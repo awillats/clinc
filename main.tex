@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage[left=0.7in,right=1.1in]{geometry}
+%\usepackage{default}
+\usepackage{amsmath,amsthm,amssymb,amsfonts,bm,mathtools,braket,units,array,comment,cases}
+\usepackage{fancyhdr,lastpage}
+\usepackage{algorithm,algpseudocode}
+\usepackage{makecell}
+\usepackage[square,numbers]{natbib}
+\usepackage{accents}
+\usepackage{centernot}
+\usepackage{filecontents}
+\usepackage{lineno}
+\usepackage{tikz}
+\usepackage[colorinlistoftodos]{todonotes}
+
+
+\newcommand{\todoblue}[2]{ \todo[#2,color=blue!20]{ \B{[note:]} #1 }}
+%\newcommand{\todored}[2]{ \todo[#2,color=blue!20]{ \B{[note:]} #1 }}
+\newcommand{\todocom}[2]{ \todo[#2,color=yellow!20]{ \B{[comment]} #1 }}
+\newcommand{\mytodo}[1]{ \todoblue{#1}{noinline}}
+\newcommand{\mycomment}[1]{ \todocom{#1}{noinline}}
+
+\usetikzlibrary{matrix}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{positioning,shapes,arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.multipart}
+
+\def\E{\mathbb{E}}
+\def\G{\mathcal{G}}
+\def\Pa{\mathrm{Pa}}
+\def\R{\mathbb{R}}
+\def\Reach{\mathcal{R}}%{\mathrm{Reach}}
+\def\Control{\kappa_i}
+\def\CL{\mathcal{C}}
+\def\OL{\mathcal{O}}
+\def\pluseqq{\mathrel{{+}{=}}}
+\def\Undirect{\mathcal{U}}%{\mathrm{Undirect}}
+\def\qhat{\widehat{q}}
+\def\xhat{\widehat{x}}
+\def\yhat{\widehat{y}}
+\def\zhat{\widehat{z}}
+\def\what{\widehat{w}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{assumption}[theorem]{Assumption}
+
+\linenumbers
+
+\title{Causal inference in neural circuits with open- and closed-loop control}
+\author{Adam Willats and Matt O'Shaughnessy}
+%\date{March 2020}
+
+\bibliographystyle{plainnat}
+
+\begin{document}
+
+% Link to google slides figure plan
+% https://docs.google.com/presentation/d/1w8q82VagGy9EmpgD1tJd2XS0f9lLHUMjUMG987uOb0Y/edit?usp=sharing
+
+\maketitle
+
+\begin{abstract}
+    \input{sec_abstract.tex}
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+\input{sec_introduction.tex}
+
+\section{Methods}
+\label{sec:methods}
+\input{sec_methods.tex}
+
+\section{Results}
+\label{sec:results}
+
+\input{sec_casestudy}
+\input{sec_reachability}
+\input{sec_characteriztion}
+
+\section{Discussion}
+\label{sec:discussion}
+\input{sec_discussion.tex}
+
+
+
+
+\bibliography{closedloopcausal.bib}
+
+\end{document}
