@@ -1,0 +1,10 @@
+# ignore aux files for overleaf 
+
+*.aux
+*.log
+*.out
+*.toc
+*.xmpdata
+*.xmpi
+*.bbl
+*.blg
