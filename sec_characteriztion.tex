@@ -1,0 +1,78 @@
+\subsection{Characterizing identifiability in spiking neural networks}
+
+\subsubsection{Methods - pipeline for inferring circuits with intervention}
+
+\textbf{relevant properties of spiking circuits}
+\textbf{within-cell properties}
+\begin{itemize}
+    \item membrane time constants
+    \item internal noise
+\end{itemize}
+
+\textbf{properties of connctions}
+\begin{itemize}
+    \item connection strength (weights)
+    \item synaptic delay
+\end{itemize}
+
+\textbf{properties across a circuit}
+\begin{itemize}
+    \item heterogeneity of (above properties) across neurons
+    \item proportion of excitatory vs inhibitory connections
+    \item \textit{(spiking vs lfp-like observations)}
+\end{itemize}
+
+\textbf{intervention parameters}
+\begin{itemize}
+    \item passive observation v.s. open-loop v.s. closed-loop control
+    \item \% of the network observed
+    \item \% of the network intervened
+    \item number of samples recorded
+    \item controller bandwidth
+    \item \textit{(intervention location - stimulating driver versus "dead-end" nodes)}
+    \item \textit{(impact of imperfect control)}
+\end{itemize}
+
+
+\textbf{Methods for extracting circuit estimates}
+\textbf{Quantifying successful identification}
+% accounting for / controlling for the influence of increased spiking on identifiability
+
+\begin{itemize}
+    \item false positives/negatives in identified links
+    \item link-identification accuracy / F1 score
+\end{itemize}
+
+
+\textbf{Results - open-loop intervention facilitates identification with less data than passive observation}
+
+
+
+
+
+
+
+\begin{figure}[ht]
+	\centering
+	 \begin{overpic}[width=.6\textwidth]{figures/figure_sketches/figure4a_sketch.png}
+	  \end{overpic}
+    \caption{\textbf{Text} more text}
+    \label{fig:pipeline} %figure 1
+ \end{figure}
+
+\begin{figure}[ht]
+	\centering
+	 \begin{overpic}[width=.6\textwidth]{figures/figure_sketches/figure4b_sketch.png}
+	  \end{overpic}
+    \caption{\textbf{Text} more text}
+    \label{fig:characterization} %figure 1
+ \end{figure}
+
+
+ \begin{figure}[ht]
+ 	\centering
+ 	 \begin{overpic}[width=.6\textwidth]{figures/figure_sketches/figure4c_sketch.png}
+ 	  \end{overpic}
+     \caption{\textbf{Text} more text}
+     \label{fig:res_summary} %figure 1
+  \end{figure}
