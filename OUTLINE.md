@@ -1,10 +1,10 @@
-# Introduction
+# Introduction ------------
 - What is closed-loop control?
     - Responsive and per-sample feedback control in neuro
     - Comparison to standard neuro system identification procedures
 - Interventions from the perspective of causal inference
 
-# Methods
+# Methods ----------------
 ## Multiple complementary perspectives on the same underlying network structure:
  - The circuit view
  - The dynamical system view
@@ -15,12 +15,11 @@
 ## Understanding identification through derived properties of circuits (reachability rules)
 
 
-
-# Results
+# Results ----------------
 
 ## Case Study: Applying <CLINC> to distinguish a pair of circuits
 
-# (back to methods?)
+# (back to methods?) ----
 
 ## Characterizing circuit-pair ambiguity through reachability properties, as a function of circuit size
 
@@ -36,6 +35,9 @@
 - Methods for extracting circuit estimates
 - Quantifying successful identification
 
-# Discussion
-- Limitations
+# Discussion ---------------
 - Comparison to related work
+- Challenges to identification
+    - a spectrum of interventions
+- Limitations of this approach
+- Future work
