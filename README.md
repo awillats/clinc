@@ -11,9 +11,9 @@ by Adam Willats and Matthew O'Shaugnessy
 
 # Code
 Associated code in the following repositories:
-see [awillats/clinc-gen](https://github.com/awillats/clinc-gen) for network & control simulations
-see [awillats/brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian) for simulating networks of gaussian nodes with delayed connections
-see [awillats/clinc-analysis](https://github.com/awillats/clinc-analysis) for network estimation
+- see [awillats/clinc-gen](https://github.com/awillats/clinc-gen) for network & control simulations  
+- see [awillats/brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian) for simulating networks of gaussian nodes with delayed connections 
+- see [awillats/clinc-analysis](https://github.com/awillats/clinc-analysis) for network estimation  
 
 # Main plots
 🚧
