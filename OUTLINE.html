@@ -1,0 +1,848 @@
+<!DOCTYPE html><html><head>
+      <title>OUTLINE</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////Users/adam/.dotfiles/atom/packages/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="overview">Overview</h1>
+
+<h2 class="mume-header" id="intended-audience">Intended audience</h2>
+
+<ul>
+<li><strong>systems neuroscientists</strong> interested in making more rigorous conclusions in circuit ID problems</li>
+<li><strong>experimental neuroscientists</strong> looking for guidance on evaluating required intervention to answer circuit hypothesis questions</li>
+</ul>
+<h2 class="mume-header" id="goal-provide-a-practical-conceptual-framework-for-applying-closed-loop-to-circuit-identification-problems">Goal -  Provide a practical conceptual framework for applying closed-loop to circuit identification problems</h2>
+
+<ul>
+<li>What&#x2019;s the value of closed-loop?</li>
+<li>What can i say about causal connections given the experiments i&#x2019;m doing?</li>
+<li>How do I design an intervention which improves the strength of hypothesis testing?</li>
+</ul>
+<h1 class="mume-header" id="table-of-conents">Table of Conents</h1>
+
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#methods">Methods</a>
+<ul>
+<li><a href="#figure-gaussian-and-spiking-networks-simulated-in-brian2">Figure: Gaussian and spiking networks simulated in Brian2</a></li>
+<li><a href="#figure-process-of-detecting-connections-in-a-network-model">Figure: Process of detecting connections in a network model</a></li>
+</ul>
+</li>
+<li><a href="#results">Results</a>
+<ul>
+<li><a href="#case-study-applying-clinc-to-distinguish-a-pair-of-circuits">Case Study: Applying CLINC to distinguish a pair of circuits</a></li>
+<li><a href="#figure-impact-of-intrinsic-network-properties-on-identifiability">Figure: impact of intrinsic network properties on identifiability</a></li>
+<li><a href="#figure-x-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data">Figure: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data</a></li>
+</ul>
+</li>
+<li><a href="#discussion">Discussion</a></li>
+<li><a href="#supplement">Supplement</a></li>
+</ul>
+<hr>
+<h1 class="mume-header" id="introduction">Introduction</h1>
+
+<ul>
+<li>
+<p>Interventions in neuro</p>
+<ul>
+<li>lesion studies in neuro
+<ul>
+<li>disadvantages of lesioning</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>What is closed-loop control?</p>
+<ul>
+<li>Responsive and per-sample feedback control in neuro</li>
+<li>Comparison to standard neuro system identification procedures (stim, lesions)</li>
+<li>Stanley, Rozell prior work in closed-loop opto</li>
+</ul>
+</li>
+<li>
+<p><strong>Causal methods for network discovery from time-series</strong></p>
+<ul>
+<li>What challenges are faced when estimating network connectivity?
+<ul>
+<li>[...]</li>
+</ul>
+</li>
+<li>background building from granger causality towards more complex methods
+<ul>
+<li>highlight limitations with current approaches</li>
+</ul>
+</li>
+<li><em>cite J.Runge</em></li>
+</ul>
+</li>
+<li>
+<p>Interventions from the perspective of causal inference</p>
+<ul>
+<li>core idea is that &quot;stronger&quot; interventions lead to &quot;higher inferential power&quot;
+<ul>
+<li>may mean identifying circuits with less data</li>
+<li>but may also mean distinguishing circuits which may have been &quot;observationally equivalent&quot; under weaker interventions</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="methods">Methods</h1>
+
+<h2 class="mume-header" id="multiple-complementary-perspectives-represenations-of-the-same-underlying-network-structure">Multiple complementary perspectives (represenations) of the same underlying network structure:</h2>
+
+<ul>
+<li>The circuit view
+<ul>
+<li>(A) &#x2192; (B) &#x2194; (C)</li>
+</ul>
+</li>
+<li>The dynamical system view</li>
+</ul>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo fence="true">{</mo><mtable rowspacing="0.3600em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msup><mi>x</mi><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup><mo>=</mo><mi>A</mi><mi>x</mi><mo>+</mo><mi>B</mi><mi>u</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>y</mi><mo>=</mo><mi>C</mi><mi>x</mi><mo>+</mo><mi>&#x3B7;</mi></mrow></mstyle></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">\begin{cases}{x&apos; = Ax + Bu}\\
+y=Cx+\eta
+\end{cases}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">u</span></span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3B7;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<ul>
+<li>The connectivity (adjacency matrix) view<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><munder><mrow><mo fence="true">[</mo><mtable rowspacing="0.1600em" columnalign="center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mover accent="true"><mi>x</mi><mo>&#x2D9;</mo></mover><mi>A</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mover accent="true"><mi>x</mi><mo>&#x2D9;</mo></mover><mi>B</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mover accent="true"><mi>x</mi><mo>&#x2D9;</mo></mover><mi>C</mi></msub></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow><mo stretchy="true">&#x23DF;</mo></munder><mover accent="true"><mi>x</mi><mo>&#x2D9;</mo></mover></munder><mo>=</mo><munder><munder><mrow><mo fence="true">[</mo><mtable rowspacing="0.1600em" columnalign="center center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>w</mi><mrow><mi>A</mi><mi>A</mi></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>w</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>w</mi><mrow><mi>A</mi><mi>C</mi></mrow></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>w</mi><mrow><mi>B</mi><mi>A</mi></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>w</mi><mrow><mi>B</mi><mi>B</mi></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>w</mi><mrow><mi>B</mi><mi>C</mi></mrow></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>w</mi><mrow><mi>C</mi><mi>A</mi></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>w</mi><mrow><mi>C</mi><mi>B</mi></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>w</mi><mrow><mi>C</mi><mi>C</mi></mrow></msub></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow><mo stretchy="true">&#x23DF;</mo></munder><mi>A</mi></munder><munder><munder><mrow><mo fence="true">[</mo><mtable rowspacing="0.1600em" columnalign="center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>x</mi><mi>A</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>x</mi><mi>B</mi></msub></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><msub><mi>x</mi><mi>C</mi></msub></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow><mo stretchy="true">&#x23DF;</mo></munder><mi>x</mi></munder></mrow><annotation encoding="application/x-tex">\underbrace{\begin{bmatrix} \dot{x}_A \\ \dot{x}_B \\ \dot{x}_C \end{bmatrix}}_{\dot{x}} =
+\underbrace{\begin{bmatrix}
+  w_{AA} &amp; w_{AB} &amp; w_{AC} \\
+  w_{BA} &amp; w_{BB} &amp; w_{BC} \\
+  w_{CA} &amp; w_{CB} &amp; w_{CC}
+\end{bmatrix}}_{A}
+\underbrace{\begin{bmatrix}
+  x_A \\
+  x_B \\
+  x_C
+\end{bmatrix}}_{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.915542em;vertical-align:-2.8655220000000003em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.0500199999999995em;"><span style="top:-1.1844979999999996em;"><span class="pstrut" style="height:4.05002em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord accent mtight"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.66786em;"><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord mathnormal mtight">x</span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="accent-body" style="left:-0.11111000000000001em;"><span class="mord mtight">&#x2D9;</span></span></span></span></span></span></span></span></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:4.05002em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span class="svg-align" style="top:-1.8519999999999999em;"><span class="pstrut" style="height:4.05002em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMinYMin slice"><path d="M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z"/></svg></span><span class="brace-center" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMidYMin slice"><path d="M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z"/></svg></span><span class="brace-right" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMaxYMin slice"><path d="M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z"/></svg></span></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:4.05002em;"></span><span class="mord"><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.2500000000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A3;</span></span></span><span style="top:-3.3970000000000002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span style="height:0.016em;width:0.667em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="0.016em" style="width:0.667em" viewBox="0 0 667 16" preserveAspectRatio="xMinYMin"><path d="M319 0 H403 V16 H319z M319 0 H403 V16 H319z"/></svg></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A1;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.66786em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.11111000000000001em;"><span class="mord">&#x2D9;</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.66786em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.11111000000000001em;"><span class="mord">&#x2D9;</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.66786em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.11111000000000001em;"><span class="mord">&#x2D9;</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.2500000000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A6;</span></span></span><span style="top:-3.3970000000000002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span style="height:0.016em;width:0.667em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="0.016em" style="width:0.667em" viewBox="0 0 667 16" preserveAspectRatio="xMinYMin"><path d="M263 0 H347 V16 H263z M263 0 H347 V16 H263z"/></svg></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A4;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:2.19802em;"><span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:2.8655220000000003em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:4.926371em;vertical-align:-2.876351em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.0500199999999995em;"><span style="top:-1.1736689999999999em;"><span class="pstrut" style="height:4.05002em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:4.05002em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span class="svg-align" style="top:-1.8519999999999999em;"><span class="pstrut" style="height:4.05002em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMinYMin slice"><path d="M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z"/></svg></span><span class="brace-center" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMidYMin slice"><path d="M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z"/></svg></span><span class="brace-right" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMaxYMin slice"><path d="M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z"/></svg></span></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:4.05002em;"></span><span class="mord"><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.2500000000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A3;</span></span></span><span style="top:-3.3970000000000002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span style="height:0.016em;width:0.667em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="0.016em" style="width:0.667em" viewBox="0 0 667 16" preserveAspectRatio="xMinYMin"><path d="M319 0 H403 V16 H319z M319 0 H403 V16 H319z"/></svg></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A1;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">AA</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span><span class="mord mathnormal mtight">A</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span><span class="mord mathnormal mtight">A</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">BB</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">CB</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">A</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">BC</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">CC</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.2500000000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A6;</span></span></span><span style="top:-3.3970000000000002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span style="height:0.016em;width:0.667em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="0.016em" style="width:0.667em" viewBox="0 0 667 16" preserveAspectRatio="xMinYMin"><path d="M263 0 H347 V16 H263z M263 0 H347 V16 H263z"/></svg></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A4;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:2.19802em;"><span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:2.876351em;"><span></span></span></span></span></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.0500199999999995em;"><span style="top:-1.3506079999999998em;"><span class="pstrut" style="height:4.05002em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:4.05002em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span class="svg-align" style="top:-1.8519999999999999em;"><span class="pstrut" style="height:4.05002em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMinYMin slice"><path d="M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z"/></svg></span><span class="brace-center" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMidYMin slice"><path d="M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z"/></svg></span><span class="brace-right" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMaxYMin slice"><path d="M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z"/></svg></span></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:4.05002em;"></span><span class="mord"><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.2500000000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A3;</span></span></span><span style="top:-3.3970000000000002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span style="height:0.016em;width:0.667em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="0.016em" style="width:0.667em" viewBox="0 0 667 16" preserveAspectRatio="xMinYMin"><path d="M319 0 H403 V16 H319z M319 0 H403 V16 H319z"/></svg></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A1;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">A</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05002em;"><span style="top:-2.2500000000000004em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A6;</span></span></span><span style="top:-3.3970000000000002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span style="height:0.016em;width:0.667em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.667em" height="0.016em" style="width:0.667em" viewBox="0 0 667 16" preserveAspectRatio="xMinYMin"><path d="M263 0 H347 V16 H263z M263 0 H347 V16 H263z"/></svg></span></span><span style="top:-4.05002em;"><span class="pstrut" style="height:3.1550000000000002em;"></span><span class="delimsizinginner delim-size4"><span>&#x23A4;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.55002em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:2.19802em;"><span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:2.699412em;"><span></span></span></span></span></span></span></span></span></span></li>
+<li>why consider multiple</li>
+</ul>
+<h2 class="mume-header" id="interventions-in-causal-identification">Interventions in causal identification</h2>
+
+<ul>
+<li>intervention types
+<ul>
+<li>passive observation</li>
+<li>open-loop stimulation
+<ul>
+<li>simulated as direct current injection</li>
+<li>but uniform across a population</li>
+<li>( see <a href="https://cleosim.readthedocs.io/en/latest/index.html">Kyle Johnsen&apos;s cleosim toolbox</a> for more detailed simulation of stimulation )</li>
+</ul>
+</li>
+<li>closed-loop stimulation
+<ul>
+<li>approaches for control
+<ul>
+<li>going with &quot;model-free&quot; PID control of output rates</li>
+</ul>
+</li>
+<li>comparison to randomization in traditional experiment design</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="reachability">Reachability</h2>
+
+<ul>
+<li>concept of <strong>binary reachability</strong> as a &quot;best case scenario&quot; for identification.
+<ul>
+<li>binary reachability describes which pairs of nodes we expect to have any correlation</li>
+<li>can be used to predict &quot;equivalence classes&quot;, i.e. circuits which may be indistinguishable under certain interventions</li>
+<li>how binary reachability is computed
+<ul>
+<li>[...equations here...]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>graded reachability</strong> can help predict the influence of parameter values (e.g. edge weights, time-constants) on identifiability
+<ul>
+<li>quantifies impact of inputs, noise on outputs</li>
+<li>easiest to describe/understand in linear-gaussian setting</li>
+<li>[...equations here...]</li>
+</ul>
+</li>
+</ul>
+<p>&#x1F3DE;&#xFE0F; <strong>Figure:</strong> illustrate reachability &#x1F3DE;&#xFE0F;</p>
+<h2 class="mume-header" id="understanding-identification-through-derived-properties-of-circuits-reachability-rules">Understanding identification through derived properties of circuits (reachability rules)</h2>
+
+<ul>
+<li>connect <strong>binary reachability</strong> to classes of ambiguity
+<ul>
+<li>a pair of networks are ambiguous (given some intervention) if they are in the same markov equivalence class</li>
+<li>ambiguity x intervention leads to the following classes
+<ul>
+<li>passively unambiguous</li>
+<li>open-loop unambiguous</li>
+<li>(single-site) closed-loop unambiguous</li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>connect <strong>graded reachability</strong> to ID-SNR
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">I</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">N</mi><mi mathvariant="normal">R</mi></mrow><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathrm{IDSNR}_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">IDSNR</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">ij</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span> measures the strength of signal related to the connection <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>&#x2192;</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i&#x2192;j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2192;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span> relative to in the output of node <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span></li>
+<li>for true, direct connections this quantity increasing means a (true positive) connection will be identified more easily (with high certainty, requiring less data)</li>
+<li>for false or indirect connections, this quantity increasing means a false positive connection is more likely to be identified</li>
+<li>as a result we want to maximize IDSNR for true links, and minimize it for false/indirect links</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="network-simulations">Network simulations</h2>
+
+<p><img src="figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png" alt></p>
+<h3 class="mume-header" id="figure-gaussian-and-spiking-networks-simulated-in-brian2">Figure: Gaussian and spiking networks simulated in Brian2</h3>
+
+<ul>
+<li>built on <a href="https://elifesciences.org/articles/47314">Brian2</a> spiking neural network simulator</li>
+<li>(delayed) linear-gaussian network
+<ul>
+<li>required custom functionality to implement
+<ul>
+<li><a href="https://github.com/awillats/brian_delayed_gaussian">[brian_delayed_gaussian] repository </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>spiking network</li>
+</ul>
+<h2 class="mume-header" id="extracting-circuit-estimates">Extracting circuit estimates</h2>
+
+<p><img src="figures/misc_figure_sketches/network_estimation_pipeline_sketch.png" alt></p>
+<h3 class="mume-header" id="figure-process-of-detecting-connections-in-a-network-model">Figure: Process of detecting connections in a network model</h3>
+
+<h3 class="mume-header" id="outputs-of-network">Outputs of network</h3>
+
+<ul>
+<li>spikes from populations of neurons</li>
+</ul>
+<h3 class="mume-header" id="lagged-cross-correlation">lagged cross-correlation</h3>
+
+<ul>
+<li>connection to / equivalence with Granger Causality (GC)
+<ul>
+<li>review of GC in neuro</li>
+<li>requisite assumptions</li>
+<li>limitations of GC</li>
+</ul>
+</li>
+<li>xcorr features
+<ul>
+<li>peak-SNR</li>
+<li>prominence</li>
+<li>time of peak</li>
+</ul>
+</li>
+<li>window of time-lags considered for direct connections
+<ul>
+<li>some multiple of expected synaptic delay</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="multivariate-transfer-entropy-mute">multivariate transfer entropy (muTE)</h3>
+
+<ul>
+<li>advantages above usual GC approach</li>
+</ul>
+<h3 class="mume-header" id="statistical-testing">statistical testing</h3>
+
+<ul>
+<li><em>for muTE, handled by IDTxl</em>
+<ul>
+<li>includes appropriate multiple-comparison testing</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="results">Results</h1>
+
+<h2 class="mume-header" id="case-study-applying-clinc-to-distinguish-a-pair-of-circuits">Case Study: Applying CLINC to distinguish a pair of circuits</h2>
+
+<ul>
+<li>explanation using binary reachability rules ?<br>
+&#x1F3DE;&#xFE0F; <strong>Figure:</strong> walk-through / case-study &#x1F3DE;&#xFE0F;</li>
+<li><em>(e.g. Advancing functional connectivity research from association to causation, Combining multiple functional connectivity methods to improve causal inferences)</em></li>
+</ul>
+<h2 class="mume-header" id="binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties">[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties</h2>
+
+<ul>
+<li>proportion of each ambiguity class as a function of circuit size</li>
+<li>possibly weight proportions by observed frequency of triplet motifs<br>
+&#x2702;&#xFE0F;&#xFE0F; <strong>Figure:</strong> ambiguity class by circuit size&#x2702;&#xFE0F;</li>
+</ul>
+<h2 class="mume-header" id="characterization">... Characterization ...</h2>
+
+<h3 class="mume-header" id="extracting-circuit-estimates-1">Extracting circuit estimates</h3>
+
+<ul>
+<li><em>(see methods for xcorr, muTE)</em></li>
+</ul>
+<h3 class="mume-header" id="quantifying-successful-identification">Quantifying successful identification</h3>
+
+<ul>
+<li>binary &quot;classification&quot; metrics
+<ul>
+<li>accuracy, F1 score (Wang &amp; Shanechi 2019)</li>
+<li>AUC (Pastore)</li>
+<li>Jaccard index (Lepage, Ching, and Kramer 2013)</li>
+<li>true/false positives, true/false negatives</li>
+</ul>
+</li>
+<li>graded metrics (<em>not a core focus here</em>)
+<ul>
+<li>distance between identified connection strength and ground-truth
+<ul>
+<li>MSE <a href="https://www.biorxiv.org/content/10.1101/463760v2">(Lepperod et al. 2018)</a></li>
+</ul>
+</li>
+<li>error in output reconstruction</li>
+</ul>
+</li>
+<li><em>relevant &quot;negative control&quot; for comparison (?)</em>
+<ul>
+<li>identified connectivity for random network?</li>
+<li>some shuffled data-surrogate procedure?</li>
+</ul>
+</li>
+<li><em>relevant &quot;positive control&quot; for comparison (?)</em></li>
+</ul>
+<h3 class="mume-header" id="impact-of-node-network-parameters"><em>Impact of node, network parameters</em></h3>
+
+<ul>
+<li>
+<p><strong>gaussian network simulation</strong></p>
+<details><summary> &#x21AA;&#xFE0F; click to expand </summary>
+- **parameters**
+  - synaptic (edge) weights - $w$
+  - synaptic (edge) delay - $\delta$
+  - time-constants - $\tau$
+  - node noise - $\sigma$
+- **expected results**
+  - weight increases xcorr peaks
+  - $\tau$ blurs xcorr peak in time 
+  - delay $\delta$ increases time-separability of sources 
+    - at $\delta = 0$ limit, connections are harder to distinguish
+      - especially direct v.s. indirect
+  - noise $\sigma$ has a &quot;location specific&quot; impact describe by IDSNR transfer function 
+    - generally, high noise &quot;upstream&quot; of a connection increases the strength of a hypothesized connection 
+      - as long as any path is present between $i&#x2192;&#x2192;j$
+    - high noise &quot;downstream&quot; of a connection, but impinging on the output node competes with / blurs / corrupts  
+    - **The location-dependent impact of noise on connection identifiability may be one key way in which different forms of intervention impact circuit estimates**
+</details>
+</li>
+<li>
+<p><strong>spiking network simulation</strong></p>
+<ul>
+<li>all gaussian params, plus ...</li>
+<li>spiking nonlinearity
+<ul>
+<li>gain</li>
+<li>bias</li>
+<li>spiking threshold</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>impact of circuit structure</strong></p>
+<ul>
+<li>degree of nodes
+<ul>
+<li>in/out-degree</li>
+<li>of source - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span></span></span></span></li>
+<li>of target - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span></span></span></span></li>
+</ul>
+</li>
+<li>presence of indirect correlations</li>
+<li>presence of feedback loops</li>
+<li># of circuits in equivalence class</li>
+</ul>
+</li>
+</ul>
+<p><img src="figures/misc_figure_sketches/intrinsic_network_params.png" alt></p>
+<h3 class="mume-header" id="figure-impact-of-intrinsic-network-properties-on-identifiability">Figure: impact of intrinsic network properties on identifiability</h3>
+
+<ul>
+<li><em>(e.g. Identification of excitatory-inhibitory links and network topology in large-scale neuronal assemblies from multi-electrode recordings)</em></li>
+<li>comparison to predicted IDSNR</li>
+</ul>
+<h3 class="mume-header" id="impact-of-intervention"><em>Impact of intervention</em></h3>
+
+<ul>
+<li>
+<p>intervention types</p>
+<ul>
+<li>
+<p>passive observation</p>
+</li>
+<li>
+<p>open-loop stimulation</p>
+</li>
+<li>
+<p>closed-loop stimulation</p>
+<ul>
+<li>controller stregnth
+<ul>
+<li>gain</li>
+<li>bandwidth</li>
+</ul>
+</li>
+<li>controller delay</li>
+</ul>
+</li>
+<li>
+<p>additional stimulation factors (open- &amp; closed-loop)</p>
+<details><summary> &#x21AA;&#xFE0F; click to expand </summary>
+<ul>
+<li>stimulus location
+<ul>
+<li>single-site</li>
+<li>multi-site</li>
+<li>location relative to features of network
+<ul>
+<li>in-degree/out-degree</li>
+<li>upstream/downstream of hypothesized connection</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>stimulus intensity
+<ul>
+<li>expected mean output rate</li>
+<li>frequency content</li>
+</ul>
+</li></ul></details>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="figures/misc_figure_sketches/intervention_eg.png" alt><br>
+<img src="figures/literature_figs/spike_field_shanechi_crop.png" alt><br>
+<img src="figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png" alt></p>
+
+
+<h3 class="mume-header" id="figure-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data">Figure: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data</h3>
+
+<ul>
+<li><em>metric:</em> # of samples required to reach accuracy threshold</li>
+<li>closed-loop &gt; open-loop &gt; passive</li>
+</ul>
+<h3 class="mume-header" id="figure-%EF%B8%8F-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses-%EF%B8%8F">Figure: &#x1F3DE;&#xFE0F; Stronger intervention facilitates disambiguating equivalent hypotheses &#x1F3DE;&#xFE0F;</h3>
+
+<ul>
+<li>in example: shows a dataset with many correlations, multiple plausible circuit hypotheses
+<ul>
+<li>patterns of correlation become more specific with increasing intervention strength</li>
+</ul>
+</li>
+<li>in aggregate: focuses on accuracy</li>
+<li>closed-loop &gt; open-loop &gt; passive</li>
+</ul>
+<h3 class="mume-header" id="figure-comparing-predicted-and-emprical-identification-performance">Figure: Comparing predicted and emprical identification performance</h3>
+
+<ul>
+<li>could be part of figures above</li>
+<li>includes how</li>
+</ul>
+<h3 class="mume-header" id="figure-interaction-of-network-structure-and-intervention-location-on-identifiability">Figure: Interaction of network structure and intervention location on identifiability</h3>
+
+<hr>
+<h1 class="mume-header" id="discussion">Discussion</h1>
+
+<ul>
+<li>
+<p>Comparison to related work</p>
+<ul>
+<li>comparison to work in ANNs
+<ul>
+<li>Kording, fakhar</li>
+</ul>
+</li>
+<li>comparison to Shanechi</li>
+<li>comparison to Bassett &quot;network controllability&quot; view</li>
+</ul>
+</li>
+<li>
+<p>Limitations of evaluated interventions</p>
+<ul>
+<li>quantifying the impact of imperfect / realistic control</li>
+<li>barriers such as low spatial / temporal precision may prevent high-performing control</li>
+</ul>
+</li>
+<li>
+<p>Limitations of network extraction approach</p>
+<ul>
+<li>limitations of bivariate xcorr</li>
+<li>effect of design / hyperparameters
+<ul>
+<li>nonlinear TE estimators</li>
+<li>time bin size</li>
+</ul>
+</li>
+<li>extraction from spiking, firing rates, LFP</li>
+</ul>
+</li>
+<li>
+<p>Limitations of <strong>network simulation</strong></p>
+<ul>
+<li>small number of nodes</li>
+<li>simple neuron dynamics</li>
+<li>didn&apos;t focus on intricate connectivity that has been observed
+<ul>
+<li>future work - apply to more complex Brian2 network models</li>
+</ul>
+</li>
+<li>assumed measurement from entire network</li>
+<li>homogeneity in network parameters</li>
+<li>understanding mediating effect of spike counts</li>
+</ul>
+</li>
+<li>
+<p><strong>Recommendations for designing network discovery experiments</strong></p>
+<ul>
+<li>
+<p>At the experiment-design phase, analyze competing hypotheses</p>
+<ul>
+<li>through the lens of CLINC reachability / IDSNR</li>
+<li>evaluate what can be distinguished under different interventions</li>
+</ul>
+</li>
+<li>
+<p>A spectrum of interventions - pick the right tool for the job</p>
+<ul>
+<li>stronger interventions generally come with cost
+<ul>
+<li>increased experiment complexity</li>
+</ul>
+</li>
+<li>depending on challenges, similarity of hypothesized circuits...
+<ul>
+<li>passive observation may be enough</li>
+<li>or stronger interventions may be required</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Future work</p>
+<ul>
+<li>tighter integration of knowledge of intervention into network estimation procedure
+<ul>
+<li>stimulus-conditional transfer entropy</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="supplement">Supplement</h2>
+
+<ul>
+<li></li>
+<li>organization of clinc-gen, clinc-analysis codebases</li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

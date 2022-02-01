@@ -1,18 +1,26 @@
 # Overview 
 ## Intended audience
-  - systems neuroscientists interested in making more rigorous conclusions in circuit ID problems 
-  - experimental neuroscientists looking for guidance on evaluating required intervention to answer circuit hypothesis questions
-## Goal -  Provide a straightforward and practically useful conceptual framework for applying closed-loop to circuit identification problems
+  - **systems neuroscientists** interested in making more rigorous conclusions in circuit ID problems 
+  - **experimental neuroscientists** looking for guidance on evaluating required intervention to answer circuit hypothesis questions
+## Goal -  Provide a practical conceptual framework for applying closed-loop to circuit identification problems
 - What’s the value of closed-loop?
 - What can i say about causal connections given the experiments i’m doing?
-- How can we make experimental design decisions which improve the strength of our hypothesis testing?
-
+- How do I design an intervention which improves the strength of hypothesis testing?
 
 # Table of Conents
 - [Introduction](#introduction)
 - [Methods](#methods)
+  - [Figure: Gaussian and spiking networks simulated in Brian2](#figure-gaussian-and-spiking-networks-simulated-in-brian2)
+  - [Figure: Process of detecting connections in a network model](#figure-process-of-detecting-connections-in-a-network-model)
 - [Results](#results)
+  - [Case Study: Applying CLINC to distinguish a pair of circuits](#case-study-applying-clinc-to-distinguish-a-pair-of-circuits)
+  - [Figure: impact of intrinsic network properties on identifiability](#figure-impact-of-intrinsic-network-properties-on-identifiability)
+  - [Figure: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data](#figure-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data)
+  - [Figure: 🏞️ Stronger intervention facilitates disambiguating equivalent hypotheses 🏞️](#figure-️-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses-️)
+  - [Figure: Comparing predicted and emprical identification performance](#figure-comparing-predicted-and-emprical-identification-performance)
+  - [Figure: Interaction of network structure and intervention location on identifiability](#figure-interaction-of-network-structure-and-intervention-location-on-identifiability)
 - [Discussion](#discussion)
+- [Supplement](#supplement)
 ---
 # Introduction 
 - Interventions in neuro 
@@ -106,14 +114,20 @@ y=Cx+\eta
   - as a result we want to maximize IDSNR for true links, and minimize it for false/indirect links 
 
 ## Network simulations 
+![](figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
+### Figure: Gaussian and spiking networks simulated in Brian2
+
 - built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
 - (delayed) linear-gaussian network 
   - required custom functionality to implement 
-    - [[<img src="figures/external_imgs/GitHub-Mark-Light-32px.png" alt="drawing" style="width:15px;"/> brian_delayed_gaussian]](https://github.com/awillats/brian_delayed_gaussian)
+    - [[brian_delayed_gaussian] repository ](https://github.com/awillats/brian_delayed_gaussian)
 - spiking network 
-  - [...]
 
 ## Extracting circuit estimates 
+![](figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
+<!-- ![](figures/core_figure_sketches/figure4a_sketch.png) -->
+<!-- ![](figures/misc_figure_sketches/data_xcorr_gaussian.png) -->
+### Figure: Process of detecting connections in a network model
 ### Outputs of network 
 - spikes from populations of neurons 
 ### lagged cross-correlation 
@@ -150,18 +164,20 @@ y=Cx+\eta
 ✂️️ **Figure:** ambiguity class by circuit size✂️
 
 ## ... Characterization ...
-🏞️ **Figure:** simulation, evaluation pipeline figure here 🏞️
 
 ### Extracting circuit estimates 
 - *(see methods for xcorr, muTE)*
 
 ### Quantifying successful identification
 - binary "classification" metrics
-  - accuracy
-  - F1 score 
+  - accuracy, F1 score (Wang & Shanechi 2019)
+  - AUC (Pastore)
+  - Jaccard index (Lepage, Ching, and Kramer 2013)
   - true/false positives, true/false negatives 
 - graded metrics (*not a core focus here*)
   - distance between identified connection strength and ground-truth
+    - MSE [(Lepperod et al. 2018)](https://www.biorxiv.org/content/10.1101/463760v2)
+  - error in output reconstruction
 - *relevant "negative control" for comparison (?)*
   - identified connectivity for random network?
   - some shuffled data-surrogate procedure?
@@ -169,6 +185,7 @@ y=Cx+\eta
 
 
 ### *Impact of node, network parameters*
+
 - **gaussian network simulation**
   <details><summary> ↪️ click to expand </summary>
   - **parameters**
@@ -204,9 +221,10 @@ y=Cx+\eta
   - presence of feedback loops
   - \# of circuits in equivalence class 
 
-- 🏞️ **Figure:** impact of intrinsic network properties on identifiability 
-  - may include component xcorr plots 
-    - *(e.g. Identification of excitatory-inhibitory links and network topology in large-scale neuronal assemblies from multi-electrode recordings)*
+
+![](figures/misc_figure_sketches/intrinsic_network_params.png)
+### Figure: impact of intrinsic network properties on identifiability   
+  - *(e.g. Identification of excitatory-inhibitory links and network topology in large-scale neuronal assemblies from multi-electrode recordings)*
   - comparison to predicted IDSNR 
   
 ### *Impact of intervention*
@@ -232,19 +250,26 @@ y=Cx+\eta
       - expected mean output rate 
       - frequency content 
       </details>
-
-- 🏞️ **Figure:** Analysis of simulated circuits suggest stronger intervention facilitates identification with less data 🏞️
-  - *(e.g Estimating Multiscale Direct Causality Graphs in Neural Spike-Field Networks)*
+  
+  ![](figures/misc_figure_sketches/intervention_eg.png)
+  ![](figures/literature_figs/spike_field_shanechi_crop.png)
+  ![](figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png)
+### Figure: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data 
   - *metric:* \# of samples required to reach accuracy threshold
   - closed-loop > open-loop > passive 
   
-- 🏞️ **Figure:** Stronger intervention facilitates disambiguating equivalent hypotheses 🏞️
+### Figure: 🏞️ Stronger intervention facilitates disambiguating equivalent hypotheses 🏞️
   - in example: shows a dataset with many correlations, multiple plausible circuit hypotheses 
     - patterns of correlation become more specific with increasing intervention strength 
   - in aggregate: focuses on accuracy
   - closed-loop > open-loop > passive 
 
-### Comparing predicted and emprical identification performance 
+### Figure: Comparing predicted and emprical identification performance 
+- could be part of figures above 
+- includes how 
+### Figure: Interaction of network structure and intervention location on identifiability
+
+
 
 ---
 # Discussion 
@@ -289,7 +314,6 @@ y=Cx+\eta
 - Future work
   - tighter integration of knowledge of intervention into network estimation procedure 
     - stimulus-conditional transfer entropy 
-
+---
 ## Supplement 
-- 
 - organization of clinc-gen, clinc-analysis codebases
