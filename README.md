@@ -3,11 +3,11 @@ by Adam Willats and Matthew O'Shaugnessy
 (work in progress)
 
 # Repo organization
-- [clinc/OUTLINE.md](https://github.com/awillats/clinc/blob/main/OUTLINE.md) - high-level overview of the contents of the manuscript
-- [clinc/OUTLINE.md](https://github.com/awillats/clinc/blob/main/TASKS.md) - to-do list
-- [clinc/publish/](https://github.com/awillats/clinc/tree/main/publish) - compiled outputs, like .pdf and .html
-- [clinc/bib/](https://github.com/awillats/clinc/tree/main/bib) - bibliography files
-- [clinc/sketch_text/](https://github.com/awillats/clinc/tree/main/sketch_text) - scratchpad for planning and snippets of text
+- [OUTLINE.md](https://github.com/awillats/clinc/blob/main/OUTLINE.md) - high-level overview of the contents of the manuscript
+- [TASKS.md](https://github.com/awillats/clinc/blob/main/TASKS.md) - to-do list
+- [publish/](https://github.com/awillats/clinc/tree/main/publish) - compiled outputs, like .pdf and .html
+- [bib/](https://github.com/awillats/clinc/tree/main/bib) - bibliography files
+- [sketch_text/](https://github.com/awillats/clinc/tree/main/sketch_text) - scratchpad for planning and snippets of text
 
 # Code
 Associated code in the following repositories:
