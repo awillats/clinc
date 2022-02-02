@@ -117,23 +117,27 @@ y=Cx+\eta
     - passively unambiguous
     - open-loop unambiguous 
     - (single-site) closed-loop unambiguous
-    - 
+    
 - connect **graded reachability** to ID-SNR 
   - $\mathrm{IDSNR}_{ij}$ measures the strength of signal related to the connection $i→j$ relative to in the output of node $j$ 
   - for true, direct connections this quantity increasing means a (true positive) connection will be identified more easily (with high certainty, requiring less data)
   - for false or indirect connections, this quantity increasing means a false positive connection is more likely to be identified
   - as a result we want to maximize IDSNR for true links, and minimize it for false/indirect links 
+![](figures/misc_figure_sketches/intervention_identifiability_concept.png)
+
 
 ## Network simulations 
 <a name='figure-gaussian'></a>
 ![](figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
 ### Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2
 
-- built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
+- all networks built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
 - (delayed) linear-gaussian network 
   - required custom functionality to implement 
     - [[brian_delayed_gaussian] repository ](https://github.com/awillats/brian_delayed_gaussian)
+    - allows us to understand impact of variability in simplest setting
 - spiking network 
+  - includes additional difficulties associated with estimation based on spiking observations, nonlinearities
 
 ## Extracting circuit estimates 
 
