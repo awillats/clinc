@@ -7,47 +7,10 @@
 - What can i say about causal connections given the experiments i’m doing?
 - How do I design an intervention which improves the strength of hypothesis testing?
 
-
-
-
-- [Methods](#methods)
-  - [Multiple complementary perspectives (represenations) of the same underlying network structure:](#multiple-complementary-perspectives-represenations-of-the-same-underlying-network-structure)
-  - [Interventions in causal identification](#interventions-in-causal-identification)
-  - [Reachability](#reachability)
-  - [Understanding identification through derived properties of circuits (reachability rules)](#understanding-identification-through-derived-properties-of-circuits-reachability-rules)
-  - [Network simulations](#network-simulations)
-    - [Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2](#figure-gaussian-gaussian-and-spiking-networks-simulated-in-brian2)
-  - [Extracting circuit estimates](#extracting-circuit-estimates)
-    - [Figure PIPELINE: Process of detecting connections in a network model](#figure-pipeline-process-of-detecting-connections-in-a-network-model)
-    - [Outputs of network](#outputs-of-network)
-    - [lagged cross-correlation](#lagged-cross-correlation)
-    - [multivariate transfer entropy (muTE)](#multivariate-transfer-entropy-mute)
-    - [statistical testing](#statistical-testing)
-- [Results](#results)
-  - [Figure DEMO: Applying CLINC to distinguish a pair of circuits (case-study)](#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits-case-study)
-  - [[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties](#binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties)
-  - [Characterization of network estimation performance](#characterization-of-network-estimation-performance)
-    - [Extracting circuit estimates](#extracting-circuit-estimates-1)
-    - [Quantifying successful identification](#quantifying-successful-identification)
-    - [*Impact of node, network parameters*](#impact-of-node-network-parameters)
-    - [Figure PROPS: impact of intrinsic network properties on identifiability](#figure-props-impact-of-intrinsic-network-properties-on-identifiability)
-    - [Figure MOTIF: Interaction of network structure and intervention location on identifiability](#figure-motif-interaction-of-network-structure-and-intervention-location-on-identifiability)
-    - [*Impact of intervention*](#impact-of-intervention)
-    - [Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data](#figure-data-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data)
-    - [Figure PREDICT: Comparing predicted and emprical identification performance](#figure-predict-comparing-predicted-and-emprical-identification-performance)
-    - [Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses](#figure-disambig-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses)
-- [Discussion](#discussion)
-- [Supplement](#supplement)
-
-<!-- /code_chunk_output -->
-
-
-
-
 # Table of Contents
 - [Introduction](#introduction)
 - [Methods](#methods)
-    - [Multiple complementary represenations](#multiple-complementary-perspectives-represenations-of-the-same-underlying-network-structure)
+    - [Multiple complementary representations](#multiple-complementary-perspectives-representations-of-the-same-underlying-network-structure)
     - [Interventions in causal identification](#interventions-in-causal-identification)
     - [Reachability](#reachability)
     - [Network simulations](#network-simulations)
@@ -93,7 +56,7 @@
   
 ---
 # Methods 
-## Multiple complementary perspectives (represenations) of the same underlying network structure:
+## Multiple complementary perspectives (representations) of the same underlying network structure:
 - The circuit view
   - (A) → (B) ↔ (C)
 - The dynamical system view
@@ -271,6 +234,8 @@ y=Cx+\eta
     - spiking threshold 
     
 <a name='figure-props'></a>
+![](figures/misc_figure_sketches/guassian_impact_weight.png)
+![](figures/misc_figure_sketches/guassian_impact_delay.png)
 ![](figures/misc_figure_sketches/intrinsic_network_params.png)
 ### Figure PROPS: impact of intrinsic network properties on identifiability   
   - *(e.g. Identification of excitatory-inhibitory links and network topology in large-scale neuronal assemblies from multi-electrode recordings)*
@@ -287,7 +252,8 @@ y=Cx+\eta
 
 
 <a name='figure-motif'></a>
-🏞️
+![](figures/misc_figure_sketches/gaussian_impact_relative_sigma.png)
+![](figures/misc_figure_sketches/filler_circuit_type_2021_10.png)
 ### Figure MOTIF: Interaction of network structure and intervention location on identifiability
 ### *Impact of intervention*
 - intervention types 
