@@ -7,20 +7,67 @@
 - What can i say about causal connections given the experiments i’m doing?
 - How do I design an intervention which improves the strength of hypothesis testing?
 
-# Table of Conents
-- [Introduction](#introduction)
+
+
+
 - [Methods](#methods)
-  - [Figure: Gaussian and spiking networks simulated in Brian2](#figure-gaussian-and-spiking-networks-simulated-in-brian2)
-  - [Figure: Process of detecting connections in a network model](#figure-process-of-detecting-connections-in-a-network-model)
+  - [Multiple complementary perspectives (represenations) of the same underlying network structure:](#multiple-complementary-perspectives-represenations-of-the-same-underlying-network-structure)
+  - [Interventions in causal identification](#interventions-in-causal-identification)
+  - [Reachability](#reachability)
+  - [Understanding identification through derived properties of circuits (reachability rules)](#understanding-identification-through-derived-properties-of-circuits-reachability-rules)
+  - [Network simulations](#network-simulations)
+    - [Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2](#figure-gaussian-gaussian-and-spiking-networks-simulated-in-brian2)
+  - [Extracting circuit estimates](#extracting-circuit-estimates)
+    - [Figure PIPELINE: Process of detecting connections in a network model](#figure-pipeline-process-of-detecting-connections-in-a-network-model)
+    - [Outputs of network](#outputs-of-network)
+    - [lagged cross-correlation](#lagged-cross-correlation)
+    - [multivariate transfer entropy (muTE)](#multivariate-transfer-entropy-mute)
+    - [statistical testing](#statistical-testing)
 - [Results](#results)
-  - [Case Study: Applying CLINC to distinguish a pair of circuits](#case-study-applying-clinc-to-distinguish-a-pair-of-circuits)
-  - [Figure: impact of intrinsic network properties on identifiability](#figure-impact-of-intrinsic-network-properties-on-identifiability)
-  - [Figure: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data](#figure-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data)
-  - [Figure: 🏞️ Stronger intervention facilitates disambiguating equivalent hypotheses 🏞️](#figure-️-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses-️)
-  - [Figure: Comparing predicted and emprical identification performance](#figure-comparing-predicted-and-emprical-identification-performance)
-  - [Figure: Interaction of network structure and intervention location on identifiability](#figure-interaction-of-network-structure-and-intervention-location-on-identifiability)
+  - [Figure DEMO: Applying CLINC to distinguish a pair of circuits (case-study)](#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits-case-study)
+  - [[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties](#binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties)
+  - [Characterization of network estimation performance](#characterization-of-network-estimation-performance)
+    - [Extracting circuit estimates](#extracting-circuit-estimates-1)
+    - [Quantifying successful identification](#quantifying-successful-identification)
+    - [*Impact of node, network parameters*](#impact-of-node-network-parameters)
+    - [Figure PROPS: impact of intrinsic network properties on identifiability](#figure-props-impact-of-intrinsic-network-properties-on-identifiability)
+    - [Figure MOTIF: Interaction of network structure and intervention location on identifiability](#figure-motif-interaction-of-network-structure-and-intervention-location-on-identifiability)
+    - [*Impact of intervention*](#impact-of-intervention)
+    - [Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data](#figure-data-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data)
+    - [Figure PREDICT: Comparing predicted and emprical identification performance](#figure-predict-comparing-predicted-and-emprical-identification-performance)
+    - [Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses](#figure-disambig-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses)
 - [Discussion](#discussion)
 - [Supplement](#supplement)
+
+<!-- /code_chunk_output -->
+
+
+
+
+# Table of Contents
+- [Introduction](#introduction)
+- [Methods](#methods)
+    - [Multiple complementary represenations](#multiple-complementary-perspectives-represenations-of-the-same-underlying-network-structure)
+    - [Interventions in causal identification](#interventions-in-causal-identification)
+    - [Reachability](#reachability)
+    - [Network simulations](#network-simulations)
+      - [Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2](#figure-gaussian-gaussian-and-spiking-networks-simulated-in-brian2)
+    - [Extracting circuit estimates](#extracting-circuit-estimates)
+      - [Figure PIPELINE: Process of detecting connections in a network model](#figure-pipeline)
+- [Results](#results)
+  - [Understanding the binary setting](#figure-demo)
+    - [Figure DEMO: Applying CLINC to distinguish a pair of circuits (case-study)](#figure-demo)
+    - [[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties](#binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties)
+  - [Impact of node, network parameters](#impact-of-node-network-parameters)
+    - [Figure PROPS: impact of intrinsic network properties on identifiability](#figure-props)
+    - [Figure MOTIF: Interaction of network structure and intervention location on identifiability](#figure-motif)
+  - [Impact of intervention](#impact-of-intervention)
+    - [Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data](#figure-data)
+    - [Figure PREDICT: Comparing predicted and emprical identification performance](#figure-predict)
+    - [Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses](#figure-disambig)
+- [Discussion](#discussion)
+- [Supplement](#supplement)
+
 ---
 # Introduction 
 - Interventions in neuro 
@@ -96,6 +143,7 @@ y=Cx+\eta
   - easiest to describe/understand in linear-gaussian setting
   - [...equations here...]
 
+<a name='figure-reachability'></a>
 🏞️ **Figure:** illustrate reachability 🏞️
 
 
@@ -114,8 +162,9 @@ y=Cx+\eta
   - as a result we want to maximize IDSNR for true links, and minimize it for false/indirect links 
 
 ## Network simulations 
+<a name='figure-gaussian'></a>
 ![](figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
-### Figure: Gaussian and spiking networks simulated in Brian2
+### Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2
 
 - built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
 - (delayed) linear-gaussian network 
@@ -124,10 +173,12 @@ y=Cx+\eta
 - spiking network 
 
 ## Extracting circuit estimates 
+
+<a name='figure-pipeline'></a>
 ![](figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
 <!-- ![](figures/core_figure_sketches/figure4a_sketch.png) -->
 <!-- ![](figures/misc_figure_sketches/data_xcorr_gaussian.png) -->
-### Figure: Process of detecting connections in a network model
+### Figure PIPELINE: Process of detecting connections in a network model
 ### Outputs of network 
 - spikes from populations of neurons 
 ### lagged cross-correlation 
@@ -152,18 +203,22 @@ y=Cx+\eta
 
 ---
 # Results 
-
-## Case Study: Applying CLINC to distinguish a pair of circuits
-  - explanation using binary reachability rules ?
-🏞️ **Figure:** walk-through / case-study 🏞️
+<a name='figure-demo'></a>
+🏞️
+## Figure DEMO: Applying CLINC to distinguish a pair of circuits (case-study)
+  - explanation using binary reachability rules
+    - consider postponing until we introduce intervention? 
+    - i.e. have one figure that walks through both reachability and impact of intervention
   - *(e.g. Advancing functional connectivity research from association to causation, Combining multiple functional connectivity methods to improve causal inferences)*
 
+<a name='figure-binary'></a>
 ## [Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties
   - proportion of each ambiguity class as a function of circuit size
   - possibly weight proportions by observed frequency of triplet motifs
-✂️️ **Figure:** ambiguity class by circuit size✂️
-
-## ... Characterization ...
+✂️️ **Figure:** ambiguity class by circuit size✂️ 🏞️
+    - SCOPE: cut?
+    
+## Characterization of network estimation performance 
 
 ### Extracting circuit estimates 
 - *(see methods for xcorr, muTE)*
@@ -187,7 +242,9 @@ y=Cx+\eta
 ### *Impact of node, network parameters*
 
 - **gaussian network simulation**
+
   <details><summary> ↪️ click to expand </summary>
+  
   - **parameters**
     - synaptic (edge) weights - $w$
     - synaptic (edge) delay - $\delta$
@@ -212,21 +269,26 @@ y=Cx+\eta
     - gain
     - bias 
     - spiking threshold 
-- **impact of circuit structure**
-  - degree of nodes 
-    - in/out-degree 
-    - of source - $i$
-    - of target - $i$
-  - presence of indirect correlations 
-  - presence of feedback loops
-  - \# of circuits in equivalence class 
-
-
+    
+<a name='figure-props'></a>
 ![](figures/misc_figure_sketches/intrinsic_network_params.png)
-### Figure: impact of intrinsic network properties on identifiability   
+### Figure PROPS: impact of intrinsic network properties on identifiability   
   - *(e.g. Identification of excitatory-inhibitory links and network topology in large-scale neuronal assemblies from multi-electrode recordings)*
   - comparison to predicted IDSNR 
-  
+
+- **impact of circuit structure**
+- degree of nodes 
+  - in/out-degree 
+  - of source - $i$
+  - of target - $j$
+- presence of indirect correlations 
+- presence of feedback loops
+- \# of circuits in equivalence class 
+
+
+<a name='figure-motif'></a>
+🏞️
+### Figure MOTIF: Interaction of network structure and intervention location on identifiability
 ### *Impact of intervention*
 - intervention types 
   - passive observation 
@@ -240,7 +302,7 @@ y=Cx+\eta
   - additional stimulation factors (open- & closed-loop)
     <details><summary> ↪️ click to expand </summary>
     
-    - stimulus location 
+    - **stimulus location** 
       - single-site
       - multi-site
       - location relative to features of network
@@ -251,25 +313,32 @@ y=Cx+\eta
       - frequency content 
       </details>
   
-  ![](figures/misc_figure_sketches/intervention_eg.png)
-  ![](figures/literature_figs/spike_field_shanechi_crop.png)
-  ![](figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png)
-### Figure: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data 
+<a name='figure-data'></a>
+![](figures/misc_figure_sketches/intervention_eg.png)
+![](figures/literature_figs/spike_field_shanechi_crop.png)
+![](figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png)  
+### Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data 
   - *metric:* \# of samples required to reach accuracy threshold
   - closed-loop > open-loop > passive 
+
+
+<a name='figure-predict'></a>
+🏞️
+### Figure PREDICT: Comparing predicted and emprical identification performance
+  - layout: scatterplot and curve fit of emprical vs predicted accuracy (false positives, false negatives)
+    - segmented by circuit type?
+  - could be part of figures above 
   
-### Figure: 🏞️ Stronger intervention facilitates disambiguating equivalent hypotheses 🏞️
+<a name='figure-disambig'></a>
+🏞️
+### Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses
+  - SCOPE: can this be combined with case-study walkthrough?
+  - like a quantitative version of [binary proportion figure](#figure-binary)
   - in example: shows a dataset with many correlations, multiple plausible circuit hypotheses 
     - patterns of correlation become more specific with increasing intervention strength 
-  - in aggregate: focuses on accuracy
+  - in aggregate: focuses on reduced bias, higher accuracy for "infinite" data limit
   - closed-loop > open-loop > passive 
-
-### Figure: Comparing predicted and emprical identification performance 
-- could be part of figures above 
-- includes how 
-### Figure: Interaction of network structure and intervention location on identifiability
-
-
+  
 
 ---
 # Discussion 
@@ -315,5 +384,5 @@ y=Cx+\eta
   - tighter integration of knowledge of intervention into network estimation procedure 
     - stimulus-conditional transfer entropy 
 ---
-## Supplement 
+# Supplement 
 - organization of clinc-gen, clinc-analysis codebases

@@ -276,21 +276,25 @@ pre[data-line] .line-highlight[data-end]:after {
 <li>What can i say about causal connections given the experiments i&#x2019;m doing?</li>
 <li>How do I design an intervention which improves the strength of hypothesis testing?</li>
 </ul>
-<h1 class="mume-header" id="table-of-conents">Table of Conents</h1>
+<h1 class="mume-header" id="table-of-contents">Table of Contents</h1>
 
 <ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#methods">Methods</a>
 <ul>
-<li><a href="#figure-gaussian-and-spiking-networks-simulated-in-brian2">Figure: Gaussian and spiking networks simulated in Brian2</a></li>
-<li><a href="#figure-process-of-detecting-connections-in-a-network-model">Figure: Process of detecting connections in a network model</a></li>
+<li><a href="#figure-gaussian">Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2</a></li>
+<li><a href="#figure-pipeline">Figure PIPELINE: Process of detecting connections in a network model</a></li>
 </ul>
 </li>
 <li><a href="#results">Results</a>
 <ul>
-<li><a href="#case-study-applying-clinc-to-distinguish-a-pair-of-circuits">Case Study: Applying CLINC to distinguish a pair of circuits</a></li>
-<li><a href="#figure-impact-of-intrinsic-network-properties-on-identifiability">Figure: impact of intrinsic network properties on identifiability</a></li>
-<li><a href="#figure-x-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data">Figure: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data</a></li>
+<li><a href="#figure-demo">Figure DEMO: Applying CLINC to distinguish a pair of circuits (case-study)</a></li>
+<li><a href="#binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties">[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties</a></li>
+<li><a href="#figure-props">Figure PROPS: impact of intrinsic network properties on identifiability</a></li>
+<li><a href="#figure-motif">Figure MOTIF: Interaction of network structure and intervention location on identifiability</a></li>
+<li><a href="#figure-data">Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data</a></li>
+<li><a href="#figure-predict">Figure PREDICT: Comparing predicted and emprical identification performance</a></li>
+<li><a href="#figure-disambig">Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses</a></li>
 </ul>
 </li>
 <li><a href="#discussion">Discussion</a></li>
@@ -452,7 +456,8 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 </ul>
 </li>
 </ul>
-<p>&#x1F3DE;&#xFE0F; <strong>Figure:</strong> illustrate reachability &#x1F3DE;&#xFE0F;</p>
+<p><a name="figure-reachability" href></a><br>
+&#x1F3DE;&#xFE0F; <strong>Figure:</strong> illustrate reachability &#x1F3DE;&#xFE0F;</p>
 <h2 class="mume-header" id="understanding-identification-through-derived-properties-of-circuits-reachability-rules">Understanding identification through derived properties of circuits (reachability rules)</h2>
 
 <ul>
@@ -480,8 +485,9 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 </ul>
 <h2 class="mume-header" id="network-simulations">Network simulations</h2>
 
-<p><img src="figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png" alt></p>
-<h3 class="mume-header" id="figure-gaussian-and-spiking-networks-simulated-in-brian2">Figure: Gaussian and spiking networks simulated in Brian2</h3>
+<p><a name="figure-gaussian" href></a><br>
+<img src="figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png" alt></p>
+<h3 class="mume-header" id="figure-gaussian-gaussian-and-spiking-networks-simulated-in-brian2">Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2</h3>
 
 <ul>
 <li>built on <a href="https://elifesciences.org/articles/47314">Brian2</a> spiking neural network simulator</li>
@@ -498,8 +504,9 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 </ul>
 <h2 class="mume-header" id="extracting-circuit-estimates">Extracting circuit estimates</h2>
 
-<p><img src="figures/misc_figure_sketches/network_estimation_pipeline_sketch.png" alt></p>
-<h3 class="mume-header" id="figure-process-of-detecting-connections-in-a-network-model">Figure: Process of detecting connections in a network model</h3>
+<p><a name="figure-pipeline" href></a><br>
+<img src="figures/misc_figure_sketches/network_estimation_pipeline_sketch.png" alt></p>
+<h3 class="mume-header" id="figure-pipeline-process-of-detecting-connections-in-a-network-model">Figure PIPELINE: Process of detecting connections in a network model</h3>
 
 <h3 class="mume-header" id="outputs-of-network">Outputs of network</h3>
 
@@ -546,21 +553,32 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <hr>
 <h1 class="mume-header" id="results">Results</h1>
 
-<h2 class="mume-header" id="case-study-applying-clinc-to-distinguish-a-pair-of-circuits">Case Study: Applying CLINC to distinguish a pair of circuits</h2>
+<p><a name="figure-demo" href></a><br>
+&#x1F3DE;&#xFE0F;</p>
+<h2 class="mume-header" id="figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits-case-study">Figure DEMO: Applying CLINC to distinguish a pair of circuits (case-study)</h2>
 
 <ul>
-<li>explanation using binary reachability rules ?<br>
-&#x1F3DE;&#xFE0F; <strong>Figure:</strong> walk-through / case-study &#x1F3DE;&#xFE0F;</li>
+<li>explanation using binary reachability rules
+<ul>
+<li>consider postponing until we introduce intervention?</li>
+<li>i.e. have one figure that walks through both reachability and impact of intervention</li>
+</ul>
+</li>
 <li><em>(e.g. Advancing functional connectivity research from association to causation, Combining multiple functional connectivity methods to improve causal inferences)</em></li>
 </ul>
+<p><a name="figure-binary" href></a></p>
 <h2 class="mume-header" id="binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties">[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties</h2>
 
 <ul>
 <li>proportion of each ambiguity class as a function of circuit size</li>
 <li>possibly weight proportions by observed frequency of triplet motifs<br>
-&#x2702;&#xFE0F;&#xFE0F; <strong>Figure:</strong> ambiguity class by circuit size&#x2702;&#xFE0F;</li>
+&#x2702;&#xFE0F;&#xFE0F; <strong>Figure:</strong> ambiguity class by circuit size&#x2702;&#xFE0F; &#x1F3DE;&#xFE0F;
+<ul>
+<li>SCOPE: cut?</li>
 </ul>
-<h2 class="mume-header" id="characterization">... Characterization ...</h2>
+</li>
+</ul>
+<h2 class="mume-header" id="characterization-of-network-estimation-performance">Characterization of network estimation performance</h2>
 
 <h3 class="mume-header" id="extracting-circuit-estimates-1">Extracting circuit estimates</h3>
 
@@ -602,22 +620,42 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <li>
 <p><strong>gaussian network simulation</strong></p>
 <details><summary> &#x21AA;&#xFE0F; click to expand </summary>
-- **parameters**
-  - synaptic (edge) weights - $w$
-  - synaptic (edge) delay - $\delta$
-  - time-constants - $\tau$
-  - node noise - $\sigma$
-- **expected results**
-  - weight increases xcorr peaks
-  - $\tau$ blurs xcorr peak in time 
-  - delay $\delta$ increases time-separability of sources 
-    - at $\delta = 0$ limit, connections are harder to distinguish
-      - especially direct v.s. indirect
-  - noise $\sigma$ has a &quot;location specific&quot; impact describe by IDSNR transfer function 
-    - generally, high noise &quot;upstream&quot; of a connection increases the strength of a hypothesized connection 
-      - as long as any path is present between $i&#x2192;&#x2192;j$
-    - high noise &quot;downstream&quot; of a connection, but impinging on the output node competes with / blurs / corrupts  
-    - **The location-dependent impact of noise on connection identifiability may be one key way in which different forms of intervention impact circuit estimates**
+<ul>
+<li><strong>parameters</strong>
+<ul>
+<li>synaptic (edge) weights - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span></span></span></span></li>
+<li>synaptic (edge) delay - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B4;</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">&#x3B4;</span></span></span></span></li>
+<li>time-constants - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C4;</mi></mrow><annotation encoding="application/x-tex">\tau</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.1132em;">&#x3C4;</span></span></span></span></li>
+<li>node noise - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C3;</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C3;</span></span></span></span></li>
+</ul>
+</li>
+<li><strong>expected results</strong>
+<ul>
+<li>weight increases xcorr peaks</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C4;</mi></mrow><annotation encoding="application/x-tex">\tau</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.1132em;">&#x3C4;</span></span></span></span> blurs xcorr peak in time</li>
+<li>delay <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B4;</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">&#x3B4;</span></span></span></span> increases time-separability of sources
+<ul>
+<li>at <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B4;</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\delta = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">&#x3B4;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> limit, connections are harder to distinguish
+<ul>
+<li>especially direct v.s. indirect</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>noise <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C3;</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C3;</span></span></span></span> has a &quot;location specific&quot; impact describe by IDSNR transfer function
+<ul>
+<li>generally, high noise &quot;upstream&quot; of a connection increases the strength of a hypothesized connection
+<ul>
+<li>as long as any path is present between <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>&#x2192;</mo><mo>&#x2192;</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i&#x2192;&#x2192;j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2192;&#x2192;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span></li>
+</ul>
+</li>
+<li>high noise &quot;downstream&quot; of a connection, but impinging on the output node competes with / blurs / corrupts</li>
+<li><strong>The location-dependent impact of noise on connection identifiability may be one key way in which different forms of intervention impact circuit estimates</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </details>
 </li>
 <li>
@@ -633,34 +671,47 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 </li>
 </ul>
 </li>
+</ul>
+<p><a name="figure-props" href></a><br>
+<img src="figures/misc_figure_sketches/intrinsic_network_params.png" alt></p>
+<h3 class="mume-header" id="figure-props-impact-of-intrinsic-network-properties-on-identifiability">Figure PROPS: impact of intrinsic network properties on identifiability</h3>
+
+<ul>
+<li>
+<p><em>(e.g. Identification of excitatory-inhibitory links and network topology in large-scale neuronal assemblies from multi-electrode recordings)</em></p>
+</li>
+<li>
+<p>comparison to predicted IDSNR</p>
+</li>
 <li>
 <p><strong>impact of circuit structure</strong></p>
-<ul>
-<li>degree of nodes
+</li>
+<li>
+<p>degree of nodes</p>
 <ul>
 <li>in/out-degree</li>
 <li>of source - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span></span></span></span></li>
-<li>of target - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathnormal">i</span></span></span></span></li>
+<li>of target - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span></li>
 </ul>
 </li>
-<li>presence of indirect correlations</li>
-<li>presence of feedback loops</li>
-<li># of circuits in equivalence class</li>
-</ul>
+<li>
+<p>presence of indirect correlations</p>
+</li>
+<li>
+<p>presence of feedback loops</p>
+</li>
+<li>
+<p># of circuits in equivalence class</p>
 </li>
 </ul>
-<p><img src="figures/misc_figure_sketches/intrinsic_network_params.png" alt></p>
-<h3 class="mume-header" id="figure-impact-of-intrinsic-network-properties-on-identifiability">Figure: impact of intrinsic network properties on identifiability</h3>
+<p><a name="figure-motif" href></a><br>
+&#x1F3DE;&#xFE0F;</p>
+<h3 class="mume-header" id="figure-motif-interaction-of-network-structure-and-intervention-location-on-identifiability">Figure MOTIF: Interaction of network structure and intervention location on identifiability</h3>
 
-<ul>
-<li><em>(e.g. Identification of excitatory-inhibitory links and network topology in large-scale neuronal assemblies from multi-electrode recordings)</em></li>
-<li>comparison to predicted IDSNR</li>
-</ul>
 <h3 class="mume-header" id="impact-of-intervention"><em>Impact of intervention</em></h3>
 
 <ul>
-<li>
-<p>intervention types</p>
+<li>intervention types
 <ul>
 <li>
 <p>passive observation</p>
@@ -684,7 +735,7 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <p>additional stimulation factors (open- &amp; closed-loop)</p>
 <details><summary> &#x21AA;&#xFE0F; click to expand </summary>
 <ul>
-<li>stimulus location
+<li><strong>stimulus location</strong>
 <ul>
 <li>single-site</li>
 <li>multi-site</li>
@@ -706,36 +757,45 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 </ul>
 </li>
 </ul>
-<p><img src="figures/misc_figure_sketches/intervention_eg.png" alt><br>
+
+
+<p><a name="figure-data" href></a><br>
+<img src="figures/misc_figure_sketches/intervention_eg.png" alt><br>
 <img src="figures/literature_figs/spike_field_shanechi_crop.png" alt><br>
 <img src="figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png" alt></p>
-
-
-<h3 class="mume-header" id="figure-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data">Figure: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data</h3>
+<h3 class="mume-header" id="figure-data-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data">Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data</h3>
 
 <ul>
 <li><em>metric:</em> # of samples required to reach accuracy threshold</li>
 <li>closed-loop &gt; open-loop &gt; passive</li>
 </ul>
-<h3 class="mume-header" id="figure-%EF%B8%8F-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses-%EF%B8%8F">Figure: &#x1F3DE;&#xFE0F; Stronger intervention facilitates disambiguating equivalent hypotheses &#x1F3DE;&#xFE0F;</h3>
+<p><a name="figure-predict" href></a><br>
+&#x1F3DE;&#xFE0F;</p>
+<h3 class="mume-header" id="figure-predict-comparing-predicted-and-emprical-identification-performance">Figure PREDICT: Comparing predicted and emprical identification performance</h3>
 
 <ul>
+<li>layout: scatterplot and curve fit of emprical vs predicted accuracy (false positives, false negatives)
+<ul>
+<li>segmented by circuit type?</li>
+</ul>
+</li>
+<li>could be part of figures above</li>
+</ul>
+<p><a name="figure-disambig" href></a><br>
+&#x1F3DE;&#xFE0F;</p>
+<h3 class="mume-header" id="figure-disambig-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses">Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses</h3>
+
+<ul>
+<li>SCOPE: can this be combined with case-study walkthrough?</li>
+<li>like a quantitative version of <a href="#figure-binary">binary proportion figure</a></li>
 <li>in example: shows a dataset with many correlations, multiple plausible circuit hypotheses
 <ul>
 <li>patterns of correlation become more specific with increasing intervention strength</li>
 </ul>
 </li>
-<li>in aggregate: focuses on accuracy</li>
+<li>in aggregate: focuses on reduced bias, higher accuracy for &quot;infinite&quot; data limit</li>
 <li>closed-loop &gt; open-loop &gt; passive</li>
 </ul>
-<h3 class="mume-header" id="figure-comparing-predicted-and-emprical-identification-performance">Figure: Comparing predicted and emprical identification performance</h3>
-
-<ul>
-<li>could be part of figures above</li>
-<li>includes how</li>
-</ul>
-<h3 class="mume-header" id="figure-interaction-of-network-structure-and-intervention-location-on-identifiability">Figure: Interaction of network structure and intervention location on identifiability</h3>
-
 <hr>
 <h1 class="mume-header" id="discussion">Discussion</h1>
 
@@ -826,10 +886,10 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 </ul>
 </li>
 </ul>
-<h2 class="mume-header" id="supplement">Supplement</h2>
+<hr>
+<h1 class="mume-header" id="supplement">Supplement</h1>
 
 <ul>
-<li></li>
 <li>organization of clinc-gen, clinc-analysis codebases</li>
 </ul>
 

@@ -1,8 +1,16 @@
 # Top 3 highest priority writing / planning tasks:
  - [~] re-transcribe high-level outline 
- - [ ] describe core figures for emprical (Spiking vs gaussian) sweep results 
+ - [~] describe core figures for emprical (Spiking vs gaussian) sweep results 
  - [ ] sketch core figures 
- 
+
+# planning tasks 
+- evaluate scope, potentially combine / cut figures
+- how much should this be a perspective / review / prospectus 
+  - v.s. focusing on new empricial research results
+- decide flow between 
+  - params (weight, delay)
+  - intervention 
+  - 
 # intro / methods tasks
  - Describe the methods for identifying circuits
   - xcorr procedure 
@@ -13,9 +21,6 @@
   - Grosenick/Deisseroth, Kording 
   
  - [~] write up "tutorial" + latex for different ways of representing a circuit
- 
-
-# brainstorming 
 
 # theory 
 - [ ] relate noise → connection SNR to sensitivity transfer function 
