@@ -3,22 +3,26 @@
 # Table of Contents 
 
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=2 orderedList=false} -->
 <!-- code_chunk_output -->
 
 - [Table of Contents](#table-of-contents)
 - [Abstract](#abstract)
 - [Introduction](#introduction)
+  - [Estimating causal interactions in the brain (why, how)](#estimating-causal-interactions-in-the-brain-why-how)
+  - [Interventions in neuro](#interventions-in-neuro)
+  - [Representations & reachability](#representations-reachability)
+  - [Figure DEMO: Applying CLINC to distinguish a pair of circuits](#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits)
 - [Methods](#methods)
-  - [first method](#first-method)
-  - [second method](#second-method)
+  - [Network simulations](#network-simulations)
+  - [Implementing interventions](#implementing-interventions)
+  - [Extracting circuit estimates](#extracting-circuit-estimates)
 - [Results](#results)
-  - [first results section](#first-results-section)
-    - [Figure 1: caption](#figure-1-caption)
-    - [Figure 2: caption](#figure-2-caption)
-  - [second results section](#second-results-section)
-    - [Figure 3: caption](#figure-3-caption)
-    - [Figure 4: caption](#figure-4-caption)
+  - [Characterizing circuit-pair ambiguity through reachability properties](#characterizing-circuit-pair-ambiguity-through-reachability-properties)
+  - [Impact of node, network parameters on estimation performance](#impact-of-node-network-parameters-on-estimation-performance)
+  - [Impact of intervention on estimation performance](#impact-of-intervention-on-estimation-performance)
+  - [Impact of circuit structure](#impact-of-circuit-structure)
 - [Discussion](#discussion)
 - [References](#references)
 - [Supplement](#supplement)
@@ -26,25 +30,43 @@
 <!-- /code_chunk_output -->
 
 
-# Abstract
 
+# Abstract
+@import "section_content/abstract.md"
+----
 # Introduction
 
-@import "section_content/test_background.md"
+## Estimating causal interactions in the brain (why, how)
+@import "section_content/background_causal_network_id.md"
 
+## Interventions in neuro
+@import "section_content/background_intervention.md"
+
+## Representations & reachability
+@import "section_content/background_representation_reach.md"
+
+## Figure DEMO: Applying CLINC to distinguish a pair of circuits
+@import "section_content/background_id_demo.md"
+
+----
 # Methods
 
-## first method
-## second method
+## Network simulations
+## Implementing interventions
+## Extracting circuit estimates
+
+----
 
 # Results
-## first results section
-### Figure 1: caption
-### Figure 2: caption
+## Characterizing circuit-pair ambiguity through reachability properties
 
-## second results section
-### Figure 3: caption
-### Figure 4: caption
+## Impact of node, network parameters on estimation performance
+
+## Impact of intervention on estimation performance
+
+## Impact of circuit structure
+
+----
 
 # Discussion
 # References
