@@ -16,14 +16,45 @@
 
 - [Introduction](#introduction)
   - [Why? - Estimating causal interactions in the brain](#why-estimating-causal-interactions-in-the-brain)
+    - @Matt, synthesizing raw material from @Adam sketch this ASAP
+    - [mechanical, medium priority, low risk]
+
   - [How? - Causal methods for network discovery from time-series](#how-causal-methods-for-network-discovery-from-time-series)
-  - [Interventions in neuro](#interventions-in-neuro)
-  - [Role of interventions in causal inference](#role-of-interventions-in-causal-inference)
+    - Challenges [medium priority for a sketch] - @Matt
+      - confound
+      - indirect correlations
+    - measures of dependence
+      - correlation (linear gaussian) vs info theoretic (TE)
+      - bivariate vs multivariate
+      - @Adam GC in neuro
+    - literature recap [mechanical, low risk, slow]
+    
+  - [Interventions in neuro](#interventions-in-neuro) - experiments, historical
+    - @Adam - prewritten 
+    - [mechanical, low risk, recap]
+  - [Role of interventions in causal inference](#role-of-interventions-in-causal-inference) - 
+    - interventions have been identified as a key ingredient in causal inference
+    - the theory is active, plenty of groundwork, but gap in connecting to practicalities of experiment
+    - gap from the neuroscience side in terms of using the established CI theory to navigate experiment design decisions 
+    - @Matt [high priority for detailed outline, high priority for early discussion, requires calibration in language used depending on audience]
+    - "stronger interventions facilitate stronger inference"
+    - 
   - [Multiple complementary perspectives (representations) of the same underlying network structure:](#multiple-complementary-perspectives-representations-of-the-same-underlying-network-structure)
+    - [communication opportunity / minor] 
+    - @Adam, prewritten
+    
   - [Reachability](#reachability)
+    - [ad-hoc, open technical]
+    - [important, but may depend on ongoing work, but lots of dependency]
+    - @Adam/@Matt copy paste
   - [Understanding identification through derived properties of circuits (reachability rules)](#understanding-identification-through-derived-properties-of-circuits-reachability-rules)
   - [Figure DEMO: Applying CLINC to distinguish a pair of circuits (walkthrough)](#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits-walkthrough)
+      - [write a script - turn into a more concrete figure ASAP] 
+      - [more concrete draft of diagram - less granular substeps - more annotation ]
+      - [HIGH PRIORTIY - important to Chris, important communication task]
+      - @Adam -> @Matt
 - [Methods](#methods)
+- @Adam sketches everything quickly
   - [Network simulations](#network-simulations)
     - [Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2](#figure-gaussian-gaussian-and-spiking-networks-simulated-in-brian2)
   - [Implementing interventions](#implementing-interventions)
@@ -38,6 +69,7 @@
   - [[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties](#binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties)
   - [Characterization of network estimation performance - Impact of node, network parameters](#characterization-of-network-estimation-performance-impact-of-node-network-parameters)
     - [Figure PROPS: impact of intrinsic network properties on identifiability](#figure-props-impact-of-intrinsic-network-properties-on-identifiability)
+      - [incidental]
     - [Figure PREDICT: Comparing predicted and emprical identification performance](#figure-predict-comparing-predicted-and-emprical-identification-performance)
   - [Impact of intervention](#impact-of-intervention)
     - [Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses](#figure-disambig-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses)
