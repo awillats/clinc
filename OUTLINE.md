@@ -86,20 +86,20 @@
       - optimize therapeutic targets for existing approaches
       
 ## How? - Causal methods for network discovery from time-series
-    - Challenges faced when estimating network connectivity
-      - [...]
-    - measures of dependence 
-      - correlation (granger causality, cross-correlation)
-      - info theoretic (transfer entropy)
-    - role of conditioning 
-      - bivariate v.s. multivariate approaches
-    - *( statistical testing )*
-      - need for group effect and post-hoc tests 
-      - issue of multiple comparisons
-      - `in the end we were leaning on IDTxl for this... may be appropriate to leave this out of scope`
-    - *( perspective on role, limitations of granger causality in neuro )*
-      - `are some of these limitations alleviated by intervention?`*
-    - *cite J.Runge*
+  - Challenges faced when estimating network connectivity
+    - [...]
+  - measures of dependence 
+    - correlation (granger causality, cross-correlation)
+    - info theoretic (transfer entropy)
+  - role of conditioning 
+    - bivariate v.s. multivariate approaches
+  - *( statistical testing )*
+    - need for group effect and post-hoc tests 
+    - issue of multiple comparisons
+    - `in the end we were leaning on IDTxl for this... may be appropriate to leave this out of scope`
+  - *( perspective on role, limitations of granger causality in neuro )*
+    - `are some of these limitations alleviated by intervention?`*
+  - *cite J.Runge*
     
 ## Interventions in neuro 
   - *(walkthrough from passive, open-loop, closed-loop with historic examples)*
