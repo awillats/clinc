@@ -43,7 +43,7 @@ see also https://beta.workflowy.com/#/f32ad4b2290a
     - more sophisticated inference isn't always enough!
   - assume unconfoundedness, and cross fingers [^quasi]
     - e.g. Granger Causality
-  - limitations of **excess intervention** (lesions, knockout) [^sprague]
+  - limitations of **excess intervention** (lesions, knockout) [^promise][^vaidya][^sprague]
   - not all pertubations are created equal[^fakhar]
 
 - intervention as gold standard[^quasi]
@@ -244,5 +244,7 @@ by M Garofalo, T Nieus, P Massobrio, S Martinoia - [link](https://journals.plos.
 [^lepperod]: [Inferring causal connectivity from pairwise recordings and optogenetics](#inferring-causal-connectivity-from-pairwise-recordings-and-optogenetics)
 [^pearl2009]: Pearl, J. (2009). Causality. Cambridge university press.
 
-
+[^vaidya]: ["Lesion Studies in Contemporary Neuroscience"](https://pubmed.ncbi.nlm.nih.gov/31279672/) Vaidya et al.
+[^promise]: ["The promise and perils of causal circuit manipulations
+"](https://www.sciencedirect.com/science/article/abs/pii/S0959438817302246) (2018) Wolff, Olveczky - discusses acute v.s. chronic and disruptive v.s. physiological perturbations. Also mentions the promise of closed-loop control in this respect
 

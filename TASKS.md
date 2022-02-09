@@ -24,13 +24,19 @@
 - decide flow between 
   - params (weight, delay)
   - intervention 
-  - 
+
+[^FC_measures]: "A systematic framework for functional connectivity measures" includes a broad comparison of performance of Granger causality vs transfer entropy vs other methods. also discusses role of weights, noise
+[^connect_infer]: "Connectivity inference from neural recording data: Challenges, mathematical bases and research directions"
+[^ctrl_sys_id]: "A control-theoretic system identification framework and a real-time closed-loop clinical simulation testbed for electrical brain stimulation"
+
 # intro / methods tasks
- - Describe the methods for identifying circuits
+ - [ ] add more closed-loop references to intro[^ctrl_sys_id]
+  - 
+ - Describe the methods for identifying circuits[^FC_measures][^connect_infer]
   - xcorr procedure 
   - IDTxl recap 
     - cover multivariate transfer entropy 
-  
+ - evaluate dimensions of parameter sweeps[^FC_measures]
  - sketch a short review of closed-loop in neuro
   - Grosenick/Deisseroth, Kording 
   
@@ -41,6 +47,7 @@
   - see [Astrom feedback fundamentals](https://www.cds.caltech.edu/~murray/courses/cds101/fa02/caltech/astrom-ch5.pdf)
 - [ ] copy over notation from 2020 brainstorming [overleaf link](https://www.overleaf.com/project/5e8232cd6157d200014b52d4)
   - rules for identifiability 
-  
+- [ ] discuss the role of prior anatomical knowledge in reducing search space 
+
 # formatting tasks 
 - add figure references to table of contents  

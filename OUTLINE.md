@@ -320,13 +320,15 @@ y=Cx+\eta
 - connection to / equivalence with Granger Causality (GC)
   - review of GC in neuro
   - requisite assumptions
-  - limitations of GC
+  - limitations of GC [^GC_problems]
 - xcorr features 
   - peak-SNR
   - prominence 
   - time of peak
 - window of time-lags considered for direct connections
   - some multiple of expected synaptic delay
+
+[^GC_problems]: a study of problems encountered in Granger causality analysis from a neuroscience perspective
 
 ### multivariate transfer entropy (muTE)
 - advantages above usual GC approach
@@ -347,10 +349,10 @@ y=Cx+\eta
   - error in output reconstruction
 - *relevant "negative control" for comparison (?)*
   - identified connectivity for random network?
-  - some shuffled data-surrogate procedure?
+  - some shuffled data-surrogate procedure? [^FC_methods]
 - *relevant "positive control" for comparison (?)*
 
-
+[^FC_methods]: "METHODS FOR STUDYING FUNCTIONAL INTERACTIONS AMONG NEURONAL POPULATIONS" - comes with MATLAB code, discusses time and trial shuffling, decomposing information (synergistic, redundant, independent)
 ---
 # Results 
 
