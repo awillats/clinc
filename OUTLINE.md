@@ -8,12 +8,81 @@
   - What can i say about causal connections given the experiments i’m doing?
   - How do I design an intervention which improves the strength of hypothesis testing?
 
+## Abstract 
+- why causal [structure-function]
+  - why interventions help 
+  - how closed-loop, causal help support this 
+  - what are the core challenges 
+    - confounds
+    - fast reciprocal, highly coupled dynamics
+- contribution
+  - when and how interventions help
+  - simulations as demonstration, basic quantitative understanding
+  
+- bigger goal (funnel out)
+  - help design and interpret experiments
+---
+- why causal? 
+- **gap:** current approaches consider mostly passive and open-loop settings. [^causal_refs]
+  - prior work shows recording more is sometimes insufficient![^ila]
+  - subgap: those papers *that do* explore impact of *strong* interventions mostly focus on lesioning 
+    - not always feasible
+    - have side effects
+- **solution:** closed-loop control can mitigate these drawbacks when applied to the right circuit in the right location 
+  - *but* we need to understand the impact of closed-loop control to reap these rewards 
+- **contribution:**
+  - Provide a straightforward and practically useful conceptual framework for applying closed-loop to circuit identification problems
+  - update causal inference theory to accomodate closed-loop interventions 
+  - quantitative demonstration in spiking circuits
+    - highlights specifics of choosing where to intervene to distinguish competing hypotheses
+- **impact:** immediate guidance for design of experiments
+  
+[^ila]: Ila Fiete , Abhranil Das -Systematic errors in connectivity inferred from activity in strongly recurrent networks 
+[^causal_refs]: esp. kording, fakhar
+---
+### Abstract decisions 
+- "advancing FC" states the gap very clearly, early 
+  > —are likely a good starting point for estimating brain network interactions. Yet only a subset of FC methods (‘effective connectivity’) is explicitly designed to infer causal interactions from statistical associations. Here we incorporate best practices from diverse areas of FC research to illustrate how FC methods can be refined to improve inferences about neural mechanisms ... 
+  
+  > We further demonstrate how the most common FC measures (correlation and coherence) reduce the set of likely causal models, facilitating causal inferences despite major limitations. 
+  
+  > Alternative FC measures are suggested to immediately start improving causal inferences beyond these common FC measures.
+  
+
+
+- how much to explain types of intervention
+  - [^N2] necessary to define "interventions" or "open-loop"?
+  - [^N3] is "lesioning" really an open-loop stimulation?
+  - [^N5] will most readers be familiar with "closed-loop"? or should this be defined / a different phrase used?
+
+- is optogenetics worth mentioning?
+  - facilitates closed-loop control with unprecedented precision
+  
+- how to state our target audience 
+  - systems neuroscientist?
+  - experimental neuroscientists?
+
+- how much to commit to a particular algorithmic approach 
+  - xcorr vs muTE
+  - try an xcorr-heavy description 
+
+- highlight our expected results
+
+  
+- how much "funneling out" is appropriate?
+ - instead, could stick to concrete conclusion 
+  > Alternative FC measures are suggested to immediately start improving causal inferences beyond these common FC measures.
+ 
+---
+
 # Table of Contents {ignore = true}
 
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
 <!-- code_chunk_output -->
 
+  - [Abstract](#abstract)
+    - [Abstract decisions](#abstract-decisions)
 - [Introduction](#introduction)
   - [Why? - Estimating causal interactions in the brain](#why-estimating-causal-interactions-in-the-brain)
   - [How? - Causal methods for network discovery from time-series](#how-causal-methods-for-network-discovery-from-time-series)

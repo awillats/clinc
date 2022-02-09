@@ -1,7 +1,9 @@
 # Top 3 highest priority writing / planning tasks:
 - [ ] draft abstract 
-  - [ ] review matt's draft - @awillats
-  - [ ] review abstracts from similar papers to assess scope, style - @awillats
+  - [x] review matt's draft - @awillats
+  - [.] review abstracts from similar papers to assess scope, style - @awillats
+    - [x] advancing FC
+    - [ ] 
   - [ ] resketch outline, key points @awillats
   - [ ] add section for expected results @awillats
   - [ ] fill text for new sections @awillats , @matthewoshaughnessy
