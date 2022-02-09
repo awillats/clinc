@@ -1,7 +1,19 @@
 # Top 3 highest priority writing / planning tasks:
- - [~] re-transcribe high-level outline 
- - [~] describe core figures for emprical (Spiking vs gaussian) sweep results 
- - [ ] sketch core figures 
+- [ ] draft abstract 
+  - [ ] review matt's draft - @awillats
+  - [ ] review abstracts from similar papers to assess scope, style - @awillats
+  - [ ] resketch outline, key points @awillats
+  - [ ] add section for expected results @awillats
+  - [ ] fill text for new sections @awillats , @matthewoshaughnessy
+  - [ ] review @awillats @matthewoshaughnessy
+
+- [ ] draft statement of need 
+  - [ ] review suggestions for this from Chris
+  - [ ] describe intersection of several fields (CL, causal, network neuro)
+  - [ ] describe context of similar papers
+  - [ ] highlight unique aspect of this work
+
+- [ ] sketch core figures 
 
 # planning tasks 
 - evaluate scope, potentially combine / cut figures
