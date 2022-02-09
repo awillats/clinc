@@ -1,0 +1,651 @@
+<!DOCTYPE html><html><head>
+      <title>exemplars</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////Users/adam/.dotfiles/atom/packages/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <p>see also <a href="https://beta.workflowy.com/#/f32ad4b2290a">https://beta.workflowy.com/#/f32ad4b2290a</a></p>
+<h1 class="mume-header undefined" id="table-of-conents">Table of Conents</h1>
+
+<div class="code-chunk" data-id="code-chunk-id-0" data-cmd="toc"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><ul>
+<li><a href="#summary-of-core-ideas">summary of core ideas</a></li>
+<li><a href="#other-misc-themes">other misc. themes</a></li>
+<li><a href="#similar-articles">Similar articles</a>
+<ul>
+<li><a href="#advancing-functional-connectivity-research-from-association-to-causation">Advancing functional connectivity research from association to causation</a></li>
+<li><a href="#inferring-causal-connectivity-from-pairwise-recordings-and-optogenetics">Inferring causal connectivity from pairwise recordings and optogenetics</a></li>
+<li><a href="#systematic-errors-in-connectivity-inferred-from-activity-in-strongly-recurrent-networks">Systematic errors in connectivity inferred from activity in strongly recurrent networks</a></li>
+<li><a href="#could-a-neuroscientist-understand-a-microprocessor">Could a Neuroscientist Understand a Microprocessor?</a></li>
+<li><a href="#systematic-perturbation-of-an-artificial-neural-network-a-step-towards-quantifying-causal-contributions-in-the-brain">Systematic Perturbation of an Artificial Neural Network: A Step Towards Quantifying Causal Contributions in The Brain</a></li>
+<li><a href="#quasi-experimental-causality-in-neuroscience-and-behavioral-research">Quasi-experimental causality in neuroscience and behavioral research</a></li>
+<li><a href="#evaluation-of-the-performance-of-information-theory-based-methods-and-cross-correlation-to-estimate-the-functional-connectivity-in-cortical-networks">Evaluation of the Performance of Information Theory-Based Methods and Cross-Correlation to Estimate the Functional Connectivity in Cortical Networks</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="summary-of-core-ideas">summary of core ideas</h2>
+
+<ul>
+<li>
+<p>we <strong>seek causal answers</strong> to questions we have about brain<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<ul>
+<li>bridging structure and function</li>
+</ul>
+<blockquote>
+<p>In neuroscience we have many causal questions. For example, we are interested in how one brain area affects another brain area, as opposed to how the two brain areas are correlated.</p>
+</blockquote>
+<blockquote>
+<p>The central goal of neuroscience, arguably, is to understand the mechanisms or causal chains that give rise to activity in the brain, to perception, cognition, and action.</p>
+</blockquote>
+</li>
+<li>
+<p>core <strong>challenges to causal understanding</strong></p>
+<ul>
+<li>
+<p>key challenge is tangling / overlap of potential sources<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup><sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup><sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></p>
+<blockquote>
+<p>Complex systems such as the brain are hard to understand because of the numerous ways the contributing elements may interact internally (Jonas and Kording, 2017) <sup class="footnote-ref"><a href="#fn4" id="fnref4:1">[4:1]</a></sup><sup class="footnote-ref"><a href="#fn3" id="fnref3:1">[3:1]</a></sup></p>
+</blockquote>
+<ul>
+<li>lack of spatial specificity in optogenetics makes this worse<sup class="footnote-ref"><a href="#fn4" id="fnref4:2">[4:2]</a></sup></li>
+<li>recurrence as a more specific form of this <sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup></li>
+</ul>
+</li>
+<li>
+<p>issue of <strong>confounding</strong> <sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup> <sup class="footnote-ref"><a href="#fn1" id="fnref1:1">[1:1]</a></sup> <sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup></p>
+<blockquote>
+<p>Confounding is the big threat to causal validity (Pearl, 2009) irrespective of the use of simple regression techniques or advanced functional connectivity techniques (Stevenson et al., 2008; Honey et al., 2009; Aitchison and Lengyel, 2017; Pfau et al., 2013)</p>
+</blockquote>
+<ul>
+<li>bigger issue with passive observation
+<blockquote>
+<p>First, there are many variables that we cannot easily set, e.g., the activity of neurons somewhere in the brain. S</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>limitations of current approaches</strong></p>
+<ul>
+<li><strong>recording more isn&apos;t always enough</strong><sup class="footnote-ref"><a href="#fn5" id="fnref5:1">[5:1]</a></sup>
+<ul>
+<li>more sophisticated inference isn&apos;t always enough!</li>
+</ul>
+</li>
+<li>assume unconfoundedness, and cross fingers <sup class="footnote-ref"><a href="#fn1" id="fnref1:2">[1:2]</a></sup>
+<ul>
+<li>e.g. Granger Causality</li>
+</ul>
+</li>
+<li>limitations of <strong>excess intervention</strong> (lesions, knockout) <sup class="footnote-ref"><a href="#fn8" id="fnref8">[8]</a></sup></li>
+<li>not all pertubations are created equal<sup class="footnote-ref"><a href="#fn2" id="fnref2:1">[2:1]</a></sup></li>
+</ul>
+</li>
+<li>
+<p>intervention as gold standard<sup class="footnote-ref"><a href="#fn1" id="fnref1:3">[1:3]</a></sup></p>
+</li>
+</ul>
+<h2 class="mume-header" id="other-misc-themes">other misc. themes</h2>
+
+<ul>
+<li>discussion of methods focused on <strong>reducing bias</strong> in network estimation</li>
+<li>integrating successful techniques from other disciplines<sup class="footnote-ref"><a href="#fn1" id="fnref1:4">[1:4]</a></sup><sup class="footnote-ref"><a href="#fn4" id="fnref4:3">[4:3]</a></sup>
+<ul>
+<li>mostly econometrics</li>
+</ul>
+</li>
+<li>value of studying a complex system with known ground-truth connectivity <sup class="footnote-ref"><a href="#fn3" id="fnref3:2">[3:2]</a></sup></li>
+<li>use / critique of Granger causality
+<ul>
+<li>conditional GC described in <sup class="footnote-ref"><a href="#fn9" id="fnref9">[9]</a></sup></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="similar-articles">Similar articles</h1>
+
+<h2 class="mume-header" id="advancing-functional-connectivity-research-from-association-to-causation">Advancing functional connectivity research from association to causation</h2>
+
+<p>by Reid, Calhoun, Cole et al. - <a href="https://www.nature.com/articles/s41593-019-0510-4">link</a></p>
+<details><summary>Abstract</summary>
+<blockquote>
+<p>Cognition and behavior emerge from brain network interactions, such that investigating causal interactions should be central to the study of brain function. Approaches that characterize statistical associations among neural time series&#x2014;functional connectivity (FC) methods&#x2014;are likely a good starting point for estimating brain network interactions. Yet only a subset of FC methods (&#x2018;effective connectivity&#x2019;) is explicitly designed to infer causal interactions from statistical associations. Here we incorporate best practices from diverse areas of FC research to illustrate how FC methods can be refined to improve inferences about neural mechanisms, with properties of causal neural interactions as a common ontology to facilitate cumulative progress across FC approaches. We further demonstrate how the most common FC measures (correlation and coherence) reduce the set of likely causal models, facilitating causal inferences despite major limitations. Alternative FC measures are suggested to immediately start improving causal inferences beyond these common FC measures.</p>
+</blockquote>
+</details>
+<h3 class="mume-header" id="transcription">transcription</h3>
+
+<ul>
+<li><strong>big goal</strong> understand structure - function</li>
+<li><strong>gap</strong> not all functional connectivity approaches infer causal interactions
+<ul>
+<li>lots of theoretical and practical limitations with current FC approaches</li>
+</ul>
+<blockquote>
+<ol>
+<li>The need for an account of FC as both a theoretical and methodological construct.</li>
+<li>the need to integrate functional (and effective) con- nectivity approaches into a single framework</li>
+<li>the need to validate FC methods to improve map- ping of FC results to properties of theoretical interest</li>
+</ol>
+</blockquote>
+</li>
+<li><strong>solution</strong> summarize best practices, illustrate how to refine inference
+<ul>
+<li>identify likely issues</li>
+<li>lay out systematic perspective for understanding layers
+<ul>
+<li>structural</li>
+<li>observational</li>
+<li>inferential</li>
+</ul>
+</li>
+<li>presents framework for understanding space of hypotheses
+<ul>
+<li>demonstrate how methods reduce the set of likely causal models</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>impact/guidance</strong> suggestions for refined FC methods to use</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="inferring-causal-connectivity-from-pairwise-recordings-and-optogenetics">Inferring causal connectivity from pairwise recordings and optogenetics</h2>
+
+<p>by Lepperod, Stober, Hafting, Fyhn, Kording - <a href="https://www.biorxiv.org/node/138945.full">link</a></p>
+<details><summary>abstract</summary>
+<blockquote>
+<p>To study how the brain works, it is crucial to identify causal interactions between neurons, which is thought to require perturbations. However, when using optogenetics we typically perturb multiple neurons, producing a confound - any of the stimulated neurons can have affected the postsynaptic neuron. Here we show how this produces large biases, and how they can be reduced using the instrumental variable (IV) technique from econometrics. The interaction between stimula- tion and the absolute refractory period produces a weak, approximately random signal which can be exploited to estimate causal connectivity. When simulating integrate-and-fire neurons, we find that estimates from IV are better than na &#x308;&#x131;ve techniques (R2 = 0.77 vs R2 = 0.01). The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity. Presented is a robust analysis framework for mapping out network connectivity based on causal neuron interactions.</p>
+</blockquote>
+</details>
+<h3 class="mume-header" id="transcription-1">transcription</h3>
+
+<ul>
+<li>
+<p><strong>big goal</strong> to study how the brain works, perturbations are key. How can we overcome limitations of current opotgenetic perturbations?</p>
+</li>
+<li>
+<p><strong>challenge</strong> opto stim provides common input to many neurons</p>
+<ul>
+<li>this is a potential confound</li>
+<li>leads to high bias</li>
+</ul>
+<blockquote>
+<p>any postsynaptic activity induced by stimulation could in prin- ciple come from any of the stimulated neurons, introducing problematic confounders.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>proposed solution</strong> borrow instrumental variables (IV) from econ.</p>
+<ul>
+<li>stimulus + refratory period provides approx. random signal</li>
+<li>also uses cross-correlation
+<blockquote>
+<p>We compare these estimates with a na &#x308;&#x131;ve, although widely used, cross-correlation histogram (CCH) method that fails to distinguish respective pairs.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>results</strong> much higher recovery</p>
+<ul>
+<li>The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity.</li>
+</ul>
+</li>
+<li>
+<p><strong>impact</strong> robust analysis framework for mapping connectivity based on causal interaction</p>
+</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="systematic-errors-in-connectivity-inferred-from-activity-in-strongly-recurrent-networks">Systematic errors in connectivity inferred from activity in strongly recurrent networks</h2>
+
+<p>by Ila Fiete &amp; Abhranil Das - <a href="https://www.nature.com/articles/s41593-020-0699-2">link</a></p>
+<details><summary>Abstract</summary>
+<blockquote>
+<p>Understanding the mechanisms of neural computation and learning will require knowledge of the underlying circuitry. Because it is difficult to directly measure the wiring diagrams of neural circuits, there has long been an interest in estimating them algorithmically from multicell activity recordings. We show that even sophisticated methods, applied to unlimited data from every cell in the circuit, are biased toward inferring connections between unconnected but highly correlated neurons. This failure to &#x2018;explain away&#x2019; connections occurs when there is a mismatch between the true network dynamics and the model used for inference, which is inevitable when modeling the real world. Thus, causal inference suffers when variables are highly correlated, and activity-based estimates of connectivity should be treated with special caution in strongly connected networks. Finally, performing inference on the activity of circuits pushed far out of equilibrium by a simple low-dimensional suppressive drive might ameliorate inference bias.</p>
+</blockquote>
+</details>
+<h3 class="mume-header" id="transcription-2">transcription</h3>
+
+<ul>
+<li>
+<p><strong>big goal:</strong> understand structure - function</p>
+<ul>
+<li>difficult to do</li>
+</ul>
+</li>
+<li>
+<p><strong>surprising result - challenge for field:</strong></p>
+<blockquote>
+<p>We show that even sophisticated methods, applied to unlimited data from every cell in the circuit, are biased toward inferring connections between unconnected but highly correlated neurons.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>explanation for why</strong></p>
+</li>
+<li>
+<p><strong>solution - method/result for partial mitigation:</strong> low-dimensional suppresive drive (open-loop stim) might ameliorate inference bias</p>
+</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="could-a-neuroscientist-understand-a-microprocessor">Could a Neuroscientist Understand a Microprocessor?</h2>
+
+<p>Jonas &amp; Kording - <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005268">link</a></p>
+<details><summary> abstract</summary>
+<blockquote>
+<p>There is a popular belief in neuroscience that we are primarily data limited, and that producing large, multimodal, and complex datasets will, with the help of advanced data analysis algorithms, lead to fundamental insights into the way the brain processes information. These datasets do not yet exist, and if they did we would have no way of evaluating whether or not the algorithmically-generated insights were sufficient or even correct.</p>
+<p>To address this, here we take a classical microprocessor as a model organism, and use our ability to perform arbitrary experiments on it to see if popular data analysis methods from neuroscience can elucidate the way it processes information. Microprocessors are among those artificial infor- mation processing systems that are both complex and that we understand at all levels, from the overall logical flow, via logical gates, to the dynamics of transistors.</p>
+<p>We show that the approaches reveal interesting structure in the data but do not meaningfully describe the hierarchy of information processing in the microprocessor. This suggests current analytic approaches in neuroscience may fall short of producing meaningful understanding of neural systems, regardless of the amount of data. Additionally, we argue for scientists using complex non-linear dynamical systems with known ground truth, such as the microprocessor as a validation platform for time-series and structure discovery methods.</p>
+</blockquote>
+</details>
+<details><summary>author summary</summary>
+<p>Neuroscience is held back by the fact that it is hard to evaluate if a conclusion is correct; the complexity of the systems under study and their experimental inaccessability make the assessment of algorithmic and data analytic technqiues challenging at best. We thus argue for testing approaches using known artifacts, where the correct interpretation is known. Here we present a microprocessor platform as one such test case. We find that many approaches in neuroscience, when used na&#xEF;vely, fall short of producing a meaningful understanding.</p>
+</details>
+<h3 class="mume-header" id="transcription-3">transcription</h3>
+
+<ul>
+<li><strong>current state of neuro</strong> more data, better analysis will be a primary driver of insight about the brain</li>
+<li><strong>gap</strong> do not yet know whether this assumption is valid</li>
+<li><strong>solution</strong> test it in-silico, in a simple but non-insular example</li>
+<li><strong>result</strong> indeed, current approaches are insufficient to uncover hierarchy of causes</li>
+<li><strong>impact</strong> argue for scientists using complex nonlinear systems with known ground truth as a rigorous validation</li>
+<li><strong>methods</strong>
+<ul>
+<li>lesioning a single transistor at a time</li>
+<li>uses conditiional granger causality <sup class="footnote-ref"><a href="#fn9" id="fnref9:1">[9:1]</a></sup></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="systematic-perturbation-of-an-artificial-neural-network-a-step-towards-quantifying-causal-contributions-in-the-brain">Systematic Perturbation of an Artificial Neural Network: A Step Towards Quantifying Causal Contributions in The Brain</h2>
+
+<p>by Fakhar, Hilgetag - <a href="https://www.biorxiv.org/content/10.1101/2021.11.04.467251v1">link</a></p>
+<details><summary>abstract</summary>
+<blockquote>
+<p>lesion inference analysis is a fundamental approach for characterizing the causal contributions of neural elements to brain function. Historically, it has helped to localize specialized functions in the brain after brain damage, and it has gained new prominence through the arrival of modern optogenetic perturbation techniques that allow probing the functional contributions of neural circuit elements at unprecedented levels of detail.</p>
+<p>While inferences drawn from brain lesions are conceptually powerful, they face methodological difficulties due to the brain&#x2019;s complexity. Particularly, they are challenged to disentangle the functional contributions of individual neural elements because many elements may contribute to a particular function, and these elements may be interacting anatomically as well as functionally. Therefore, studies of real-world data, as in clinical lesion studies, are not suitable for establishing the reliability of lesion approaches due to an unknown, potentially complex ground truth. Instead, ground truth studies of well-characterized artificial systems are required.</p>
+<p>Here, we systematically and exhaustively lesioned a small Artificial Neural Network (ANN) playing a classic arcade game. We determined the functional contributions of all nodes and links, contrasting results from single-element perturbations and perturbing multiple elements simultaneously. Moreover, we computed pairwise causal functional interactions between the network elements, and looked deeper into the system&#x2019;s inner workings, proposing a mechanistic explanation for the effects of lesions.</p>
+<p>We found that not every perturbation necessarily reveals causation, as lesioning elements, one at a time, produced biased results. By contrast, multi-site lesion analysis captured crucial details that were missed by single-site lesions. We conclude that even small and seemingly simple ANNs show surprising complexity that needs to be understood for deriving a causal picture of the system. In the context of rapidly evolving multivariate brain-mapping approaches and inference methods, we advocate using in-silico experiments and ground-truth models to verify fundamental assumptions, technical limitations, and the scope of possible interpretations of these methods.</p>
+</blockquote>
+</details>
+<details><summary>author summary</summary>
+<blockquote>
+<p><strong>Author summary</strong> The motto &#x201C;No causation without manipulation&#x201D; is canonical to scientific endeavors. In particular, neuroscience seeks to find which brain elements are causally involved in cognition and behavior of interest by perturbing them. However, due to complex interactions among those elements, this goal has remained challenging.</p>
+<p>In this paper, we used an Artificial Neural Network as a ground-truth model to compare the inferential capacities of lesioning the system one element at a time against sampling from the set of all possible combinations of lesions.</p>
+<p>We argue for employing more exhaustive perturbation regimes since, as we show, lesioning one element at a time provides misleading results. We further advocate using simulated experiments and ground-truth models to verify the assumptions and limitations of brain-mapping methods.</p>
+</blockquote>
+</details>
+<h3 class="mume-header" id="transcription-4">transcription</h3>
+
+<ul>
+<li>
+<p><strong>historical intro</strong> lesion analysis has been useful historically</p>
+<ul>
+<li>optogenetics facilitate making this more precise</li>
+</ul>
+</li>
+<li>
+<p><strong>remaining challenges</strong> with lesion analysis</p>
+<ul>
+<li>lesions are powerful but methodologically difficult
+<ul>
+<li>difficult to disentagle causes</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>proposed solution</strong> use more extensive perturbation - combinations of lesion experiemtns</p>
+<blockquote>
+<p>We found that not every perturbation necessarily reveals causation, as lesioning elements, one at a time, produced biased results. By contrast, multi-site lesion analysis captured crucial details that were missed by single-site lesions.</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="quasi-experimental-causality-in-neuroscience-and-behavioral-research">Quasi-experimental causality in neuroscience and behavioral research</h2>
+
+<p>by Marinescu, Lawlor, Kording - <a href="https://www.nature.com/articles/s41562-018-0466-5">link</a></p>
+<details><summary>abstract</summary>
+<blockquote>
+<p>in many scientific domains, causality is the key question. For example, in neuroscience, we might ask whether a medication affects perception, cognition, or action. Randomized controlled trials (RCTs) are the gold standard to establish causality, but they are not always practical. The field of empirical economics developed rigorous methods to establish causality even when RCTs are not available. Here we review these quasi-experimental methods and highlight how neuroscience and behavioral researchers can use them to do research that can credibly demonstrate causal effects.</p>
+</blockquote>
+<blockquote>
+<p>In response to the confounding problem in observational data, there are two important schools of thought. One school attempts to builds large, complex models that observe and model all confounders. [...] This second school of thought mainly comes from econometrics, and over the last few decades has developed a number of ways in which meaningful causal estimates can be obtained without randomization.</p>
+</blockquote>
+<blockquote>
+<p>Here we review these alternatives to randomization. We take published examples, and explain the methods. For each method, we then sketch how it could be used more widely across behavioral and neuroscience research using existing and emerging data. By systemically replacing correlational techniques with causal techniques, economics went through what they call a credibility revolution. Perhaps as a result, empirical work in economics has progressively overtaken theoretical work both in terms of citations within economics [15], and in terms of citations to economics papers made by articles in other fields</p>
+</blockquote>
+</details>
+<h3 class="mume-header" id="transcription-5">transcription</h3>
+
+<ul>
+<li><strong>big goal</strong> causality is key (at the heart of what we want)</li>
+<li><strong>challenge</strong> establishing causality is not always practical
+<ul>
+<li>via fully randomized control trials</li>
+<li>then confounding is a major challenge</li>
+</ul>
+</li>
+<li><strong>limitations of existing solutions</strong>
+<ul>
+<li>assume unconfoundedness / over-model the system</li>
+</ul>
+</li>
+<li><strong>solution</strong> bring in methods from economics for practical establishment of causality</li>
+<li><strong>impact</strong> neuroscientists can use these techniques too!</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="evaluation-of-the-performance-of-information-theory-based-methods-and-cross-correlation-to-estimate-the-functional-connectivity-in-cortical-networks">Evaluation of the Performance of Information Theory-Based Methods and Cross-Correlation to Estimate the Functional Connectivity in Cortical Networks</h2>
+
+<p>by M Garofalo, T Nieus, P Massobrio, S Martinoia - <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0006482">link</a></p>
+<details><summary>abstract</summary>
+<blockquote>
+<p>functional connectivity of in vitro neuronal networks was estimated by applying different statistical algorithms on data collected by Micro-Electrode Arrays (MEAs). First we tested these &#x2018;&#x2018;connectivity methods&#x2019;&#x2019; on neuronal network models at an increasing level of complexity and evaluated the performance in terms of ROC (Receiver Operating Characteristic) and PPC (Positive Precision Curve), a new defined complementary method specifically developed for functional links identification. Then, the algorithms better estimated the actual connectivity of the network models, were used to extract functional connectivity from cultured cortical networks coupled to MEAs. Among the proposed approaches, Transfer Entropy and Joint-Entropy showed the best results suggesting those methods as good candidates to extract functional links in actual neuronal networks from multi-site recordings.</p>
+</blockquote>
+</details>
+<h3 class="mume-header" id="transcription-6">transcription</h3>
+
+<ul>
+<li><strong>goal</strong> seek to leverage multi-electrode arrays to estimate functional connectivity</li>
+<li><strong>challenge</strong> prior methods are only partially effective, novel methods are relatively untested
+<ul>
+<li><strong>gap</strong> prior work mostly considers linear networks or very small networks</li>
+<li></li>
+</ul>
+</li>
+<li><strong>result</strong> Tranfer Entropy and Joint Entropy based measures perform best</li>
+<li><strong>impact</strong> - use info theoretic measures, inhibitory connections are still hard to ID</li>
+</ul>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="#quasi-experimental-causality-in-neuroscience-and-behavioral-research">Quasi-experimental causality in neuroscience and behavioral research</a> <a href="#fnref1" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:1" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:2" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:3" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:4" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><a href="#systematic-perturbation-of-an-artificial-neural-network-a-step-towards-quantifying-causal-contributions-in-the-brain">Systematic Perturbation of an Artificial Neural Network: A Step Towards Quantifying Causal Contributions in The Brain</a> <a href="#fnref2" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref2:1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p><a href="#could-a-neuroscientist-understand-a-microprocessor">Could a Neuroscientist Understand a Microprocessor?</a> <a href="#fnref3" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref3:1" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref3:2" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref3:3" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p><a href="#inferring-causal-connectivity-from-pairwise-recordings-and-optogenetics">Inferring causal connectivity from pairwise recordings and optogenetics</a> <a href="#fnref4" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref4:1" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref4:2" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref4:3" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p><a href="#systematic-errors-in-connectivity-inferred-from-activity-in-strongly-recurrent-networks">Systematic errors in connectivity inferred from activity in strongly recurrent networks</a> <a href="#fnref5" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref5:1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p><a href="#advancing-functional-connectivity-research-from-association-to-causation">Advancing functional connectivity research from association to causation</a> <a href="#fnref6" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn7" class="footnote-item"><p>Pearl, J. (2009). Causality. Cambridge university press. <a href="#fnref7" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn8" class="footnote-item"><p>Perturbation-driven paradoxical facilitation of visuo-spatial function: Revisiting the &#x2018;Sprague effect&#x2019; <a href="#fnref8" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn9" class="footnote-item"><p>Granger Causality: Basic Theory and Application to Neuroscience. Hand- book of Time Series Analysis. - outlines procedure for conditional GC, used in <sup class="footnote-ref"><a href="#fn3" id="fnref3:3">[3:3]</a></sup> <a href="#fnref9" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref9:1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+</ol>
+</section>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

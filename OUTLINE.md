@@ -48,7 +48,9 @@
   
   > Alternative FC measures are suggested to immediately start improving causal inferences beyond these common FC measures.
   
-
+- highlight value of closed-loop
+  - severing connections in-situ 
+  - shaping (co)variance
 
 - how much to explain types of intervention
   - [^N2] necessary to define "interventions" or "open-loop"?
