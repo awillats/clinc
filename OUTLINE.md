@@ -23,7 +23,7 @@
   - help design and interpret experiments
 ---
 - why causal? 
-- **gap:** current approaches consider mostly passive and open-loop settings. [^causal_refs]
+- **gap:** current approaches consider mostly passive and open-loop settings. [^kording_fakhar]
   - prior work shows recording more is sometimes insufficient![^ila]
   - subgap: those papers *that do* explore impact of *strong* interventions mostly focus on lesioning 
     - not always feasible
@@ -38,7 +38,8 @@
 - **impact:** immediate guidance for design of experiments
   
 [^ila]: Ila Fiete , Abhranil Das -Systematic errors in connectivity inferred from activity in strongly recurrent networks 
-[^causal_refs]: esp. kording, fakhar
+[^kording_kakhar]: esp. kording, fakhar. *see [exemplars](sketches_and_notation/planning_big_picture/exemplars.md)*
+[^wolff]: wolff and olvecszy - promise and perils of causal manipulationss
 ---
 ### Abstract decisions 
 - "advancing FC" states the gap very clearly, early 
@@ -74,7 +75,42 @@
 - how much "funneling out" is appropriate?
  - instead, could stick to concrete conclusion 
   > Alternative FC measures are suggested to immediately start improving causal inferences beyond these common FC measures.
- 
+
+### Statement of specific need - relationship to prior work
+Theme of bringing 2 fields (CL, CI) to neuroscience
+  - bring **closed-loop control** to neuroscience 
+    - CL is a mature field, revolution in leveraging it for neuroscience
+    - facilitated by optogenetics [grosenick]
+    - recent success [our work]
+    - *restate* value of closed-loop control for ID[^wolff]
+    - *( need to enumerate types of intervention ? )*
+      - *( need to distinguish feedback from reactive control? )*
+  - network id has always been a central goal - causal refines this to get to the heart of what we want 
+    - integrating techniques from econ and causal theory to meet this challenge 
+  - **solution - high-level** combine intervention + causal theory
+    - theory of causal inference (+dynamical systems + graph theory) gives us the language to predict "what are the implications of intervention"
+    - **remaining challenge** this integration is new, and HOW we intervene matters - need guidance on how to choose!
+      - **results so far**
+        - observation isn't enough[^ila]
+        - kording - single-site lesions aren't enough[^kording_fakhar]
+          - *have to be careful about this...we may propose single-site closed-loop control*
+      - **challenge** problem has several layers of complexity
+        - closed-loop interventions are complex 
+        - networks in brain are complex (recurrent, equivalent explanations, unobserved confounds)
+    - **refined solution** - bring theory and simulation together to demonstrate & validate intersection between these approaches for identification with closed-loop control
+      - specifically work towards framework for understanding 
+      - this leads to guidance for designing interventions to maximize identifiability 
+        - given prior knowledge, system-specific details, experimental constraints, hypotheses
+---
+- Causal / Network ID
+  - [^ila] Ila Fiete
+  - Kording, Fakhar - lesioning ANNs for causality
+  - Advancing FC
+- CL 
+  - reference Grosencik
+  - reference CL sys ID Shanechi
+  - control *theory* has been used to understand impact of intervention
+    - Bassett
 ---
 
 # Table of Contents {ignore = true}
@@ -85,6 +121,7 @@
 
   - [Abstract](#abstract)
     - [Abstract decisions](#abstract-decisions)
+    - [Statement of specific need - relation to prior work](#statement-of-specific-need-relation-to-prior-work)
 - [Introduction](#introduction)
   - [Why? - Estimating causal interactions in the brain](#why-estimating-causal-interactions-in-the-brain)
   - [How? - Causal methods for network discovery from time-series](#how-causal-methods-for-network-discovery-from-time-series)

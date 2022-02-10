@@ -22,10 +22,12 @@
 - decide flow between 
   - params (weight, delay)
   - intervention 
-
-[^FC_measures]: "A systematic framework for functional connectivity measures" includes a broad comparison of performance of Granger causality vs transfer entropy vs other methods. also discusses role of weights, noise
-[^connect_infer]: "Connectivity inference from neural recording data: Challenges, mathematical bases and research directions"
-[^ctrl_sys_id]: "A control-theoretic system identification framework and a real-time closed-loop clinical simulation testbed for electrical brain stimulation"
+- possible journals 
+  - perspectives 
+    - Nature Neuro
+  - technical
+    - PLOS Comp Bio
+    - JNE 
 
 # intro / methods tasks
  - [ ] add more closed-loop references to intro[^ctrl_sys_id]
@@ -39,6 +41,10 @@
   - Grosenick/Deisseroth, Kording 
   
  - [~] write up "tutorial" + latex for different ways of representing a circuit
+
+ [^FC_measures]: "A systematic framework for functional connectivity measures" includes a broad comparison of performance of Granger causality vs transfer entropy vs other methods. also discusses role of weights, noise
+ [^connect_infer]: "Connectivity inference from neural recording data: Challenges, mathematical bases and research directions"
+ [^ctrl_sys_id]: "A control-theoretic system identification framework and a real-time closed-loop clinical simulation testbed for electrical brain stimulation"
 
 # theory 
 - [ ] relate noise → connection SNR to sensitivity transfer function 
