@@ -1,4 +1,4 @@
-## Feb 2022 draft
+## Feb 8th 2022 draft 
 
 A primary goal of neuroscience is identifying causal relationships in the brain[^N1], a task often aided by interventions which stimulate activity in portions of the brain such as lesioning and optogenetics. These open-loop interventions[^N2][^N3], however, do not fully eliminate potential confounding influences, often limiting their ability to reveal causal structure[^N4]. In this paper, we use tools from causal inference, control theory, and neuroscience to show *when* and *how* closed-loop[^N5] interventions can more effectively reveal causal relationships. Using a variety of simulated neural circuits, we examine how key process and intervention parameters affect identifiability[^N6][^N7], developing guidance to help experimentalists determine when closed-loop control[^N8] is needed to infer causal structure, and when observational data or open-loop stimulation is sufficient. Our results build toward a practical framework that will aid experimental neuroscientists[^N9] design and interpret experiments that, by revealing more causal structure in the brain, could open the door to new and more effective therapies.[^N10]
 
@@ -12,3 +12,8 @@ A primary goal of neuroscience is identifying causal relationships in the brain[
 [^N8]: how much to focus on the "control" aspect here? (closed-loop interventions? closed-loop control?)
 [^N9]: not sure what word to use here --- "systems neuroscientists"? "experimentalists"?
 [^N10]: perhaps somewhat redundant with previous sentence? trying to go for broader impact here.
+
+## Feb 10th 2022 draft
+*this draft is intended as an independent attempt at an abstract, with the core goal of positioning this work relative to similar papers in the field (see [exemplars.md](../sketches_and_notation/planning_big_picture/exemplars.md) )*
+
+## Summary of specific need this work 
