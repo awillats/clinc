@@ -55,3 +55,6 @@
 
 # formatting tasks 
 - add figure references to table of contents  
+
+# organization tasks
+- move exemplars to sketches/intro-background ?
