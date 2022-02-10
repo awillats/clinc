@@ -36,7 +36,7 @@ see also https://beta.workflowy.com/#/f32ad4b2290a
     > Confounding is the big threat to causal validity (Pearl, 2009) irrespective of the use of simple regression techniques or advanced functional connectivity techniques (Stevenson et al., 2008; Honey et al., 2009; Aitchison and Lengyel, 2017; Pfau et al., 2013)
     
     - bigger issue with passive observation
-      > First, there are many variables that we cannot easily set, e.g., the activity of neurons somewhere in the brain. S
+      > But if we can only observe a system, then confounding is a serious problem; we can never know if an apparent interaction between X and Y is real or is confounded by the other variables. First, there are many variables that we cannot easily set, e.g., the activity of neurons somewhere in the brain. [^quasi]
 
 - **limitations of current approaches**
   - **recording more isn't always enough**[^fiete]
@@ -53,9 +53,14 @@ see also https://beta.workflowy.com/#/f32ad4b2290a
 - discussion of methods focused on **reducing bias** in network estimation
 - integrating successful techniques from other disciplines[^quasi][^lepperod]
   - mostly econometrics
+  - see Grosenick for discussion of bridging engineering and biology[^grosenick_bridge]
+
 - value of studying a complex system with known ground-truth connectivity [^jonas]
 - use / critique of Granger causality
   - conditional GC described in [^GCtheory]
+- "reduce the set of likely models"[^advance]
+
+[^grosenick_bridge]: "This [lack of applications so far] is unlikely to be due to the technical and experimental challenges involved in undertaking such investigations, since neurobiologists are accustomed to the design and implementation of experiments characterized by computational and technical complexity. -- There may be, however, a cultural gap between biologists and engineers regarding available tools, techniques, and motivation for closed-loop optical control and related technologies in systems engineering. Here we seek to address the latter challenge by helping to unite the relevant literatures" Closed-loop and Activity-Guided Optogenetic Control
 
 ---
 # Similar articles
@@ -90,7 +95,7 @@ by Lepperod, Stober, Hafting, Fyhn, Kording - [link](https://www.biorxiv.org/nod
 <details><summary>abstract</summary>
 
 
-> To study how the brain works, it is crucial to identify causal interactions between neurons, which is thought to require perturbations. However, when using optogenetics we typically perturb multiple neurons, producing a confound - any of the stimulated neurons can have affected the postsynaptic neuron. Here we show how this produces large biases, and how they can be reduced using the instrumental variable (IV) technique from econometrics. The interaction between stimula- tion and the absolute refractory period produces a weak, approximately random signal which can be exploited to estimate causal connectivity. When simulating integrate-and-fire neurons, we find that estimates from IV are better than na ̈ıve techniques (R2 = 0.77 vs R2 = 0.01). The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity. Presented is a robust analysis framework for mapping out network connectivity based on causal neuron interactions.
+> To study how the brain works, it is crucial to identify causal interactions between neurons, which is thought to require perturbations. However, when using optogenetics we typically perturb multiple neurons, producing a confound - any of the stimulated neurons can have affected the postsynaptic neuron. Here we show how this produces large biases, and how they can be reduced using the instrumental variable (IV) technique from econometrics. The interaction between stimulation and the absolute refractory period produces a weak, approximately random signal which can be exploited to estimate causal connectivity. When simulating integrate-and-fire neurons, we find that estimates from IV are better than na ̈ıve techniques (R2 = 0.77 vs R2 = 0.01). The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity. Presented is a robust analysis framework for mapping out network connectivity based on causal neuron interactions.
 </details>
 
 ### transcription
@@ -98,7 +103,7 @@ by Lepperod, Stober, Hafting, Fyhn, Kording - [link](https://www.biorxiv.org/nod
 - **challenge** opto stim provides common input to many neurons
   - this is a potential confound
   - leads to high bias
-  > any postsynaptic activity induced by stimulation could in prin- ciple come from any of the stimulated neurons, introducing problematic confounders.
+  > any postsynaptic activity induced by stimulation could in principle come from any of the stimulated neurons, introducing problematic confounders.
   
 - **proposed solution** borrow instrumental variables (IV) from econ.
   - stimulus + refratory period provides approx. random signal
@@ -106,7 +111,7 @@ by Lepperod, Stober, Hafting, Fyhn, Kording - [link](https://www.biorxiv.org/nod
     > We compare these estimates with a na ̈ıve, although widely used, cross-correlation histogram (CCH) method that fails to distinguish respective pairs.
     
 - **results** much higher recovery
-  - The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity.
+  - > The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity.
 - **impact** robust analysis framework for mapping connectivity based on causal interaction
 
 
@@ -147,15 +152,17 @@ Neuroscience is held back by the fact that it is hard to evaluate if a conclusio
 </details>
 
 ### transcription
-- **current state of neuro** more data, better analysis will be a primary driver of insight about the brain 
-- **gap** do not yet know whether this assumption is valid
-- **solution** test it in-silico, in a simple but non-insular example 
-- **result** indeed, current approaches are insufficient to uncover hierarchy of causes 
-- **impact** argue for scientists using complex nonlinear systems with known ground truth as a rigorous validation
-- **methods**
+- **current state of neuro:** more data, better analysis will be a primary driver of insight about the brain 
+- **gap:** do not yet know whether this assumption is valid
+- **solution:** test it in-silico, in a known but non-insular[^noninsular] example 
+- **result:** indeed, current approaches are insufficient to uncover hierarchy of causes 
+- **impact:** argue for scientists using complex nonlinear systems with known ground truth as a rigorous validation
+- **methods:**
   - lesioning a single transistor at a time
   - uses conditiional granger causality [^GCtheory]
-  
+
+[^noninsular]: meaning a system which steps outside a perfect match of the assumptions used to develop the analysis techniques
+
 ---
 ## Systematic Perturbation of an Artificial Neural Network: A Step Towards Quantifying Causal Contributions in The Brain
 by Fakhar, Hilgetag - [link](https://www.biorxiv.org/content/10.1101/2021.11.04.467251v1)
@@ -180,7 +187,7 @@ by Fakhar, Hilgetag - [link](https://www.biorxiv.org/content/10.1101/2021.11.04.
 </details>
 
 ### transcription
-- **historical intro** lesion analysis has been useful historically 
+- **historical intro:** lesion analysis has been useful
   - optogenetics facilitate making this more precise
 - **remaining challenges** with lesion analysis
   - lesions are powerful but methodologically difficult
@@ -205,14 +212,14 @@ by Marinescu, Lawlor, Kording - [link](https://www.nature.com/articles/s41562-01
 </details>
 
 ### transcription
-- **big goal** causality is key (at the heart of what we want)
-- **challenge** establishing causality is not always practical 
+- **big goal:** causality is key (at the heart of what we want)
+- **challenge:** establishing causality is not always practical 
   - via fully randomized control trials
   - then confounding is a major challenge
-- **limitations of existing solutions**
+- **limitations of existing solutions:**
   - assume unconfoundedness / over-model the system
-- **solution** bring in methods from economics for practical establishment of causality
-- **impact** neuroscientists can use these techniques too!
+- **solution:** bring in methods from economics for practical establishment of causality
+- **impact:** neuroscientists can, should use these techniques too
 
 ---
 
@@ -232,11 +239,11 @@ by M Garofalo, T Nieus, P Massobrio, S Martinoia - [link](https://journals.plos.
 - **impact** - use info theoretic measures, inhibitory connections are still hard to ID
 
 
-[^GCtheory]: Granger Causality: Basic Theory and Application to Neuroscience. Hand- book of Time Series Analysis. - outlines procedure for conditional GC, used in [^jonas]
+[^GCtheory]: **Granger Causality:** Basic Theory and Application to Neuroscience. Handbook of Time Series Analysis. - outlines procedure for conditional GC, used in [^jonas]
 
 [^jonas]: [Could a Neuroscientist Understand a Microprocessor?](#could-a-neuroscientist-understand-a-microprocessor)
 [^fiete]: [Systematic errors in connectivity inferred from activity in strongly recurrent networks](#systematic-errors-in-connectivity-inferred-from-activity-in-strongly-recurrent-networks)
-[^sprague]: Perturbation-driven paradoxical facilitation of visuo-spatial function: Revisiting the ‘Sprague effect’
+[^sprague]: "Perturbation-driven paradoxical facilitation of visuo-spatial function: Revisiting the ‘Sprague effect’"
 [^fakhar]: [Systematic Perturbation of an Artificial Neural Network: A Step Towards Quantifying Causal Contributions in The Brain](#systematic-perturbation-of-an-artificial-neural-network-a-step-towards-quantifying-causal-contributions-in-the-brain)
 [^advance]: [Advancing functional connectivity research from association to causation](#advancing-functional-connectivity-research-from-association-to-causation)
 [^quasi]: [Quasi-experimental causality in neuroscience and behavioral research](#quasi-experimental-causality-in-neuroscience-and-behavioral-research)

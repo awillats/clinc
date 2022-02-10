@@ -8,7 +8,7 @@
   - What can i say about causal connections given the experiments i’m doing?
   - How do I design an intervention which improves the strength of hypothesis testing?
 
-## Abstract 
+## Abstract outline A
 - why causal [structure-function]
   - why interventions help 
   - how closed-loop, causal help support this 
@@ -22,6 +22,7 @@
 - bigger goal (funnel out)
   - help design and interpret experiments
 ---
+## Abstract outline B
 - why causal? 
 - **gap:** current approaches consider mostly passive and open-loop settings. [^kording_fakhar]
   - prior work shows recording more is sometimes insufficient![^ila]
@@ -40,8 +41,41 @@
 [^ila]: Ila Fiete , Abhranil Das -Systematic errors in connectivity inferred from activity in strongly recurrent networks 
 [^kording_kakhar]: esp. kording, fakhar. *see [exemplars](sketches_and_notation/planning_big_picture/exemplars.md)*
 [^wolff]: wolff and olvecszy - promise and perils of causal manipulationss
+
+## Abstract outline C - Statement of specific need - relationship to prior work
+Theme of bringing 2 fields[^grosenick-bridge] (CL, CI) to neuroscience for goal of network identification
+  - **network id** has always been a central goal - **causal** refines this to get to the heart of what we want 
+    - integrating techniques from econ and causal theory to meet this challenge 
+  - bring **closed-loop control** to neuroscience 
+    - *( need to enumerate types of intervention ? )*
+      - *( need to distinguish feedback from reactive control? )*
+    - CL is a mature field, revolution in leveraging it for neuroscience
+    - facilitated by optogenetics [grosenick]
+    - recent success [our work]
+    - *restate* value of closed-loop control for ID[^wolff]
+      - severing connections in-situ 
+      - shaping (co)variance
+  - **high-level goal** combine intervention + causal theory for network id
+    - theory of causal inference (+dynamical systems + graph theory) gives us the language to predict "what are the implications of intervention"
+    - **results so far**
+      - observation isn't enough[^ila]
+      - kording - single-site lesions aren't enough[^kording_fakhar]
+        - *have to be careful about this...we may propose single-site closed-loop control*
+    - **remaining challenge** this integration is new, and HOW we intervene matters - need guidance on how to choose
+      - **additional challenge** problem has several layers of complexity
+        - closed-loop interventions are complex 
+        - networks in brain are complex (recurrent, equivalent explanations, unobserved confounds)
+    - **solution** - bring theory and simulation together to demonstrate & validate intersection between these approaches for identification with closed-loop control
+      - specifically work towards framework for understanding 
+    - **impact** - this leads to guidance for designing interventions to maximize identifiability 
+        - given prior knowledge, system-specific details, experimental constraints, hypotheses
+
+
 ---
-### Abstract decisions 
+### Abstract decisions / brainstorming
+- How much did other abstracts talk about key challenges?
+- How much did other abstracts talk about expected results?
+
 - what are our **expected results**?
   - one of the key outcomes of effective iterventions is to eliminate alternate explanations    
     - narrow the space of plausible hypotheses
@@ -70,15 +104,29 @@
   > We further demonstrate how the most common FC measures (correlation and coherence) reduce the set of likely causal models, facilitating causal inferences despite major limitations. 
   
   > Alternative FC measures are suggested to immediately start improving causal inferences beyond these common FC measures.
-  
+
+- start with "structure-function" v.s. start with "intervention is key to understanding causal roles"
+
+- highlight our expected results
+  - first we (cover theory)
+  - then me demonstrate (sims)
+  - (finding) - location matters, CL is best at severing edges which blur (patterns of correlation between) distinct hypotheses
+    - "we show..."
+    - to do that, apply CL at expected bridges / "ambiguating edges" of candidate hypotheses
+
 - highlight value of closed-loop
   - severing connections in-situ 
   - shaping (co)variance
+  - closed-loop could be used to induce virtual dependencies - i.e. "gain of function" experiments to test counterfactuals
+    - not something we explore much
 
 - how much to explain types of intervention
   - [^N2] necessary to define "interventions" or "open-loop"?
   - [^N3] is "lesioning" really an open-loop stimulation?
   - [^N5] will most readers be familiar with "closed-loop"? or should this be defined / a different phrase used?
+  - [^grosenick] does a good job of distinguishing feedback CL from activity-guided
+
+misc: 
 
 - is optogenetics worth mentioning?
   - facilitates closed-loop control with unprecedented precision
@@ -91,52 +139,46 @@
   - xcorr vs muTE
   - try an xcorr-heavy description 
 
-- highlight our expected results
 
-  
 - how much "funneling out" is appropriate?
  - instead, could stick to concrete conclusion 
   > Alternative FC measures are suggested to immediately start improving causal inferences beyond these common FC measures.
+### Prior work
 
-### Statement of specific need - relationship to prior work
-Theme of bringing 2 fields (CL, CI) to neuroscience
-  - bring **closed-loop control** to neuroscience 
-    - *( need to enumerate types of intervention ? )*
-      - *( need to distinguish feedback from reactive control? )*
-    - CL is a mature field, revolution in leveraging it for neuroscience
-    - facilitated by optogenetics [grosenick]
-    - recent success [our work]
-    - *restate* value of closed-loop control for ID[^wolff]
-      - severing connections in-situ 
-      - shaping (co)variance
-
-  - **network id** has always been a central goal - **causal** refines this to get to the heart of what we want 
-    - integrating techniques from econ and causal theory to meet this challenge 
-  - **high-level goal** combine intervention + causal theory for network id
-    - theory of causal inference (+dynamical systems + graph theory) gives us the language to predict "what are the implications of intervention"
-    - **results so far**
-      - observation isn't enough[^ila]
-      - kording - single-site lesions aren't enough[^kording_fakhar]
-        - *have to be careful about this...we may propose single-site closed-loop control*
-    - **remaining challenge** this integration is new, and HOW we intervene matters - need guidance on how to choose
-      - **additional challenge** problem has several layers of complexity
-        - closed-loop interventions are complex 
-        - networks in brain are complex (recurrent, equivalent explanations, unobserved confounds)
-    - **solution** - bring theory and simulation together to demonstrate & validate intersection between these approaches for identification with closed-loop control
-      - specifically work towards framework for understanding 
-    - **impact** - this leads to guidance for designing interventions to maximize identifiability 
-        - given prior knowledge, system-specific details, experimental constraints, hypotheses
----
 - Causal / Network ID
   - [^ila] Ila Fiete
   - Kording, Fakhar - lesioning ANNs for causality
   - Advancing FC
+  - Lutcke 2013 - Inference of neuronal network spike dynamics and topology from calcium imaging data
+
   
 - CL 
   - reference Grosenick
+    > Closing the loop optogenetically (i.e., basing optogenetic stimulation on simultaneously observed dynamics in a principled way) is a powerful strategy for causal investigation of neural circuitry. In particular, observing and feeding back the effects of circuit interventions on physiologically relevant timescales is valuable for directly testing whether inferred models of dynamics, connectivity, and causation are accurate in vivo.
+    
+    - points to several examples of closed-loop for understanding causal role of related variables
+    
+    - value of closed-loop over open-loop 
+    > Although it is possible to separately image native dynamics and then try to evoke a similar response in open loop fashion by designing light stimuli before the experiment, such an approach is highly sensitive to model misspecification, calibration, and state changes in the system (habituation, plasticity, motor state, etc.), and without simultaneous measurement it cannot be confirmed that the response was accurately evoked. Closed-loop feedback control now allows real-time adjustment of input parameters to keep the observed output as close as possible to a target level or time-varying trajectory (Figure 4E).[^grosenick]
+    
+    - highlights the major barrier to adoption is not technology but a cultural gap between biologists and engineers
+    > to the best of our knowledge only a few papers have utilized feedback control in this way (e.g., Sohal et al., 2009; Paz et al., 2013; O’Connor et al., 2013; Krook-Magnuson et al., 2014, 2015; Siegle and Wilson, 2014; Stark et al., 2014). 
+    > This is unlikely to be due to the technical and experimental challenges involved in undertaking such investigations, since neurobiologists are accustomed to the design and implementation of experiments characterized by computational and technical complexity.
+    > There may be, however, a cultural gap between biologists and engineers regarding available tools, techniques, and motivation for closed-loop optical control and related technologies in systems engineering. Here we seek to address the latter challenge by helping to unite the relevant literatures
+
+    - points to "where to stimulate matters"
+    >  Basic sequential experimental designs are already in use in neuroscience; for example, in vitro studies of mammalian microcircuits have used imaging in hippocampal brain slices to screen for rare, highly connected “hub” neurons that appear to be important for engaging the larger network in oscillations (Bonifazi et al., 2009)
+    
+    - sequential experimental design to reduce circuit uncertainty 
+      - see figure 5, Lewi et al.
+      
+
   - reference CL sys ID Shanechi
   - control *theory* (notion of network controllability) has been used to understand (??)
     - Bassett
+
+[^grosenick-bridge]: "This is unlikely to be due to the technical and experimental challenges involved in undertaking such investigations, since neurobiologists are accustomed to the design and implementation of experiments characterized by computational and technical complexity. --- There may be, however, a cultural gap between biologists and engineers regarding available tools, techniques, and motivation for closed-loop optical control and related technologies in systems engineering. Here we seek to address the latter challenge by helping to unite the relevant literatures"
+
 ---
 
 # Table of Contents {ignore = true}
@@ -145,9 +187,11 @@ Theme of bringing 2 fields (CL, CI) to neuroscience
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
 <!-- code_chunk_output -->
 
-  - [Abstract](#abstract)
-    - [Abstract decisions](#abstract-decisions)
-    - [Statement of specific need - relationship to prior work](#statement-of-specific-need-relationship-to-prior-work)
+  - [Abstract outline A](#abstract-outline-a)
+  - [Abstract outline B](#abstract-outline-b)
+  - [Abstract outline C - Statement of specific need - relationship to prior work](#abstract-outline-c-statement-of-specific-need-relationship-to-prior-work)
+    - [Abstract decisions / brainstorming](#abstract-decisions-brainstorming)
+    - [Prior work](#prior-work)
 - [Introduction](#introduction)
   - [Why? - Estimating causal interactions in the brain](#why-estimating-causal-interactions-in-the-brain)
   - [How? - Causal methods for network discovery from time-series](#how-causal-methods-for-network-discovery-from-time-series)

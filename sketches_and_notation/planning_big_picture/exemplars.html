@@ -316,7 +316,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li>bigger issue with passive observation
 <blockquote>
-<p>First, there are many variables that we cannot easily set, e.g., the activity of neurons somewhere in the brain. S</p>
+<p>But if we can only observe a system, then confounding is a serious problem; we can never know if an apparent interaction between X and Y is real or is confounded by the other variables. First, there are many variables that we cannot easily set, e.g., the activity of neurons somewhere in the brain. <sup class="footnote-ref"><a href="#fn1" id="fnref1:2">[1:2]</a></sup></p>
 </blockquote>
 </li>
 </ul>
@@ -331,7 +331,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <li>more sophisticated inference isn&apos;t always enough!</li>
 </ul>
 </li>
-<li>assume unconfoundedness, and cross fingers <sup class="footnote-ref"><a href="#fn1" id="fnref1:2">[1:2]</a></sup>
+<li>assume unconfoundedness, and cross fingers <sup class="footnote-ref"><a href="#fn1" id="fnref1:3">[1:3]</a></sup>
 <ul>
 <li>e.g. Granger Causality</li>
 </ul>
@@ -341,23 +341,33 @@ pre[data-line] .line-highlight[data-end]:after {
 </ul>
 </li>
 <li>
-<p>intervention as gold standard<sup class="footnote-ref"><a href="#fn1" id="fnref1:3">[1:3]</a></sup></p>
+<p>intervention as gold standard<sup class="footnote-ref"><a href="#fn1" id="fnref1:4">[1:4]</a></sup></p>
 </li>
 </ul>
 <h2 class="mume-header" id="other-misc-themes">other misc. themes</h2>
 
 <ul>
-<li>discussion of methods focused on <strong>reducing bias</strong> in network estimation</li>
-<li>integrating successful techniques from other disciplines<sup class="footnote-ref"><a href="#fn1" id="fnref1:4">[1:4]</a></sup><sup class="footnote-ref"><a href="#fn4" id="fnref4:3">[4:3]</a></sup>
+<li>
+<p>discussion of methods focused on <strong>reducing bias</strong> in network estimation</p>
+</li>
+<li>
+<p>integrating successful techniques from other disciplines<sup class="footnote-ref"><a href="#fn1" id="fnref1:5">[1:5]</a></sup><sup class="footnote-ref"><a href="#fn4" id="fnref4:3">[4:3]</a></sup></p>
 <ul>
 <li>mostly econometrics</li>
+<li>see Grosenick for discussion of bridging engineering and biology<sup class="footnote-ref"><a href="#fn11" id="fnref11">[11]</a></sup></li>
 </ul>
 </li>
-<li>value of studying a complex system with known ground-truth connectivity <sup class="footnote-ref"><a href="#fn3" id="fnref3:2">[3:2]</a></sup></li>
-<li>use / critique of Granger causality
+<li>
+<p>value of studying a complex system with known ground-truth connectivity <sup class="footnote-ref"><a href="#fn3" id="fnref3:2">[3:2]</a></sup></p>
+</li>
+<li>
+<p>use / critique of Granger causality</p>
 <ul>
-<li>conditional GC described in <sup class="footnote-ref"><a href="#fn11" id="fnref11">[11]</a></sup></li>
+<li>conditional GC described in <sup class="footnote-ref"><a href="#fn12" id="fnref12">[12]</a></sup></li>
 </ul>
+</li>
+<li>
+<p>&quot;reduce the set of likely models&quot;<sup class="footnote-ref"><a href="#fn6" id="fnref6:1">[6:1]</a></sup></p>
 </li>
 </ul>
 <hr>
@@ -412,7 +422,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <p>by Lepperod, Stober, Hafting, Fyhn, Kording - <a href="https://www.biorxiv.org/node/138945.full">link</a></p>
 <details><summary>abstract</summary>
 <blockquote>
-<p>To study how the brain works, it is crucial to identify causal interactions between neurons, which is thought to require perturbations. However, when using optogenetics we typically perturb multiple neurons, producing a confound - any of the stimulated neurons can have affected the postsynaptic neuron. Here we show how this produces large biases, and how they can be reduced using the instrumental variable (IV) technique from econometrics. The interaction between stimula- tion and the absolute refractory period produces a weak, approximately random signal which can be exploited to estimate causal connectivity. When simulating integrate-and-fire neurons, we find that estimates from IV are better than na &#x308;&#x131;ve techniques (R2 = 0.77 vs R2 = 0.01). The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity. Presented is a robust analysis framework for mapping out network connectivity based on causal neuron interactions.</p>
+<p>To study how the brain works, it is crucial to identify causal interactions between neurons, which is thought to require perturbations. However, when using optogenetics we typically perturb multiple neurons, producing a confound - any of the stimulated neurons can have affected the postsynaptic neuron. Here we show how this produces large biases, and how they can be reduced using the instrumental variable (IV) technique from econometrics. The interaction between stimulation and the absolute refractory period produces a weak, approximately random signal which can be exploited to estimate causal connectivity. When simulating integrate-and-fire neurons, we find that estimates from IV are better than na &#x308;&#x131;ve techniques (R2 = 0.77 vs R2 = 0.01). The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity. Presented is a robust analysis framework for mapping out network connectivity based on causal neuron interactions.</p>
 </blockquote>
 </details>
 <h3 class="mume-header" id="transcription-1">transcription</h3>
@@ -428,7 +438,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <li>leads to high bias</li>
 </ul>
 <blockquote>
-<p>any postsynaptic activity induced by stimulation could in prin- ciple come from any of the stimulated neurons, introducing problematic confounders.</p>
+<p>any postsynaptic activity induced by stimulation could in principle come from any of the stimulated neurons, introducing problematic confounders.</p>
 </blockquote>
 </li>
 <li>
@@ -445,7 +455,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <li>
 <p><strong>results</strong> much higher recovery</p>
 <ul>
-<li>The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity.</li>
+<li>
+<blockquote>
+<p>The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity.</p>
+</blockquote>
+</li>
 </ul>
 </li>
 <li>
@@ -500,15 +514,15 @@ pre[data-line] .line-highlight[data-end]:after {
 <h3 class="mume-header" id="transcription-3">transcription</h3>
 
 <ul>
-<li><strong>current state of neuro</strong> more data, better analysis will be a primary driver of insight about the brain</li>
-<li><strong>gap</strong> do not yet know whether this assumption is valid</li>
-<li><strong>solution</strong> test it in-silico, in a simple but non-insular example</li>
-<li><strong>result</strong> indeed, current approaches are insufficient to uncover hierarchy of causes</li>
-<li><strong>impact</strong> argue for scientists using complex nonlinear systems with known ground truth as a rigorous validation</li>
-<li><strong>methods</strong>
+<li><strong>current state of neuro:</strong> more data, better analysis will be a primary driver of insight about the brain</li>
+<li><strong>gap:</strong> do not yet know whether this assumption is valid</li>
+<li><strong>solution:</strong> test it in-silico, in a known but non-insular<sup class="footnote-ref"><a href="#fn13" id="fnref13">[13]</a></sup> example</li>
+<li><strong>result:</strong> indeed, current approaches are insufficient to uncover hierarchy of causes</li>
+<li><strong>impact:</strong> argue for scientists using complex nonlinear systems with known ground truth as a rigorous validation</li>
+<li><strong>methods:</strong>
 <ul>
 <li>lesioning a single transistor at a time</li>
-<li>uses conditiional granger causality <sup class="footnote-ref"><a href="#fn11" id="fnref11:1">[11:1]</a></sup></li>
+<li>uses conditiional granger causality <sup class="footnote-ref"><a href="#fn12" id="fnref12:1">[12:1]</a></sup></li>
 </ul>
 </li>
 </ul>
@@ -535,7 +549,7 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <ul>
 <li>
-<p><strong>historical intro</strong> lesion analysis has been useful historically</p>
+<p><strong>historical intro:</strong> lesion analysis has been useful</p>
 <ul>
 <li>optogenetics facilitate making this more precise</li>
 </ul>
@@ -615,7 +629,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p><a href="#quasi-experimental-causality-in-neuroscience-and-behavioral-research">Quasi-experimental causality in neuroscience and behavioral research</a> <a href="#fnref1" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:1" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:2" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:3" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:4" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+<li id="fn1" class="footnote-item"><p><a href="#quasi-experimental-causality-in-neuroscience-and-behavioral-research">Quasi-experimental causality in neuroscience and behavioral research</a> <a href="#fnref1" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:1" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:2" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:3" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:4" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:5" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
 <li id="fn2" class="footnote-item"><p><a href="#systematic-perturbation-of-an-artificial-neural-network-a-step-towards-quantifying-causal-contributions-in-the-brain">Systematic Perturbation of an Artificial Neural Network: A Step Towards Quantifying Causal Contributions in The Brain</a> <a href="#fnref2" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref2:1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
@@ -625,7 +639,7 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 <li id="fn5" class="footnote-item"><p><a href="#systematic-errors-in-connectivity-inferred-from-activity-in-strongly-recurrent-networks">Systematic errors in connectivity inferred from activity in strongly recurrent networks</a> <a href="#fnref5" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref5:1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
-<li id="fn6" class="footnote-item"><p><a href="#advancing-functional-connectivity-research-from-association-to-causation">Advancing functional connectivity research from association to causation</a> <a href="#fnref6" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+<li id="fn6" class="footnote-item"><p><a href="#advancing-functional-connectivity-research-from-association-to-causation">Advancing functional connectivity research from association to causation</a> <a href="#fnref6" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref6:1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
 <li id="fn7" class="footnote-item"><p>Pearl, J. (2009). Causality. Cambridge university press. <a href="#fnref7" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
@@ -636,7 +650,11 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 <li id="fn10" class="footnote-item"><p>Perturbation-driven paradoxical facilitation of visuo-spatial function: Revisiting the &#x2018;Sprague effect&#x2019; <a href="#fnref10" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
-<li id="fn11" class="footnote-item"><p>Granger Causality: Basic Theory and Application to Neuroscience. Hand- book of Time Series Analysis. - outlines procedure for conditional GC, used in <sup class="footnote-ref"><a href="#fn3" id="fnref3:3">[3:3]</a></sup> <a href="#fnref11" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref11:1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+<li id="fn11" class="footnote-item"><p>&quot;This [lack of applications so far] is unlikely to be due to the technical and experimental challenges involved in undertaking such investigations, since neurobiologists are accustomed to the design and implementation of experiments characterized by computational and technical complexity. -- There may be, however, a cultural gap between biologists and engineers regarding available tools, techniques, and motivation for closed-loop optical control and related technologies in systems engineering. Here we seek to address the latter challenge by helping to unite the relevant literatures&quot; Closed-loop and Activity-Guided Optogenetic Control <a href="#fnref11" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn12" class="footnote-item"><p>Granger Causality: Basic Theory and Application to Neuroscience. Hand- book of Time Series Analysis. - outlines procedure for conditional GC, used in <sup class="footnote-ref"><a href="#fn3" id="fnref3:3">[3:3]</a></sup> <a href="#fnref12" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref12:1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn13" class="footnote-item"><p>meaning a system which steps outside a perfect match of the assumptions used to develop the analysis techniques <a href="#fnref13" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
 </ol>
 </section>

@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+      <link rel="stylesheet" href="file:////Users/adam/.dotfiles/atom/packages/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
       
       
       
@@ -280,9 +280,353 @@ pre[data-line] .line-highlight[data-end]:after {
 </ul>
 </li>
 </ul>
+<h2 class="mume-header" id="abstract-outline-a">Abstract outline A</h2>
+
+<ul>
+<li>
+<p>why causal [structure-function]</p>
+<ul>
+<li>why interventions help</li>
+<li>how closed-loop, causal help support this</li>
+<li>what are the core challenges
+<ul>
+<li>confounds</li>
+<li>fast reciprocal, highly coupled dynamics</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>contribution</p>
+<ul>
+<li>when and how interventions help</li>
+<li>simulations as demonstration, basic quantitative understanding</li>
+</ul>
+</li>
+<li>
+<p>bigger goal (funnel out)</p>
+<ul>
+<li>help design and interpret experiments</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="mume-header" id="abstract-outline-b">Abstract outline B</h2>
+
+<ul>
+<li>why causal?</li>
+<li><strong>gap:</strong> current approaches consider mostly passive and open-loop settings. [^kording_fakhar]
+<ul>
+<li>prior work shows recording more is sometimes insufficient!<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></li>
+<li>subgap: those papers <em>that do</em> explore impact of <em>strong</em> interventions mostly focus on lesioning
+<ul>
+<li>not always feasible</li>
+<li>have side effects</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>solution:</strong> closed-loop control can mitigate these drawbacks when applied to the right circuit in the right location
+<ul>
+<li><em>but</em> we need to understand the impact of closed-loop control to reap these rewards</li>
+</ul>
+</li>
+<li><strong>contribution:</strong>
+<ul>
+<li>Provide a straightforward and practically useful conceptual framework for applying closed-loop to circuit identification problems</li>
+<li>update causal inference theory to accomodate closed-loop interventions</li>
+<li>quantitative demonstration in spiking circuits
+<ul>
+<li>highlights specifics of choosing where to intervene to distinguish competing hypotheses</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>impact:</strong> immediate guidance for design of experiments</li>
+</ul>
+<h2 class="mume-header" id="abstract-outline-c-statement-of-specific-need-relationship-to-prior-work">Abstract outline C - Statement of specific need - relationship to prior work</h2>
+
+<p>Theme of bringing 2 fields<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> (CL, CI) to neuroscience for goal of network identification</p>
+<ul>
+<li><strong>network id</strong> has always been a central goal - <strong>causal</strong> refines this to get to the heart of what we want
+<ul>
+<li>integrating techniques from econ and causal theory to meet this challenge</li>
+</ul>
+</li>
+<li>bring <strong>closed-loop control</strong> to neuroscience
+<ul>
+<li><em>( need to enumerate types of intervention ? )</em>
+<ul>
+<li><em>( need to distinguish feedback from reactive control? )</em></li>
+</ul>
+</li>
+<li>CL is a mature field, revolution in leveraging it for neuroscience</li>
+<li>facilitated by optogenetics [grosenick]</li>
+<li>recent success [our work]</li>
+<li><em>restate</em> value of closed-loop control for ID<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>
+<ul>
+<li>severing connections in-situ</li>
+<li>shaping (co)variance</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>high-level goal</strong> combine intervention + causal theory for network id
+<ul>
+<li>theory of causal inference (+dynamical systems + graph theory) gives us the language to predict &quot;what are the implications of intervention&quot;</li>
+<li><strong>results so far</strong>
+<ul>
+<li>observation isn&apos;t enough<sup class="footnote-ref"><a href="#fn1" id="fnref1:1">[1:1]</a></sup></li>
+<li>kording - single-site lesions aren&apos;t enough[^kording_fakhar]
+<ul>
+<li><em>have to be careful about this...we may propose single-site closed-loop control</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>remaining challenge</strong> this integration is new, and HOW we intervene matters - need guidance on how to choose
+<ul>
+<li><strong>additional challenge</strong> problem has several layers of complexity
+<ul>
+<li>closed-loop interventions are complex</li>
+<li>networks in brain are complex (recurrent, equivalent explanations, unobserved confounds)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>solution</strong> - bring theory and simulation together to demonstrate &amp; validate intersection between these approaches for identification with closed-loop control
+<ul>
+<li>specifically work towards framework for understanding</li>
+</ul>
+</li>
+<li><strong>impact</strong> - this leads to guidance for designing interventions to maximize identifiability
+<ul>
+<li>given prior knowledge, system-specific details, experimental constraints, hypotheses</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="mume-header" id="abstract-decisions-brainstorming">Abstract decisions / brainstorming</h3>
+
+<ul>
+<li>
+<p>How much did other abstracts talk about key challenges?</p>
+</li>
+<li>
+<p>How much did other abstracts talk about expected results?</p>
+</li>
+<li>
+<p>what are our <strong>expected results</strong>?</p>
+<ul>
+<li>
+<p>one of the key outcomes of effective iterventions is to eliminate alternate explanations</p>
+<ul>
+<li>narrow the space of plausible hypotheses</li>
+</ul>
+</li>
+<li>
+<p>one of the key ways closed-loop control efficiently cuts down that hypothesis space is through removing confounding / common input connections</p>
+<ul>
+<li>resulting in &quot;less similar, more distinguishable&quot; patterns of correlation</li>
+</ul>
+</li>
+<li>
+<p>closed-loop feedback control is unique in its ability to both...</p>
+<ul>
+<li>reduce variance at certain locations
+<ul>
+<li>open-loop can&apos;t do this</li>
+</ul>
+</li>
+<li>while leaving other key properties intact
+<ul>
+<li>i.e. doesn&apos;t push into disrupted, non-physiologic activity levels</li>
+<li>downside of lesions, even acute reversible lesions</li>
+</ul>
+</li>
+<li>changes multi-variate dependence without moving into extreme operating regimes</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>restate what&apos;s <strong>unique</strong> about this work</p>
+<ul>
+<li>while the field is already thinking about...
+<ul>
+<li>applications of feedback control</li>
+<li>centrality of intervention in answering causal questions</li>
+</ul>
+</li>
+<li>this is the first work to bring insight in <em>how to use</em> feedback control as an intervention for efficient network inference
+<ul>
+<li>efficient both in the sense of requiring less data...</li>
+<li>but also in the sense of narrowing the search space more (?dramatically) with each experiment configuration</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>&quot;advancing FC&quot; states the gap very clearly, early</p>
+<blockquote>
+<p>&#x2014;are likely a good starting point for estimating brain network interactions. Yet only a subset of FC methods (&#x2018;effective connectivity&#x2019;) is explicitly designed to infer causal interactions from statistical associations. Here we incorporate best practices from diverse areas of FC research to illustrate how FC methods can be refined to improve inferences about neural mechanisms ...</p>
+</blockquote>
+<blockquote>
+<p>We further demonstrate how the most common FC measures (correlation and coherence) reduce the set of likely causal models, facilitating causal inferences despite major limitations.</p>
+</blockquote>
+<blockquote>
+<p>Alternative FC measures are suggested to immediately start improving causal inferences beyond these common FC measures.</p>
+</blockquote>
+</li>
+<li>
+<p>start with &quot;structure-function&quot; v.s. start with &quot;intervention is key to understanding causal roles&quot;</p>
+</li>
+<li>
+<p>highlight our expected results</p>
+<ul>
+<li>first we (cover theory)</li>
+<li>then me demonstrate (sims)</li>
+<li>(finding) - location matters, CL is best at severing edges which blur (patterns of correlation between) distinct hypotheses
+<ul>
+<li>&quot;we show...&quot;</li>
+<li>to do that, apply CL at expected bridges / &quot;ambiguating edges&quot; of candidate hypotheses</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>highlight value of closed-loop</p>
+<ul>
+<li>severing connections in-situ</li>
+<li>shaping (co)variance</li>
+<li>closed-loop could be used to induce virtual dependencies - i.e. &quot;gain of function&quot; experiments to test counterfactuals
+<ul>
+<li>not something we explore much</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>how much to explain types of intervention</p>
+<ul>
+<li>[^N2] necessary to define &quot;interventions&quot; or &quot;open-loop&quot;?</li>
+<li>[^N3] is &quot;lesioning&quot; really an open-loop stimulation?</li>
+<li>[^N5] will most readers be familiar with &quot;closed-loop&quot;? or should this be defined / a different phrase used?</li>
+<li>[^grosenick] does a good job of distinguishing feedback CL from activity-guided</li>
+</ul>
+</li>
+</ul>
+<p>misc:</p>
+<ul>
+<li>
+<p>is optogenetics worth mentioning?</p>
+<ul>
+<li>facilitates closed-loop control with unprecedented precision</li>
+</ul>
+</li>
+<li>
+<p>how to state our target audience</p>
+<ul>
+<li>systems neuroscientist?</li>
+<li>experimental neuroscientists?</li>
+</ul>
+</li>
+<li>
+<p>how much to commit to a particular algorithmic approach</p>
+<ul>
+<li>xcorr vs muTE</li>
+<li>try an xcorr-heavy description</li>
+</ul>
+</li>
+<li>
+<p>how much &quot;funneling out&quot; is appropriate?</p>
+</li>
+<li>
+<p>instead, could stick to concrete conclusion</p>
+</li>
+</ul>
+<blockquote>
+<p>Alternative FC measures are suggested to immediately start improving causal inferences beyond these common FC measures.</p>
+</blockquote>
+<h3 class="mume-header" id="prior-work">Prior work</h3>
+
+<ul>
+<li>
+<p>Causal / Network ID</p>
+<ul>
+<li><sup class="footnote-ref"><a href="#fn1" id="fnref1:2">[1:2]</a></sup> Ila Fiete</li>
+<li>Kording, Fakhar - lesioning ANNs for causality</li>
+<li>Advancing FC</li>
+<li>Lutcke 2013 - Inference of neuronal network spike dynamics and topology from calcium imaging data</li>
+</ul>
+</li>
+<li>
+<p>CL</p>
+<ul>
+<li>
+<p>reference Grosenick</p>
+<blockquote>
+<p>Closing the loop optogenetically (i.e., basing optogenetic stimulation on simultaneously observed dynamics in a principled way) is a powerful strategy for causal investigation of neural circuitry. In particular, observing and feeding back the effects of circuit interventions on physiologically relevant timescales is valuable for directly testing whether inferred models of dynamics, connectivity, and causation are accurate in vivo.</p>
+</blockquote>
+<ul>
+<li>
+<p>points to several examples of closed-loop for understanding causal role of related variables</p>
+</li>
+<li>
+<p>value of closed-loop over open-loop</p>
+</li>
+</ul>
+<blockquote>
+<p>Although it is possible to separately image native dynamics and then try to evoke a similar response in open loop fashion by designing light stimuli before the experiment, such an approach is highly sensitive to model misspecification, calibration, and state changes in the system (habituation, plasticity, motor state, etc.), and without simultaneous measurement it cannot be confirmed that the response was accurately evoked. Closed-loop feedback control now allows real-time adjustment of input parameters to keep the observed output as close as possible to a target level or time-varying trajectory (Figure 4E).[^grosenick]</p>
+</blockquote>
+<ul>
+<li>highlights the major barrier to adoption is not technology but a cultural gap between biologists and engineers</li>
+</ul>
+<blockquote>
+<p>to the best of our knowledge only a few papers have utilized feedback control in this way (e.g., Sohal et al., 2009; Paz et al., 2013; O&#x2019;Connor et al., 2013; Krook-Magnuson et al., 2014, 2015; Siegle and Wilson, 2014; Stark et al., 2014).<br>
+This is unlikely to be due to the technical and experimental challenges involved in undertaking such investigations, since neurobiologists are accustomed to the design and implementation of experiments characterized by computational and technical complexity.<br>
+There may be, however, a cultural gap between biologists and engineers regarding available tools, techniques, and motivation for closed-loop optical control and related technologies in systems engineering. Here we seek to address the latter challenge by helping to unite the relevant literatures</p>
+</blockquote>
+<ul>
+<li>points to &quot;where to stimulate matters&quot;</li>
+</ul>
+<blockquote>
+<p>Basic sequential experimental designs are already in use in neuroscience; for example, in vitro studies of mammalian microcircuits have used imaging in hippocampal brain slices to screen for rare, highly connected &#x201C;hub&#x201D; neurons that appear to be important for engaging the larger network in oscillations (Bonifazi et al., 2009)</p>
+</blockquote>
+<ul>
+<li>sequential experimental design to reduce circuit uncertainty
+<ul>
+<li>see figure 5, Lewi et al.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>reference CL sys ID Shanechi</p>
+</li>
+<li>
+<p>control <em>theory</em> (notion of network controllability) has been used to understand (??)</p>
+<ul>
+<li>Bassett</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
 <h1 class="mume-header undefined" id="table-of-contents">Table of Contents</h1>
 
 <div class="code-chunk" data-id="code-chunk-id-0" data-cmd="toc"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><ul>
+<li><a href="#abstract-outline-a">Abstract outline A</a></li>
+<li><a href="#abstract-outline-b">Abstract outline B</a></li>
+<li><a href="#abstract-outline-c-statement-of-specific-need-relationship-to-prior-work">Abstract outline C - Statement of specific need - relationship to prior work</a>
+<ul>
+<li><a href="#abstract-decisions-brainstorming">Abstract decisions / brainstorming</a></li>
+<li><a href="#prior-work">Prior work</a></li>
+</ul>
+</li>
 <li><a href="#introduction">Introduction</a>
 <ul>
 <li><a href="#why-estimating-causal-interactions-in-the-brain">Why? - Estimating causal interactions in the brain</a></li>
@@ -544,7 +888,7 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <li>for true, direct connections this quantity increasing means a (true positive) connection will be identified more easily (with high certainty, requiring less data)</li>
 <li>for false or indirect connections, this quantity increasing means a false positive connection is more likely to be identified</li>
 <li>as a result we want to maximize IDSNR for true links, and minimize it for false/indirect links<br>
-<img src="../figures/misc_figure_sketches/intervention_identifiability_concept.png" alt></li>
+<img src="figures/misc_figure_sketches/intervention_identifiability_concept.png" alt></li>
 </ul>
 </li>
 </ul>
@@ -633,7 +977,7 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 </ul>
 
 
-<p><img src="../figures/misc_figure_sketches/intervention_eg.png" alt></p>
+<p><img src="figures/misc_figure_sketches/intervention_eg.png" alt></p>
 <h2 class="mume-header" id="extracting-circuit-estimates">Extracting circuit estimates</h2>
 
 <p><a name="figure-pipeline" href></a><br>
@@ -652,7 +996,7 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <ul>
 <li>review of GC in neuro</li>
 <li>requisite assumptions</li>
-<li>limitations of GC</li>
+<li>limitations of GC <sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></li>
 </ul>
 </li>
 <li>xcorr features
@@ -706,7 +1050,7 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <li><em>relevant &quot;negative control&quot; for comparison (?)</em>
 <ul>
 <li>identified connectivity for random network?</li>
-<li>some shuffled data-surrogate procedure?</li>
+<li>some shuffled data-surrogate procedure? <sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup></li>
 </ul>
 </li>
 <li><em>relevant &quot;positive control&quot; for comparison (?)</em></li>
@@ -787,7 +1131,7 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <p><a name="figure-props" href></a><br>
 <img src="figures/misc_figure_sketches/gaussian_impact_weight.png" alt><br>
 <img src="figures/misc_figure_sketches/gaussian_impact_delay.png" alt><br>
-<img src="../figures/misc_figure_sketches/intrinsic_network_params.png" alt></p>
+<img src="figures/misc_figure_sketches/intrinsic_network_params.png" alt></p>
 <h3 class="mume-header" id="figure-props-impact-of-intrinsic-network-properties-on-identifiability">Figure PROPS: impact of intrinsic network properties on identifiability</h3>
 
 <ul>
@@ -825,7 +1169,7 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 </ul>
 <p><a name="figure-data" href></a><br>
 <img src="figures/literature_figs/spike_field_shanechi_crop.png" alt><br>
-<img src="../figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png" alt></p>
+<img src="figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png" alt></p>
 <h3 class="mume-header" id="figure-data-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data">Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data</h3>
 
 <ul>
@@ -948,6 +1292,21 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <ul>
 <li>organization of clinc-gen, clinc-analysis codebases</li>
 </ul>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Ila Fiete , Abhranil Das -Systematic errors in connectivity inferred from activity in strongly recurrent networks <a href="#fnref1" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:1" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref1:2" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>&quot;This is unlikely to be due to the technical and experimental challenges involved in undertaking such investigations, since neurobiologists are accustomed to the design and implementation of experiments characterized by computational and technical complexity. --- There may be, however, a cultural gap between biologists and engineers regarding available tools, techniques, and motivation for closed-loop optical control and related technologies in systems engineering. Here we seek to address the latter challenge by helping to unite the relevant literatures&quot; <a href="#fnref2" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>wolff and olvecszy - promise and perils of causal manipulationss <a href="#fnref3" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>a study of problems encountered in Granger causality analysis from a neuroscience perspective <a href="#fnref4" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>&quot;METHODS FOR STUDYING FUNCTIONAL INTERACTIONS AMONG NEURONAL POPULATIONS&quot; - comes with MATLAB code, discusses time and trial shuffling, decomposing information (synergistic, redundant, independent) <a href="#fnref5" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+</li>
+</ol>
+</section>
 </div>
       </div>
       
