@@ -1,17 +1,4 @@
 # Top 3 highest priority writing / planning tasks:
-- [ ] draft abstract 
-  - [x] review matt's draft - @awillats
-  - [x] review abstracts from similar papers to assess scope, style - @awillats
-  - [x] resketch outline, key points @awillats
-  - [.] add section for expected results @awillats
-  - [ ] fill text for new sections @awillats , @matthewoshaughnessy
-  - [ ] review @awillats @matthewoshaughnessy
-
-- [ ] draft statement of need 
-  - [.] review suggestions for this from Chris
-  - [ ] describe intersection of several fields (CL, causal, network neuro)
-  - [x] describe context of similar papers
-  - [ ] highlight unique aspect of this work
 
 - [ ] sketch core figures 
 
