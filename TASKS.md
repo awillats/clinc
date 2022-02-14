@@ -34,6 +34,16 @@
  [^ctrl_sys_id]: "A control-theoretic system identification framework and a real-time closed-loop clinical simulation testbed for electrical brain stimulation"
 
 # theory 
+- [ ] write input → connection notation 
+  - [ ] basic text form
+  - [ ] computing via reachability 
+  - [ ] computing via masked noise propogating
+  - [ ] update notation to function on "common cause" circuits
+- [ ] write python to compute via reachability 
+- [ ] evaluate python on simple circuit
+- [ ] evaluate python on two-path circuit
+
+
 - [ ] relate noise → connection SNR to sensitivity transfer function 
   - see [Astrom feedback fundamentals](https://www.cds.caltech.edu/~murray/courses/cds101/fa02/caltech/astrom-ch5.pdf)
 - [ ] copy over notation from 2020 brainstorming [overleaf link](https://www.overleaf.com/project/5e8232cd6157d200014b52d4)
