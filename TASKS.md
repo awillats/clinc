@@ -1,11 +1,14 @@
 # Top 3 highest priority writing / planning tasks:
-
+- [ ] checking definitions for r2, R2, SNR
+- [ ] looking for refs to predict side-band xcorr magnitude
+- [ ] linear algebra for computing $I^{+AB}$
+  - python verification
 - [ ] sketch core figures 
 
 # planning tasks 
 - evaluate scope, potentially combine / cut figures
 - how much should this be a perspective / review / prospectus 
-  - v.s. focusing on new empricial research results
+  - v.s. focusing on new empirical research results
 - decide flow between 
   - params (weight, delay)
   - intervention 
@@ -30,7 +33,6 @@
 
 # intro / methods tasks
  - [ ] add more closed-loop references to intro[^ctrl_sys_id]
-  - 
  - Describe the methods for identifying circuits[^FC_measures][^connect_infer]
   - xcorr procedure 
   - IDTxl recap 
@@ -49,10 +51,13 @@
 - [ ] write input → connection notation 
   - [ ] basic text form
   - [ ] computing via reachability 
-  - [ ] computing via masked noise propogating
+  - [ ] computing via masked noise propagating
   - [ ] update notation to function on "common cause" circuits
 - [ ] write python to compute via reachability 
-- [ ] evaluate python on simple circuit
+- [~] evaluate python on simple circuit
+  - see [code/network_analysis/simple_gaussian_SNR.py](code/network_analysis/simple_gaussian_SNR.py)
+  - [ ] conduct a small sweep to verify whether sources add or multiply
+  
 - [ ] evaluate python on two-path circuit
 
 

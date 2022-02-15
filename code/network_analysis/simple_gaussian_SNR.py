@@ -87,6 +87,8 @@ def sim_dag(w_ux=w_ux, w_uy=w_uy, S=[s_u,s_x,s_y], g=g, gu=gu):
     '''
     [s_u, s_x, s_y]=S
     u = gu(nt, SHARED_SIGNAL_TYPE)*s_u
+    # u1 = gu(nt, SHARED_SIGNAL_TYPE)*s_u
+    # u2 = gu(nt, SHARED_SIGNAL_TYPE)*s_u
     x = g()*s_x + w_ux*u
     y = g()*s_y + w_uy*u
     return {'u':u,'x':x,'y':y}
@@ -112,6 +114,7 @@ prefix 'p' denotes 'predicted' here
 
 '''
 er_xy = corr(x,y)
+print(er_xy)
 
 pcov_xy = (w_ux*s_u)*(w_uy*s_u)
 cov_str = f' cov {cov(x,y):.2f}, pred {pcov_xy:.2f}'
@@ -181,14 +184,20 @@ xy_xcorr = xcorr(x, y)
 
 # naive "shuffle correction" on y to predict "side-lobe variance" of xcorr
 _xy_xcorr = xcorr(x, rng.permutation(y))
+# the above will underestimate xcorr from auto-correlation
+# a more appropriate surrogate would be simulating a counterfactual DAG where
+# all common inputs are broken into independent paths
+# while this is infeasible without oracle knowledge, this may be an inroad to 
+# deriving an expression for the expected std.dev(xcorr(side_band))
+
 
 mid_lag = len(xx_xcorr)//2
 lags = np.arange(0,len(xx_xcorr))-mid_lag
 
-side_std_xy = np.std(xy_xcorr[nt//2+1:]) # has to do with autocorr!
-side_std_xx = np.std(xx_xcorr[nt//2+1:]) # has to do with autocorr!
-side_std_yy = np.std(yy_xcorr[nt//2+1:]) # has to do with autocorr!
-
+side_std_xy = np.std(xy_xcorr[(nt//2+nplot//2):]) # has to do with autocorr!
+side_std_xx = np.std(xx_xcorr[(nt//2+nplot//2):]) # has to do with autocorr!
+side_std_yy = np.std(yy_xcorr[(nt//2+nplot//2):]) # has to do with autocorr!
+print(side_std_xy)
 #%%
 
 

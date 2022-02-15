@@ -259,10 +259,30 @@ w^{+AB} = \mathrm{Diag(I^+)}\left(R^w(:,A) + R^w(:,B)\right)
 [^sqr]: verify convention with whether $S_i$ represents the output variance versus standard deviation, and whether therefore we need to square any of these terms
 
 
+# Appendix
+### SNR, r2, R2, xcorr
+
+$r^2$ and $\text{SNR}$ may be closely related through simple transformations. If so, this relationship may be useful in communicating context for how to interpret $\text{IDSNR}$.
+
+Practically, there may be scenarios where computing shared and total variance is simpler than computing shared and independent variance
+
+\[
+r^2 = \frac{\color{green}shared}{total} = \frac{\color{green}shared}{\color{green}shared+\color{red}indp.} = \frac{1}{1+\frac{\color{red}indp.}{\color{green}shared}} 
+\\
+\mathrm{SNR} = \frac{\color{green}shared}{\color{red}indp.}
+\\
+r^2= \frac{1}{1+1/\mathrm{SNR}} 
+\\
+\mathrm{SNR} = \frac{r^2}{1-r^2}
+\]
+*under the right conditions:*
+\[
+r^2 = 1 - \frac{\color{red}indp.}{\color{green}shared + \color{red}indp.} = 1 - \frac{SS_{res}}{SS_{total}} = R^2
+\\
+\]
 
 
-
----
+### Circuit for simple_gaussian_SNR.py
 ```mermaid
 graph TD
   u((u))

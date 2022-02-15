@@ -34,15 +34,21 @@ def reachability( adj ):
     reach = nx.to_numpy_array( nx_reach )
     return reach
 
-def draw_np_adj(adj, ax=None):
+def draw_np_adj(adj, ax=None, more_options={}):
     nx_adj = nx.from_numpy_matrix(adj, create_using=nx.DiGraph) 
+    pos = nx.circular_layout(nx_adj)
+    
     options = {
         'node_color': 'lightgrey',
         'node_size': 1000,
         'width': 2,
         'arrowstyle': '-|>',
+        'ax':ax,
+        'pos':pos
     }
+    options.update(more_options)
     nx.draw_networkx(nx_adj, arrows=True, **options)
+    return pos
 
 #%%
 
