@@ -10,11 +10,23 @@
   - params (weight, delay)
   - intervention 
 - possible journals 
+  - [ ] Chris in discussion with editors
   - perspectives 
     - Nature Neuro
   - technical
     - PLOS Comp Bio
     - JNE 
+- **remaining scope**
+  - probably
+    - linear theory (IDSNR)
+    - impact of OL ctrl on IDSNR
+    - spiking results
+    - open-loop design
+  - maybe
+    - optimizing closed-loop policy via IDSNR
+      - can we do design of experiments without brute-force search of all control locations?
+  - probably not 
+    - predicting nonlinear case 
 
 # intro / methods tasks
  - [ ] add more closed-loop references to intro[^ctrl_sys_id]
