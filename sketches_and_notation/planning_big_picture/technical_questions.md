@@ -5,6 +5,9 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
 
 
 ## Open methodological questions
+- should we be computing partial correlation?
+
+- how to we "integrate" inference - i.e. combine results from multiple intervention conditions to arrive at a refined hypothesis?
 - **how to predict/describe the impact of delays on SNR** 
 - is it useful to sum component-wise identifiability across nodes → net identifiability?
 - connect quotient vector product form of SNR calculations to existing model structures
@@ -15,3 +18,8 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
 - should a node be considered reachable from itself?
   - would splitting nodes into Sin | Sout help make this clearer
 - do we need to consider "fork-shaped" reachability?
+
+## to read/think about pile 
+[jkbren/netrd](https://github.com/jkbren/netrd)
+- a library for reconstruction, comparison and dynamics on networks
+  - works closely with networkx

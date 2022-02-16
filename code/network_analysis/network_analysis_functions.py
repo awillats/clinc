@@ -41,8 +41,13 @@ def fork_reachability( adj ):
     [UNTESTED]
     '''
     return np.matmul( reachability(adj.T), reachability(adj) )
+def indirect( adj ):
+    return reachability(adj)-adj #could be xor?
+
+
 def undirect( adj ):
     return np.logical_or( adj.T, adj)
+    
 def correlations( adj ):
     '''
     [UNTESTED], binary
@@ -50,12 +55,17 @@ def correlations( adj ):
     '''    
     return undirect( np.logical_or(fork_reachability(adj), reachability(adj)) )
     
-def indirect( adj ):
-    return reachability(adj)-adj
+def illusory_correlations( adj , corr=None):
+    if corr is None:
+        corr = correlations(adj)
+    return corr.astype(int)-undirect(adj) #could be xor?
 
-def illusory_correlations( adj ):
-    return correlations(adj).astype(int)-undirect(adj)
-    
+#TODO: partial correlations
+'''
+def partial_correlations( adj, i_condition ):
+    return adj
+''' 
+#%%  network plotting  
 def draw_np_adj(adj, ax=None, more_options={}):
     nx_adj = nx.from_numpy_matrix(adj, create_using=nx.DiGraph) 
     pos = nx.circular_layout(nx_adj)
@@ -63,8 +73,9 @@ def draw_np_adj(adj, ax=None, more_options={}):
     options = {
         'node_color': 'lightgrey',
         'node_size': 1000,
-        'width': 2,
+        'width': 3,
         'arrowstyle': '-|>',
+        'arrowsize':25,
         'ax':ax,
         'pos':pos,
         'connectionstyle':"arc3,rad=0.1"
@@ -72,35 +83,44 @@ def draw_np_adj(adj, ax=None, more_options={}):
     
     myplot.unbox(ax)
     # myplot.expand_bounds(ax)
-    # print(pos)
     options.update(more_options)
     nx.draw_networkx(nx_adj, arrows=True, **options)
     return pos
+def straight_edge_style(color):
+    return {'edge_color':color,'connectionstyle':'arc3,rad=0','arrowstyle':'-'}
+    
+def draw_reachability(A,R=None,ax=None):
+    if R is None:
+        R = reachability(A)
+    draw_np_adj(R, ax=ax, more_options={'edge_color':'lightgrey'})
+    draw_np_adj(A, ax=ax)
+    
+def draw_correlations(A,Corr=None,ax=None):
+    if Corr is None:
+        Corr = correlations(A)
+    draw_np_adj(Corr, ax=ax, more_options=straight_edge_style('lightgreen'))
+    draw_np_adj(illusory_correlations(A,Corr), ax=ax, more_options=straight_edge_style('lightcoral'))
 
 #%%
 
 if __name__ == "__main__":
     A = np.array([[0,1,0],
-                  [1,0,1],
-                  [0,0,0]])
+                  [1,0,0],
+                  [1,0,0]])
     
     rA = reachability(A);
     rwA = reachability_weight(A);
-    frA = illusory_correlations(A)
+    corrA = correlations(A)
     
-    fig,ax = plt.subplots(1,3,figsize=(12,4))
-    
+    fig, ax = plt.subplots(1,3,figsize=(12,4))
     
     draw_np_adj(A, ax=ax[0])
-    
-    # 'draw reachability light grey under'
-    draw_np_adj(rA, ax=ax[1])
-    
-    # 'draw illusory red, no curvature over'
-    draw_np_adj(frA, ax=ax[2])
+    draw_reachability(A,rA,    ax[1])
+    draw_correlations(A,corrA, ax[2])
+
     ax[0].set_title('adj')
-    ax[1].set_title('reach')
-    ax[2].set_title('corr - adj')
+    ax[1].set_title('reach') #indirect = reach-adj
+    ax[2].set_title('correlations')
     # [myplot.expand_bounds(_ax,2) for _ax in ax]# doesn't work?
     print(rwA)
     fig
