@@ -165,7 +165,7 @@ resulting in S1 having a shared contribution to A & B
 
 where $S_i →→ N_j$ is a boolean reporting whether the reachability matrix $\mathcal{R}_{ij} \neq 0$.[^binarycomp]
 
-[^binarycomp]: this can be solved through boolean operations on $R$
+[^binarycomp]: this can be solved through boolean operations on $R$, see [coreachability_source_classification.py](../../code/network_analysis/coreachability_source_classification.py)
 
 [^pnab]: for fully explicit notation $S^+$ is always referenced to a queried pair of nodes (A,B) i.e. $S^{+AB}$. The same node $S_i$ maybe $\in S^{+AB}$ but $\in S^{-CD}$ for instance
 <!-- $$
