@@ -1,7 +1,7 @@
 # Top 3 highest priority writing / planning tasks:
 - [ ] checking definitions for r2, R2, SNR
 - [ ] looking for refs to predict side-band xcorr magnitude
-- [ ] linear algebra for computing $I^{+AB}$
+- [x] linear algebra for computing $I^{+AB}$
   - python verification
 - [ ] sketch core figures 
 

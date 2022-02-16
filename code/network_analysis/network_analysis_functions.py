@@ -2,8 +2,10 @@
 import numpy as np 
 import networkx as nx 
 import matplotlib.pyplot as plt
+import plotting_functions as myplot
 DYNAMIC = 0
-
+# %load_ext autoreload
+# %autoreload 2
 #%%
 def reachability_weight( adj ):
     # intended to capture the total scaling a unit input at node i 
@@ -33,7 +35,27 @@ def reachability( adj ):
     nx_reach = nx.dag.transitive_closure( nx_dag )
     reach = nx.to_numpy_array( nx_reach )
     return reach
+    
+def fork_reachability( adj ):
+    '''
+    [UNTESTED]
+    '''
+    return np.matmul( reachability(adj.T), reachability(adj) )
+def undirect( adj ):
+    return np.logical_or( adj.T, adj)
+def correlations( adj ):
+    '''
+    [UNTESTED], binary
+    fork reachabile OR direct reachable
+    '''    
+    return undirect( np.logical_or(fork_reachability(adj), reachability(adj)) )
+    
+def indirect( adj ):
+    return reachability(adj)-adj
 
+def illusory_correlations( adj ):
+    return correlations(adj).astype(int)-undirect(adj)
+    
 def draw_np_adj(adj, ax=None, more_options={}):
     nx_adj = nx.from_numpy_matrix(adj, create_using=nx.DiGraph) 
     pos = nx.circular_layout(nx_adj)
@@ -47,6 +69,9 @@ def draw_np_adj(adj, ax=None, more_options={}):
         'pos':pos,
         'connectionstyle':"arc3,rad=0.1"
     }
+    
+    myplot.unbox(ax)
+    # myplot.expand_bounds(ax)
     # print(pos)
     options.update(more_options)
     nx.draw_networkx(nx_adj, arrows=True, **options)
@@ -56,17 +81,27 @@ def draw_np_adj(adj, ax=None, more_options={}):
 
 if __name__ == "__main__":
     A = np.array([[0,1,0],
-                  [0,0,2],
+                  [1,0,1],
                   [0,0,0]])
     
     rA = reachability(A);
     rwA = reachability_weight(A);
+    frA = illusory_correlations(A)
     
-    fig0,ax0 = plt.subplots()
-    draw_np_adj(A, ax=ax0)
+    fig,ax = plt.subplots(1,3,figsize=(12,4))
     
-    fig1,ax1 = plt.subplots()
-    draw_np_adj(rA, ax=ax1)
-
+    
+    draw_np_adj(A, ax=ax[0])
+    
+    # 'draw reachability light grey under'
+    draw_np_adj(rA, ax=ax[1])
+    
+    # 'draw illusory red, no curvature over'
+    draw_np_adj(frA, ax=ax[2])
+    ax[0].set_title('adj')
+    ax[1].set_title('reach')
+    ax[2].set_title('corr - adj')
+    # [myplot.expand_bounds(_ax,2) for _ax in ax]# doesn't work?
     print(rwA)
+    fig
     

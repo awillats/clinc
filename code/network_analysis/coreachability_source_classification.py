@@ -106,18 +106,23 @@ if __name__ == '__main__':
 
     #%%
     n = A.shape[0];
-    df = pd.DataFrame(columns=['iA','jB','kS','type'])
-    for i in range(n):
-        for j in range(i,n):
-            _s_labels = partition_and_label_sources(R,i,j)
-            for k in range(n):
-                df = df.append({'iA':i,'jB':j,'kS':k,'type':_s_labels[k]},ignore_index=True)
+    
+    def compute_coreachability_tensor(R):
+        n = R.shape[0]
+        df = pd.DataFrame(columns=['iA','jB','kS','type'])
+        for i in range(n):
+            for j in range(i,n):
+                _s_labels = partition_and_label_sources(R,i,j)
+                for k in range(n):
+                    df = df.append({'iA':i,'jB':j,'kS':k,'type':_s_labels[k]},ignore_index=True)
+        return df
+        
+    df = compute_coreachability_tensor(R)
     df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
     df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
     print(R)
-    sub_df = df[ (df['iA']==3) & (df['jB']==3)]
-    
-    print( sub_df )
+    # sub_df = df[ (df['iA']==0) & (df['jB']==1)]
+    # print( sub_df )
     #%%
     #TODO: Highlight false connections by taking forkreachability - adjacency
     
@@ -125,15 +130,8 @@ if __name__ == '__main__':
     fig,ax = plt.subplots(n,n,figsize=(n*2.5,n*2.5))
 
     #manage axes
-    [_ax.set_title(i) for i,_ax in enumerate(ax[0,:])]
-    [_ax.set_xlabel(i) for i,_ax in enumerate(ax[n-1,:])]
-    [_ax.set_ylabel(i) for i,_ax in enumerate(ax[:,0])]
-    [_ax.set_ylabel(i) for i,_ax in enumerate(ax[:,n-1])]
-    [_ax.yaxis.set_label_position('right') for i,_ax in enumerate(ax[:,n-1])]
-    [__ax.set_yticks([]) for _ax in ax for __ax in _ax ]
-    [__ax.set_xticks([]) for _ax in ax for __ax in _ax ]
-    [myplot.unbox(__ax) for _ax in ax for __ax in _ax ]
-
+    myplot.label_and_clear_axes_grid(ax)
+    
     #TODO: highlight true and illusory edges in background of plot!
 
     for i in range(n):
@@ -146,14 +144,16 @@ if __name__ == '__main__':
             node_opts.update(node_sizes)
             node_opts.update({'edge_color':'lightgrey'})
             net.draw_np_adj(A, ax[i][j], more_options=node_opts)
+            # highlight queried edge
             edge_A = 0*A;
             edge_A[i,j]=1
             node_opts.update({'edge_color':'black','style':':','arrowstyle':'-'})
             net.draw_np_adj(edge_A, ax[i][j], more_options=node_opts)
+            
     [myplot.expand_bounds(__ax) for _ax in ax for __ax in _ax ]
     fig.suptitle('To node j\n(target)',fontsize=20)
-    fig.text(0.05,.5,'From node i\n(source)',fontsize=20,ha='center',va='center',rotation='vertical')
-    # print(df[ (df['iA']==3) & (df['jB']==2)] ) # 
+    myplot.super_ylabel(fig, 'From node i\n(source)',fontsize=20)
+    fig
 
         
 
