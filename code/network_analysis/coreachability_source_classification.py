@@ -1,9 +1,11 @@
 import numpy as np
 import networkx as nx
 import network_analysis_functions as net
+import plotting_functions as myplot
+%load_ext autoreload
+%autoreload 2
 #%%
 # set up functions for computing whether a source can reach both A and B
-
 def and_coreach(R,i,j):
     return np.logical_and(R[:,i],R[:,j])
 def xor_coreach(R,i,j):
@@ -43,12 +45,21 @@ def condense_source_type_labels(S):
         S_labels.append(this_label)
     return S_labels
 
+def partition_and_label_sources(R,i,j):
+    return condense_source_type_labels(partition_sources_ab(R,i,j))
 #%%
 
 if __name__ == '__main__':
+    # TEST script for categorizing whether sources increase or 
+    # decrease correlation between two nodes
     import matplotlib.pyplot as plt
+    import pandas as pd
     # Construct a network with networkx
-    G = nx.DiGraph({'U':['V'],'V':['zA','zB'],'zZ':[]})
+    # G = nx.DiGraph({'U':['V'],'V':['zA','zB'],'zZ':['zB'],'zA':['zB']})
+    # G = nx.DiGraph({'A':['B'],'B':['A','C']})
+    G = nx.DiGraph({'A':['B','C']})
+
+
     '''mermaid vis from networkx
     https://blog.mdb977.de/rendering-networkx-graphs-or-graphml-files-via-mermaid/
     https://github.com/mermaid-js/mermaid/issues/1791'''
@@ -60,37 +71,89 @@ if __name__ == '__main__':
     R = net.reachability(A).astype(int)
     print(R)
     
-    iA = 2
-    jB = 3
-    def _idx_to_shape(i,iA=iA,jB=jB):
-        if (i==iA):
-            return 600
-        if (i==jB):
-            return 600
-        else:
-            return 300
+    iA = 0
+    jB = 1
     
     S = partition_sources_ab(R,iA,jB)
     print(S)
     print(validate_sources(S))
     S_labels = condense_source_type_labels(S)
+    
+    def _idx_to_node_size(i,iA=iA,jB=jB):
+        if (i==iA):
+            return 800
+        if (i==jB):
+            return 800
+        else:
+            return 300
     label_colors = {'S+':'lightgreen','S-':'lightcoral','S0':'lightgrey'}
-    C = {'node_color':[label_colors[s] for s in S_labels]}
-    Sh = {'node_size':[_idx_to_shape(i) for i in range(len(S_labels))]}
-    C.update(Sh)
+    node_opts = {'node_color':[label_colors[s] for s in S_labels]}
+    node_sizes = {'node_size':[_idx_to_node_size(i) for i in range(len(S_labels))]}
+    node_opts.update(node_sizes)
     
     fig,ax = plt.subplots(2,1,figsize=(4,8))
     ax
-    # net.draw_np_adj(A, ax[0])
-    # net.draw_np_adj(R, ax[1])
     
-    net.draw_np_adj(A, ax[0], more_options=C)
-    net.draw_np_adj(R, ax[1], more_options=C)
+    net.draw_np_adj(A, ax[0], more_options=node_opts)
+    net.draw_np_adj(R, ax[1], more_options=node_opts)
     
     ax[0].set_title('big nodes are source, target\n green nodes are S+\nred nodes are S-')
     ax[0].set_ylabel('adjacency')
     ax[1].set_ylabel('reachability')
     fig
-    
+        
+    print(S_labels)
 
+    #%%
+    n = A.shape[0];
+    df = pd.DataFrame(columns=['iA','jB','kS','type'])
+    for i in range(n):
+        for j in range(i,n):
+            _s_labels = partition_and_label_sources(R,i,j)
+            for k in range(n):
+                df = df.append({'iA':i,'jB':j,'kS':k,'type':_s_labels[k]},ignore_index=True)
+    df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
+    df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
+    print(R)
+    sub_df = df[ (df['iA']==3) & (df['jB']==3)]
+    
+    print( sub_df )
+    #%%
+    #TODO: Highlight false connections by taking forkreachability - adjacency
+    
+    #%%
+    fig,ax = plt.subplots(n,n,figsize=(n*2.5,n*2.5))
+
+    #manage axes
+    [_ax.set_title(i) for i,_ax in enumerate(ax[0,:])]
+    [_ax.set_xlabel(i) for i,_ax in enumerate(ax[n-1,:])]
+    [_ax.set_ylabel(i) for i,_ax in enumerate(ax[:,0])]
+    [_ax.set_ylabel(i) for i,_ax in enumerate(ax[:,n-1])]
+    [_ax.yaxis.set_label_position('right') for i,_ax in enumerate(ax[:,n-1])]
+    [__ax.set_yticks([]) for _ax in ax for __ax in _ax ]
+    [__ax.set_xticks([]) for _ax in ax for __ax in _ax ]
+    [myplot.unbox(__ax) for _ax in ax for __ax in _ax ]
+
+    #TODO: highlight true and illusory edges in background of plot!
+
+    for i in range(n):
+        for j in range(i,n):
+            df_rows = df[ (df['iA']==i) & (df['jB']==j)]
+            node_opts = {'node_color':[c for c in df_rows['node_color']]}
+            node_sizes = {'node_size':[s for s in df_rows['node_size']]}
+            # print(node_opts)
+            # print(node_sizes)
+            node_opts.update(node_sizes)
+            node_opts.update({'edge_color':'lightgrey'})
+            net.draw_np_adj(A, ax[i][j], more_options=node_opts)
+            edge_A = 0*A;
+            edge_A[i,j]=1
+            node_opts.update({'edge_color':'black','style':':','arrowstyle':'-'})
+            net.draw_np_adj(edge_A, ax[i][j], more_options=node_opts)
+    [myplot.expand_bounds(__ax) for _ax in ax for __ax in _ax ]
+    fig.suptitle('To node j\n(target)',fontsize=20)
+    fig.text(0.05,.5,'From node i\n(source)',fontsize=20,ha='center',va='center',rotation='vertical')
+    # print(df[ (df['iA']==3) & (df['jB']==2)] ) # 
+
+        
 

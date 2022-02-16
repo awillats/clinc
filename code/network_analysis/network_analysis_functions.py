@@ -44,8 +44,10 @@ def draw_np_adj(adj, ax=None, more_options={}):
         'width': 2,
         'arrowstyle': '-|>',
         'ax':ax,
-        'pos':pos
+        'pos':pos,
+        'connectionstyle':"arc3,rad=0.1"
     }
+    # print(pos)
     options.update(more_options)
     nx.draw_networkx(nx_adj, arrows=True, **options)
     return pos
