@@ -166,6 +166,26 @@ resulting in S1 having a shared contribution to A & B
 where $S_i →→ N_j$ is a boolean reporting whether the reachability matrix $\mathcal{R}_{ij} \neq 0$.[^binarycomp]
 
 [^binarycomp]: this can be solved through boolean operations on $R$, see [coreachability_source_classification.py](../../code/network_analysis/coreachability_source_classification.py)
+```python
+# set up functions for computing whether a source can reach both A and B
+def and_coreach(R,i,j):
+    return np.logical_and(R[:,i],R[:,j])
+def xor_coreach(R,i,j):
+    return np.logical_xor(R[:,i],R[:,j])
+def nor_coreach(R,i,j):
+    return np.logical_not(np.logical_or(R[:,i],R[:,j]))
+    
+def partition_sources_ab(R,i,j):
+    '''
+    assumes IN x OUT convention for reachability R
+    '''
+    # adds diagonal elements if they don't already exist
+    # this represents the assumption that sources can access every node
+    R = np.logical_or(R, np.eye(R.shape[0])) 
+    return {'S+':and_coreach(R,i,j),
+            'S-':xor_coreach(R,i,j),
+            'S0':nor_coreach(R,i,j)}
+```
 
 [^pnab]: for fully explicit notation $S^+$ is always referenced to a queried pair of nodes (A,B) i.e. $S^{+AB}$. The same node $S_i$ maybe $\in S^{+AB}$ but $\in S^{-CD}$ for instance
 <!-- $$
