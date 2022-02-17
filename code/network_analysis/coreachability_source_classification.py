@@ -66,10 +66,84 @@ def compute_coreachability_tensor(R):
             for k in range(n):
                 df = df.append({'iA':i,'jB':j,'kS':k,'type':_s_labels[k]},ignore_index=True)
     return df
+#%%
+def df_edgelist_to_numpy_adj(df, source_key, target_key, node_list):
+    return nx.to_numpy_matrix(nx.from_pandas_edgelist(df, source_key, target_key, create_using=nx.DiGraph),nodelist=node_list)
 
-def plot_coreachability_by_source():
-    pass
+def get_coreachability_from_source(df, kS):
+    df_rows = df[df['kS']==kS]
+    df_pos  = df_rows[df_rows['type']=='S+']
+    df_neg  = df_rows[df_rows['type']=='S-']
+    df_neut = df_rows[df_rows['type']=='S0']
     
+    nodes = df_rows['iA'].unique()
+    pos_edges = df_edgelist_to_numpy_adj(df_pos,  'iA','jB',nodes)
+    neg_edges = df_edgelist_to_numpy_adj(df_neg,  'iA','jB',nodes)
+    neut_edges = df_edgelist_to_numpy_adj(df_neut,'iA','jB',nodes)
+
+    return pos_edges, neut_edges, neg_edges
+
+def indicate_intervention(intv_idx, pos, ax, type='open-loop'):
+    arrow_mag = 0.4
+    arrow_c = 'k'
+    # start from "outside" the node
+    x0 = pos[intv_idx][0]*(1+arrow_mag)
+    y0 = pos[intv_idx][1]*(1+arrow_mag)
+    # point back towards the node
+    dx = -pos[intv_idx][0]*arrow_mag*.8
+    dy = -pos[intv_idx][1]*arrow_mag*.8
+    
+    # https://stackoverflow.com/questions/37819215/matplotlib-arrowheads-and-aspect-ratio
+    # https://stackoverflow.com/questions/27598976/matplotlib-unknown-property-headwidth-and-head-width/27611041
+    arrow_spec =  dict(arrowstyle='->, head_width=0.2',
+        color=arrow_c,
+        connectionstyle='arc3')
+        
+    ax.annotate("", xy=(x0+dx,y0+dy), xycoords='data',
+                    xytext=(x0,y0), textcoords='data',
+                    arrowprops=arrow_spec,
+                        zorder=100
+                    )
+    
+
+def draw_coreachability_by_source(df, axs, node_position, add_titles=True):
+    pos_edge_style = net.straight_edge_style('peachpuff')
+    pos_edge_style.update({'width':10})
+    neg_edge_style = net.straight_edge_style('lightblue')
+    neg_edge_style.update({'width':2})
+    neut_edge_style = net.straight_edge_style('lightgrey')
+    neut_edge_style.update({'width':5})
+
+    #TODO: scale these by IDSNR weighted co-reachability
+    n = len(df['iA'].unique())
+    for i in range(n):
+        pos_edges, neut_edges, neg_edges = get_coreachability_from_source(df,i)
+        
+        net.draw_np_adj(neut_edges, axs[i], neut_edge_style)
+        net.draw_np_adj(pos_edges, axs[i], pos_edge_style)
+        net.draw_np_adj(neg_edges, axs[i], neg_edge_style)
+        indicate_intervention(i, node_position, axs[i])
+        # print(node_position)
+        if add_titles:
+            axs[i].set_title(f'effect of $S_{i}$')
+            
+def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True):    
+    n = A.shape[0]
+    n_plot = 3+n;  
+    if df is None:
+        df = compute_coreachability_tensor(net.reachability(A))
+
+    if axs is None:
+        fig, axs =  plt.subplots(1,n_plot, figsize=((n_plot)*5, 2*2.5),sharey=True,aspect='equal')
+        print('INFO: creating axes')
+    else:
+        fig = axs[0].get_figure()
+
+    graph_pos = net.draw_adj_reach_corr(A, axs[0:3], add_titles, grey_correlations=True)
+    draw_coreachability_by_source(df, axs[3:], graph_pos, add_titles)
+    return fig
+
+
 #%%
 
 if __name__ == '__main__':
@@ -86,8 +160,6 @@ if __name__ == '__main__':
     # G = nx.DiGraph({'A':['B','C']})
     G = nx.DiGraph({'A':['B'],'B':['A'],'C':['A']})
 
-
-
     '''mermaid vis from networkx
     https://blog.mdb977.de/rendering-networkx-graphs-or-graphml-files-via-mermaid/
     https://github.com/mermaid-js/mermaid/issues/1791'''
@@ -99,8 +171,6 @@ if __name__ == '__main__':
     R = net.reachability(A).astype(int)
     print(R)
     
-
-    
     def _idx_to_node_size(i,iA,jB):
         if (i==iA):
             return 800
@@ -111,7 +181,6 @@ if __name__ == '__main__':
     # label_colors = {'S+':'lightgreen','S-':'lightcoral','S0':'lightgrey'}
     label_colors = {'S+':'peachpuff','S-':'lightblue','S0':'lightgrey'}
 
-    
     # # Examine co-reachability for a single source-target pair
     # iA = 0
     # jB = 1
@@ -139,13 +208,10 @@ if __name__ == '__main__':
     #%%
     n = A.shape[0];
     
-        
     df = compute_coreachability_tensor(R)
     df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
     df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
-    print(R)
-    # sub_df = df[ (df['iA']==0) & (df['jB']==1)]
-    # print( sub_df )
+
     #%%
     
     fig, ax = plt.subplots(1,3,figsize=(12,4))
@@ -155,126 +221,47 @@ if __name__ == '__main__':
     # print(A)
          
     As = egcirc.get_all_2node()
-    As = egcirc.get_chainlike_3node()
+    # As = egcirc.get_chainlike_3node()
 
     ncirc = len(As)                    
     npanels = 3    
-    fig,ax = plt.subplots(ncirc,npanels,figsize=(10,4*ncirc))
+    fig,ax = plt.subplots(ncirc,npanels,figsize=(10,4*ncirc), sharey=True)
     for i,_A in enumerate(As):
         net.draw_adj_reach_corr(_A,ax[i,:3],add_titles=(i==0))
     myplot.super_ylabel(fig,'hypothesized circuits',30)
-    # A1 = 
-    # A2 = 
     
     #%%
-    #PLOT coreachability sensor by AxB, S embedded in node color
-    fig,ax = plt.subplots(n,n,figsize=(n*2.5,n*2.5))
-
-    #manage axes
-    myplot.label_and_clear_axes_grid(ax)
-    
-    for i in range(n):
-        for j in range(i,n):
-            df_rows = df[ (df['iA']==i) & (df['jB']==j)]
-            node_opts = {'node_color':[c for c in df_rows['node_color']]}
-            node_sizes = {'node_size':[s for s in df_rows['node_size']]}
-            # print(node_opts)
-            # print(node_sizes)
-            node_opts.update(node_sizes)
-            node_opts.update({'edge_color':'lightgrey'})
-            net.draw_np_adj(A, ax[i][j], more_options=node_opts)
-            # highlight queried edge
-            edge_A = 0*A;
-            edge_A[i,j]=1
-            node_opts.update({'edge_color':'black','style':':','arrowstyle':'-'})
-            net.draw_np_adj(edge_A, ax[i][j], more_options=node_opts)
-            
-    [myplot.expand_bounds(__ax) for _ax in ax for __ax in _ax ]
-    fig.suptitle('To node j\n(target)',fontsize=20)
-    myplot.super_ylabel(fig, 'From node i\n(source)',fontsize=20)
-    fig
+    # #PLOT coreachability sensor by AxB...S embedded in node color
+    # fig,ax = plt.subplots(n,n,figsize=(n*2.5,n*2.5))
+    # 
+    # #manage axes
+    # myplot.label_and_clear_axes_grid(ax)
+    # 
+    # for i in range(n):
+    #     for j in range(i,n):
+    #         df_rows = df[ (df['iA']==i) & (df['jB']==j)]
+    #         node_opts = {'node_color':[c for c in df_rows['node_color']]}
+    #         node_sizes = {'node_size':[s for s in df_rows['node_size']]}
+    #         # print(node_opts)
+    #         # print(node_sizes)
+    #         node_opts.update(node_sizes)
+    #         node_opts.update({'edge_color':'lightgrey'})
+    #         net.draw_np_adj(A, ax[i][j], more_options=node_opts)
+    #         # highlight queried edge
+    #         edge_A = 0*A;
+    #         edge_A[i,j]=1
+    #         node_opts.update({'edge_color':'black','style':':','arrowstyle':'-'})
+    #         net.draw_np_adj(edge_A, ax[i][j], more_options=node_opts)
+    # 
+    # [myplot.expand_bounds(__ax) for _ax in ax for __ax in _ax ]
+    # fig.suptitle('To node j\n(target)',fontsize=20)
+    # myplot.super_ylabel(fig, 'From node i\n(source)',fontsize=20)
+    # fig
 
     #%%
     '''
     plot co-reachability tensor as a function of source location
     '''
-    def df_edgelist_to_numpy_adj(df, source_key, target_key, node_list):
-        return nx.to_numpy_matrix(nx.from_pandas_edgelist(df, source_key, target_key, create_using=nx.DiGraph),nodelist=node_list)
-    
-    def get_coreachability_from_source(df, kS):
-        df_rows = df[df['kS']==kS]
-        df_pos  = df_rows[df_rows['type']=='S+']
-        df_neg  = df_rows[df_rows['type']=='S-']
-        df_neut = df_rows[df_rows['type']=='S0']
-        
-        nodes = df_rows['iA'].unique()
-        pos_edges = df_edgelist_to_numpy_adj(df_pos,  'iA','jB',nodes)
-        neg_edges = df_edgelist_to_numpy_adj(df_neg,  'iA','jB',nodes)
-        neut_edges = df_edgelist_to_numpy_adj(df_neut,'iA','jB',nodes)
-
-        return pos_edges, neut_edges, neg_edges
-    
-    def indicate_intervention(intv_idx, pos, ax, type='open-loop'):
-        arrow_mag = 0.4
-        arrow_c = 'k'
-        # start from "outside" the node
-        x0 = pos[intv_idx][0]*(1+arrow_mag)
-        y0 = pos[intv_idx][1]*(1+arrow_mag)
-        # point back towards the node
-        dx = -pos[intv_idx][0]*arrow_mag*.8
-        dy = -pos[intv_idx][1]*arrow_mag*.8
-        
-        # https://stackoverflow.com/questions/37819215/matplotlib-arrowheads-and-aspect-ratio
-        # https://stackoverflow.com/questions/27598976/matplotlib-unknown-property-headwidth-and-head-width/27611041
-        arrow_spec =  dict(arrowstyle='->, head_width=0.2',
-            color=arrow_c,
-            connectionstyle='arc3')
-            
-        ax.annotate("", xy=(x0+dx,y0+dy), xycoords='data',
-                        xytext=(x0,y0), textcoords='data',
-                        arrowprops=arrow_spec,
-                            zorder=100
-                        )
-        
-    
-    def draw_coreachability_by_source(df, axs, node_position, add_titles=True):
-        pos_edge_style = net.straight_edge_style('peachpuff')
-        pos_edge_style.update({'width':10})
-        neg_edge_style = net.straight_edge_style('lightblue')
-        neg_edge_style.update({'width':2})
-        neut_edge_style = net.straight_edge_style('lightgrey')
-        neut_edge_style.update({'width':5})
-
-        #TODO: scale these by IDSNR weighted co-reachability
-        n = len(df['iA'].unique())
-        for i in range(n):
-            pos_edges, neut_edges, neg_edges = get_coreachability_from_source(df,i)
-            
-            net.draw_np_adj(neut_edges, axs[i], neut_edge_style)
-            net.draw_np_adj(pos_edges, axs[i], pos_edge_style)
-            net.draw_np_adj(neg_edges, axs[i], neg_edge_style)
-            indicate_intervention(i, node_position, axs[i])
-            # print(node_position)
-            if add_titles:
-                axs[i].set_title(f'effect of $S_{i}$')
-                
-    def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True):    
-        n = A.shape[0]
-        n_plot = 3+n;  
-        if df is None:
-            df = compute_coreachability_tensor(net.reachability(A))
-
-        if axs is None:
-            fig, axs =  plt.subplots(1,n_plot, figsize=((n_plot)*5, 2*2.5),sharey=True,aspect='equal')
-            print('INFO: creating axes')
-        else:
-            fig = axs[0].get_figure()
-
-        graph_pos = net.draw_adj_reach_corr(A, axs[0:3], add_titles, grey_correlations=True)
-        draw_coreachability_by_source(df, axs[3:], graph_pos, add_titles)
-        return fig
-
-    #%#%
     # df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
     # df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
     
