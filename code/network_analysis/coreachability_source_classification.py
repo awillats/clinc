@@ -7,9 +7,12 @@ import plotting_functions as myplot
 
 '''
 to-do list
-- wrap coreachability | Si into function so it can be compared across hypotheses
-    - correlation_style
-    - indicate_intervention( type='open-loop')
+- [ ] compute entropy across hypotheses
+    - mega df?
+    - tokenizer for each circuit?
+        - dictionary with tuples of patterns as keys?
+    - compute entropy across tokens
+    - ( weight by prior )
 '''
 #%%
 # set up functions for computing whether a source can reach both A and B
@@ -75,6 +78,7 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     import pandas as pd
     plt.rcParams.update({'font.size': 25})
+    import example_circuits as egcirc
 
     # Construct a network with networkx
     # G = nx.DiGraph({'U':['V'],'V':['zA','zB'],'zZ':['zB'],'zA':['zB']})
@@ -149,32 +153,10 @@ if __name__ == '__main__':
     fig
     #%%
     # print(A)
-    A_ = np.array([[0,0,0],
-                   [1,0,0],
-                   [1,0,0]])
-                   
-    A0 = np.array([[0,1,0],
-                   [0,0,0],
-                   [1,0,0]])
+         
+    As = egcirc.get_all_2node()
+    As = egcirc.get_chainlike_3node()
 
-    A1 = np.array([[0,1,0],
-                   [1,0,0],
-                   [1,0,0]])
-                   
-    A2 = np.array([[0,1,1],
-                   [0,0,0],
-                   [0,0,0]])                 
-                                      
-    A3 = np.array([[0,1,1],
-                   [0,0,0],
-                   [0,1,0]])      
-                   
-    A4 = np.array([[0,1,1],
-                   [1,0,1],
-                   [1,1,0]])
-                   
-
-    As = [A_,A0,A1,A2,A3,A4]
     ncirc = len(As)                    
     npanels = 3    
     fig,ax = plt.subplots(ncirc,npanels,figsize=(10,4*ncirc))
@@ -216,42 +198,45 @@ if __name__ == '__main__':
     '''
     plot co-reachability tensor as a function of source location
     '''
+    def df_edgelist_to_numpy_adj(df, source_key, target_key, node_list):
+        return nx.to_numpy_matrix(nx.from_pandas_edgelist(df, source_key, target_key, create_using=nx.DiGraph),nodelist=node_list)
+    
     def get_coreachability_from_source(df, kS):
         df_rows = df[df['kS']==kS]
-        df_pos = df_rows[df_rows['type']=='S+']
-        df_neg = df_rows[df_rows['type']=='S-']
+        df_pos  = df_rows[df_rows['type']=='S+']
+        df_neg  = df_rows[df_rows['type']=='S-']
         df_neut = df_rows[df_rows['type']=='S0']
+        
+        nodes = df_rows['iA'].unique()
+        pos_edges = df_edgelist_to_numpy_adj(df_pos,  'iA','jB',nodes)
+        neg_edges = df_edgelist_to_numpy_adj(df_neg,  'iA','jB',nodes)
+        neut_edges = df_edgelist_to_numpy_adj(df_neut,'iA','jB',nodes)
 
-        # print(df_pos)
-        pos_edges = 0*A
-        neg_edges = 0*A
-        neut_edges = 0*A
-        
-        # TODO: got to be a more efficient way to extract these sub-circuits
-        for a,b in zip(df_pos['iA'],df_pos['jB']):
-            pos_edges[a,b]=1
-        for a,b in zip(df_neg['iA'],df_neg['jB']):
-            neg_edges[a,b]=1
-        for a,b in zip(df_neut['iA'],df_neut['jB']):
-            neut_edges[a,b]=1
-        
         return pos_edges, neut_edges, neg_edges
     
-    def indicate_intervention(intv_idx,pos, ax, type='open-loop'):
+    def indicate_intervention(intv_idx, pos, ax, type='open-loop'):
         arrow_mag = 0.4
         arrow_c = 'k'
-        
         # start from "outside" the node
         x0 = pos[intv_idx][0]*(1+arrow_mag)
         y0 = pos[intv_idx][1]*(1+arrow_mag)
         # point back towards the node
-        dx = -pos[intv_idx][0]*arrow_mag/2
-        dy = -pos[intv_idx][1]*arrow_mag/2
-        ax.arrow(x0,y0,dx,dy,
-            head_width=0.05, zorder=100,
-            facecolor = arrow_c, edgecolor = arrow_c)
-        pass
+        dx = -pos[intv_idx][0]*arrow_mag*.8
+        dy = -pos[intv_idx][1]*arrow_mag*.8
         
+        # https://stackoverflow.com/questions/37819215/matplotlib-arrowheads-and-aspect-ratio
+        # https://stackoverflow.com/questions/27598976/matplotlib-unknown-property-headwidth-and-head-width/27611041
+        arrow_spec =  dict(arrowstyle='->, head_width=0.2',
+            color=arrow_c,
+            connectionstyle='arc3')
+            
+        ax.annotate("", xy=(x0+dx,y0+dy), xycoords='data',
+                        xytext=(x0,y0), textcoords='data',
+                        arrowprops=arrow_spec,
+                            zorder=100
+                        )
+        
+    
     def draw_coreachability_by_source(df, axs, node_position, add_titles=True):
         pos_edge_style = net.straight_edge_style('peachpuff')
         pos_edge_style.update({'width':10})
@@ -260,55 +245,51 @@ if __name__ == '__main__':
         neut_edge_style = net.straight_edge_style('lightgrey')
         neut_edge_style.update({'width':5})
 
-
         #TODO: scale these by IDSNR weighted co-reachability
-
+        n = len(df['iA'].unique())
         for i in range(n):
             pos_edges, neut_edges, neg_edges = get_coreachability_from_source(df,i)
             
             net.draw_np_adj(neut_edges, axs[i], neut_edge_style)
             net.draw_np_adj(pos_edges, axs[i], pos_edge_style)
             net.draw_np_adj(neg_edges, axs[i], neg_edge_style)
-            indicate_intervention(i,node_position, axs[i])
+            indicate_intervention(i, node_position, axs[i])
+            # print(node_position)
             if add_titles:
                 axs[i].set_title(f'effect of $S_{i}$')
                 
-    def draw_adj_reach_corr_coreach(A,df=None, axs=None, add_titles=True):    
+    def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True):    
         n = A.shape[0]
         n_plot = 3+n;  
         if df is None:
             df = compute_coreachability_tensor(net.reachability(A))
+
         if axs is None:
-            fig, axs =  plt.subplots(1,n_plot, figsize=((n_plot)*5, 2*2.5),sharey=True)
-            print('creating axes')
-            print(fig)
+            fig, axs =  plt.subplots(1,n_plot, figsize=((n_plot)*5, 2*2.5),sharey=True,aspect='equal')
+            print('INFO: creating axes')
         else:
             fig = axs[0].get_figure()
-        [_ax.set_aspect('equal') for _ax in axs]
+
         graph_pos = net.draw_adj_reach_corr(A, axs[0:3], add_titles, grey_correlations=True)
         draw_coreachability_by_source(df, axs[3:], graph_pos, add_titles)
         return fig
 
-
-    #%%
-    # TODO: annotation pointing to stim location
-    # TODO: encode increases and decreases with edge weight?
-    # 'df = compute_coreachability_tensor(R)'
+    #%#%
     # df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
     # df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
-    # df.sort_values(['kS','iA','jB'])
+    
+    n = As[0].shape[0]
     n_plot = 3+n
     # ncirc = 3
     fig, axs =  plt.subplots(ncirc, n_plot, figsize=((n_plot)*5, ncirc*5),sharey=True)
     
     for i,_A in enumerate(As):
         draw_adj_reach_corr_coreach(_A, axs=axs[i,:], add_titles=(i==0))
-        # net.draw_adj_reach_corr(_A,ax[i,:3],add_titles=(i==0))
-    # fig.suptitle('interventions',size=30)
+    
     fig.text((2+ncirc/2)/(ncirc+2),.92,'Interventions',size=35,va='center',ha='center')
     myplot.super_ylabel(fig,'Hypothesized Circuits',35)
-    plt.savefig('hypo_x_intv.png',dpi=100,facecolor='w')
-    fig
+    # plt.savefig('hypo_x_intv_2node_openloop.png',dpi=100,facecolor='w')
+    # fig
     
     #%%
     
