@@ -74,7 +74,7 @@ if __name__ == '__main__':
     # decrease correlation between two nodes
     import matplotlib.pyplot as plt
     import pandas as pd
-    plt.rcParams.update({'font.size': 15})
+    plt.rcParams.update({'font.size': 25})
 
     # Construct a network with networkx
     # G = nx.DiGraph({'U':['V'],'V':['zA','zB'],'zZ':['zB'],'zA':['zB']})
@@ -220,14 +220,22 @@ if __name__ == '__main__':
         df_rows = df[df['kS']==kS]
         df_pos = df_rows[df_rows['type']=='S+']
         df_neg = df_rows[df_rows['type']=='S-']
+        df_neut = df_rows[df_rows['type']=='S0']
+
         # print(df_pos)
         pos_edges = 0*A
         neg_edges = 0*A
+        neut_edges = 0*A
+        
+        # TODO: got to be a more efficient way to extract these sub-circuits
         for a,b in zip(df_pos['iA'],df_pos['jB']):
             pos_edges[a,b]=1
         for a,b in zip(df_neg['iA'],df_neg['jB']):
             neg_edges[a,b]=1
-        return pos_edges, neg_edges
+        for a,b in zip(df_neut['iA'],df_neut['jB']):
+            neut_edges[a,b]=1
+        
+        return pos_edges, neut_edges, neg_edges
     
     def indicate_intervention(intv_idx,pos, ax, type='open-loop'):
         arrow_mag = 0.4
@@ -249,15 +257,22 @@ if __name__ == '__main__':
         pos_edge_style.update({'width':10})
         neg_edge_style = net.straight_edge_style('lightblue')
         neg_edge_style.update({'width':2})
+        neut_edge_style = net.straight_edge_style('lightgrey')
+        neut_edge_style.update({'width':5})
+
+
         #TODO: scale these by IDSNR weighted co-reachability
 
         for i in range(n):
-            pos_edges, neg_edges = get_coreachability_from_source(df,i)
+            pos_edges, neut_edges, neg_edges = get_coreachability_from_source(df,i)
+            
+            net.draw_np_adj(neut_edges, axs[i], neut_edge_style)
             net.draw_np_adj(pos_edges, axs[i], pos_edge_style)
             net.draw_np_adj(neg_edges, axs[i], neg_edge_style)
             indicate_intervention(i,node_position, axs[i])
             if add_titles:
                 axs[i].set_title(f'effect of $S_{i}$')
+                
     def draw_adj_reach_corr_coreach(A,df=None, axs=None, add_titles=True):    
         n = A.shape[0]
         n_plot = 3+n;  
@@ -270,7 +285,7 @@ if __name__ == '__main__':
         else:
             fig = axs[0].get_figure()
         [_ax.set_aspect('equal') for _ax in axs]
-        graph_pos = net.draw_adj_reach_corr(A, axs[0:3],add_titles)
+        graph_pos = net.draw_adj_reach_corr(A, axs[0:3], add_titles, grey_correlations=True)
         draw_coreachability_by_source(df, axs[3:], graph_pos, add_titles)
         return fig
 
@@ -278,46 +293,25 @@ if __name__ == '__main__':
     #%%
     # TODO: annotation pointing to stim location
     # TODO: encode increases and decreases with edge weight?
-    'df = compute_coreachability_tensor(R)'
+    # 'df = compute_coreachability_tensor(R)'
     # df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
     # df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
     # df.sort_values(['kS','iA','jB'])
     n_plot = 3+n
-    ncirc = 3
+    # ncirc = 3
     fig, axs =  plt.subplots(ncirc, n_plot, figsize=((n_plot)*5, ncirc*5),sharey=True)
-    draw_adj_reach_corr_coreach(A,axs=axs[0,:])
+    
+    for i,_A in enumerate(As):
+        draw_adj_reach_corr_coreach(_A, axs=axs[i,:], add_titles=(i==0))
+        # net.draw_adj_reach_corr(_A,ax[i,:3],add_titles=(i==0))
+    # fig.suptitle('interventions',size=30)
+    fig.text((2+ncirc/2)/(ncirc+2),.92,'Interventions',size=35,va='center',ha='center')
+    myplot.super_ylabel(fig,'Hypothesized Circuits',35)
+    plt.savefig('hypo_x_intv.png',dpi=100,facecolor='w')
     fig
     
     #%%
     
-    '''
-    for i in range(n):
-        plot_i = i+n_pre_plot
-        
-        pos_edges, neg_edges = get_coreachability_from_source(df,i)
-        # print(i)
-        # print(pos_edges)
-        # net.draw_np_adj(A,ax[i],more_options={'edge_color':'lightgrey'})
-        pos_edge_style = net.straight_edge_style('peachpuff')
-        neg_edge_style = net.straight_edge_style('lightblue')
-        #TODO: scale these by IDSNR weighted co-reachability
-        pos_edge_style.update({'width':10})
-        neg_edge_style.update({'width':2})
-        
-        net.draw_np_adj(pos_edges, ax[plot_i], pos_edge_style)
-        net.draw_np_adj(neg_edges, ax[plot_i], neg_edge_style)
-        pos[i]
-        ax[plot_i].set_title(f'effect of $S_{i}$')
-        
-        arrow_mag = 0.4
-        arrow_c = 'k'
-    
-        # NOTE: only works for circular layouts
-        ax[plot_i].arrow(pos[i][0]*(1+arrow_mag),pos[i][1]*(1+arrow_mag),
-            -pos[i][0]*arrow_mag/2, -pos[i][1]*arrow_mag/2,
-            head_width=.05,zorder=100,
-            facecolor=arrow_c,edgecolor=arrow_c)
-    '''
 
     # fig
 

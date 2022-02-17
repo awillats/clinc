@@ -36,4 +36,4 @@ def label_and_clear_axes_grid(ax):
     [unbox(__ax)  for _ax in ax for __ax in _ax ]
 
 def super_ylabel(fig,txt,fontsize=20):
-    fig.text(0.05,.5,txt,fontsize=fontsize,ha='center',va='center',rotation='vertical')
+    fig.text(0.1,.5,txt,fontsize=fontsize,ha='center',va='center',rotation='vertical')
