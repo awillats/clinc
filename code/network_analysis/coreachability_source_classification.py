@@ -63,6 +63,10 @@ def compute_coreachability_tensor(R):
             for k in range(n):
                 df = df.append({'iA':i,'jB':j,'kS':k,'type':_s_labels[k]},ignore_index=True)
     return df
+
+def plot_coreachability_by_source():
+    pass
+    
 #%%
 
 if __name__ == '__main__':
@@ -70,6 +74,8 @@ if __name__ == '__main__':
     # decrease correlation between two nodes
     import matplotlib.pyplot as plt
     import pandas as pd
+    plt.rcParams.update({'font.size': 15})
+
     # Construct a network with networkx
     # G = nx.DiGraph({'U':['V'],'V':['zA','zB'],'zZ':['zB'],'zA':['zB']})
     # G = nx.DiGraph({'A':['B'],'B':['A','C']})
@@ -142,7 +148,39 @@ if __name__ == '__main__':
     net.draw_adj_reach_corr(A, ax)
     fig
     #%%
-    # A0 = 
+    # print(A)
+    A_ = np.array([[0,0,0],
+                   [1,0,0],
+                   [1,0,0]])
+                   
+    A0 = np.array([[0,1,0],
+                   [0,0,0],
+                   [1,0,0]])
+
+    A1 = np.array([[0,1,0],
+                   [1,0,0],
+                   [1,0,0]])
+                   
+    A2 = np.array([[0,1,1],
+                   [0,0,0],
+                   [0,0,0]])                 
+                                      
+    A3 = np.array([[0,1,1],
+                   [0,0,0],
+                   [0,1,0]])      
+                   
+    A4 = np.array([[0,1,1],
+                   [1,0,1],
+                   [1,1,0]])
+                   
+
+    As = [A_,A0,A1,A2,A3,A4]
+    ncirc = len(As)                    
+    npanels = 3    
+    fig,ax = plt.subplots(ncirc,npanels,figsize=(10,4*ncirc))
+    for i,_A in enumerate(As):
+        net.draw_adj_reach_corr(_A,ax[i,:3],add_titles=(i==0))
+    myplot.super_ylabel(fig,'hypothesized circuits',30)
     # A1 = 
     # A2 = 
     
@@ -174,22 +212,12 @@ if __name__ == '__main__':
     myplot.super_ylabel(fig, 'From node i\n(source)',fontsize=20)
     fig
 
-    #%% 
-    # TODO: annotation pointing to stim location
-    # TODO: encode increases and decreases with edge weight?
-    
-    # df.sort_values(['kS','iA','jB'])
-    fig,ax =  plt.subplots(1,n+1,figsize=((n+1)*5,2*2.5),sharey=True)
-    [_ax.set_aspect('equal') for _ax in ax]
-    pos = net.draw_np_adj(A,ax[0])
-    ax[0].set_title('adj')
-    
+    #%%
     '''
     plot co-reachability tensor as a function of source location
     '''
-    for i in range(n):
-        plot_i = i+1
-        df_rows = df[df['kS']==i]
+    def get_coreachability_from_source(df, kS):
+        df_rows = df[df['kS']==kS]
         df_pos = df_rows[df_rows['type']=='S+']
         df_neg = df_rows[df_rows['type']=='S-']
         # print(df_pos)
@@ -199,6 +227,74 @@ if __name__ == '__main__':
             pos_edges[a,b]=1
         for a,b in zip(df_neg['iA'],df_neg['jB']):
             neg_edges[a,b]=1
+        return pos_edges, neg_edges
+    
+    def indicate_intervention(intv_idx,pos, ax, type='open-loop'):
+        arrow_mag = 0.4
+        arrow_c = 'k'
+        
+        # start from "outside" the node
+        x0 = pos[intv_idx][0]*(1+arrow_mag)
+        y0 = pos[intv_idx][1]*(1+arrow_mag)
+        # point back towards the node
+        dx = -pos[intv_idx][0]*arrow_mag/2
+        dy = -pos[intv_idx][1]*arrow_mag/2
+        ax.arrow(x0,y0,dx,dy,
+            head_width=0.05, zorder=100,
+            facecolor = arrow_c, edgecolor = arrow_c)
+        pass
+        
+    def draw_coreachability_by_source(df, axs, node_position, add_titles=True):
+        pos_edge_style = net.straight_edge_style('peachpuff')
+        pos_edge_style.update({'width':10})
+        neg_edge_style = net.straight_edge_style('lightblue')
+        neg_edge_style.update({'width':2})
+        #TODO: scale these by IDSNR weighted co-reachability
+
+        for i in range(n):
+            pos_edges, neg_edges = get_coreachability_from_source(df,i)
+            net.draw_np_adj(pos_edges, axs[i], pos_edge_style)
+            net.draw_np_adj(neg_edges, axs[i], neg_edge_style)
+            indicate_intervention(i,node_position, axs[i])
+            if add_titles:
+                axs[i].set_title(f'effect of $S_{i}$')
+    def draw_adj_reach_corr_coreach(A,df=None, axs=None, add_titles=True):    
+        n = A.shape[0]
+        n_plot = 3+n;  
+        if df is None:
+            df = compute_coreachability_tensor(net.reachability(A))
+        if axs is None:
+            fig, axs =  plt.subplots(1,n_plot, figsize=((n_plot)*5, 2*2.5),sharey=True)
+            print('creating axes')
+            print(fig)
+        else:
+            fig = axs[0].get_figure()
+        [_ax.set_aspect('equal') for _ax in axs]
+        graph_pos = net.draw_adj_reach_corr(A, axs[0:3],add_titles)
+        draw_coreachability_by_source(df, axs[3:], graph_pos, add_titles)
+        return fig
+
+
+    #%%
+    # TODO: annotation pointing to stim location
+    # TODO: encode increases and decreases with edge weight?
+    'df = compute_coreachability_tensor(R)'
+    # df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
+    # df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
+    # df.sort_values(['kS','iA','jB'])
+    n_plot = 3+n
+    ncirc = 3
+    fig, axs =  plt.subplots(ncirc, n_plot, figsize=((n_plot)*5, ncirc*5),sharey=True)
+    draw_adj_reach_corr_coreach(A,axs=axs[0,:])
+    fig
+    
+    #%%
+    
+    '''
+    for i in range(n):
+        plot_i = i+n_pre_plot
+        
+        pos_edges, neg_edges = get_coreachability_from_source(df,i)
         # print(i)
         # print(pos_edges)
         # net.draw_np_adj(A,ax[i],more_options={'edge_color':'lightgrey'})
@@ -221,7 +317,7 @@ if __name__ == '__main__':
             -pos[i][0]*arrow_mag/2, -pos[i][1]*arrow_mag/2,
             head_width=.05,zorder=100,
             facecolor=arrow_c,edgecolor=arrow_c)
-    
+    '''
 
     # fig
 

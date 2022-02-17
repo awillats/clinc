@@ -98,16 +98,20 @@ def draw_reachability(A,R=None,ax=None):
 def draw_correlations(A,Corr=None,ax=None):
     if Corr is None:
         Corr = correlations(A)
+    #NOTE: does it make sense to have "yellow" correlations which are in the reachability but NOT the adj 
+    # then "red" correlations which aren't in the reachability ?
     draw_np_adj(Corr, ax=ax, more_options=straight_edge_style('lightgreen'))
     draw_np_adj(illusory_correlations(A,Corr), ax=ax, more_options=straight_edge_style('lightcoral'))
 
-def draw_adj_reach_corr(A,axs):
-    draw_np_adj(A, ax=axs[0])
+def draw_adj_reach_corr(A,axs,add_titles=True):
+    pos = draw_np_adj(A, ax=axs[0])
     draw_reachability(A, None, axs[1])
     draw_correlations(A, None, axs[2])
-    axs[0].set_title('adj')
-    axs[1].set_title('reach')
-    axs[2].set_title('correlations')
+    if add_titles:
+        axs[0].set_title('adj')
+        axs[1].set_title('reach')
+        axs[2].set_title('correlations')
+    return pos
 #%%
 
 if __name__ == "__main__":
