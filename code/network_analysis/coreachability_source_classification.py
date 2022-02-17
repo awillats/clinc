@@ -4,6 +4,13 @@ import network_analysis_functions as net
 import plotting_functions as myplot
 %load_ext autoreload
 %autoreload 2
+
+'''
+to-do list
+- wrap coreachability | Si into function so it can be compared across hypotheses
+    - correlation_style
+    - indicate_intervention( type='open-loop')
+'''
 #%%
 # set up functions for computing whether a source can reach both A and B
 def and_coreach(R,i,j):
@@ -47,6 +54,15 @@ def condense_source_type_labels(S):
 
 def partition_and_label_sources(R,i,j):
     return condense_source_type_labels(partition_sources_ab(R,i,j))
+def compute_coreachability_tensor(R):
+    n = R.shape[0]
+    df = pd.DataFrame(columns=['iA','jB','kS','type'])
+    for i in range(n):
+        for j in range(i,n):
+            _s_labels = partition_and_label_sources(R,i,j)
+            for k in range(n):
+                df = df.append({'iA':i,'jB':j,'kS':k,'type':_s_labels[k]},ignore_index=True)
+    return df
 #%%
 
 if __name__ == '__main__':
@@ -113,15 +129,6 @@ if __name__ == '__main__':
     #%%
     n = A.shape[0];
     
-    def compute_coreachability_tensor(R):
-        n = R.shape[0]
-        df = pd.DataFrame(columns=['iA','jB','kS','type'])
-        for i in range(n):
-            for j in range(i,n):
-                _s_labels = partition_and_label_sources(R,i,j)
-                for k in range(n):
-                    df = df.append({'iA':i,'jB':j,'kS':k,'type':_s_labels[k]},ignore_index=True)
-        return df
         
     df = compute_coreachability_tensor(R)
     df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
@@ -134,6 +141,10 @@ if __name__ == '__main__':
     fig, ax = plt.subplots(1,3,figsize=(12,4))
     net.draw_adj_reach_corr(A, ax)
     fig
+    #%%
+    # A0 = 
+    # A1 = 
+    # A2 = 
     
     #%%
     #PLOT coreachability sensor by AxB, S embedded in node color
@@ -168,14 +179,20 @@ if __name__ == '__main__':
     # TODO: encode increases and decreases with edge weight?
     
     # df.sort_values(['kS','iA','jB'])
-    fig,ax =  plt.subplots(1,n+1,figsize=((n+1)*5,2*2.5))
-    net.draw_np_adj(A,ax[0])
+    fig,ax =  plt.subplots(1,n+1,figsize=((n+1)*5,2*2.5),sharey=True)
+    [_ax.set_aspect('equal') for _ax in ax]
+    pos = net.draw_np_adj(A,ax[0])
     ax[0].set_title('adj')
+    
+    '''
+    plot co-reachability tensor as a function of source location
+    '''
     for i in range(n):
+        plot_i = i+1
         df_rows = df[df['kS']==i]
         df_pos = df_rows[df_rows['type']=='S+']
         df_neg = df_rows[df_rows['type']=='S-']
-        print(df_pos)
+        # print(df_pos)
         pos_edges = 0*A
         neg_edges = 0*A
         for a,b in zip(df_pos['iA'],df_pos['jB']):
@@ -185,8 +202,27 @@ if __name__ == '__main__':
         # print(i)
         # print(pos_edges)
         # net.draw_np_adj(A,ax[i],more_options={'edge_color':'lightgrey'})
-        net.draw_np_adj(pos_edges, ax[i+1],net.straight_edge_style('peachpuff'))
-        net.draw_np_adj(neg_edges, ax[i+1],net.straight_edge_style('lightblue'))
+        pos_edge_style = net.straight_edge_style('peachpuff')
+        neg_edge_style = net.straight_edge_style('lightblue')
+        #TODO: scale these by IDSNR weighted co-reachability
+        pos_edge_style.update({'width':10})
+        neg_edge_style.update({'width':2})
+        
+        net.draw_np_adj(pos_edges, ax[plot_i], pos_edge_style)
+        net.draw_np_adj(neg_edges, ax[plot_i], neg_edge_style)
+        pos[i]
+        ax[plot_i].set_title(f'effect of $S_{i}$')
+        
+        arrow_mag = 0.4
+        arrow_c = 'k'
+    
+        # NOTE: only works for circular layouts
+        ax[plot_i].arrow(pos[i][0]*(1+arrow_mag),pos[i][1]*(1+arrow_mag),
+            -pos[i][0]*arrow_mag/2, -pos[i][1]*arrow_mag/2,
+            head_width=.05,zorder=100,
+            facecolor=arrow_c,edgecolor=arrow_c)
+    
+
     # fig
 
             

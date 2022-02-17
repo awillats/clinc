@@ -301,6 +301,26 @@ r^2 = 1 - \frac{\color{red}indp.}{\color{green}shared + \color{red}indp.} = 1 - 
 \\
 \]
 
+### combining variances 
+\[
+\mathrm{Var}(A+B) = {\color{red}\mathrm{Var}(A) + \mathrm{Var}(B)} + {\color{green}2\mathrm{Cov}(A,B)}\\
+\mathrm{Cov}(A,B) = w_{cA}\sigma_c * w_{cB}\sigma_c \\
+\mathrm{Var}(A) = Var(intoA) + Var(noiseA)
+\]
+where C is some common source driving both A,B
+```mermaid
+graph TD
+  sc[ ]-->|s_C|C
+  sa[ ]-->|s_A|A
+  C-->A
+  C-->B
+  sb[ ]-->|s_B|B
+
+  
+  style sc fill:#fff, stroke:#fff
+  style sb fill:#fff, stroke:#fff
+  style sa fill:#fff, stroke:#fff
+```
 
 ### Circuit for simple_gaussian_SNR.py
 ```mermaid
