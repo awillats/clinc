@@ -101,12 +101,19 @@ def draw_correlations(A,Corr=None,ax=None):
     draw_np_adj(Corr, ax=ax, more_options=straight_edge_style('lightgreen'))
     draw_np_adj(illusory_correlations(A,Corr), ax=ax, more_options=straight_edge_style('lightcoral'))
 
+def draw_adj_reach_corr(A,axs):
+    draw_np_adj(A, ax=axs[0])
+    draw_reachability(A, None, axs[1])
+    draw_correlations(A, None, axs[2])
+    axs[0].set_title('adj')
+    axs[1].set_title('reach')
+    axs[2].set_title('correlations')
 #%%
 
 if __name__ == "__main__":
-    A = np.array([[0,1,0],
+    A = np.array([[0,1,1],
                   [1,0,0],
-                  [1,0,0]])
+                  [0,0,0]])
     
     rA = reachability(A);
     rwA = reachability_weight(A);
@@ -114,14 +121,7 @@ if __name__ == "__main__":
     
     fig, ax = plt.subplots(1,3,figsize=(12,4))
     
-    draw_np_adj(A, ax=ax[0])
-    draw_reachability(A,rA,    ax[1])
-    draw_correlations(A,corrA, ax[2])
-
-    ax[0].set_title('adj')
-    ax[1].set_title('reach') #indirect = reach-adj
-    ax[2].set_title('correlations')
-    # [myplot.expand_bounds(_ax,2) for _ax in ax]# doesn't work?
-    print(rwA)
+    draw_adj_reach_corr(A, ax)
+    
     fig
     

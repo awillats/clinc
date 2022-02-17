@@ -11,10 +11,25 @@
   - reachability matrix approach provides concise summary for small, dense networks
   - but graph-search may be more (space, memory) efficient for large, sparse networks
   - the end result calculations should be equivalent
-  
+---
 # limitations / untested assumptions
-- nonlinear outputs
+## nonlinear outputs
+  - non-negativity means total variance can't be linear as a function of inputs 
+    - moreover, this nonlinearity affects each junction between nodes, meaning **nonlinearity can't just be considered at the final output node**
+      - a description of the full nonlinear path of influence is likely required 
+        - could be accomplished with a graph search / "path tracing" approach 
+        - the result would be a nonlinear function of inputs $S$ and network parameters $\Theta$
+          - this function would also depend on external disturbances in a more complicated way
+    - nodes being inhibited to 0 activity have 0 variance, and don't 
+      - sort of like a "half closed-loop intervention"
+        - in that inhibitory inputs won't be propagated downstream, effectively severing inputs 
+        - but sufficiently excitatory inputs might push the system back above the 0 activity threshold 
+      
+    - Poisson spiking means mean and variance are now coupled 
+      - 0 activity = 0 variance can be seen as a natural consequence of this
+
   - higher order neuron dynamics - more biophysically rich neuron models
+## other limitations
 - heterogeneous neuronal dynamics / weights / parameters
 - only considered "direct current" injection 
   - opsin dynamics, actuator limits not considered
@@ -28,6 +43,7 @@
 - haven't considered state-dependent or nonstationary networks 
   - e.g. synaptic plasticity
 
+--- 
 # future work
 - **sequential experimental design**
   - intervene at one location, measure dependence 
@@ -35,6 +51,8 @@
 - multi-site control
 - measuring dependence from higher-order signal features 
   - e.g. frequency domain
+
+---
 
 # blue sky future work
 - multi-objective control

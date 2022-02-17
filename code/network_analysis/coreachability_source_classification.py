@@ -57,7 +57,9 @@ if __name__ == '__main__':
     # Construct a network with networkx
     # G = nx.DiGraph({'U':['V'],'V':['zA','zB'],'zZ':['zB'],'zA':['zB']})
     # G = nx.DiGraph({'A':['B'],'B':['A','C']})
-    G = nx.DiGraph({'A':['B','C']})
+    # G = nx.DiGraph({'A':['B','C']})
+    G = nx.DiGraph({'A':['B'],'B':['A'],'C':['A']})
+
 
 
     '''mermaid vis from networkx
@@ -71,38 +73,42 @@ if __name__ == '__main__':
     R = net.reachability(A).astype(int)
     print(R)
     
-    iA = 0
-    jB = 1
+
     
-    S = partition_sources_ab(R,iA,jB)
-    print(S)
-    print(validate_sources(S))
-    S_labels = condense_source_type_labels(S)
-    
-    def _idx_to_node_size(i,iA=iA,jB=jB):
+    def _idx_to_node_size(i,iA,jB):
         if (i==iA):
             return 800
         if (i==jB):
             return 800
         else:
             return 300
-    label_colors = {'S+':'lightgreen','S-':'lightcoral','S0':'lightgrey'}
-    node_opts = {'node_color':[label_colors[s] for s in S_labels]}
-    node_sizes = {'node_size':[_idx_to_node_size(i) for i in range(len(S_labels))]}
-    node_opts.update(node_sizes)
+    # label_colors = {'S+':'lightgreen','S-':'lightcoral','S0':'lightgrey'}
+    label_colors = {'S+':'peachpuff','S-':'lightblue','S0':'lightgrey'}
+
     
-    fig,ax = plt.subplots(2,1,figsize=(4,8))
-    ax
-    
-    net.draw_np_adj(A, ax[0], more_options=node_opts)
-    net.draw_np_adj(R, ax[1], more_options=node_opts)
-    
-    ax[0].set_title('big nodes are source, target\n green nodes are S+\nred nodes are S-')
-    ax[0].set_ylabel('adjacency')
-    ax[1].set_ylabel('reachability')
-    fig
-        
-    print(S_labels)
+    # # Examine co-reachability for a single source-target pair
+    # iA = 0
+    # jB = 1
+    # 
+    # S = partition_sources_ab(R,iA,jB)
+    # print(S)
+    # print(validate_sources(S))
+    # S_labels = condense_source_type_labels(S)
+    # node_opts = {'node_color':[label_colors[s] for s in S_labels]}
+    # node_sizes = {'node_size':[_idx_to_node_size(i) for i in range(len(S_labels))]}
+    # node_opts.update(node_sizes)
+    # 
+    # fig,ax = plt.subplots(2,1,figsize=(4,8))
+    # ax
+    # 
+    # net.draw_np_adj(A, ax[0], more_options=node_opts)
+    # net.draw_np_adj(R, ax[1], more_options=node_opts)
+    # 
+    # ax[0].set_title('big nodes are source, target\n green nodes are S+\nred nodes are S-')
+    # ax[0].set_ylabel('adjacency')
+    # ax[1].set_ylabel('reachability')
+    # fig
+    # print(S_labels)
 
     #%%
     n = A.shape[0];
@@ -124,16 +130,18 @@ if __name__ == '__main__':
     # sub_df = df[ (df['iA']==0) & (df['jB']==1)]
     # print( sub_df )
     #%%
-    #TODO: Highlight false connections by taking forkreachability - adjacency
+    
+    fig, ax = plt.subplots(1,3,figsize=(12,4))
+    net.draw_adj_reach_corr(A, ax)
+    fig
     
     #%%
+    #PLOT coreachability sensor by AxB, S embedded in node color
     fig,ax = plt.subplots(n,n,figsize=(n*2.5,n*2.5))
 
     #manage axes
     myplot.label_and_clear_axes_grid(ax)
     
-    #TODO: highlight true and illusory edges in background of plot!
-
     for i in range(n):
         for j in range(i,n):
             df_rows = df[ (df['iA']==i) & (df['jB']==j)]
@@ -155,5 +163,32 @@ if __name__ == '__main__':
     myplot.super_ylabel(fig, 'From node i\n(source)',fontsize=20)
     fig
 
+    #%% 
+    # TODO: annotation pointing to stim location
+    # TODO: encode increases and decreases with edge weight?
+    
+    # df.sort_values(['kS','iA','jB'])
+    fig,ax =  plt.subplots(1,n+1,figsize=((n+1)*5,2*2.5))
+    net.draw_np_adj(A,ax[0])
+    ax[0].set_title('adj')
+    for i in range(n):
+        df_rows = df[df['kS']==i]
+        df_pos = df_rows[df_rows['type']=='S+']
+        df_neg = df_rows[df_rows['type']=='S-']
+        print(df_pos)
+        pos_edges = 0*A
+        neg_edges = 0*A
+        for a,b in zip(df_pos['iA'],df_pos['jB']):
+            pos_edges[a,b]=1
+        for a,b in zip(df_neg['iA'],df_neg['jB']):
+            neg_edges[a,b]=1
+        # print(i)
+        # print(pos_edges)
+        # net.draw_np_adj(A,ax[i],more_options={'edge_color':'lightgrey'})
+        net.draw_np_adj(pos_edges, ax[i+1],net.straight_edge_style('peachpuff'))
+        net.draw_np_adj(neg_edges, ax[i+1],net.straight_edge_style('lightblue'))
+    # fig
+
+            
         
 
