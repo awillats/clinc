@@ -5,11 +5,50 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
 
 
 ## Open methodological questions
-- should we be computing partial correlation?
+- do we care about **permutations of circuits** as distinct entities?
 
+- how to integrate recent "per intervention location" identifiability with prior "per intervetnion type" results ?
+
+- verify Reach(Ctrl(A @ k)) != Ctrl(Reach(A) @ k)
+
+- look into **r^2 as f(w)** function of homogenous weight parameter 
+  - or w_shared and w_independent
+  
+- do **self-connections** matter?
+  - currently we're implicitly adding in self connections
+
+- in the 2-node case, can it be shown that closed-loop control gives 2-bits of information
+  - rather than the 1-bit info granted by single open-loop sim
+  - may require correlating required inputs with outputs of other nodes
+    - how to capture this in theory ...
+  - would like for there to be benefits without "reverse engineer" correlations
+
+- how to "back calculate" adjacency matrices consistent with a given reachability?
+  - d-separation!
+
+- is there a way of investigating whether the **need for closed-loop increases with (circuit features)**
+  - especially reciprocal motifs
+  - increases density
+  - dominant higher-order effects (larger weights)
+
+- can we derive a formula for number of perturbations needed to fully disambiguate a circuit?
+  - see [modular biological compexity](https://www.science.org/doi/10.1126/science.1218616) via Kumar et al.
+  \[
+  B_N = \sum^{N-1}_{k=0} \frac{(N-1)!}{k!(N-1-k)}B_k
+  \]
+  
+
+- how to **decompose intervention effect** into effect on subgraphs, motifs
+
+- should we be computing **partial correlation**?
+  - how do we describe their impact on observed corr?
+  
 - how to we "integrate" inference - i.e. combine results from multiple intervention conditions to arrive at a refined hypothesis?
 - **how to predict/describe the impact of delays on SNR** 
+
 - is it useful to sum component-wise identifiability across nodes → net identifiability?
+  - what about dR2 / dSk
+  
 - connect quotient vector product form of SNR calculations to existing model structures
   - does this connect to transfer functions in Laplace domain for instance?
 

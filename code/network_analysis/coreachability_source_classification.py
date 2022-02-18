@@ -5,6 +5,12 @@ import plotting_functions as myplot
 %load_ext autoreload
 %autoreload 2
 
+'''
+the if __name__ == '__main__' is far too complicated 
+- separate this into a minimal example included here 
+- and a comprehensive script elsewhere
+'''
+
 
 #%%
 # set up functions for computing whether a source can reach both A and B

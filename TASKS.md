@@ -5,6 +5,14 @@
   - python verification
 - [ ] sketch core figures 
 
+
+## unsorted 
+- [ ] implement new R2 
+  - W~ 
+- ( ) make sure  "Successful Reconstruction of a Physiological Circuit with Known Connectivity from Spiking Activity Alone" is accounted for
+
+
+
 # planning tasks 
 - evaluate scope, potentially combine / cut figures
 - how much should this be a perspective / review / prospectus 
@@ -17,6 +25,7 @@
   - perspectives 
     - Nature Neuro
   - technical
+    - Neuron
     - PLOS Comp Bio
     - JNE 
 - **remaining scope**
