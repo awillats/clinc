@@ -3,7 +3,16 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
 - Given a fixed control budget and some kind of ranking of potential causal links we'd like to uncover, where should control be applied, and how much inference power do we have?
 - How do these answers change in the face of **imperfect** control (for example, when other observed or unobserved variables still have some limited effect on the circuit)?
 
-
+## To be integrated elsewhere - binary impact of closed-loop
+- we already know CL @ i severs the inputs to i
+  - following the classes S+, S-, S0, we’d call this something like Sx or SKO
+- but depending on the variance of the closed-loop target you can also have bidirectional control on edge correlations.
+  - however, just like open loop inputs can have a “sign” (they either increase or decrease correlation (but not both) at an edge), closed-loop control has a “slope sign”
+  - if closed-loop control at Si has a “positive variance slope” at an edge (A→B), increasing the variance of the target increases the correlation at an edge (same as open-loop S+) and decreasing the variance of the target decreases the correlation (potentially below its baseline levels unlike open-loop)
+  - if closed-loop control at Si has a “negative variance slope” at an edge (A→B) the opposite is true.
+  - i might call these classes S+- and S-+ respectively
+  - if open-loop stim results in S+ at an edge, I think closed-loop control results in S+- at that same edge
+- [ ] add this to python implementation
 ## Open methodological questions
 - do we care about **permutations of circuits** as distinct entities?
 

@@ -1,17 +1,40 @@
 # Top 3 highest priority writing / planning tasks:
-- [ ] checking definitions for r2, R2, SNR
-- [ ] looking for refs to predict side-band xcorr magnitude
-- [x] linear algebra for computing $I^{+AB}$
-  - python verification
-- [ ] sketch core figures 
+- 1. [ ] review/verify matt's R2 formulation
+  - [ ] should different sources sum?
+  - [ ] walk through some adversarial circuits
+  - next steps:
+     - [ ] compute dR2 / dSk
+     - [ ] extend to impact of closed-loop
+     - [ ] examine R2 = f(w)
 
+- 2A. [ ] write out hypotheses X interventions 
+  - quantifying diversity via entropy
+  - combining multiple interventions
+  - incorporating priors over hypotheses
+
+- 2B. [ ] compute entropy over hypotheses for given interventions
+    - [ ] does CL result in higher entropy, especially for reciprocal circuits?
+    
+- 3. [ ] sketch core figures 
+  - [ ] paste over recent figures
+  - [ ] paste over abstract, extended abstract into introduction    
+
+- [ ] looking for refs to predict side-band xcorr magnitude
 
 ## unsorted 
-- [ ] implement new R2 
+
+- [ ] **what about time lags?**  
+  - timestep augmented representation?
+- [ ] connecting to OL ambiguity
+  - "if the directed reachability of two circuits is identical, open-loop is insufficient to distinguish. If the directed reachability is non-identical, some (unspecified) combination of open-loop interventions will be sufficient to distinguish"
+
+- [~] check definitions for r2, R2, SNR
+
+- [ ] make use of example_circuits.py - investigate a few more circuits
+- [ ] implement new R2 formula in python
   - W~ 
 - ( ) make sure  "Successful Reconstruction of a Physiological Circuit with Known Connectivity from Spiking Activity Alone" is accounted for
-
-
+---
 
 # planning tasks 
 - evaluate scope, potentially combine / cut figures
