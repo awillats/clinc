@@ -5,15 +5,7 @@ import plotting_functions as myplot
 %load_ext autoreload
 %autoreload 2
 
-'''
-to-do list
-- [ ] compute entropy across hypotheses
-    - mega df?
-    - tokenizer for each circuit?
-        - dictionary with tuples of patterns as keys?
-    - compute entropy across tokens
-    - ( weight by prior )
-'''
+
 #%%
 # set up functions for computing whether a source can reach both A and B
 def and_coreach(R,i,j):
@@ -220,8 +212,8 @@ if __name__ == '__main__':
     #%%
     # print(A)
          
-    As = egcirc.get_all_2node()
-    # As = egcirc.get_chainlike_3node()
+    # As = egcirc.get_all_2node()
+    As = egcirc.get_chainlike_3node()
 
     ncirc = len(As)                    
     npanels = 3    
