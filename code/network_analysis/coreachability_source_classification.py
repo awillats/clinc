@@ -262,11 +262,11 @@ if __name__ == '__main__':
     '''
     # df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
     # df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
-    
+    df.sort_values('kS')
     n = As[0].shape[0]
     n_plot = 3+n
     # ncirc = 3
-    fig, axs =  plt.subplots(ncirc, n_plot, figsize=((n_plot)*5, ncirc*5),sharey=True)
+    fig, axs =  plt.subplots(ncirc, n_plot, figsize=((n_plot)*4, ncirc*5),sharey=True)
     
     for i,_A in enumerate(As):
         draw_adj_reach_corr_coreach(_A, axs=axs[i,:], add_titles=(i==0))

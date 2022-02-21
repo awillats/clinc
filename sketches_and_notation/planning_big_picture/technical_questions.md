@@ -46,12 +46,15 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
   B_N = \sum^{N-1}_{k=0} \frac{(N-1)!}{k!(N-1-k)}B_k
   \]
   
+- effect of joint open-loop stim
+  
 
 - how to **decompose intervention effect** into effect on subgraphs, motifs
 
 - should we be computing **partial correlation**?
   - how do we describe their impact on observed corr?
-  
+- should we be computing **effect of node knockout**?
+  - severs outputs
 - how to we "integrate" inference - i.e. combine results from multiple intervention conditions to arrive at a refined hypothesis?
 - **how to predict/describe the impact of delays on SNR** 
 

@@ -1,30 +1,42 @@
 # Top 3 highest priority writing / planning tasks:
+- !!!! only worth going so far down any given technical avenue until we decide technical scope for the paper
 - 1. [ ] review/verify matt's R2 formulation
   - [ ] should different sources sum?
+  - [ ] python implementation
   - [ ] walk through some adversarial circuits
   - next steps:
-     - [ ] compute dR2 / dSk
-     - [ ] extend to impact of closed-loop
-     - [ ] examine R2 = f(w)
+    - [ ] python + whiteboard
+   - [ ] **compute dR2 / dSk** - summarize the net effect of intervention at one location 
+    - quantitatively
+   - [ ] **extend to impact of closed-loop** - @matt
+   ---
+   - [ ] examine R2 = f(w)
+    - one way to tackle this is with simple 2-node examples for instance
+   - **postulate:** a source increases correlations regardless of quantitative magnitude
+   - **followup/verify:** does S+/S- depend on magnitudes of weights 
+    - signs / mixing of signs of weights
 
-- 2A. [ ] write out hypotheses X interventions 
+- **2A. [ ] write out hypotheses X interventions** 
   - quantifying diversity via entropy
   - combining multiple interventions
   - incorporating priors over hypotheses
 
-- 2B. [ ] compute entropy over hypotheses for given interventions
+- **2B. [ ] compute entropy over hypotheses for given interventions**
     - [ ] does CL result in higher entropy, especially for reciprocal circuits?
     
-- 3. [ ] sketch core figures 
+- **3. [ ] sketch core figures** - late afternoon tuesday?
   - [ ] paste over recent figures
   - [ ] paste over abstract, extended abstract into introduction    
-
+  - meet & reassess writing tasks
+    - writing more methods
+---
 - [ ] looking for refs to predict side-band xcorr magnitude
-
-## unsorted 
-
 - [ ] **what about time lags?**  
   - timestep augmented representation?
+  
+## unsorted 
+
+
 - [ ] connecting to OL ambiguity
   - "if the directed reachability of two circuits is identical, open-loop is insufficient to distinguish. If the directed reachability is non-identical, some (unspecified) combination of open-loop interventions will be sufficient to distinguish"
 

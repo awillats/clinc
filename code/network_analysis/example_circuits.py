@@ -66,16 +66,16 @@ def kumar_fig2_3node():
     A = np.array([[0,1,0],
                   [0,0,1],
                   [0,0,0]])
-    B = np.array([0,1,0],
+    B = np.array([[0,1,0],
                  [0,0,1],
                  [0,1,0]])
-     "In the toy example with five populations, this requires 52 different stimulation patterns involving 1–5 populations."
-     return [A,B]
+    "In the toy example with five populations, this requires 52 different stimulation patterns involving 1–5 populations."
+    return [A,B]
      
- def kumar_fig2_5node():
-     GC = nx.DiGraph({'1':['5'],'2':['3'],'3':['2'],'4':['1'],'5':['2','3','4']})
-     AC = nx.to_numpy_matrix(GC)
-     return AC
+def kumar_fig2_5node():
+    GC = nx.DiGraph({'1':['5'],'2':['3'],'3':['2'],'4':['1'],'5':['2','3','4']})
+    AC = nx.to_numpy_matrix(GC)
+    return AC
      
 def get_chainlike_3node():
     '''
@@ -90,8 +90,8 @@ def get_chainlike_3node():
                    [1,0,0]])
     
     A1 = np.array([[0,1,0],
-                   [1,0,0],
-                   [1,0,0]])
+                   [0,0,0],
+                   [1,1,0]])
     
     A2 = np.array([[0,1,1],
                    [0,0,0],
