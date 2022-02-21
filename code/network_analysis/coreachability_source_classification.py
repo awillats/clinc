@@ -6,14 +6,12 @@ import plotting_functions as myplot
 %autoreload 2
 
 '''
-to-do list
-- [ ] compute entropy across hypotheses
-    - mega df?
-    - tokenizer for each circuit?
-        - dictionary with tuples of patterns as keys?
-    - compute entropy across tokens
-    - ( weight by prior )
+the if __name__ == '__main__' is far too complicated 
+- separate this into a minimal example included here 
+- and a comprehensive script elsewhere
 '''
+
+
 #%%
 # set up functions for computing whether a source can reach both A and B
 def and_coreach(R,i,j):
@@ -220,8 +218,8 @@ if __name__ == '__main__':
     #%%
     # print(A)
          
-    As = egcirc.get_all_2node()
-    # As = egcirc.get_chainlike_3node()
+    # As = egcirc.get_all_2node()
+    As = egcirc.get_chainlike_3node()
 
     ncirc = len(As)                    
     npanels = 3    
@@ -264,11 +262,11 @@ if __name__ == '__main__':
     '''
     # df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
     # df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
-    
+    df.sort_values('kS')
     n = As[0].shape[0]
     n_plot = 3+n
     # ncirc = 3
-    fig, axs =  plt.subplots(ncirc, n_plot, figsize=((n_plot)*5, ncirc*5),sharey=True)
+    fig, axs =  plt.subplots(ncirc, n_plot, figsize=((n_plot)*4, ncirc*5),sharey=True)
     
     for i,_A in enumerate(As):
         draw_adj_reach_corr_coreach(_A, axs=axs[i,:], add_titles=(i==0))

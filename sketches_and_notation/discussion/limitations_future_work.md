@@ -34,7 +34,7 @@
 - only considered "direct current" injection 
   - opsin dynamics, actuator limits not considered
   - highly spatially-correlated actuation not considered
-- partial observation not considered
+- we assume full observation - partial observation not considered
   - particularly unobserved common inputs
 - impact of time-bin size
 - only looked at small networks
