@@ -2,8 +2,7 @@ import numpy as np
 import networkx as nx
 import network_analysis_functions as net
 import plotting_functions as myplot
-%load_ext autoreload
-%autoreload 2
+
 
 '''
 the if __name__ == '__main__' is far too complicated 
@@ -145,6 +144,8 @@ def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True):
 #%%
 
 if __name__ == '__main__':
+    # %load_ext autoreload
+    # %autoreload 2
     # TEST script for categorizing whether sources increase or 
     # decrease correlation between two nodes
     import matplotlib.pyplot as plt
@@ -205,7 +206,6 @@ if __name__ == '__main__':
 
     #%%
     n = A.shape[0];
-    
     df = compute_coreachability_tensor(R)
     df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
     df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
