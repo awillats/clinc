@@ -209,7 +209,7 @@ if __name__ == '__main__':
     df = compute_coreachability_tensor(R)
     df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
     df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
-
+    # df.to_csv('results/demo_fingerprint.csv')
     #%%
     
     fig, ax = plt.subplots(1,3,figsize=(12,4))

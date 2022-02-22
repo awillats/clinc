@@ -175,9 +175,28 @@ def compute_and_plot_count_entropy(data, ax, do_normalize=True, entropy_base=2, 
     return {'token_frequencies':token_freq,'H':H,'H_max':H_max,'base':entropy_base,
         'ax':ax}
     
-
 #%%
+    def extract_circuit_signature_single_df(df):
+        sort_order = ['kS','iA','jB']
+        iAs = df.sort_values(sort_order).groupby('kS').agg({'iA':list})
+        jBs = df.sort_values(sort_order).groupby('kS').agg({'jB':list})
+        #tuples of (i,j) associated with each link
+        ij_fingerprint = list(zip(iAs.loc[0].item(),jBs.loc[0].item()))
+        #TODO: check this ordering is consistent across kS
+        
+        fingerprint_str = df.sort_values(sort_order).groupby('kS').agg({'type':' '.join})
+        # Convert df to dictionary
+        # - keys are kS 
+        # - values are strings representing 
+        fingerprint_dict = fingerprint_str.T.to_dict('index')['type']
+        
+        return {'fingerprint_dict':fingerprint_dict,'fingerprint_idx':ij_fingerprint}
+        
+#%%
+# DEMO SCRIPT
 if __name__ == '__main__':
+    import pandas as pd
+    import matplotlib.pyplot as plt
     # data = [*['A']*10, 'B','B','C','D','e','f','g','h']
     # data = [*['A']*8,'B','B','C','D']
     # data = [*['A']*2,'B','B','C','D']
@@ -207,13 +226,46 @@ if __name__ == '__main__':
     print(f'    #states = {2**H:.1f} / {len(tf.keys())} max')
 
     #%%
+    # Basic summary plot
     fig,ax = plt.subplots(figsize=(5,6))
     res= compute_and_plot_count_entropy(data, ax)
      
-    #%%
+    #%% 
+    # Additional, debug / extra-insight plots
     fig,ax = plt.subplots(1,2, figsize=(9,6))
     weighted_surprise_plot(res['token_frequencies'], ax[0])
     component_efficiency_plot(res['token_frequencies'], ax[1])
-     
+    #%%
     
+    '''
+    TEST: extract the circuit signature under a given open-loop intervention (kS)
+    - while this snippet is a good test run
+        - need to be able to aggregate across multiple hypotheses
+        - so likely will need to construct a large multi-circuit df first, then extract
+    - alt. could use some method which appends dictionary values
+    '''
+    df = pd.read_csv('results/demo_fingerprint.csv')
+    fp = extract_circuit_signature_single_df(df)
+    print(fp['fingerprint_dict'])
+
+    
+
+    
+    #%%
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    #%%
 
