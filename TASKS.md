@@ -1,46 +1,63 @@
 # Top 3 highest priority writing / planning tasks:
 - !!!! only worth going so far down any given technical avenue until we decide technical scope for the paper
-- 1. [ ] review/verify matt's R2 formulation
-  - [ ] should different sources sum?
-  - [ ] python implementation
-  - [ ] walk through some adversarial circuits
-  - next steps:
-    - [ ] python + whiteboard
-   - [ ] **compute dR2 / dSk** - summarize the net effect of intervention at one location 
-    - quantitatively
-   - [ ] **extend to impact of closed-loop** - @matt
-   ---
-   - [ ] examine R2 = f(w)
-    - one way to tackle this is with simple 2-node examples for instance
-   - **postulate:** a source increases correlations regardless of quantitative magnitude
-   - **followup/verify:** does S+/S- depend on magnitudes of weights 
-    - signs / mixing of signs of weights
+## quantitative impact - ID-$r^2$
+- [x] review/verify matt's R2 formulation    
+- [x] **compute dR2 / dSk** - summarize the net effect of intervention at one location 
+- [~] **extend to impact of closed-loop** - @matt
+  - see [IDSNR_notation_matt](sketches_and_notation/identifiability/IDSNR_notation_matt.md) for initial notes
+  - [ ] add partial incomplete control parameter 
+    - simply blends target and un-controlled variance 
+- [ ] python implementation
+- [ ] demonstrate bi-directional variance control  
+<img src="figures/whiteboard/sketch_quant_OL_CL_variance.png" width="200"/>
 
-- **2A. [ ] write out hypotheses X interventions** 
-  - quantifying diversity via entropy
-  - combining multiple interventions
-  - incorporating priors over hypotheses
+<details><summary>bonus / future work</summary>
 
-- **2B. [ ] compute entropy over hypotheses for given interventions**
-    - [ ] does CL result in higher entropy, especially for reciprocal circuits?
+- [x] examine R2 = f(w)
+<img src="figures/misc_figure_sketches/quant_r2_prediction_common.png" width="500"/>
+- [ ] decompose terms in $r^2$
+  - increase interpretability, intuitive understanding 
+  - get a sense for when $r^2$ is monotonic w.r.t. source variance, weights
+
+- **followup/verify:** does S+/S- depend on magnitudes of weights 
+  - **postulate:** a source increases correlations regardless of quantitative magnitude
+    - :warning: incorrect!
+  - look at: signs / mixing of signs of weights  
+</details>
     
-- **3. [ ] sketch core figures** - late afternoon tuesday?
+## map out hypotheses X interventions
+  - [x] quantifying diversity via entropy
+    - [x] have python implementation
+    - [ ] compute across set of hypotheses
+    <details><summary>future work</summary>
+    
+    - [ ] combining multiple interventions
+    - [ ] incorporating priors over hypotheses
+    </details>
+- **2B. [ ] compute entropy over hypotheses for given interventions**
+  - [ ] compute **binary impact of CL**
+    - severs inputs 
+    - bidirectional control of variance w/specific slope between target variance and edge correlation
+  - [ ] does CL result in higher entropy, especially for reciprocal circuits?
+    
+### [.] sketch core figures
   - [ ] paste over recent figures
   - [ ] paste over abstract, extended abstract into introduction    
   - meet & reassess writing tasks
     - writing more methods
----
-- [ ] looking for refs to predict side-band xcorr magnitude
-- [ ] **what about time lags?**  
-  - timestep augmented representation?
+    <details><summary>future work</summary>
+
+    - [ ] looking for refs to predict side-band xcorr magnitude
+    - [ ] **what about time lags?**  
+      - timestep augmented representation?
+    </details>
   
 ## unsorted 
+- [ ] port [simple_gaussian_R2.m](code/network_analysis/simple_gaussian_R2.m) to python
+  - [ ] sweep pairs of weights to investigate matched weight hypothesis
 
-
-- [ ] connecting to OL ambiguity
+- [~] connecting to OL ambiguity
   - "if the directed reachability of two circuits is identical, open-loop is insufficient to distinguish. If the directed reachability is non-identical, some (unspecified) combination of open-loop interventions will be sufficient to distinguish"
-
-- [~] check definitions for r2, R2, SNR
 
 - [ ] make use of example_circuits.py - investigate a few more circuits
 - [ ] implement new R2 formula in python
