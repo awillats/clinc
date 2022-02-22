@@ -96,8 +96,10 @@ see also [abstract_outline_planning.md](sketches_and_notation/planning_big_pictu
   - **Highlight that the impact of interventions may generalize across any particular choice of inference algorithm**
   - intervention types 
   
-  
+
 ## Multiple complementary perspectives (representations) of the same underlying network structure:
+<img src="figures/core_figure_sketches/figure2_sketch.png" width="500"/>
+<img src="figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500"/>
 - The circuit view
   - (A) → (B) ↔ (C)
 - The dynamical system view
@@ -149,7 +151,7 @@ y=Cx+\eta
       - (single-site) closed-loop unambiguous
 
 <a name='figure-demo'></a>
-🏞️
+
 ## Figure DEMO: Applying CLINC to distinguish a pair of circuits (walkthrough)
   - intuitive explanation using binary reachability rules
     <!-- - consider postponing until we introduce intervention? 
@@ -164,8 +166,6 @@ y=Cx+\eta
     - as a result we want to maximize IDSNR for true links, and minimize it for false/indirect links 
   ![](figures/misc_figure_sketches/intervention_identifiability_concept.png)
 
-  
-  
 ---
 # Methods 
 
@@ -308,6 +308,7 @@ y=Cx+\eta
   - comparison to predicted IDSNR 
   
 <a name='figure-predict'></a>
+![](figures/misc_figure_sketches/quant_r2_prediction_common.png)
 🏞️
 ### Figure PREDICT: Comparing predicted and emprical identification performance
   - layout: scatterplot and curve fit of emprical vs predicted accuracy (false positives, false negatives)
@@ -316,8 +317,8 @@ y=Cx+\eta
 
 
 ## Impact of intervention
-
 <a name='figure-disambig'></a>
+![](figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
 🏞️
 ### Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses
   <!-- - SCOPE: can this be combined with case-study walkthrough? -->

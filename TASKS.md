@@ -94,7 +94,7 @@
 
 # intro / methods tasks
  - [ ] add more closed-loop references to intro[^ctrl_sys_id]
- - Describe the methods for identifying circuits[^FC_measures][^connect_infer]
+ - [ ] Describe the methods for identifying circuits[^FC_measures][^connect_infer]
   - xcorr procedure 
   - IDTxl recap 
     - cover multivariate transfer entropy 
@@ -109,18 +109,10 @@
  [^ctrl_sys_id]: "A control-theoretic system identification framework and a real-time closed-loop clinical simulation testbed for electrical brain stimulation"
 
 # theory 
-- [ ] write input → connection notation 
-  - [ ] basic text form
-  - [ ] computing via reachability 
-  - [ ] computing via masked noise propagating
-  - [ ] update notation to function on "common cause" circuits
 - [ ] write python to compute via reachability 
+- [x] write input → connection notation 
 - [~] evaluate python on simple circuit
-  - see [code/network_analysis/simple_gaussian_SNR.py](code/network_analysis/simple_gaussian_SNR.py)
-  - [ ] conduct a small sweep to verify whether sources add or multiply
-  
-- [ ] evaluate python on two-path circuit
-
+  - see [code/network_analysis/simple_gaussian_SNR.py](code/network_analysis/simple_gaussian_SNR.py)  
 
 - [ ] relate noise → connection SNR to sensitivity transfer function 
   - see [Astrom feedback fundamentals](https://www.cds.caltech.edu/~murray/courses/cds101/fa02/caltech/astrom-ch5.pdf)
