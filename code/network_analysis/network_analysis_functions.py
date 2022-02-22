@@ -7,6 +7,40 @@ DYNAMIC = 0
 # %load_ext autoreload
 # %autoreload 2
 #%%
+
+R = np.eye(3,3)
+R[1,2]=1.5
+R[0,2]=1.5
+print(R)
+R[0,:]*R[2,:]
+s = [2,3,4]
+#%%
+def correlation_from_reachability(i,j, Rw , s):
+    '''
+    Rw -- weighted reachability matrix, also denoted with W~  
+        - uses indexing convention Rw(from, to) 
+    s -- vector of source variances
+    
+    reminder, python operations on numpy vectors/matrices are elementwise by default
+    '''
+    Ri = Rw[:,i]
+    Rj = Rw[:,j]
+    return sum(Ri*Rj*s) / np.sqrt(sum(Ri**2 * s) * sum(Rj**2 * s))
+
+def gradient_wrt_sources():
+    pass
+
+print(R)    
+print(correlation_from_reachability(0,2,R,[0.1,.1,.1]))
+
+#%%
+'''
+MOVE THIS INTO IF NAME MAIN
+'''
+
+#%%
+#%%  
+
 def reachability_weight( adj ):
     # intended to capture the total scaling a unit input at node i 
     # experiences by the time it ends up at node j
@@ -14,6 +48,10 @@ def reachability_weight( adj ):
     reach = 0.0*adj;
     curr = np.eye(adj.shape[0]);
 
+    '''
+    NOTE!!
+    - [ ] this needs to be replaced with the matrix exponential to handle reciprocally connected circuits
+    '''
     for i in range(n):
         curr = np.matmul(adj, curr)
         reach += curr

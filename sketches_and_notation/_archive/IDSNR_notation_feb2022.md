@@ -197,35 +197,32 @@ S^?(S_i, A,B) = \left\{\begin{array}{lr}
 $$ -->
 ----
 # Quantifying impact
-<!-- !!!! - update index convention -->
-$$
-\begin{align*}
-r^2(i,j) &= \frac{\Sigma_{ij}}{\sqrt{\Sigma_{ii} \Sigma_{jj}}} \\
-&= \frac{\sum_{k=1}^p \widetilde{W}_{ki} \widetilde{W}_{kj} s_k}{\sqrt{\left(\sum_{k=1}^p \widetilde{W}_{ki}^2 s_k\right)\left(\sum_{k=1}^p \widetilde{W}_{kj}^2 s_k\right)}}.
-\end{align*}
-$$
+Revisiting our previous statement, now focusing on a single source $S_i$
+\[
+\mathrm{IDSNR}(A,B | S_i) \propto 
+\frac
+{\color{green}|S_i→A\&B|}
+{\color{red}? + \sigma_A\sigma_B}
+OR
+\frac
+{\color{green}\text{?}}
+{\color{red} |S_i→A| + |S_i→B|}
+\]
+[^norm]
+[^norm]: double check whether we intend positive and negative weights to partially cancel
 
-## Code implementations
-**Python:**
-```python    
-def correlation_from_reachability(i,j, Wt , s):
-    Wi = Wt[:,i]
-    Wj = Wt[:,j]
-    r2_numer = sum(Wi*Wj*s)
-    r2_denom = np.sqrt(sum(Wi**2 * s) * sum(Wj**2 * s))
-    return r2_numer / r2_denom 
-```
-**MATLAB:**
-```matlab
-function r2 = correlation_from_reachability(i,j,Wt,s)
-    Wi = Wt(:,i);
-    Wj = Wt(:,j);
-    
-    r2_numer = sum(Wi.*Wj.*s);
-    r2_denom = sqrt(sum(Wi.^2 .* s)*sum(Wj.^2 .* s));
-    r2 = r2_numer / r2_denom;
-end
-```
+# Combining sources
+<!-- S_i→A + S_i→B -->
+how to combine component-wise SNR?[^sum_SNR]
+\[
+\mathrm{IDSNR}(A,B | S) \propto 
+\frac
+{\color{green} \prod_{i\in S^+}{ ||S_i→A|| + ||S_i→B|| }}
+{\color{red}\prod_{i\in S^-}{ ||S_i→A|| + ||S_i→B|| }}
+\]
+
+[^sum_SNR]: no idea whether this is the right way to "sum" contributions yet. We do know signals from sources are independent of each other, by definition, which should help
+
 
 **common input, no causal links (A B)**
 ```mermaid

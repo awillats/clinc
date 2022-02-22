@@ -51,6 +51,7 @@
 
 # Abstract 
 see also [abstract_outline_planning.md](sketches_and_notation/planning_big_picture/abstract_outline_planning.md)
+@import "section_content/abstract.md"
 
 ---
 # Introduction 

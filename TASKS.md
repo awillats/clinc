@@ -5,10 +5,14 @@
 - [x] **compute dR2 / dSk** - summarize the net effect of intervention at one location 
 - [~] **extend to impact of closed-loop** - @matt
   - see [IDSNR_notation_matt](sketches_and_notation/identifiability/IDSNR_notation_matt.md) for initial notes
+- [ ] python implementation
+  - [ ] of r2 formula
+  - [ ] of sweep script 
+    - look into matched common input weights
+  - 🎁 import graph from mermaid or other convenient string format
+- [ ] demonstrate bi-directional variance control  
   - [ ] add partial incomplete control parameter 
     - simply blends target and un-controlled variance 
-- [ ] python implementation
-- [ ] demonstrate bi-directional variance control  
 <img src="figures/whiteboard/sketch_quant_OL_CL_variance.png" width="200"/>
 
 <details><summary>bonus / future work</summary>
@@ -29,22 +33,24 @@
   - [x] quantifying diversity via entropy
     - [x] have python implementation
     - [ ] compute across set of hypotheses
+      - mostly data-wrangling at this point
     <details><summary>future work</summary>
     
     - [ ] combining multiple interventions
     - [ ] incorporating priors over hypotheses
     </details>
 - **2B. [ ] compute entropy over hypotheses for given interventions**
-  - [ ] compute **binary impact of CL**
+  - [ ] ⚠️compute **binary impact of CL**
     - severs inputs 
     - bidirectional control of variance w/specific slope between target variance and edge correlation
+      - S+-, S-+
   - [ ] does CL result in higher entropy, especially for reciprocal circuits?
     
 ### [.] sketch core figures
-  - [ ] paste over recent figures
-  - [ ] paste over abstract, extended abstract into introduction    
-  - meet & reassess writing tasks
-    - writing more methods
+  - [~] paste over recent figures
+  - [~] paste over abstract, extended abstract into introduction    
+  - [ ] ⚠️ meet & reassess writing tasks
+    - [ ] ⚠️ writing more methods
     <details><summary>future work</summary>
 
     - [ ] looking for refs to predict side-band xcorr magnitude
@@ -73,7 +79,7 @@
   - params (weight, delay)
   - intervention 
 - possible journals 
-  - [ ] Chris in discussion with editors
+  - connect with Lepperod/Kording?
   - perspectives 
     - Nature Neuro
   - technical

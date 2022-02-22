@@ -5,7 +5,7 @@ n = 100000;
 
 r2_vals = zeros(size(param_vals));
 r2_emp_vals = zeros(size(param_vals));
-
+%%
 for param_i = 1:numel(param_vals)
   fprintf('Computing trial %d/%d...', param_i, numel(param_vals));
   param_val = param_vals(param_i);
@@ -40,13 +40,8 @@ for param_i = 1:numel(param_vals)
   for i = 0:length(s)
     Wt = Wt + W^i;
   end
+  r2 = correlation_from_reachability(4,5,Wt,s)
 
-  % analytically compute r2(a,b) = r2(4,5)
-  
-  r2_num_k = Wt(4,:).*Wt(5,:).*s.';
-  r2_denomi_k = Wt(4,:).^2.*s.';
-  r2_denomj_k = Wt(5,:).^2.*s.';
-  r2 = sum(r2_num_k) ./ sqrt(sum(r2_denomi_k)*sum(r2_denomj_k));
   r2_vals(param_i) = r2;
   fprintf('done!\n');
   
@@ -66,7 +61,9 @@ for param_i = 1:numel(param_vals)
   r2_emp_vals(param_i) = corr(a.',b.');
   
 end
-
+%%
 clf; plot(param_vals, r2_vals); hold on; plot(param_vals, r2_emp_vals,'--');
 xlabel('w_{Sz->B}'); ylabel('r^2(a,b)'); grid on; ylim([0 1]);
 set(gca,'fontsize',16);
+%%
+
