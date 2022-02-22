@@ -129,6 +129,9 @@ def weighted_surprise_plot(token_freq, ax, entropy_res=None, token_surprise=None
     return ax
 
 def component_efficiency_plot(token_freq, ax, entropy_res=None):
+    '''
+    verify this does what we expect
+    '''
     N = len(token_freq)
     regularized_probs = np.array(list(token_freq.values()))+.01
 
@@ -146,7 +149,7 @@ def component_efficiency_plot(token_freq, ax, entropy_res=None):
     ax.plot([-.5, len(token_freq)-0.5],[g*H_max/N,g*H_max/N],'g--',linewidth=1)
     # ax.set_title(summary_str
     # ax.set_title('Entropy$_i$ = $p_i$log$(p_i)$ [bits / symbol]')
-    ax.set_title('efficiency $\propto$ $p_i$log$(p_i)$')
+    ax.set_title('efficiency$_i \propto$ $p_i$log$(p_i)$')
     return ax
 
 def compute_entropy_stats_of_dict(token_freq,entropy_base=2):
@@ -164,7 +167,7 @@ def compute_and_plot_count_entropy(data, ax, do_normalize=True, entropy_base=2, 
 
     
     ax.bar(keys_to_xlabels(token_freq.keys()), token_freq.values())
-    ax.plot([-.5,N+.5],[1/N,1/N],'g:')
+    # ax.plot([-.5,N+.5],[1/N,1/N],'g:')
     ax.set_ylabel('p')
     ax.set_xlabel('Symbol')
     ax.set_title(entropy_res['summary_str'])
@@ -182,7 +185,8 @@ if __name__ == '__main__':
     # data = [*['A']*40,*['B']*35,*['C']*20,*['D']*5]
     # data = [*['A']*500,*['B']*250,*['C']*125,*['D']*125]
     # data = [*['A']*127,*['B']*64,*['C']*64,*['D']*1]
-    data = [*['A→B']*127,*['A←B']*64,*['A↔B']*64,*['A.B']*1]
+    # data = [*['A→B']*127,*['A←B']*64,*['A↔B']*64,*['A.B']*1]
+    data = [*['A']*3,'B','C','D']
 # data = [*[0]*7,1]
     
     tf = count_unique_frequency(data, do_normalize=True)
@@ -207,10 +211,9 @@ if __name__ == '__main__':
     res= compute_and_plot_count_entropy(data, ax)
      
     #%%
-    fig,ax = plt.subplots(figsize=(5,6))
-    weighted_surprise_plot(res['token_frequencies'], ax)
-    fig,ax = plt.subplots(figsize=(5,6))
-    component_efficiency_plot(res['token_frequencies'], ax)
+    fig,ax = plt.subplots(1,2, figsize=(9,6))
+    weighted_surprise_plot(res['token_frequencies'], ax[0])
+    component_efficiency_plot(res['token_frequencies'], ax[1])
      
     
 
