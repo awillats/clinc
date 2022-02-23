@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def unbox(ax):
+def unbox(ax, clear_labels=False):
     '''
     removes edges of subplot frame
     '''
@@ -9,6 +9,11 @@ def unbox(ax):
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
     ax.spines['right'].set_visible(False)
+    if clear_labels:
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_yticklabels([])
+        ax.set_xticklabels([])
     return ax
     
 def expand_bounds(ax,expansion_factor=1.1):

@@ -7,6 +7,9 @@ import numdifftools as nd
 import network_analysis_functions as naf
 import scipy.linalg as linalg
 #%%
+# TODO: check against's matt's non-monotonic common cause circuit example
+# TODO: visualize gradient field
+
 R = np.eye(3,3)
 R[1,2]=1.5
 R[0,2]=1.5

@@ -35,10 +35,10 @@ to-do list
 '''
     
 ----
-- [ ] construct a set of circuits 
-- [ ] construct the coreachability df across circuits 
+- [~] construct a set of circuits 
+- [ ] !! construct the coreachability df across circuits 
     - ( ) adjacency key 
-- [ ] export corr x dR/dS string
+- [~] export corr x dR/dS string
 
 ---
 plotting 
@@ -82,7 +82,7 @@ def count_unique_frequency(data, do_sort=True, do_normalize=False):
         token_frequencies = sort_dict_by_value(token_frequencies)
     
     return token_frequencies
-    
+#%%    
 #wrappers
 #NOTE: seems to work if values are counts OR probabilities
 def component_entropy_of_dict(d, base=2):
@@ -108,7 +108,6 @@ def format_dict_fstr(d,f=lambda k,v: f'{k}: {v:.2f}'):
     s = " ".join([f(k,v) for k,v in d.items()])
     return s
 
-_entropy_ = lambda p: -p*np.log2(p)
 
 def weighted_surprise_plot(token_freq, ax, entropy_res=None, token_surprise=None):
     regularized_probs = np.array(list(token_freq.values()))+.01
@@ -139,6 +138,7 @@ def component_efficiency_plot(token_freq, ax, entropy_res=None):
         entropy_res = compute_entropy_stats_of_dict(token_freq, 2)
     H, H_max, summary_str = entropy_res.values()
 
+    _entropy_ = lambda p: -p*np.log2(p)
     # bar_h = [_entropy_(v)*len(token_freq.values()) for v in token_freq.values()]
     N = len(token_freq.values())
     g = np.log2(N) 
@@ -164,7 +164,6 @@ def compute_and_plot_count_entropy(data, ax, do_normalize=True, entropy_base=2, 
     token_surprise = component_entropy_of_dict(token_freq)
     entropy_res = compute_entropy_stats_of_dict(token_freq, entropy_base)
     H, H_max, summary_str = entropy_res.values()
-
     
     ax.bar(keys_to_xlabels(token_freq.keys()), token_freq.values())
     # ax.plot([-.5,N+.5],[1/N,1/N],'g:')
@@ -176,21 +175,23 @@ def compute_and_plot_count_entropy(data, ax, do_normalize=True, entropy_base=2, 
         'ax':ax}
     
 #%%
-    def extract_circuit_signature_single_df(df):
-        sort_order = ['kS','iA','jB']
-        iAs = df.sort_values(sort_order).groupby('kS').agg({'iA':list})
-        jBs = df.sort_values(sort_order).groupby('kS').agg({'jB':list})
-        #tuples of (i,j) associated with each link
-        ij_fingerprint = list(zip(iAs.loc[0].item(),jBs.loc[0].item()))
-        #TODO: check this ordering is consistent across kS
-        
-        fingerprint_str = df.sort_values(sort_order).groupby('kS').agg({'type':' '.join})
-        # Convert df to dictionary
-        # - keys are kS 
-        # - values are strings representing 
-        fingerprint_dict = fingerprint_str.T.to_dict('index')['type']
-        
-        return {'fingerprint_dict':fingerprint_dict,'fingerprint_idx':ij_fingerprint}
+# Data parsing functions 
+# TODO: separate to their own file
+def extract_circuit_signature_single_df(df):
+    sort_order = ['kS','iA','jB']
+    iAs = df.sort_values(sort_order).groupby('kS').agg({'iA':list})
+    jBs = df.sort_values(sort_order).groupby('kS').agg({'jB':list})
+    #tuples of (i,j) associated with each link
+    ij_fingerprint = list(zip(iAs.loc[0].item(),jBs.loc[0].item()))
+    #TODO: check this ordering is consistent across kS
+    
+    fingerprint_str = df.sort_values(sort_order).groupby('kS').agg({'type':' '.join})
+    # Convert df to dictionary
+    # - keys are kS 
+    # - values are strings representing 
+    fingerprint_dict = fingerprint_str.T.to_dict('index')['type']
+    
+    return {'fingerprint_dict':fingerprint_dict,'fingerprint_idx':ij_fingerprint}
         
 #%%
 # DEMO SCRIPT
@@ -250,7 +251,6 @@ if __name__ == '__main__':
 
     
 
-    
     #%%
     
     

@@ -64,6 +64,7 @@ def compute_coreachability_tensor(R):
                 df = df.append({'iA':i,'jB':j,'kS':k,'type':_s_labels[k]},ignore_index=True)
     return df
 #%%
+# Data parsing functions
 def df_edgelist_to_numpy_adj(df, source_key, target_key, node_list):
     return nx.to_numpy_matrix(nx.from_pandas_edgelist(df, source_key, target_key, create_using=nx.DiGraph),nodelist=node_list)
 
@@ -102,7 +103,8 @@ def indicate_intervention(intv_idx, pos, ax, type='open-loop'):
                         zorder=100
                     )
     
-
+#%%
+# Plotting functions
 def draw_coreachability_by_source(df, axs, node_position, add_titles=True):
     pos_edge_style = net.straight_edge_style('peachpuff')
     pos_edge_style.update({'width':10})

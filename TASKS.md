@@ -1,15 +1,16 @@
 # Top 3 highest priority writing / planning tasks:
 - !!!! only worth going so far down any given technical avenue until we decide technical scope for the paper
 ## quantitative impact - ID-$r^2$
-- [x] review/verify matt's R2 formulation    
-- [x] **compute dR2 / dSk** - summarize the net effect of intervention at one location 
 - [~] **extend to impact of closed-loop** - @matt
   - see [IDSNR_notation_matt](sketches_and_notation/identifiability/IDSNR_notation_matt.md) for initial notes
+- [x] review/verify matt's R2 formulation    
+- [x] **compute dR2 / dSk** - summarize the net effect of intervention at one location 
+  - see [gradient_of_r2_demo.m](code/network_analysis/gradient_of_r2_demo.py), uses numerical differentiate to compute $\nabla r^2(S)$
 - [x] python implementation
   - [x] of r2 formula
-  - [ ] of matrix exponential
+  - [x] of matrix exponential
   - [ ] of sweep script 
-    - look into matched common input weights
+    - ( ) look into matched common input weights
   - 🎁 import graph from mermaid or other convenient string format
 - [ ] demonstrate bi-directional variance control  
   - [ ] add partial incomplete control parameter 
@@ -41,7 +42,7 @@
     - [ ] incorporating priors over hypotheses
     </details>
 - **2B. [ ] compute entropy over hypotheses for given interventions**
-  - [ ] ⚠️compute **binary impact of CL**
+  - [ ] ⚠️ compute **binary impact of CL**
     - severs inputs 
     - bidirectional control of variance w/specific slope between target variance and edge correlation
       - S+-, S-+
@@ -65,10 +66,11 @@
 
 - [~] connecting to OL ambiguity
   - "if the directed reachability of two circuits is identical, open-loop is insufficient to distinguish. If the directed reachability is non-identical, some (unspecified) combination of open-loop interventions will be sufficient to distinguish"
-
+- [ ] clean up data parsing functions, move to their own file 
+- [ ] update python_requirements
+  - do an environment export?
 - [ ] make use of example_circuits.py - investigate a few more circuits
-- [ ] implement new R2 formula in python
-  - W~ 
+
 - ( ) make sure  "Successful Reconstruction of a Physiological Circuit with Known Connectivity from Spiking Activity Alone" is accounted for
 ---
 
@@ -116,16 +118,16 @@
  [^ctrl_sys_id]: "A control-theoretic system identification framework and a real-time closed-loop clinical simulation testbed for electrical brain stimulation"
 
 # theory 
-- [ ] write python to compute via reachability 
+- [x] write python to compute via reachability 
 - [x] write input → connection notation 
 - [~] evaluate python on simple circuit
   - see [code/network_analysis/simple_gaussian_SNR.py](code/network_analysis/simple_gaussian_SNR.py)  
 
-- [ ] relate noise → connection SNR to sensitivity transfer function 
+- [ ] 🎁 relate noise → connection SNR to sensitivity transfer function 
   - see [Astrom feedback fundamentals](https://www.cds.caltech.edu/~murray/courses/cds101/fa02/caltech/astrom-ch5.pdf)
-- [ ] copy over notation from 2020 brainstorming [overleaf link](https://www.overleaf.com/project/5e8232cd6157d200014b52d4)
+- [?] copy over notation from 2020 brainstorming [overleaf link](https://www.overleaf.com/project/5e8232cd6157d200014b52d4)
   - rules for identifiability 
-- [ ] discuss the role of prior anatomical knowledge in reducing search space 
+- [ ] 🎁 discuss the role of prior anatomical knowledge in reducing search space 
 
 # formatting tasks 
 - add figure references to table of contents  
