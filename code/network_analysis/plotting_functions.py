@@ -15,7 +15,12 @@ def unbox(ax, clear_labels=False):
         ax.set_yticklabels([])
         ax.set_xticklabels([])
     return ax
-    
+
+def unbox_each(ax, clear_labels=False):
+    for _ax in ax:
+        for __ax in _ax:
+            unbox(__ax,clear_labels)
+            
 def expand_bounds(ax,expansion_factor=1.1):
     '''
     sets the boundaries of an axis to be a little larger 
@@ -25,7 +30,12 @@ def expand_bounds(ax,expansion_factor=1.1):
     ax.set_xlim([1.1*x for x in ax.get_xlim()])
     ax.set_ylim([1.1*y for y in ax.get_ylim()])
     return ax
-
+    
+def expand_bounds_each(ax, expansion_factor=None):
+    for _ax in ax: 
+        for __ax in _ax:
+            expand_bounds(__ax, expansion_factor)
+            
 def label_and_clear_axes_grid(ax):
     '''
     writes index into x and y-labels
