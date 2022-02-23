@@ -9,6 +9,8 @@
 - [x] python implementation
   - [x] of r2 formula
   - [x] of matrix exponential
+  - [x] across all edges
+  - [x] with input-severing
   - [ ] of sweep script 
     - ( ) look into matched common input weights
   - 🎁 import graph from mermaid or other convenient string format
@@ -41,10 +43,12 @@
     - [ ] combining multiple interventions
     - [ ] incorporating priors over hypotheses
     </details>
-- **2B. [ ] compute entropy over hypotheses for given interventions**
-  - [ ] ⚠️ compute **binary impact of CL**
-    - severs inputs 
-    - bidirectional control of variance w/specific slope between target variance and edge correlation
+- **2B. [~] compute entropy over hypotheses for given interventions**
+  - [x] [.] compute **binary impact of CL**
+    - [x] severs inputs 
+    - [ ] ⚠️ bidirectional control of variance w/specific slope between target variance and edge correlation
+      - 💡 do target → output and intrinsic→output need to be considered separately 
+        - does this mean adding a node to the network representation?
       - S+-, S-+
   - [ ] does CL result in higher entropy, especially for reciprocal circuits?
     
