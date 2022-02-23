@@ -10,21 +10,33 @@ import scipy.linalg as linalg
 # TODO: check against's matt's non-monotonic common cause circuit example
 # TODO: visualize gradient field
 
-R = np.eye(3,3)
-R[1,2]=1.5
-R[0,2]=1.5
+A = np.eye(3,3)*0
+A[1,2]=0.8
+A[0,1]=0.5
 S_0 = [0.1, 0.1, 0.1]
    
-Rw = linalg.expm(R)
-print(R) 
+Rw = linalg.expm(A)
+print(A) 
 print(Rw)
-print(naf.correlation_from_reachability(0,2, Rw, S_0))
+#%%
+# print(naf.correlation_from_reachability(0,2, Rw, S_0))
+
+R2 = naf.correlation_matrix_from_reachability(Rw,S_0)
+print('R2 w/o ctrl')
+print(R2)
+print('--')
+ctrl_R2s = naf.correlation_matrix_from_each_control(A, S_0)
+[print(f'ctrl {i}  R2: \n',c,'\n') for i,c in enumerate(ctrl_R2s)];
+
 #%% markdown
 '''
 $\nabla{r^2} (S)$
 '''
 # > see grad.md
 #%%
+'''
+- seems to break down with reciprocal circuits?
+'''
 r2 = lambda S: naf.correlation_from_reachability(0,2,Rw,S)
 gradR2 = nd.Gradient(r2)
 #%%

@@ -8,8 +8,18 @@ import plotting_functions as myplot
 DYNAMIC = 0
 # %load_ext autoreload
 # %autoreload 2
+'''
+TODO: unify naming convention:
+    - control v.s. closed-loop control etc.
+TODO: some function(s) add the diagonal into the adjacency matrix 
+    - this is likely a clunky result of not deciding whether a node is "adjacent to" itself
+'''
 #%%
 
+
+
+#%%
+# control-related functions
 def sever_inputs(adj, ctrl_loc):
     '''
     could imagine an "imperfect" control which scales down inputs by a factor 
@@ -121,14 +131,14 @@ def each_closed_loop_intervention(adj, is_binary=True):
 '''
 Quantitative properties of correlations
 '''
-def correlation_from_reachability(i,j, Rw , s, verbose=False):
+def correlation_from_reachability(i,j, Rw , S, verbose=False):
     '''
     NEEDS RENAMING, something like _by_source
     i -- index of first node
     j -- index of second node
     Rw -- weighted reachability matrix, also denoted with W~  
         - uses indexing convention Rw(from, to) 
-    s -- vector of source variances
+    S -- vector of source variances
     
     reminder, python operations on numpy vectors/matrices are elementwise by default
     correlation should be symmetric with respect to i,j (but not Rw, s)
@@ -137,26 +147,46 @@ def correlation_from_reachability(i,j, Rw , s, verbose=False):
     Rj = Rw[:,j]
     # clip negative values of s - useful to error-proof this function...
     # ... against numerical gradient calculation
-    s = np.array(s)
+    S = np.array(S)
     eps = 1e-15    
-    if verbose and any(s<eps):
+    if verbose and any(S<eps):
         print('WARNING: regularizing s')
-    s[s<eps] = eps
+    S[S<eps] = eps
     
-    if any(np.less(s,0)):
+    if any(np.less(S,0)):
         raise ValueError('ERROR: s cannot be negative, it represents a variance')
     
-    return sum(Ri*Rj*s) / np.sqrt(sum(Ri**2 * s) * sum(Rj**2 * s))
-'''
-TODO: function which loops the above across all pairs of edges
-'''
-def each_correlation_from_reachability(Rw, s, verbose=False):
+    return sum(Ri*Rj*S) / np.sqrt(sum(Ri**2 * S) * sum(Rj**2 * S))
+
+def correlation_matrix_from_reachability(Rw, S, verbose=False):
+    '''
+    computes correlations across all pairs of edges
+    -migy
+    '''
     N = Rw.shape[0]
-    corr_coeffs = np.zeros(N,N)
-    for i in N:
-        for j in N:
-            corr_coeffs(i,j)
-def corrcoeff_from_reachability_controlled(i,j):
+    corr_coeffs = np.zeros((N,N))
+    for i in range(N):
+        for j in range(N):
+            corr_coeffs[i,j] = correlation_from_reachability(i,j, Rw, S, verbose)
+    return corr_coeffs 
+    
+def correlation_matix_from_adjacency(A, S, verbose=False):
+    Rw = reachability_weight(A)
+    return correlation_matrix_from_reachability(Rw, S, verbose)
+    
+def correlation_matrix_from_controlled_adjacency(A,S, ctrl_loc, verbose=False):
+    '''
+    note, this represents a combination of closed-loop control (via ctrl_loc)
+    AND open-loop control (via S)
+    AND endogenous noise sources (via S)
+    '''
+    return correlation_matix_from_adjacency(sever_inputs(A,ctrl_loc), S, verbose)
+    
+def correlation_matrix_from_each_control(A, S, verbose=False):
+    return [correlation_matix_from_adjacency(sever_inputs(A,ctrl_loc),S,verbose)\
+                for ctrl_loc in range(A.shape[0])]
+
+# def corrcoeff_from_reachability_controlled(i,j):
 #%%  
 # Network plotting  
 def draw_np_adj(adj, ax=None, more_options={}):
