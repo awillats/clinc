@@ -1,6 +1,8 @@
 # reachability of adjacency matrix ...
 import numpy as np 
 import networkx as nx 
+import scipy.linalg as splinalg
+
 import matplotlib.pyplot as plt
 import plotting_functions as myplot
 DYNAMIC = 0
@@ -8,30 +10,36 @@ DYNAMIC = 0
 # %autoreload 2
 #%%
 
-R = np.eye(3,3)
-R[1,2]=1.5
-R[0,2]=1.5
-print(R)
-R[0,:]*R[2,:]
-s = [2,3,4]
 #%%
-def correlation_from_reachability(i,j, Rw , s):
+def correlation_from_reachability(i,j, Rw , s, verbose=False):
     '''
+    i -- index of first node
+    j -- index of second node
     Rw -- weighted reachability matrix, also denoted with W~  
         - uses indexing convention Rw(from, to) 
     s -- vector of source variances
     
     reminder, python operations on numpy vectors/matrices are elementwise by default
+    correlation should be symmetric with respect to i,j (but not Rw, s)
     '''
     Ri = Rw[:,i]
     Rj = Rw[:,j]
+    # clip negative values of s
+    s = np.array(s)
+    eps = 1e-15
+    
+
+    if verbose and any(s<eps):
+        print('WARNING: regularizing s')
+    s[s<eps] = eps
+    
+    if any(np.less(s,0)):
+        raise ValueError('ERROR: s cannot be negative, it represents a variance')
+    
     return sum(Ri*Rj*s) / np.sqrt(sum(Ri**2 * s) * sum(Rj**2 * s))
 
-def gradient_wrt_sources():
-    pass
 
-print(R)    
-print(correlation_from_reachability(0,2,R,[0.1,.1,.1]))
+
 
 #%%
 '''
@@ -157,9 +165,9 @@ def draw_adj_reach_corr(A,axs,add_titles=True,grey_correlations=False):
 #%%
 
 if __name__ == "__main__":
-    A = np.array([[0,1,1],
-                  [1,0,0],
-                  [0,0,0]])
+    A = np.array([[1,0,1],
+                  [0,1,1],
+                  [0,0,1]])
     
     rA = reachability(A);
     rwA = reachability_weight(A);

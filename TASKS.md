@@ -5,8 +5,9 @@
 - [x] **compute dR2 / dSk** - summarize the net effect of intervention at one location 
 - [~] **extend to impact of closed-loop** - @matt
   - see [IDSNR_notation_matt](sketches_and_notation/identifiability/IDSNR_notation_matt.md) for initial notes
-- [ ] python implementation
-  - [ ] of r2 formula
+- [x] python implementation
+  - [x] of r2 formula
+  - [ ] of matrix exponential
   - [ ] of sweep script 
     - look into matched common input weights
   - 🎁 import graph from mermaid or other convenient string format
