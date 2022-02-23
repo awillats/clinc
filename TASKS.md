@@ -11,11 +11,13 @@
   - [x] of matrix exponential
   - [x] across all edges
   - [x] with input-severing
-  - [ ] of sweep script 
+  - [ ] 🍐 PLOT, weighted edges for quant correlation plotting 
+  - [ ] 🧵 of sweep script 
     - ( ) look into matched common input weights
   - 🎁 import graph from mermaid or other convenient string format
-- [ ] demonstrate bi-directional variance control  
-  - [ ] add partial incomplete control parameter 
+- [ ] 🧵 demonstrate bi-directional variance control  
+  - [ ] ⚠️ add control dg sim
+  - [ ] ⚠️ add partial incomplete control parameter 
     - simply blends target and un-controlled variance 
 <img src="figures/whiteboard/sketch_quant_OL_CL_variance.png" width="200"/>
 
@@ -36,7 +38,7 @@
 ## map out hypotheses X interventions
   - [x] quantifying diversity via entropy
     - [x] have python implementation
-    - [ ] compute across set of hypotheses
+    - [ ] 🧵 compute across set of hypotheses
       - mostly data-wrangling at this point
     <details><summary>future work</summary>
     
@@ -46,6 +48,7 @@
 - **2B. [~] compute entropy over hypotheses for given interventions**
   - [x] [.] compute **binary impact of CL**
     - [x] severs inputs 
+    - [ ] 🍐 PLOT concatenate binary correlations given control to big interventions X hypotheses plot
     - [ ] ⚠️ bidirectional control of variance w/specific slope between target variance and edge correlation
       - 💡 do target → output and intrinsic→output need to be considered separately 
         - does this mean adding a node to the network representation?
