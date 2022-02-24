@@ -1,6 +1,8 @@
 import numpy as np
 import networkx as nx
 import network_analysis_functions as net
+import network_data_functions as netdata
+import network_plotting_functions as netplot
 import plotting_functions as myplot
 import pandas as pd
 
@@ -9,6 +11,7 @@ the if __name__ == '__main__' is far too complicated
 - separate this into a minimal example included here 
 - and a comprehensive script elsewhere
 '''
+
 
 
 #%%
@@ -83,48 +86,7 @@ def get_coreachability_from_source(df, kS):
 
     
 #%%
-# Plotting functions
-def draw_coreachability_by_source(df, axs, node_position, add_titles=True):
-    pos_edge_style = net.straight_edge_style('peachpuff')
-    pos_edge_style.update({'width':10})
-    neg_edge_style = net.straight_edge_style('lightblue')
-    neg_edge_style.update({'width':2})
-    neut_edge_style = net.straight_edge_style('lightgrey')
-    neut_edge_style.update({'width':5})
-    
-    #NOTE: temporarily overriding rendering style
-    # pos_edge_style['edge_color'] = 'lightgrey'
-    # neg_edge_style['edge_color'] = 'lightgrey'
 
-    #TODO: scale these by IDSNR weighted co-reachability
-    n = len(df['iA'].unique())
-    for i in range(n):
-        pos_edges, neut_edges, neg_edges = get_coreachability_from_source(df,i)
-        
-        net.draw_np_adj(neut_edges, axs[i], neut_edge_style)
-        net.draw_np_adj(pos_edges, axs[i], pos_edge_style)
-        net.draw_np_adj(neg_edges, axs[i], neg_edge_style)
-        myplot.indicate_intervention(axs[i],node_position[i])
-        # print(node_position)
-        if add_titles:
-            axs[i].set_title(f'open-loop $S_{i}$')
-            #effect of $S_{i}$
-            
-def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True):    
-    n = A.shape[0]
-    n_plot = 3+n;  
-    if df is None:
-        df = compute_coreachability_tensor(net.reachability(A))
-
-    if axs is None:
-        fig, axs =  plt.subplots(1,n_plot, figsize=((n_plot)*5, 2*2.5),sharey=True,aspect='equal')
-        print('INFO: creating axes')
-    else:
-        fig = axs[0].get_figure()
-
-    graph_pos = net.draw_adj_reach_corr(A, axs[0:3], add_titles, grey_correlations=True)
-    draw_coreachability_by_source(df, axs[3:], graph_pos, add_titles)
-    return fig
 
 
 #%%
@@ -150,7 +112,7 @@ if __name__ == '__main__':
     # nx.draw(G, with_labels=True)
     
     # View the adjacency and reachability matrices
-    A = nx.adjacency_matrix(G, nodelist=sorted(G.nodes())).todense()
+    A = netdata.nx_to_np_adj(G)
     print(A)
     R = net.reachability(A).astype(int)
     print(R)
@@ -175,7 +137,7 @@ if __name__ == '__main__':
     #%%
     
     fig, ax = plt.subplots(1,3,figsize=(12,4))
-    net.draw_adj_reach_corr(A, ax)
+    netplot.draw_adj_reach_corr(A, ax)
     fig
     #%%
     # print(A)
@@ -187,9 +149,9 @@ if __name__ == '__main__':
     npanels = 3    
     fig,ax = plt.subplots(ncirc,npanels,figsize=(10,4*ncirc), sharey=True)
     for i,_A in enumerate(As):
-        net.draw_adj_reach_corr(_A,ax[i,:3],add_titles=(i==0))
+        netplot.draw_adj_reach_corr(_A,ax[i,:3],add_titles=(i==0))
     myplot.super_ylabel(fig,'hypothesized circuits',30)
+    fig
     
-            
         
 
