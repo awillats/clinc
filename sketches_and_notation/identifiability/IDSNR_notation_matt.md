@@ -29,12 +29,12 @@ It is a fact that $(I-A)^{-1} = \sum_{n=0}^{\infty} A^n$ when $|\lambda_i(A)| < 
 
 To simplify a bit, we can equivalently write $$\Sigma_{ij} = \sum_{k=1}^p \widetilde{W}_{ik} \widetilde{W}_{jk} s_k.$$
 
-## Expression for $r^2(i,j)$ under passive observation
+## Expression for $r(i,j)$ under passive observation
 
 Using the expression for $\Sigma$ above, we have
 $$
 \begin{align*}
-r^2(i,j) &= \frac{\Sigma_{ij}}{\sqrt{\Sigma_{ii} \Sigma_{jj}}} \\
+r(i,j) &= \frac{\Sigma_{ij}}{\sqrt{\Sigma_{ii} \Sigma_{jj}}} \\
 &= \frac{\sum_{k=1}^p \widetilde{W}_{ik} \widetilde{W}_{jk} s_k}{\sqrt{\left(\sum_{k=1}^p \widetilde{W}_{ik}^2 s_k\right)\left(\sum_{k=1}^p \widetilde{W}_{jk}^2 s_k\right)}}.
 \end{align*}
 $$
@@ -54,8 +54,8 @@ The application of closed-loop control on node $c$ can be modeled as:
 
 Note that step 1 above will result in $\widetilde{W}_{i,:} = 0$ except for $\widetilde{W}_{i,i} = 1$.
 
-### Impact of CL control on $r^2(i,j)$
+### Impact of CL control on $r(i,j)$
 
-We might be interested in $\Delta_c^{(CL)}r^2(i,j)$, defined as "the amount that $r^2(i,j)$ increases when we place closed-loop control on node $c$." Unfortunately, writing out a general expression for this gets ugly fairly quickly.
+We might be interested in $\Delta_c^{(CL)}r(i,j)$, defined as "the amount that $r(i,j)$ increases when we place closed-loop control on node $c$." Unfortunately, writing out a general expression for this gets ugly fairly quickly.
 
 [^sumlim]: We can use $p-1$ as an upper limit on the sum $\widetilde{W} = \sum_{k=0}^{p-1} W^k$ when there are no recurrent connections. Later we can characterize what type of recurrent connections are ok.

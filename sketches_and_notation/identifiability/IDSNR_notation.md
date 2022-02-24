@@ -27,10 +27,11 @@ looking at the connection A→→B, signals shared in common between A and B wil
 # Quantifying impact
 $$
 \begin{align*}
-r^2(i,j) &= \frac{\Sigma_{ij}}{\sqrt{\Sigma_{ii} \Sigma_{jj}}} \\
+r(i,j) &= \frac{\Sigma_{ij}}{\sqrt{\Sigma_{ii} \Sigma_{jj}}} \\
 &= \frac{\sum_{k=1}^p \widetilde{W}_{ki} \widetilde{W}_{kj} s_k}{\sqrt{\left(\sum_{k=1}^p \widetilde{W}_{ki}^2 s_k\right)\left(\sum_{k=1}^p \widetilde{W}_{kj}^2 s_k\right)}}.
 \end{align*}
 $$
+$s_k$ - variance at source location $k$
 
 ## Code implementations
 **Python:**

@@ -12,7 +12,7 @@ import plotting_functions as myplot
 #%%
 # Load adjacency matrices 
 As = egcirc.get_chainlike_3node()
-As = [np.array([[0,1,0],[0,0,1],[0,0,0]])]*3
+# As = [np.array([[0,1,0],[0,0,1],[0,0,0]])]*3
 # As = egcirc.get_recur_dense_3node()
 
 n = As[0].shape[0]
@@ -31,7 +31,6 @@ pos = netplot.draw_np_adj(As[0],axs)
 fig
 #%%
 fig, axs = plt.subplots(n_circ, n_plot-n,figsize=(4.5*(n_plot-n),5*n_circ),sharey=True)
-# axs[0,[0,1,2,3,5,7]]
 for i,_A in enumerate(As):
     ax_row = axs[i,:]
     #interlace open-loop and closed-loop columns
