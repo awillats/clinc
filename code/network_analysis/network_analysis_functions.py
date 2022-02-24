@@ -11,6 +11,7 @@ DYNAMIC = 0
 '''
 TODO: unify naming convention:
     - control v.s. closed-loop control etc.
+    - A v.s. adj
 TODO: some function(s) add the diagonal into the adjacency matrix 
     - this is likely a clunky result of not deciding whether a node is "adjacent to" itself
 '''
@@ -188,6 +189,26 @@ def correlation_matrix_from_each_control(A, S, verbose=False):
 
 # def corrcoeff_from_reachability_controlled(i,j):
 #%%  
+def flipper(is_horizontal=True):
+    F = np.eye(2,2)
+    if is_horizontal:
+        F[0,0] = -1
+    else:
+        F[1,1] = -1
+    return F
+    
+def rotor(angle):
+    R = np.array([[np.cos(angle), -np.sin(angle)],
+                  [np.sin(angle) , np.cos(angle)]])
+    return R
+
+def rotate_layout(pos,angle=np.pi/3,flip_h=True):
+    '''
+    TODO: shift center of rotation
+    '''
+    transform = np.matmul(flipper(flip_h), rotor(angle))
+    new_pos = {k:np.dot(transform,v) for k,v in pos.items()}
+    return new_pos
 # Network plotting  
 def draw_np_adj(adj, ax=None, more_options={}):
     '''
@@ -196,10 +217,12 @@ def draw_np_adj(adj, ax=None, more_options={}):
     '''
     nx_adj = nx.from_numpy_matrix(adj, create_using=nx.DiGraph) 
     pos = nx.circular_layout(nx_adj)
+    pos = rotate_layout(pos, np.pi/3, True)
+    
     
     options = {
         'node_color': 'lightgrey',
-        'node_size': 1000,
+        'node_size': 1000, #1000
         'width': 5,
         'arrowstyle': '-|>',
         'arrowsize':25,
@@ -235,7 +258,8 @@ def draw_correlations(A,Corr=None,ax=None,grey_correlations=False):
     bad_corr_style = straight_edge_style('lightcoral') if not grey_correlations else straight_edge_style('lightgrey')
     
     draw_np_adj(Corr, ax=ax, more_options=good_corr_style)
-    draw_np_adj(illusory_correlations(A,Corr), ax=ax, more_options=bad_corr_style)
+    pos = draw_np_adj(illusory_correlations(A,Corr), ax=ax, more_options=bad_corr_style)
+    return pos
 
 def draw_adj_reach_corr(A, axs, add_titles=True, grey_correlations=False):
     pos = draw_np_adj(A, ax=axs[0])
@@ -247,8 +271,6 @@ def draw_adj_reach_corr(A, axs, add_titles=True, grey_correlations=False):
         axs[2].set_title('correlations')
     return pos
 
-def draw_ctrl(ax, pos_i, color='darkorange'):
-    ax.plot(pos_i[0],pos_i[1],'o',color=color,markersize=30,markeredgewidth=4,fillstyle='none')
 
 def draw_controlled_representations(ax, adj, adj_ctrls=None, reach_ctrls=None, corr_ctrls=None):
     '''
@@ -264,7 +286,7 @@ def draw_controlled_representations(ax, adj, adj_ctrls=None, reach_ctrls=None, c
     ctrl_marker_color = 'darkorange'
     severed_edge_style = {'edge_color':'moccasin','style':':'}
     
-    pos = draw_adj_reach_corr(A, ax[0,:],grey_correlations=True)
+    pos = draw_adj_reach_corr(adj, ax[0,:],grey_correlations=True)
     # loop across control locations
     for i in range(N):
         plot_i = i+1
@@ -276,11 +298,30 @@ def draw_controlled_representations(ax, adj, adj_ctrls=None, reach_ctrls=None, c
         draw_adj_reach_corr(adj_ctrls[i], ax_row, grey_correlations=True)
         ax_row[0].set_ylabel(f'ctrl @ {i}')
         for _ax in ax_row:
-            draw_ctrl(_ax, pos[i])
+            myplot.indicate_ctrl(_ax, pos[i])
             if i>0:
                 _ax.set_title('')
+                
+def draw_controlled_correlations(ax, adj,  adj_ctrls=None, corr_ctrls=None, add_titles=True):
+    '''
+    expects ax to be 1 x (N) subplot axes
+    '''
+    if adj_ctrls is None or corr_ctrls is None:
+        adj_ctrls = each_closed_loop_adj(adj)
+        corr_ctrls = each_closed_loop_correlations(adj) #pass through is_binary?
+    N = len(adj_ctrls)
+    
+    for i in range(N):
+        _ax = ax[i]
+        pos = draw_correlations(adj_ctrls[i], Corr=corr_ctrls[i],
+            ax=_ax, grey_correlations=True)
+        myplot.indicate_ctrl(_ax, pos[i],color='#b4a390')
+        if add_titles:
+            _ax.set_title(f'ctrl$_{i}$')
+        # myplot.expand_bounds(_ax)
 
-def draw_controlled_correlations(ax, adj, adj_ctrls=None, corr_ctrls=None):
+    
+def draw_controlled_adj_correlations(ax, adj, adj_ctrls=None, corr_ctrls=None):
     '''
     expects ax to be 2 x (3+N) subplot axes
     '''
@@ -293,7 +334,7 @@ def draw_controlled_correlations(ax, adj, adj_ctrls=None, corr_ctrls=None):
     severed_edge_style = {'edge_color':'moccasin','style':':'}
 
     #draw unmodified circuit in lower left 3 panels
-    pos = draw_adj_reach_corr(A, ax[1,:3], grey_correlations=True)
+    pos = draw_adj_reach_corr(adj, ax[1,:3], grey_correlations=True)
     #clear unused axes
     myplot.unbox_each(ax, clear_labels=True)
     
@@ -311,8 +352,8 @@ def draw_controlled_correlations(ax, adj, adj_ctrls=None, corr_ctrls=None):
             ax=_ax1, grey_correlations=True)
         
         #add node indicators of location of control    
-        draw_ctrl(_ax0, pos[i])
-        draw_ctrl(_ax1, pos[i])
+        myplot.indicate_ctrl(_ax0, pos[i])
+        myplot.indicate_ctrl(_ax1, pos[i])
         
     ax[0,3].set_ylabel('ctrl adj')
     ax[1,3].set_ylabel('ctrl corr')
@@ -345,7 +386,7 @@ if __name__ == "__main__":
     fig, ax = plt.subplots(2,6,figsize=(18,7))
     adj_ctrls = each_closed_loop_adj(A) 
     corr_ctrls = each_closed_loop_correlations(A)
-    ax = draw_controlled_correlations(ax, A)
+    ax = draw_controlled_adj_correlations(ax, A)
     fig
     # plt.savefig('effect_of_control_horiz.png',dpi=100,facecolor='w')
 

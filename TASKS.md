@@ -48,7 +48,7 @@
 - **2B. [~] compute entropy over hypotheses for given interventions**
   - [x] [.] compute **binary impact of CL**
     - [x] severs inputs 
-    - [ ] 🍐 PLOT concatenate binary correlations given control to big interventions X hypotheses plot
+    - [x] 🍐🎯 PLOT concatenate binary correlations given control to big interventions X hypotheses plot
     - [ ] ⚠️ bidirectional control of variance w/specific slope between target variance and edge correlation
       - 💡 do target → output and intrinsic→output need to be considered separately 
         - does this mean adding a node to the network representation?

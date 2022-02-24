@@ -206,7 +206,8 @@ if __name__ == '__main__':
     # data = [*['A']*500,*['B']*250,*['C']*125,*['D']*125]
     # data = [*['A']*127,*['B']*64,*['C']*64,*['D']*1]
     # data = [*['A→B']*127,*['A←B']*64,*['A↔B']*64,*['A.B']*1]
-    data = [*['A']*3,'B','C','D']
+    data = [0,0,1,2]
+    # data = [*['A']*3,'B','C','D']
 # data = [*[0]*7,1]
     
     tf = count_unique_frequency(data, do_normalize=True)

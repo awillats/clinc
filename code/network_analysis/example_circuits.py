@@ -38,14 +38,15 @@ def get_recur_dense_3node():
     
     #pseudo collider 
     # e.g. Exc, VIP-Inh, Som-Inh
-    A0 = np.array([[1,0,0],
+    A2 = np.array([[1,0,0],
                    [0,1,1],
                    [1,1,1]])
     #collider shaped          
-    A2 = np.array([[1,0,0],
+    A3 = np.array([[1,0,0],
                    [1,1,1],
                    [1,1,1]])
-    As = [A0,A1,A2]
+    As = [A0,A1,A2,A3]
+    return As
 def get_pyloric_3node():
     '''
     Successful Reconstruction of a Physiological Circuit with Known Connectivity from Spiking Activity Alone
