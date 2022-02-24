@@ -11,14 +11,23 @@
   - [x] of matrix exponential
   - [x] across all edges
   - [x] with input-severing
-  - [ ] 🍐 PLOT, weighted edges for quant correlation plotting 
+  - [x] 🍐 PLOT, weighted edges for quant correlation plotting 
   - [ ] 🧵 of sweep script 
     - ( ) look into matched common input weights
   - 🎁 import graph from mermaid or other convenient string format
-- [ ] 🧵 demonstrate bi-directional variance control  
+- [ ] 🧵🎯  demonstrate bi-directional variance control  
   - [ ] ⚠️ add control dg sim
+    - [~] merge / verify against matt's sweep 
+    - [x] flexible specification of weights
+      - see [LinGauss_3node inside brian](https://github.com/awillats/clinc-gen/blob/69d5751ea96bfbffc65b78d8af07f7af37eb882e/small_circuit_scripts/LinGauss_3node/scripts/brian_linear_gaussian_circuits.py)
+      
+    - [x] separate out baseline / endogenous from applied / open-loop
+    - (.) 🎁 fold in Poisson noise   
+      - take inspo. from [xcorr-viz](https://github.com/awillats/xcorr-visualizer-p5/blob/main/signal-generation.js)
+        - multiPoisson?
   - [ ] ⚠️ add partial incomplete control parameter 
     - simply blends target and un-controlled variance 
+    - :gift: implementation writeup?
 <img src="figures/whiteboard/sketch_quant_OL_CL_variance.png" width="200"/>
 
 <details><summary>bonus / future work</summary>
@@ -48,7 +57,9 @@
 - **2B. [~] compute entropy over hypotheses for given interventions**
   - [x] [.] compute **binary impact of CL**
     - [x] severs inputs 
-    - [x] 🍐🎯 PLOT concatenate binary correlations given control to big interventions X hypotheses plot
+    - [x] 🍐 PLOT concatenate binary correlations given control to big interventions X hypotheses plot
+      - [ ] overlay closed-loop and open-loop interventions 
+      - [ ] think about which S to push with ctrl @ i 
     - [ ] ⚠️ bidirectional control of variance w/specific slope between target variance and edge correlation
       - 💡 do target → output and intrinsic→output need to be considered separately 
         - does this mean adding a node to the network representation?

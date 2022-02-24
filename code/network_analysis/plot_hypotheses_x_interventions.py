@@ -12,6 +12,7 @@ import plotting_functions as myplot
 #%%
 # Load adjacency matrices 
 As = egcirc.get_chainlike_3node()
+As = [np.array([[0,1,0],[0,0,1],[0,0,0]])]*3
 # As = egcirc.get_recur_dense_3node()
 
 n = As[0].shape[0]
@@ -27,7 +28,21 @@ plot co-reachability tensor as a function of source location
 
 fig, axs =  plt.subplots(1, 1, figsize=(3,3))
 pos = netplot.draw_np_adj(As[0],axs)
+fig
+#%%
+fig, axs = plt.subplots(n_circ, n_plot-n,figsize=(4.5*(n_plot-n),5*n_circ),sharey=True)
+# axs[0,[0,1,2,3,5,7]]
+for i,_A in enumerate(As):
+    ax_row = axs[i,:]
+    #interlace open-loop and closed-loop columns
+    ax_ol = ax_row
+    netplot.draw_adj_reach_corr_coreach(_A, axs=ax_ol, add_titles=(i==0))    
+    # cor.draw_adj_reach_corr_coreach(_A, axs=axsax_, add_titles=(i==0))
+    # netplot.draw_controlled_correlations(ax_cl, _A, add_titles=(i==0)) 
 
+# fig.text((2+n_circ/2)/(n_circ+2),.92,'Interventions',size=35,va='center',ha='center')
+# myplot.super_ylabel(fig,'Hypothesized Circuits',35)
+fig
 #%%
 # 
 fig, axs = plt.subplots(n_circ, n_plot,figsize=(4.5*n_plot,5*n_circ),sharey=True)

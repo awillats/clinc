@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-plt.rcParams.update({'font.size': 25})
+plt.rcParams.update({'font.size': 15})#25
 
 def unbox(ax, clear_labels=False):
     '''

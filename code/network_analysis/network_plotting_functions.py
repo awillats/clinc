@@ -7,31 +7,85 @@ import network_data_functions as netdata
 import matplotlib.pyplot as plt
 import plotting_functions as myplot
 #%%
+DEFAULT_NET_PLOT_OPTIONS = {
+        'node_color': 'lightgrey',
+        'node_size': 1000, #1000
+        'width': 5,
+        'arrowstyle': '-|>',
+        'arrowsize':25,
+        'connectionstyle':"arc3,rad=0.1",
+    }
 # Network plotting  
+def draw_weighted_corr(W, ax=None, min_w=0,max_w=10, more_options={}):
+    G = nx.from_numpy_matrix(W, create_using=nx.Graph) 
+    weights = np.array(list(nx.get_edge_attributes(G,'weight').values()))
+    weights = rescale(weights, min_w,max_w, 0,1)
+    
+    pos = clockwise_circular_layout(G)
+    
+    options = DEFAULT_NET_PLOT_OPTIONS.copy()
+    options.update({'ax':ax,'pos':pos})
+    options.update({'width':weights,'node_size':100})
+    nx.draw(G, **options)
+    ax.set_aspect('equal')
+    # nx.draw_networkx_edge_labels(G, pos=pos)
+    myplot.expand_bounds(ax)
+    return pos
+    
+def rescale(x,out_min=0, out_max=1, in_min=None,in_max=None,clip_min=True,clip_max=True):
+    if in_min is None:
+        in_min = x.min()
+    if in_max is None:
+        in_max is x.max()
+    vals = np.interp(x, (in_min, in_max), (out_min, out_max))
+    
+    if clip_min:
+        vals = np.clip(vals,out_min,None)
+    if clip_max:
+        vals = np.clip(vals,None,out_max)
+    return vals
+#%%
+def flipper(is_horizontal=True):
+    F = np.eye(2,2)
+    if is_horizontal:
+        F[0,0] = -1
+    else:
+        F[1,1] = -1
+    return F
+    
+def rotor(angle):
+    R = np.array([[np.cos(angle), -np.sin(angle)],
+                  [np.sin(angle) , np.cos(angle)]])
+    return R
+
+def rotate_layout(pos,angle=np.pi/3,flip_h=True):
+    '''
+    TODO: shift center of rotation
+    '''
+    transform = flipper(flip_h) @ rotor(angle)
+    new_pos = {k:np.dot(transform,v) for k,v in pos.items()}
+    return new_pos
+def clockwise_circular_layout(G):
+    pos = nx.circular_layout(G)
+    pos = rotate_layout(pos, np.pi/3, True)
+    return pos
+#%%    
 def draw_np_adj(adj, ax=None, more_options={}):
     '''
     core plotting function that renders an adjacency_matrix 
     - gets used is several other higher-level plotting functions
     '''
     nx_adj = nx.from_numpy_matrix(adj, create_using=nx.DiGraph) 
-    pos = nx.circular_layout(nx_adj)
-    pos = netdata.rotate_layout(pos, np.pi/3, True)
+    pos = clockwise_circular_layout(nx_adj)
     
-    options = {
-        'node_color': 'lightgrey',
-        'node_size': 1000, #1000
-        'width': 5,
-        'arrowstyle': '-|>',
-        'arrowsize':25,
-        'ax':ax,
-        'pos':pos,
-        'connectionstyle':"arc3,rad=0.1"
-    }
+    options = DEFAULT_NET_PLOT_OPTIONS.copy()
+    options.update({'ax':ax,'pos':pos})
+    options.update(more_options)
+    
+    nx.draw_networkx(nx_adj, arrows=True, **options)
     
     myplot.unbox(ax)
     # myplot.expand_bounds(ax)
-    options.update(more_options)
-    nx.draw_networkx(nx_adj, arrows=True, **options)
     return pos
 #%%
 def straight_edge_style(color):

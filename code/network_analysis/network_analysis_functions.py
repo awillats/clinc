@@ -39,7 +39,7 @@ def reachability_weight( adj ):
     # reach = 0.0*adj;
     # curr = np.eye(adj.shape[0]);
     # for i in range(n):
-    #     curr = np.matmul(adj, curr)
+    #     curr = adj @ curr
     #     reach += curr
     return reach
 
@@ -65,7 +65,7 @@ def fork_reachability( adj ):
     '''
     [UNTESTED]
     '''
-    return np.matmul( reachability(adj.T), reachability(adj) )
+    return reachability(adj.T) @ reachability(adj) 
 def indirect( adj ):
     return reachability(adj)-adj #could be xor?
 

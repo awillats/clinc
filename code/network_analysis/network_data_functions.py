@@ -40,27 +40,6 @@ def nx_to_np_adj(G):
     return nx.adjacency_matrix(G, nodelist=sorted(G.nodes())).todense()
     
 #%%
-def flipper(is_horizontal=True):
-    F = np.eye(2,2)
-    if is_horizontal:
-        F[0,0] = -1
-    else:
-        F[1,1] = -1
-    return F
-    
-def rotor(angle):
-    R = np.array([[np.cos(angle), -np.sin(angle)],
-                  [np.sin(angle) , np.cos(angle)]])
-    return R
-
-def rotate_layout(pos,angle=np.pi/3,flip_h=True):
-    '''
-    TODO: shift center of rotation
-    '''
-    transform = np.matmul(flipper(flip_h), rotor(angle))
-    new_pos = {k:np.dot(transform,v) for k,v in pos.items()}
-    return new_pos
-#%%
 
 if __name__ == "__main__":
     mg='''mermaid
