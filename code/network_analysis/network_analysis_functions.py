@@ -29,11 +29,31 @@ def sever_inputs(adj, ctrl_loc):
     return new_adj
     
 #%%  
+#%% markdown
+'''
+$ \sum_{n=1}^{\infty} A^{n} = (I-A)^{-1}$  
 
+Let $f(A) :  = (I-A)^{-1}$  
+
+$ f(A^T) = f(A)^T$ (assumed, and tested empirically)  
+
+therefore this should work for either indexing convention of W
+'''
+#%%
+inf_sum_mat = lambda M: np.linalg.inv(np.eye(M.shape[0]) - M )
+# print(inf_sum(W))
+# print(  )
+# print(inf_sum(W.T).T)
+# print(  ) 
+# np.max(np.abs(inf_sum(W.T).T - inf_sum(W)))
+#%%
 def reachability_weight( adj ):
     # intended to capture the total scaling a unit input at node i 
     # experiences by the time it ends up at node j
-    reach = linalg.expm(adj)
+    
+    
+    reach = inf_sum_mat(adj)
+    
     # previous sum-based solution:
     # n = adj.shape[0]
     # reach = 0.0*adj;

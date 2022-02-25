@@ -1,4 +1,19 @@
 % parameters
+%%
+s = [1;1;1]
+W = [0,1,0;0,0,0;0,0,0]
+Wt = 0*W
+for i = 0:length(s)
+  Wt = Wt + W^i;
+  Wt
+end
+Wt
+
+correlation_from_reachability(1,2,Wt,s)^2
+
+%%
+return
+%%
 
 param_vals = linspace(0,5,100);
 n = 100000;
@@ -61,8 +76,10 @@ for param_i = 1:numel(param_vals)
   r2_emp_vals(param_i) = corr(a.',b.');
   
 end
+
+
 %%
-clf; plot(param_vals, r2_vals); hold on; plot(param_vals, r2_emp_vals,'--');
+clf; plot(param_vals, r2_vals,linewidth=2); hold on; plot(param_vals, r2_emp_vals,'--',linewidth=2);
 xlabel('w_{Sz->B}'); ylabel('r^2(a,b)'); grid on; ylim([0 1]);
 set(gca,'fontsize',16);
 %%
