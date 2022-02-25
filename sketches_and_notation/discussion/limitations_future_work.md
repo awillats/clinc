@@ -48,7 +48,7 @@
 - **sequential experimental design**
   - intervene at one location, measure dependence 
   - use updated model to pick next location to intervene
-- multi-site control
+- multi-site control, combining inference across multiple experiments
 - measuring dependence from higher-order signal features 
   - e.g. frequency domain
 

@@ -1,12 +1,71 @@
 # Overview {ignore=true}
 ## Intended audience {ignore=true}
   - **systems neuroscientists** interested in making more rigorous conclusions in circuit ID problems 
-  - **experimental neuroscientists** looking for guidance on evaluating required intervention to answer circuit hypothesis questions
+  - **experimental neuroscientists** looking for guidance on evaluating required intervention to answer circuit hypothesis questions  
 ## Goal {ignore=true}
 - Provide a practical conceptual framework for applying closed-loop to circuit identification problems
   - What’s the value of closed-loop?
   - What can i say about causal connections given the experiments i’m doing?
   - How do I design an intervention which improves the strength of hypothesis testing?
+## Core Takeaways 🥡 {ignore=true}
+
+[^risks]: really talking about risk with respect to conclusions  of inference here (not being able to conclude much, or concluding a connection is present when it isn't), rather than risk of injury
+
+[^causal_takeaway]: we're currently treating this as "axiomatic" rather than explicitly demonstrating the value of a causal perspective. Also need to think about how much of our results rely on Causality™ versus broader graph theory / network theory / foundational statistics
+
+**1. Thinking about causality is necessary**[^causal_takeaway] to judge potential value and anticipate unforeseen risks[^risks] of experiments.
+  - If you "don't know what you don't know" you are susceptible to drawing false conclusions as a result of hidden confounds.
+  - Understanding the uncertainty in outcomes given uncertainty in your assumptions / hypotheses empowers you to design efficient, targeted experiments.
+
+**2. Intervening provides (categorical) improvements in inference power above passive observation.**
+  - This potential advantage is large! whole categories of conclusions are invisible/indistinguishable under passive-observation that are revealed under sufficient intervention.
+    - No amount of fancy inference will help.
+  - *Secondarily,* there are also graded / quantitative advantages afforded by more active intervention (higher SNR, better data efficiency).
+  - but it needs to be applied wisely to leverage that capability
+
+**3. *How* you intervene** strongly determines the inference power of your experiment.
+  - e.g. sophisticated closed-loop control applied to the wrong part of the circuit may not add any additional information.
+      - Closed-loop control is like a high-powered microscope, but you have to point it at relevant samples / the right part of the glass slide.
+  - **3B. *Where* to intervene** is the most important decision[^howmuch]
+  - **3C.** The impact of intervention **depends strongly on its relationship to the structure** (and other properties) of the circuit being studied
+
+[^howmuch]: the next most important decision is figuring out whether to use a high or low variance stimulus
+[^design_recipe]: this describes the "brute force" design procedure. more sophisticated optimization may be possible.
+
+**4.** Because how you intervene matters, it's valuable to **develop guidelines for designing useful intervention.** 
+  - **4A.** To solve this, we need to **predict the impact** of intervention on a given circuit
+  - **4B.** We then need a recipe for turning predictions into <details><summary>**choosing the best intervention**</summary>
+  
+    - explicitly enumerate your hypothesis set 
+      - use causality + graph theory to find "lurking look-alikes" i.e. markov-equivalent circuits
+    - run a design-optimization procedure[^design_recipe]
+      - predict (using graph operations) the impact of intervention across your hypothesis set 
+      - evaluate the utility of proposed interventions
+        - especially in terms of reducing uncertainty about hypotheses
+      - choose the best intervention 
+    - observe data → update hypotheses (→iterate)
+    </details>
+    
+  - **4C.** By observing the relationship between circuit properties and the utility of particular interventions, we've distilled this understanding into <details><summary>general guidelines for when certain interventions are useful</summary>
+  
+    - CL $\geq$ OL $\gt$ passive
+    - open-loop control, especially "upstream" in a circuit is likely to help reveal
+    - these can act as priors in 4B. designing interventions
+    </details>
+
+## Other themes {ignore=true}
+**A. targetted exploration** (of dependence structure of variables)
+
+  - **shaping covariance** is the focus of this paper.<details><summary>... </summary>
+    - this is a key advantage of closed-loop control
+      - which can have bidirectional influence over variance
+    - *but* it's a specific example of a larger set of approaches which should work equally well with other, nonlinear, multivariate measures of dependence
+    
+    </details>
+    
+**B.** Experiments for circuit inference can be thought of as **narrowing the set of plausible explanations**, refining a hypotheses space
+
+--- 
 # Table of Contents {ignore = true}
 
 

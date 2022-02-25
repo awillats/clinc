@@ -106,7 +106,7 @@ def sim_contemporaneous(W,S,B,u,ctrl_fn=None):
     '''
     # Wt = scipy.linalg.expm(W)
     # look up matrix cookbook
-    Wt =  np.inverse(np.eye()-W) #check transposition - yeeeehaw
+    Wt =  np.inverse(np.eye()-W) #NOTE: check transposition - yeeeehaw
     X = E @ np.diag(S)
     if ctrl_fn: X = ctrl_fn(X)
     X += X @ Wt + u @ B
