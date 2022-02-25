@@ -16,7 +16,7 @@
     - ( ) look into matched common input weights
   - 🎁 import graph from mermaid or other convenient string format
 - [ ] 🧵🎯  demonstrate bi-directional variance control  
-  - [ ] ⚠️🍐 add control dg sim
+  - [~] ⚠️🍐 add control dg sim
     - [~] merge / verify against matt's sweep 
     - [x] flexible specification of weights
       - see [LinGauss_3node inside brian](https://github.com/awillats/clinc-gen/blob/69d5751ea96bfbffc65b78d8af07f7af37eb882e/small_circuit_scripts/LinGauss_3node/scripts/brian_linear_gaussian_circuits.py)
@@ -25,7 +25,7 @@
     - (.) 🎁 fold in Poisson noise   
       - take inspo. from [xcorr-viz](https://github.com/awillats/xcorr-visualizer-p5/blob/main/signal-generation.js)
         - multiPoisson?
-  - [ ] ⚠️🍐 add partial incomplete control parameter 
+  - [~] ⚠️🍐 add partial incomplete control parameter 
     - simply blends target and un-controlled variance 
     - :gift: implementation writeup?
 <img src="figures/whiteboard/sketch_quant_OL_CL_variance.png" width="200"/>

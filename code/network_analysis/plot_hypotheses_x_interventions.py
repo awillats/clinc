@@ -30,6 +30,7 @@ fig, axs =  plt.subplots(1, 1, figsize=(3,3))
 pos = netplot.draw_np_adj(As[0],axs)
 fig
 #%%
+# Plot open-loop impact
 fig, axs = plt.subplots(n_circ, n_plot-n,figsize=(4.5*(n_plot-n),5*n_circ),sharey=True)
 for i,_A in enumerate(As):
     ax_row = axs[i,:]
@@ -43,7 +44,7 @@ for i,_A in enumerate(As):
 # myplot.super_ylabel(fig,'Hypothesized Circuits',35)
 fig
 #%%
-# 
+# Plot open-loop and closed-loop impact (interlaced)
 fig, axs = plt.subplots(n_circ, n_plot,figsize=(4.5*n_plot,5*n_circ),sharey=True)
 axs[0,[0,1,2,3,5,7]]
 for i,_A in enumerate(As):
