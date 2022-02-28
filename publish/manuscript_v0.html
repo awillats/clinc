@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>OUTLINE</title>
+      <title>manuscript_v0</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -264,325 +264,85 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <div><h1 class="mume-header undefined" id="overview">Overview</h1>
-
-<h2 class="mume-header undefined" id="intended-audience">Intended audience</h2>
-
-<ul>
-<li><strong>systems neuroscientists</strong> interested in making more rigorous conclusions in circuit ID problems</li>
-<li><strong>experimental neuroscientists</strong> looking for guidance on evaluating required intervention to answer circuit hypothesis questions</li>
-</ul>
-<h2 class="mume-header undefined" id="goal">Goal</h2>
-
-<ul>
-<li>Provide a practical conceptual framework for applying closed-loop to circuit identification problems
-<ul>
-<li>What&#x2019;s the value of closed-loop?</li>
-<li>What can i say about causal connections given the experiments i&#x2019;m doing?</li>
-<li>How do I design an intervention which improves the strength of hypothesis testing?</li>
-</ul>
-</li>
-</ul>
-<h2 class="mume-header undefined" id="core-takeaways">Core Takeaways &#x1F961;</h2>
-
-<p><strong>1. Thinking about causality is necessary</strong><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> to judge potential value and anticipate unforeseen risks<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> of experiments.</p>
-<ul>
-<li>If you &quot;don&apos;t know what you don&apos;t know&quot; you are susceptible to drawing false conclusions as a result of hidden confounds.</li>
-<li>Understanding the uncertainty in outcomes given uncertainty in your assumptions / hypotheses empowers you to design efficient, targeted experiments.</li>
-</ul>
-<p><strong>2. Intervening provides (categorical) improvements in inference power above passive observation.</strong></p>
-<ul>
-<li>This potential advantage is large! whole categories of conclusions are invisible/indistinguishable under passive-observation that are revealed under sufficient intervention.
-<ul>
-<li>No amount of fancy inference will help.</li>
-</ul>
-</li>
-<li><em>Secondarily,</em> there are also graded / quantitative advantages afforded by more active intervention (higher SNR, better data efficiency).</li>
-<li>but it needs to be applied wisely to leverage that capability</li>
-</ul>
-<p><strong>3. <em>How</em> you intervene</strong> strongly determines the inference power of your experiment.</p>
-<ul>
-<li>e.g. sophisticated closed-loop control applied to the wrong part of the circuit may not add any additional information.
-<ul>
-<li>Closed-loop control is like a high-powered microscope, but you have to point it at relevant samples / the right part of the glass slide.</li>
-</ul>
-</li>
-<li><strong>3B. <em>Where</em> to intervene</strong> is the most important decision<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></li>
-<li><strong>3C.</strong> The impact of intervention <strong>depends strongly on its relationship to the structure</strong> (and other properties) of the circuit being studied</li>
-</ul>
-<p><strong>4.</strong> Because how you intervene matters, it&apos;s valuable to <strong>develop guidelines for designing useful intervention.</strong></p>
-<ul>
-<li>
-<p><strong>4A.</strong> To solve this, we need to <strong>predict the impact</strong> of intervention on a given circuit</p>
-</li>
-<li>
-<p><strong>4B.</strong> We then need a recipe for turning predictions into </p><details><summary><strong>choosing the best intervention</strong></summary><p></p>
-<ul>
-<li>explicitly enumerate your hypothesis set
-<ul>
-<li>use causality + graph theory to find &quot;lurking look-alikes&quot; i.e. markov-equivalent circuits</li>
-</ul>
-</li>
-<li>run a design-optimization procedure<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup>
-<ul>
-<li>predict (using graph operations) the impact of intervention across your hypothesis set</li>
-<li>evaluate the utility of proposed interventions
-<ul>
-<li>especially in terms of reducing uncertainty about hypotheses</li>
-</ul>
-</li>
-<li>choose the best intervention</li>
-</ul>
-</li>
-<li>observe data &#x2192; update hypotheses (&#x2192;iterate)</li>
-</ul>
-</details>
-</li>
-<li>
-<p><strong>4C.</strong> By observing the relationship between circuit properties and the utility of particular interventions, we&apos;ve distilled this understanding into </p><details><summary>general guidelines for when certain interventions are useful</summary><p></p>
-<ul>
-<li>CL <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2265;</mo></mrow><annotation encoding="application/x-tex">\geq</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mrel">&#x2265;</span></span></span></span> OL <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">\gt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span></span></span></span> passive</li>
-<li>open-loop control, especially &quot;upstream&quot; in a circuit is likely to help reveal</li>
-<li>these can act as priors in 4B. designing interventions</li>
-</ul>
-</details>
-</li>
-</ul>
-<h2 class="mume-header undefined" id="other-themes">Other themes</h2>
-
-<p><strong>A. targetted exploration</strong> (of dependence structure of variables)</p>
-<ul>
-<li>
-<p><strong>shaping covariance</strong> is the focus of this paper.</p><details><summary>... </summary><p></p>
-<ul>
-<li>this is a key advantage of closed-loop control
-<ul>
-<li>which can have bidirectional influence over variance</li>
-</ul>
-</li>
-<li><em>but</em> it&apos;s a specific example of a larger set of approaches which should work equally well with other, nonlinear, multivariate measures of dependence</li>
-</ul>
-</details>
-</li>
-</ul>
-<p><strong>B.</strong> Experiments for circuit inference can be thought of as <strong>narrowing the set of plausible explanations</strong>, refining a hypotheses space</p>
-<hr>
-<h1 class="mume-header undefined" id="table-of-contents">Table of Contents</h1>
+      <p><strong>Title:</strong> ...<br>
+<strong>Authors:</strong> Adam Willats, Matt O&apos;Shaughnessy</p>
+<h1 class="mume-header" id="table-of-contents">Table of Contents</h1>
 
 <div class="code-chunk" data-id="code-chunk-id-0" data-cmd="toc"><div class="input-div"><div class="btn-group"><div class="run-btn btn"><span>&#x25B6;&#xFE0E;</span></div><div class="run-all-btn btn">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#table-of-contents">Table of Contents</a></li>
 <li><a href="#abstract">Abstract</a></li>
 <li><a href="#introduction">Introduction</a>
 <ul>
-<li><a href="#why-estimating-causal-interactions-in-the-brain">Why? - Estimating causal interactions in the brain</a></li>
-<li><a href="#how-causal-methods-for-network-discovery-from-time-series">How? - Causal methods for network discovery from time-series</a></li>
-<li><a href="#interventions-in-neuro">Interventions in neuro</a></li>
-<li><a href="#role-of-interventions-in-causal-inference">Role of interventions in causal inference</a></li>
-<li><a href="#multiple-complementary-perspectives-representations-of-the-same-underlying-network-structure">Multiple complementary perspectives (representations) of the same underlying network structure:</a></li>
+<li><a href="#estimating-causal-interactions-in-the-brain">Estimating causal interactions in the brain</a></li>
+<li><a href="#interventions-in-neuroscience-causal-inference">Interventions in neuroscience &amp; causal inference</a></li>
+<li><a href="#representations-reachability">Representations &amp; reachability</a></li>
+</ul>
+</li>
+<li><a href="#representations">Representations</a>
+<ul>
 <li><a href="#reachability">Reachability</a></li>
 <li><a href="#understanding-identification-through-derived-properties-of-circuits-reachability-rules">Understanding identification through derived properties of circuits (reachability rules)</a></li>
-<li><a href="#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits-walkthrough">Figure DEMO: Applying CLINC to distinguish a pair of circuits (walkthrough)</a></li>
+<li><a href="#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits">Figure DEMO: Applying CLINC to distinguish a pair of circuits</a></li>
 </ul>
 </li>
-<li><a href="#methods">Methods</a>
+<li><a href="#theory-prediction">Theory / Prediction</a>
 <ul>
-<li><a href="#network-simulations">Network simulations</a>
-<ul>
-<li><a href="#figure-gaussian-gaussian-and-spiking-networks-simulated-in-brian2">Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2</a></li>
+<li><a href="#computing-reachability-theory">Computing reachability (theory)</a></li>
+<li><a href="#predicting-correlation-structure-theory">Predicting correlation structure (theory)</a></li>
 </ul>
 </li>
-<li><a href="#implementing-interventions">Implementing interventions</a></li>
-<li><a href="#extracting-circuit-estimates">Extracting circuit estimates</a>
+<li><a href="#simulation">Simulation</a>
 <ul>
-<li><a href="#figure-pipeline-process-of-detecting-connections-in-a-network-model">Figure PIPELINE: Process of detecting connections in a network model</a></li>
-<li><a href="#outputs-of-network">Outputs of network</a></li>
-<li><a href="#lagged-cross-correlation">lagged cross-correlation</a></li>
-<li><a href="#multivariate-transfer-entropy-mute">multivariate transfer entropy (muTE)</a></li>
-<li><a href="#statistical-testing">statistical testing</a></li>
-<li><a href="#quantifying-successful-identification">Quantifying successful identification</a></li>
-</ul>
-</li>
-<li><a href="#extracting-circuit-estimates-1">Extracting circuit estimates</a></li>
-<li><a href="#predicting-correlation-structure">Predicting correlation structure</a></li>
+<li><a href="#network-simulations-simulation">Network simulations (simulation)</a></li>
+<li><a href="#implementing-interventions-simulation">Implementing interventions (simulation)</a></li>
+<li><a href="#extracting-circuit-estimates-empirical">Extracting circuit estimates (empirical)</a></li>
 <li><a href="#information-theoretic-measures-of-hypothesis-ambiguity">Information-theoretic measures of hypothesis ambiguity</a></li>
 </ul>
 </li>
 <li><a href="#results">Results</a>
 <ul>
-<li><a href="#binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties">[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties</a></li>
-<li><a href="#characterization-of-network-estimation-performance-impact-of-node-network-parameters">Characterization of network estimation performance - Impact of node, network parameters</a>
+<li><a href="#interaction-of-intervention-on-circuit-estimation">Interaction of intervention on circuit estimation</a>
 <ul>
-<li><a href="#figure-props-impact-of-intrinsic-network-properties-on-identifiability">Figure PROPS: impact of intrinsic network properties on identifiability</a></li>
-<li><a href="#figure-predict-comparing-predicted-and-emprical-identification-performance">Figure PREDICT: Comparing predicted and emprical identification performance</a></li>
+<li><a href="#intervening-provides-categorical-improvements-in-inference-power-beyond-passive-observation">Intervening provides (categorical) improvements in inference power beyond passive observation</a></li>
+<li><a href="#stronger-intervention-results-in-more-efficient-accuracy-inference">Stronger intervention results in more efficient, accuracy inference</a></li>
+<li><a href="#related-sections">Related sections</a></li>
 </ul>
 </li>
-<li><a href="#impact-of-intervention">Impact of intervention</a>
-<ul>
-<li><a href="#figure-disambig-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses">Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses</a></li>
-<li><a href="#figure-data-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data">Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data</a></li>
-</ul>
-</li>
-<li><a href="#impact-of-circuit-structure">impact of circuit structure</a>
-<ul>
-<li><a href="#figure-motif-interaction-of-network-structure-and-intervention-location-on-identifiability">Figure MOTIF: Interaction of network structure and intervention location on identifiability</a></li>
-</ul>
-</li>
+<li><a href="#interaction-of-intervention-circuit-structure">Interaction of intervention &amp; circuit structure</a></li>
 </ul>
 </li>
 <li><a href="#discussion">Discussion</a></li>
+<li><a href="#references">References</a></li>
+<li><a href="#supplement">Supplement</a></li>
 <li><a href="#supplement">Supplement</a></li>
 </ul>
 <h1 class="mume-header" id="abstract">Abstract</h1>
 
-<p>see also <a href="sketches_and_notation/planning_big_picture/abstract_outline_planning.md">abstract_outline_planning.md</a></p>
 <p>The necessity of intervention in inferring cause has long been understood in neuroscience. Recent work has highlighted the limitations of passive observation and single-site lesion studies in accurately recovering causal circuit structure. The advent of optogenetics has facilitated increasingly precise forms of intervention including closed-loop control which may help eliminate confounding influences. However, it is not yet clear how best to apply closed-loop control to leverage this increased inferential power. In this paper, we use tools from causal inference, control theory, and neuroscience to show when and how closed-loop interventions can more effectively reveal causal relationships. We also examine the performance of standard network inference procedures in simulated spiking networks under passive, open-loop and closed-loop conditions. We demonstrate a unique capacity of feedback control to distinguish competing circuit hypotheses by disrupting connections which would otherwise result in equivalent patterns of correlation. Our results build toward a practical framework to improve design of neuroscience experiments to answer causal questions about neural circuits.</p>
 <hr>
 <h1 class="mume-header" id="introduction">Introduction</h1>
 
-<h2 class="mume-header" id="why-estimating-causal-interactions-in-the-brain">Why? - Estimating causal interactions in the brain</h2>
+<h2 class="mume-header" id="estimating-causal-interactions-in-the-brain">Estimating causal interactions in the brain</h2>
+
+<img src="figures/core_figure_sketches/figure1_sketch.png" width="400">
+<p>@ import &quot;section_content/background_causal_network_id.md&quot;</p>
+<h2 class="mume-header" id="interventions-in-neuroscience-causal-inference">Interventions in neuroscience &amp; causal inference</h2>
+
+<p>@ import &quot;section_content/background_intervention_neuro.md&quot;<br>
+@ import &quot;section_content/background_intervention_causal_inf.md&quot;</p>
+<h2 class="mume-header" id="representations-reachability">Representations &amp; reachability</h2>
+
+<h1 class="mume-header" id="representations">Representations</h1>
 
 <ul>
-<li>understanding relationship between structure and function
+<li>The circuit view
 <ul>
-<li>for basic science</li>
-<li>and for discovering new therapies
-<ul>
-<li>optimize therapeutic targets for existing approaches</li>
+<li>(A) &#x2192; (B) &#x2194; (C)</li>
 </ul>
 </li>
+<li>The dynamical system view</li>
 </ul>
-</li>
-</ul>
-<h2 class="mume-header" id="how-causal-methods-for-network-discovery-from-time-series">How? - Causal methods for network discovery from time-series</h2>
-
-<ul>
-<li>Challenges faced when estimating network connectivity
-<ul>
-<li>contributions from multiple sources overlap</li>
-<li>confound from common-input</li>
-<li>several equivalent hypotheses</li>
-</ul>
-</li>
-<li>measures of dependence
-<ul>
-<li>see <a href="https://arxiv.org/pdf/2003.03887.pdf">&quot;Assessing the significance of directed and multivariate dependence measures&quot;</a>,<br>
-, &quot;Unifying Pairwise Interactions in Complex Dynamics&quot;, and technical_questions.md for comparisons</li>
-<li>correlation (granger causality, cross-correlation)</li>
-<li>info theoretic (transfer entropy)</li>
-<li>contemporanoues v.s. time-directed</li>
-</ul>
-</li>
-<li>role of conditioning
-<ul>
-<li>bivariate v.s. multivariate approaches</li>
-</ul>
-</li>
-<li><em>( statistical testing )</em>
-<ul>
-<li>need for group effect and post-hoc tests</li>
-<li>issue of multiple comparisons</li>
-<li><code>in the end we were leaning on IDTxl for this... may be appropriate to leave this out of scope</code></li>
-</ul>
-</li>
-<li><em>( perspective on role, limitations of granger causality in neuro )</em>
-<ul>
-<li><code>are some of these limitations alleviated by intervention?</code>*</li>
-</ul>
-</li>
-<li><em>cite J.Runge</em></li>
-</ul>
-<h2 class="mume-header" id="interventions-in-neuro">Interventions in neuro</h2>
-
-  <details><summary> figure sketch &#x1F5BC;&#xFE0F; </summary>
-<p><img src="figures/misc_figure_sketches/neuro_intervention_background_sketch.png" alt></p>
-  </details>
-<ul>
-<li><em>(walkthrough from passive, open-loop, closed-loop with historic examples)</em>
-<ul>
-<li><strong>passive</strong> detect seizure from EEG</li>
-<li><strong>open-loop</strong> Penfield discovers spatial map of senses by electrical stimulation</li>
-<li><strong>lesion studies</strong> in neuro
-<ul>
-<li>disadvantages of lesioning</li>
-</ul>
-</li>
-<li><strong>closed-loop</strong> Hodgkin, Huxley discover the role of ion channels in generating action potentials through voltage clamp</li>
-<li>What is closed-loop control?
-<ul>
-<li>Responsive and per-sample feedback control in neuro</li>
-<li>Comparison to standard neuro system identification procedures (stim, lesions)</li>
-<li>Stanley, Rozell prior work in closed-loop opto</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 class="mume-header" id="role-of-interventions-in-causal-inference">Role of interventions in causal inference</h2>
-
-<ul>
-<li>core idea is that &quot;stronger&quot; interventions lead to &quot;higher inferential power&quot;
-<ul>
-<li>may mean identifying circuits with less data</li>
-<li>but may also mean distinguishing circuits which may have been &quot;observationally equivalent&quot; under weaker interventions</li>
-<li>summarize there&apos;s both a <em>&quot;graded/quantitative&quot;</em> advantage (less data, higher SNR) and sometimes an additional <em>&quot;categorical/qualitative&quot;</em> advantage
-<ul>
-<li>no amount of observational data will distinguish circuits in the same equivalence class
-<ul>
-<li>but intervention might</li>
-</ul>
-</li>
-<li>fancier inference algorithms are also insufficient<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Highlight that the impact of interventions may generalize across any particular choice of inference algorithm</strong></li>
-<li>intervention types<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Expt.</th>
-<th>Causal</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>observe</td>
-<td>correlations</td>
-</tr>
-<tr>
-<td>condition</td>
-<td>adjusting, partial correlations</td>
-</tr>
-<tr>
-<td>perturb</td>
-<td>x+= val, instrumental variables?</td>
-</tr>
-<tr>
-<td>&#x21AA; sweep input</td>
-<td>x+= <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x2200;</mi><mi>v</mi><mo>&#x2208;</mo><mtext>values</mtext></mrow><annotation encoding="application/x-tex">&#x2200;v \in {\text{values}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord">&#x2200;</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x2208;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord"><span class="mord text"><span class="mord">values</span></span></span></span></span></span></td>
-</tr>
-<tr>
-<td>clamp</td>
-<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>do</mtext><mo stretchy="false">(</mo><mi>x</mi><mo>&#x21D0;</mo><mtext>val</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{do}(x&#x21D0;\text{val})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">do</span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x21D0;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">val</span></span><span class="mclose">)</span></span></span></span></td>
-</tr>
-<tr>
-<td>&#x21AA; lesion</td>
-<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>do</mtext><mo stretchy="false">(</mo><mi>x</mi><mo>&#x21D0;</mo><mi mathvariant="normal">&#x2205;</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{do}(x&#x21D0;\empty)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">do</span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x21D0;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">&#x2205;</span><span class="mclose">)</span></span></span></span></td>
-</tr>
-<tr>
-<td>&#x21AA; sweep output<sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup></td>
-<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>do</mtext><mo stretchy="false">(</mo><mi>x</mi><mo>&#x21D0;</mo><mi mathvariant="normal">&#x2200;</mi><mi>v</mi><mo>&#x2208;</mo><mtext>values</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{do}(x&#x21D0;&#x2200;v \in {\text{values}} )</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">do</span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x21D0;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord">&#x2200;</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x2208;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord text"><span class="mord">values</span></span></span><span class="mclose">)</span></span></span></span></td>
-</tr>
-</tbody>
-</table>
-<h2 class="mume-header" id="multiple-complementary-perspectives-representations-of-the-same-underlying-network-structure">Multiple complementary perspectives (representations) of the same underlying network structure:</h2>
-
-<img src="figures/core_figure_sketches/figure2_sketch.png" width="500">
-<img src="figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500">
-- The circuit view
-  - (A) &#x2192; (B) &#x2194; (C)
-- The dynamical system view
 <p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo fence="true">{</mo><mtable rowspacing="0.36em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msup><mi>x</mi><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup><mo>=</mo><mi>A</mi><mi>x</mi><mo>+</mo><mi>B</mi><mi>u</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>y</mi><mo>=</mo><mi>C</mi><mi>x</mi><mo>+</mo><mi>&#x3B7;</mi></mrow></mstyle></mtd></mtr></mtable></mrow><annotation encoding="application/x-tex">\begin{cases}{x&apos; = Ax + Bu}\\
 y=Cx+\eta
 \end{cases}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3em;vertical-align:-1.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">u</span></span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3B7;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
@@ -631,19 +391,18 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 <h2 class="mume-header" id="reachability">Reachability</h2>
 
 <ul>
-<li>concept of <strong>binary reachability</strong> as a &quot;best case scenario<sup class="footnote-ref"><a href="#fn8" id="fnref8">[8]</a></sup>&quot; for identification.
+<li>concept of <strong>binary reachability</strong> as a &quot;best case scenario&quot; for identification.
 <ul>
 <li>binary reachability describes which pairs of nodes we expect to have any correlation</li>
 <li>can be used to predict &quot;equivalence classes&quot;, i.e. circuits which may be indistinguishable under certain interventions</li>
 <li>how binary reachability is computed
 <ul>
-<li>series of powers corresponds to projecting the network forward in time to see n-steps ahead</li>
 <li>[...equations here...]</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>graded(weighted) reachability</strong> can help predict the influence of parameter values (e.g. edge weights, time-constants) on identifiability
+<li><strong>graded reachability</strong> can help predict the influence of parameter values (e.g. edge weights, time-constants) on identifiability
 <ul>
 <li>quantifies impact of inputs, noise on outputs</li>
 <li>easiest to describe/understand in linear-gaussian setting</li>
@@ -651,12 +410,9 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 </ul>
 </li>
 </ul>
-<p><a name="figure-reachability" href></a><br>
-&#x1F3DE;&#xFE0F; <strong>Figure:</strong> illustrate reachability <em>(skip for now)</em> &#x1F3DE;&#xFE0F;</p>
 <h2 class="mume-header" id="understanding-identification-through-derived-properties-of-circuits-reachability-rules">Understanding identification through derived properties of circuits (reachability rules)</h2>
 
 <ul>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox"> &#x2702;&#xFE0F; <code>more appropriate for methods section?</code> &#x2702;&#xFE0F;</li>
 <li>connect <strong>binary reachability</strong> to classes of ambiguity
 <ul>
 <li>a pair of networks are ambiguous (given some intervention) if they are in the same markov equivalence class</li>
@@ -670,486 +426,184 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 </ul>
 </li>
 </ul>
-<p><a name="figure-demo" href></a></p>
-<h2 class="mume-header" id="figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits-walkthrough">Figure DEMO: Applying CLINC to distinguish a pair of circuits (walkthrough)</h2>
+<p><code>(text from proposal)</code><br>
+To perform this evaluation, I used a simple derived quantity of the circuit&#x2019;s adjacency matrix: its reachability (Skiena 2011). This quantity measures which nodes can be &#x201C;reached&#x201D; by direct and indirect connections starting from a target node. Moreover, this measure allows us to predict which node&#x2019;s signals will be correlated. If the reachability of two circuits are equal, they will have similar correlational structure and be difficult to distinguish with that level of intervention. For instance looking at hypotheses for cortical gain control in open-loop (Figure 12, left column), in both circuit 2a and 2b, PV cells are reachable from the Som cell node since Som activity can influence PV activity indirectly through the Pyr node. As such these circuits cannot be distinguished in open loop.</p>
+<p>If the reachability of two circuits are unequal for a given intervention, differences in correlation between observed regions will be sufficient to distinguish between the two hypotheses. Looking at these same circuits under closed-loop control of the pyramidal population (Figure 12, right column), dashed lines reveal that there is no longer an indirect functional connection from Som to PV cells. As such, in circuit 2a, PV cells are no longer reachable from the Som population, whereas they are reachable under circuit 2b. This difference in reachability corresponds to the difference in correlational structure that allows us to distinguish these two hypotheses under closed-loop control.</p>
+<p>( see also <code>sketches_and_notation/notation0_reachability.md</code>, <code>walkthrough_EI_dissection.md</code> )</p>
+<img src="figures/core_figure_sketches/figure2_sketch.png" width="500">
+<img src="figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500">
+<h2 class="mume-header" id="figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits">Figure DEMO: Applying CLINC to distinguish a pair of circuits</h2>
 
-<ul>
-<li>
-<p>intuitive explanation using binary reachability rules</p>
-<!-- - consider postponing until we introduce intervention? 
-- i.e. have one figure that walks through both reachability and impact of intervention -->
-</li>
-<li>
-<p><em>point to the rest of the paper as deepening and generalizing these ideas</em></p>
-</li>
-<li>
-<p><em>(example papers - Advancing functional connectivity research from association to causation, Combining multiple functional connectivity methods to improve causal inferences)</em></p>
-</li>
-<li>
-<p>connect <strong>graded reachability</strong> to ID-SNR</p>
-<ul>
-<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">I</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">N</mi><mi mathvariant="normal">R</mi></mrow><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mathrm{IDSNR}_{ij}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">IDSNR</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">ij</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span> measures the strength of signal related to the connection <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>&#x2192;</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i&#x2192;j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x2192;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span> relative to in the output of node <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span></li>
-<li>for true, direct connections this quantity increasing means a (true positive) connection will be identified more easily (with high certainty, requiring less data)</li>
-<li>for false or indirect connections, this quantity increasing means a false positive connection is more likely to be identified</li>
-<li>as a result we want to maximize IDSNR for true links, and minimize it for false/indirect links<br>
-<img src="figures/misc_figure_sketches/intervention_identifiability_concept.png" alt></li>
-</ul>
-</li>
-</ul>
 <hr>
-<h1 class="mume-header" id="methods">Methods</h1>
+<h1 class="mume-header" id="theory-prediction">Theory / Prediction</h1>
 
-<p><img src="code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png" alt></p>
-<h2 class="mume-header" id="network-simulations">Network simulations</h2>
+<h2 class="mume-header" id="computing-reachability-theory">Computing reachability (theory)</h2>
 
-<p><a name="figure-gaussian" href></a><br>
-<img src="figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png" alt></p>
-<details class="mume-header" id="figure-gaussian-gaussian-and-spiking-networks-simulated-in-brian2"><summary>see also</summary>
-<p><img src="figures/whiteboard/signal_aggregation.jpeg" alt></p>
-</details>
-###  Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2
-
-<p>&#x1F961; <strong>takeaway:</strong> ??? &#x1F6A7;</p>
-<ul>
-<li>all networks built on <a href="https://elifesciences.org/articles/47314">Brian2</a> spiking neural network simulator</li>
-<li>(delayed) linear-gaussian network
-<ul>
-<li>required custom functionality to implement
-<ul>
-<li><a href="https://github.com/awillats/brian_delayed_gaussian">[brian_delayed_gaussian] repository </a></li>
-<li>allows us to understand impact of variability in simplest setting</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>spiking network
-<ul>
-<li>introduces additional difficulties associated with estimation based on spiking observations, nonlinearities</li>
-</ul>
-</li>
-</ul>
-<h2 class="mume-header" id="implementing-interventions">Implementing interventions</h2>
-
-<ul>
-<li>
-<p>passive observation</p>
-</li>
-<li>
-<p>open-loop stimulation</p>
-<ul>
-<li>simulated as direct current injection</li>
-<li>but uniform across a population</li>
-<li>( see <a href="https://cleosim.readthedocs.io/en/latest/index.html">Kyle Johnsen&apos;s cleosim toolbox</a> for more detailed simulation of stimulation )</li>
-<li>&#x26A0;&#xFE0F; closed-loop replay ? &#x26A0;&#xFE0F;</li>
-</ul>
-</li>
-<li>
-<p>closed-loop stimulation</p>
-<ul>
-<li>approaches for control
-<ul>
-<li>going with &quot;model-free&quot; PID control of output rates</li>
-</ul>
-</li>
-<li>comparison to randomization in traditional experiment design<sup class="footnote-ref"><a href="#fn9" id="fnref9">[9]</a></sup></li>
-<li>controller stregnth
-<ul>
-<li>gain</li>
-<li>bandwidth</li>
-</ul>
-</li>
-<li>controller delay</li>
-</ul>
-</li>
-<li>
-<p>additional stimulation factors (open- &amp; closed-loop)</p>
-<details><summary> &#x21AA;&#xFE0F; click to expand </summary>
-<ul>
-<li><strong>stimulus location</strong>
-<ul>
-<li>single-site</li>
-<li>multi-site</li>
-<li>location relative to features of network
-<ul>
-<li>in-degree/out-degree</li>
-<li>upstream/downstream of hypothesized connection</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>stimulus intensity
-<ul>
-<li>expected mean output rate</li>
-<li>frequency content</li>
-</ul>
-</li></ul></details>
-</li>
-</ul>
-
-
-<p><img src="figures/misc_figure_sketches/intervention_eg.png" alt></p>
-<h2 class="mume-header" id="extracting-circuit-estimates">Extracting circuit estimates</h2>
-
-<p><a name="figure-pipeline" href></a><br>
-<img src="figures/misc_figure_sketches/network_estimation_pipeline_sketch.png" alt></p>
-<details class="mume-header" id="figure-pipeline-process-of-detecting-connections-in-a-network-model"><summary> see also </summary>
-<p><img src="figures/whiteboard/methods_xcorr_features.jpeg" alt><br>
-<img src="figures/whiteboard/methods_circuit_xcorr_sketch.png" alt><br>
-<img src="figures/core_figure_sketches/figure4a_sketch.png" alt><br>
-<img src="figures/misc_figure_sketches/data_xcorr_gaussian.png" alt></p>
-</details>
-###  Figure PIPELINE: Process of detecting connections in a network model
-
-<p>&#x1F961; <strong>takeaway:</strong> ??? &#x1F6A7;</p>
-<h3 class="mume-header" id="outputs-of-network">Outputs of network</h3>
-
-<ul>
-<li>spikes from populations of neurons</li>
-</ul>
-<h3 class="mume-header" id="lagged-cross-correlation">lagged cross-correlation</h3>
-
-<ul>
-<li>connection to / equivalence with Granger Causality (GC)
-<ul>
-<li>review of GC in neuro</li>
-<li>requisite assumptions</li>
-<li>limitations of GC <sup class="footnote-ref"><a href="#fn10" id="fnref10">[10]</a></sup></li>
-</ul>
-</li>
-<li>xcorr features
-<ul>
-<li>peak-SNR</li>
-<li>prominence</li>
-<li>time of peak</li>
-</ul>
-</li>
-<li>window of time-lags considered for direct connections
-<ul>
-<li>some multiple of expected synaptic delay</li>
-</ul>
-</li>
-</ul>
-<h3 class="mume-header" id="multivariate-transfer-entropy-mute">multivariate transfer entropy (muTE)</h3>
-
-<ul>
-<li>advantages above usual GC approach</li>
-</ul>
-<h3 class="mume-header" id="statistical-testing">statistical testing</h3>
-
-<ul>
-<li><em>for muTE, handled by IDTxl</em>
-<ul>
-<li>includes appropriate multiple-comparison testing</li>
-</ul>
-</li>
-</ul>
-<h3 class="mume-header" id="quantifying-successful-identification">Quantifying successful identification</h3>
-
-<ul>
-<li>binary &quot;classification&quot; metrics
-<ul>
-<li>accuracy, F1 score (Wang &amp; Shanechi 2019)</li>
-<li>AUC (Pastore)</li>
-<li>Jaccard index (Lepage, Ching, and Kramer 2013)</li>
-<li>true/false positives, true/false negatives</li>
-</ul>
-</li>
-<li>graded metrics (<em>not a core focus here</em>)
-<ul>
-<li>distance between identified connection strength and ground-truth
-<ul>
-<li>MSE <a href="https://www.biorxiv.org/content/10.1101/463760v2">(Lepperod et al. 2018)</a></li>
-</ul>
-</li>
-<li>error in output reconstruction</li>
-</ul>
-</li>
-<li><em>relevant &quot;negative control&quot; for comparison (?)</em>
-<ul>
-<li>identified connectivity for random network?</li>
-<li>some shuffled data-surrogate procedure? <sup class="footnote-ref"><a href="#fn11" id="fnref11">[11]</a></sup></li>
-</ul>
-</li>
-<li><em>relevant &quot;positive control&quot; for comparison (?)</em></li>
-</ul>
-<h2 class="mume-header" id="extracting-circuit-estimates-1">Extracting circuit estimates</h2>
-
-<h2 class="mume-header" id="predicting-correlation-structure">Predicting correlation structure</h2>
+<h2 class="mume-header" id="predicting-correlation-structure-theory">Predicting correlation structure (theory)</h2>
 
 <p><img src="figures/misc_figure_sketches/intervention_identifiability_concept.png" alt></p>
+<hr>
+<h1 class="mume-header" id="simulation">Simulation</h1>
+
+<h2 class="mume-header" id="network-simulations-simulation">Network simulations (simulation)</h2>
+
+<h2 class="mume-header" id="implementing-interventions-simulation">Implementing interventions (simulation)</h2>
+
+<h2 class="mume-header" id="extracting-circuit-estimates-empirical">Extracting circuit estimates (empirical)</h2>
+
 <h2 class="mume-header" id="information-theoretic-measures-of-hypothesis-ambiguity">Information-theoretic measures of hypothesis ambiguity</h2>
 
 <hr>
 <h1 class="mume-header" id="results">Results</h1>
 
-<p><a name="figure-binary" href></a></p>
-<h2 class="mume-header" id="binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties">[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties</h2>
+<h2 class="mume-header" id="interaction-of-intervention-on-circuit-estimation">Interaction of intervention on circuit estimation</h2>
 
+<details><summary>going to assume these have already been discussed</summary>
 <ul>
-<li>proportion of each ambiguity class as a function of circuit size</li>
-<li>possibly weight proportions by observed frequency of triplet motifs<br>
-&#x2702;&#xFE0F;&#xFE0F; <strong>Figure:</strong> ambiguity class by circuit size&#x2702;&#xFE0F; &#x1F3DE;&#xFE0F;
-<ul>
-<li>SCOPE: cut?<br>
-&#x1F961; <strong>takeaway:</strong> ??? &#x1F6A7;</li>
-</ul>
-</li>
-</ul>
-<h2 class="mume-header" id="characterization-of-network-estimation-performance-impact-of-node-network-parameters">Characterization of network estimation performance - Impact of node, network parameters</h2>
-
-<ul>
-<li>
-<p><strong>gaussian network simulation</strong></p>
-<details><summary> &#x21AA;&#xFE0F; click to expand </summary>
-<ul>
-<li><strong>parameters</strong>
-<ul>
-<li>synaptic (edge) weights - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span></span></span></span></li>
-<li>synaptic (edge) delay - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B4;</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">&#x3B4;</span></span></span></span></li>
-<li>time-constants - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C4;</mi></mrow><annotation encoding="application/x-tex">\tau</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.1132em;">&#x3C4;</span></span></span></span></li>
-<li>node noise - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C3;</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C3;</span></span></span></span></li>
-</ul>
-</li>
-<li><strong>expected results</strong>
-<ul>
-<li>weight increases xcorr peaks</li>
-<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C4;</mi></mrow><annotation encoding="application/x-tex">\tau</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.1132em;">&#x3C4;</span></span></span></span> blurs xcorr peak in time</li>
-<li>delay <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B4;</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">&#x3B4;</span></span></span></span> increases time-separability of sources
-<ul>
-<li>at <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B4;</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\delta = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">&#x3B4;</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span> limit, connections are harder to distinguish
-<ul>
-<li>especially direct v.s. indirect</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>noise <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C3;</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C3;</span></span></span></span> has a &quot;location specific&quot; impact describe by IDSNR transfer function
-<ul>
-<li>generally, high noise &quot;upstream&quot; of a connection increases the strength of a hypothesized connection
-<ul>
-<li>as long as any path is present between <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>&#x2192;</mo><mo>&#x2192;</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i&#x2192;&#x2192;j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x2192;&#x2192;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span></li>
-</ul>
-</li>
-<li>high noise &quot;downstream&quot; of a connection, but impinging on the output node competes with / blurs / corrupts</li>
-<li><strong>The location-dependent impact of noise on connection identifiability may be one key way in which different forms of intervention impact circuit estimates</strong></li>
-</ul>
-</li>
-</ul>
-</li>
+<li>predicting correlation</li>
+<li>measuring dependence</li>
+<li>markov equivalence</li>
 </ul>
 </details>
+<hr>
+<h3 class="mume-header" id="intervening-provides-categorical-improvements-in-inference-power-beyond-passive-observation">Intervening provides (categorical) improvements in inference power beyond passive observation</h3>
+
+<blockquote>
+<p><strong>Theme B.</strong> Experiments for circuit inference can be thought of as <strong>narrowing the set of plausible explanations</strong>, refining a hypotheses space</p>
+</blockquote>
+<p>&#x1F6A7; figure request: flowchart for steps of intervention experiment &#x1F6A7;</p>
+<p><strong>We envision the structure of an experiment<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></strong> to include the following broad stages:</p>
+<ol>
+<li>
+<p>First, explicitly <strong>enumerate the set of hypothesized circuits.</strong> Hypotheses about the structure of the circuit would be based on multiple sources of information including prior recordings, anatomical constraints revealed by <code>experiments where you look at the fiber bundles connecting regions</code>, or commonly observed connectivity patterns in other systems <code>[&#x1F6A7; add other sources of priors for circuit hypotheses]</code><sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup><sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> These hypotheses should be expressed as a set of circuits (adjacency matrices) each with a probability representing the prior belief about the relative likelihood of these options.</p>
 </li>
 <li>
-<p><strong>spiking network simulation</strong></p>
+<p>Second, <em>in silico</em>, <strong>forecast patterns of correlation</strong> which could result from applying candidate interventions.<br>
+A detailed forecast of the observed outputs could be achieved by simulating detailed biophysical networks across both candidate interventions, and hypothesized ground-truth circuits. However, for large networks or large hypothesis sets this may be infeasible. Instead, using the reachability representation of a linear (linearized) network we can succinctly and efficiently predict the observed correlations<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup> across nodes<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>. The methods described in <code>[ref. prediction methods]</code> allow us to anticipate how open and closed-loop interventions across nodes in the network might increase, decrease, or sever dependencies between node outputs.</p>
+</li>
+</ol>
+<ol start="3">
+<li><code>{Survey / analyze / compare / summarize}</code> <code>{diversity / equivalence / distinguishability of}</code> patterns of correlation across each hypothesized circuit.</li>
+</ol>
+<p>Our goal is to reduce the set of [...]</p>
 <ul>
-<li>all gaussian params, plus ...</li>
-<li>spiking nonlinearity
+<li>if there are many distinct patterns of correlation for a given intervention depending on the ground-truth circuit structure then an experimenter is likely to learn a lot
 <ul>
-<li>gain</li>
-<li>bias</li>
-<li>spiking threshold</li>
+<li>then we can consider these hypotheses to be &quot;distinguishable&quot; under that intervention</li>
+<li>this situation would allow</li>
 </ul>
 </li>
 </ul>
+<p>However, since the ground-truth circuit is not known <em>a priori</em>, it is useful to measure the expected information gained across the set of possible circuits</p>
+<ul>
+<li>uniqueness / diversity of observed patterns can be summarized across a hypothesis set with (Shannon) entropy, a scalar which quantifies the expected information gained <code>[...]</code></li>
+</ul>
+<ol start="4">
+<li>
+<p><em>(in expt. or detailed biophysical simulation)</em> Apply intervention, collect data**</p>
+</li>
+<li>
+<p><strong>Given the observed dependency pattern, form a posterior belief over hypotheses</strong></p>
+</li>
+</ol>
+<ul>
+<li>remaining entropy quantifies the &quot;realized&quot; information (which may be larger or smaller than the expectation), and equivalently the remaining size and uncertainty of the posterior belief over the hypothesis set</li>
+<li>Can choose the most likely (MAP) circuit amongst this posterior hypotheses
+<ul>
+<li><em>(optionally, this posterior distribution can be used as an updated prior for the next iteration)</em></li>
+</ul>
 </li>
 </ul>
-<p><a name="figure-props" href></a><br>
-<img src="figures/misc_figure_sketches/gaussian_impact_weight.png" alt><br>
-<img src="figures/misc_figure_sketches/gaussian_impact_delay.png" alt><br>
-<img src="figures/misc_figure_sketches/intrinsic_network_params.png" alt></p>
-<h3 class="mume-header" id="figure-props-impact-of-intrinsic-network-properties-on-identifiability">Figure PROPS: impact of intrinsic network properties on identifiability</h3>
-
-<p>&#x1F961; <strong>takeaway:</strong> ??? &#x1F6A7;</p>
+<hr>
+<p>Next, we apply (steps 1-3 of) this circuit search procedure to a collection of closely related hypotheses for 3 interacting nodes<sup class="footnote-ref"><a href="#fn5" id="fnref5:1">[5:1]</a></sup> to illustrate the impact of intervention.</p>
+<p><img src="../figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png" alt><br>
+<strong>Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses</strong></p>
+<p><strong>Why does closed-loop control provide a categorical advantage?</strong> Because it severs indirect links</p>
 <ul>
-<li><em>(e.g. Identification of excitatory-inhibitory links and network topology in large-scale neuronal assemblies from multi-electrode recordings)</em></li>
-<li>comparison to predicted IDSNR</li>
-<li>&#x26A0;&#xFE0F; don&apos;t focus too much on intrinsic parameters, that is not a core takeaway &#x26A0;&#xFE0F;</li>
+<li>this is especially relevant in recurrently connected networks where the reachability matrix becomes more dense.</li>
+<li>more stuff is connected to other stuff, so there are more indirect connections, and the resulting correlations look more similar (more circuits in the equivalence class)</li>
 </ul>
-<p><a name="figure-predict" href></a><br>
-<img src="figures/misc_figure_sketches/quant_r2_prediction_common.png" alt><br>
-<img src="figures/whiteboard/sketch_quant_OL_CL_variance.png" alt><br>
-&#x1F3DE;&#xFE0F; &#x1F6A7;</p>
-<h3 class="mume-header" id="figure-predict-comparing-predicted-and-empirical-identification-performance">Figure PREDICT: Comparing predicted and empirical identification performance</h3>
-
-<p>&#x1F961; <strong>takeaway:</strong> ??? &#x1F6A7;</p>
-<ul>
-<li>layout: scatterplot and curve fit of emprical vs predicted accuracy (false positives, false negatives)
-<ul>
-<li>segmented by circuit type?</li>
-</ul>
-</li>
-<li>could be part of figures above</li>
-</ul>
-<h2 class="mume-header" id="impact-of-intervention">Impact of intervention</h2>
-
-<p><a name="figure-disambig" href></a><br>
-<img src="figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png" alt><br>
-&#x1F3DE;&#xFE0F;</p>
-<h3 class="mume-header" id="figure-disambig-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses">Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses</h3>
-
-  <!-- - SCOPE: can this be combined with case-study walkthrough? -->
-<p>&#x1F961; <strong>takeaway:</strong> ??? &#x1F6A7;</p>
-<ul>
-<li>like a quantitative version of <a href="#figure-binary">binary proportion figure</a></li>
-<li>in example: shows a dataset with many correlations, multiple plausible circuit hypotheses
+<hr>
+<p><strong>Where you intervene</strong> strongly determines the inference power of your experiment.</p>
+<p><strong>secondary:</strong> having (binary) prediction helps capture this relationship</p>
+<p>shows a dataset with many correlations, multiple plausible circuit hypotheses</p>
 <ul>
 <li>patterns of correlation become more specific with increasing intervention strength</li>
-</ul>
-</li>
 <li>in aggregate: focuses on reduced bias, higher accuracy for &quot;infinite&quot; data limit</li>
 <li>closed-loop &gt; open-loop &gt; passive</li>
 </ul>
-<p><a name="figure-data" href></a><br>
-<img src="figures/literature_figs/spike_field_shanechi_crop.png" alt><br>
-<img src="figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png" alt></p>
-<h3 class="mume-header" id="figure-data-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data">Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data</h3>
+<h3 class="mume-header" id="stronger-intervention-results-in-more-efficient-accuracy-inference">Stronger intervention results in more efficient, accuracy inference</h3>
 
-<p>&#x1F961; <strong>takeaway:</strong> ??? &#x1F6A7;</p>
+<blockquote>
 <ul>
-<li><em>metric:</em> # of samples required to reach accuracy threshold</li>
-<li>closed-loop &gt; open-loop &gt; passive</li>
+<li>quantitative</li>
+<li>&quot;here&apos;s additional nuance&quot;</li>
+<li></li>
 </ul>
-<h2 class="mume-header" id="impact-of-circuit-structure">impact of circuit structure</h2>
-
+</blockquote>
+<p><img src="../figures/misc_figure_sketches/quant_r2_prediction_common.png" alt></p>
+<p><strong>Figure VAR: Stronger intervention allows better control of covariance</strong></p>
+<p><strong>shaping covariance</strong> is the focus of this paper.</p>
 <ul>
-<li>degree of nodes
+<li>this is a key advantage of closed-loop control
 <ul>
-<li>in/out-degree</li>
-<li>of source - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span></li>
-<li>of target - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span></li>
+<li>which can have bidirectional influence over variance</li>
 </ul>
 </li>
-<li>presence of indirect correlations</li>
-<li>presence of feedback loops</li>
-<li># of circuits in equivalence class</li>
 </ul>
-<p><a name="figure-motif" href></a><br>
-<img src="figures/misc_figure_sketches/gaussian_impact_relative_sigma.png" alt><br>
-<img src="figures/misc_figure_sketches/filler_circuit_type_2021_10.png" alt><br>
-&#x26A0;&#xFE0F; numbers in this figure are out-dated, likely not representative &#x26A0;&#xFE0F;<br>
-<img src="figures/whiteboard/accuracy_vs_degree.png" alt></p>
-<h3 class="mume-header" id="figure-motif-interaction-of-network-structure-and-intervention-location-on-identifiability">Figure MOTIF: Interaction of network structure and intervention location on identifiability</h3>
+<blockquote>
+<p>while you can deliver open-loop inputs with titrated amounts of variance, you&apos;re often only able to add variance rather than subtract it, and the amount of variance you would add to the system is hard to predict a priori</p>
+</blockquote>
+<ul>
+<li>having (quantitative) prediction helps capture this relationship
+<ul>
+<li><strong>Figure PREDICT: Comparing predicted and empirical correlation, identification performance</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 class="mume-header" id="related-sections">Related sections</h3>
 
-<p>&#x1F961; <strong>takeaway:</strong> ??? &#x1F6A7;</p>
+<ul>
+<li>
+<p>Quantitative advantages -- higher accuracy &amp; data efficiency<br>
+Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data<br>
+<img src="figures/literature_figs/spike_field_shanechi_crop.png" alt><br>
+<img src="figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png" alt></p>
+</li>
+<li>
+<p><strong>impact of circuit structure</strong></p>
+<ul>
+<li>Figure MOTIF: Interaction of network structure and intervention location on identifiability</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="interaction-of-intervention-circuit-structure">Interaction of intervention &amp; circuit structure</h2>
+
+<p><strong>Figure MOTIF: Interaction of network structure and intervention location on identifiability</strong></p>
 <hr>
 <h1 class="mume-header" id="discussion">Discussion</h1>
 
-<p><em>see also <a href="sketches_and_notation/discussion/limitations_future_work.md">limitations_future_work.md</a></em></p>
-<ul>
-<li>
-<p>Comparison to related work</p>
-<ul>
-<li>comparison to work in ANNs
-<ul>
-<li>Kording, fakhar</li>
-</ul>
-</li>
-<li>comparison to Shanechi</li>
-<li>comparison to Bassett &quot;network controllability&quot; view</li>
-</ul>
-</li>
-<li>
-<p>Limitations of evaluated interventions</p>
-<ul>
-<li>quantifying the impact of imperfect / realistic control</li>
-<li>barriers such as low spatial / temporal precision may prevent high-performing control</li>
-</ul>
-</li>
-<li>
-<p>Limitations of network extraction approach</p>
-<ul>
-<li>limitations of bivariate xcorr</li>
-<li>effect of design / hyperparameters
-<ul>
-<li>nonlinear TE estimators</li>
-<li>time bin size</li>
-</ul>
-</li>
-<li>extraction from spiking, firing rates, LFP</li>
-</ul>
-</li>
-<li>
-<p>Limitations of <strong>network simulation</strong></p>
-<ul>
-<li>small number of nodes</li>
-<li>simple neuron dynamics</li>
-<li>didn&apos;t focus on intricate connectivity that has been observed
-<ul>
-<li>future work - apply to more complex Brian2 network models</li>
-</ul>
-</li>
-<li>assumed measurement from entire network</li>
-<li>homogeneity in network parameters</li>
-<li>understanding mediating effect of spike counts</li>
-</ul>
-</li>
-<li>
-<p><strong>Recommendations for designing network discovery experiments</strong></p>
-<ul>
-<li>
-<p>At the experiment-design phase, analyze competing hypotheses</p>
-<ul>
-<li>through the lens of CLINC reachability / IDSNR</li>
-<li>evaluate what can be distinguished under different interventions</li>
-</ul>
-</li>
-<li>
-<p>A spectrum of interventions - pick the right tool for the job</p>
-<ul>
-<li>stronger interventions generally come with cost
-<ul>
-<li>increased experiment complexity</li>
-</ul>
-</li>
-<li>depending on challenges, similarity of hypothesized circuits...
-<ul>
-<li>passive observation may be enough</li>
-<li>or stronger interventions may be required</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Future work<br>
-<em>see also <a href="sketches_and_notation/discussion/limitations_future_work.md">limitations_future_work.md</a></em></p>
-</li>
-</ul>
-<hr>
+<h1 class="mume-header" id="references">References</h1>
+
 <h1 class="mume-header" id="supplement">Supplement</h1>
 
-<ul>
-<li>organization of clinc-gen, clinc-analysis codebases</li>
-</ul>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>we&apos;re currently treating this as &quot;axiomatic&quot; rather than explicitly demonstrating the value of a causal perspective. Also need to think about how much of our results rely on Causality&#x2122; versus broader graph theory / network theory / foundational statistics <a href="#fnref1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+<li id="fn1" class="footnote-item"><p>more than just an experiment, this is a &quot;hypothesis search.&quot; Is this procedure what we&apos;re going to brand as the &quot;CLINC&quot; process? <a href="#fnref1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
-<li id="fn2" class="footnote-item"><p>really talking about risk with respect to conclusions  of inference here (not being able to conclude much, or concluding a connection is present when it isn&apos;t), rather than risk of injury <a href="#fnref2" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+<li id="fn2" class="footnote-item"><p><strong>[future work]</strong> use causality + graph theory to find &quot;lurking look-alikes&quot; i.e. Markov-equivalent circuits <a href="#fnref2" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
-<li id="fn3" class="footnote-item"><p>the next most important decision is figuring out whether to use a high or low variance stimulus <a href="#fnref3" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+<li id="fn3" class="footnote-item"><p>should also enumerate assumptions about the dynamics of the network, signs of network weights, approximate timescales of interaction. <a href="#fnref3" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
-<li id="fn4" class="footnote-item"><p>this describes the &quot;brute force&quot; design procedure. more sophisticated optimization may be possible. <a href="#fnref4" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+<li id="fn4" class="footnote-item"><p>using binary reachability, we can be more general above predicting the &quot;direction&quot; of other measures of bivariate dependence like transfer entropy <a href="#fnref4" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
-<li id="fn5" class="footnote-item"><p>see abstract and abstract_extended for a more polished explanation. this has been pointed out by recent work <a href="#fnref5" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
-</li>
-<li id="fn6" class="footnote-item"><p>maybe this is more appropriate for supplement or discussion <a href="#fnref6" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
-</li>
-<li id="fn7" class="footnote-item"><p>see also <a href="https://en.wikipedia.org/wiki/Average_treatment_effect">average causal effect</a>. something like <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">E</mi><mo stretchy="false">[</mo><mi>y</mi><mi mathvariant="normal">&#x2223;</mi><mi>d</mi><mi>o</mi><mo stretchy="false">(</mo><mi>x</mi><mo>&#x21D0;</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">]</mo><mo>&#x2212;</mo><mi mathvariant="double-struck">E</mi><mo stretchy="false">[</mo><mi>y</mi><mi mathvariant="normal">&#x2223;</mi><mi>d</mi><mi>o</mi><mo stretchy="false">(</mo><mi>x</mi><mo>&#x21D0;</mo><mn>0</mn><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathbb{E}[y | do(x&#x21D0;1)] - \mathbb{E}[y | do(x&#x21D0;0)]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathbb">E</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord">&#x2223;</span><span class="mord mathnormal">d</span><span class="mord mathnormal">o</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x21D0;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathbb">E</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord">&#x2223;</span><span class="mord mathnormal">d</span><span class="mord mathnormal">o</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x21D0;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mclose">)]</span></span></span></span> <a href="#fnref7" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
-</li>
-<li id="fn8" class="footnote-item"><p>best-case meaning, parameters aren&apos;t pathological, you&apos;ve collected enough data etc. <a href="#fnref8" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
-</li>
-<li id="fn9" class="footnote-item"><p>see <a href="sketches_and_notation/intro-background/causal_vs_expt.md">causal_vs_expt.md</a> <a href="#fnref9" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
-</li>
-<li id="fn10" class="footnote-item"><p>a study of problems encountered in Granger causality analysis from a neuroscience perspective <a href="#fnref10" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
-</li>
-<li id="fn11" class="footnote-item"><p>&quot;METHODS FOR STUDYING FUNCTIONAL INTERACTIONS AMONG NEURONAL POPULATIONS&quot; - comes with MATLAB code, discusses time and trial shuffling, decomposing information (synergistic, redundant, independent) <a href="#fnref11" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
+<li id="fn5" class="footnote-item"><p>nodes in such a graphical model may represent populations of neurons, distinct cell-types, different regions within the brain, or components of a latent variable represented in the brain. <a href="#fnref5" class="footnote-backref">&#x21A9;&#xFE0E;</a> <a href="#fnref5:1" class="footnote-backref">&#x21A9;&#xFE0E;</a></p>
 </li>
 </ol>
 </section>
-</div>
+
       </div>
       
       
