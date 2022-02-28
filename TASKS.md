@@ -1,16 +1,37 @@
 # Top 3 highest priority writing / planning tasks:
 
 ## Monday Feb 28th
+- [.] scaffold methods, results - @adam 
+  - **planning**
+    - for now, set aside unresolved technical details 
+    - topic sentences for each paragraph
+    - how many figures?
+    
+  - [.] 🧿 review outline, check which outline is most up-to-date
+    - @ outline.md
+    - @ workflowy
+    - ( ) sync both ways
+    - [ ] archive old stuff
+    
+  - [ ] map chapter files if needed
+  - [ ] write topic sentences into outline, than manuscript
+  - [ ] write results forecasts 
+  - *switch to figures*
+  - [ ] describe figures 
+  
 - [ ] Resketch figures - @adam
   - make sure they're aligned towards a core takeaway 
   - make them concrete
   - write the takeaway via caption 
-- [ ] scaffold methods, results - @adam 
-  - for now, set aside unresolved technical details 
-  - topic sentences for each paragraph
+  - [ ] review outline 
+  - [ ] rescan demos folder, slides for new material 
+  - [ ] point to where source files (svg / g-drawing)
+  
 - [ ] gather info from citations for intro - @matt 
 - [ ] automatic writing session - results - @matt, @adam
   - evaluate alignment with core takeaways
+  - (look at teletype?)
+  
 - [ ] automatic writing session - methods - @matt, @adam
 
 ----

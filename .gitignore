@@ -1,5 +1,7 @@
-# ignore aux files for overleaf 
 *__pycache__*
+*.swp
+
+# ignore aux files for overleaf 
 *.aux
 *.log
 *.out
