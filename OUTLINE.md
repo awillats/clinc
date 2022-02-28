@@ -68,7 +68,6 @@
 --- 
 # Table of Contents {ignore = true}
 
-
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=3 orderedList=false} -->
 <!-- code_chunk_output -->
 
@@ -424,7 +423,7 @@ y=Cx+\eta
 ![](figures/whiteboard/sketch_quant_OL_CL_variance.png)
 🏞️ 🚧 
 
-### Figure PREDICT: Comparing predicted and emprical identification performance
+### Figure PREDICT: Comparing predicted and empirical identification performance
   🥡 **takeaway:** ??? 🚧
   - layout: scatterplot and curve fit of emprical vs predicted accuracy (false positives, false negatives)
     - segmented by circuit type?

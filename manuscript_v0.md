@@ -13,6 +13,9 @@
   - [Estimating causal interactions in the brain](#estimating-causal-interactions-in-the-brain)
   - [Interventions in neuroscience & causal inference](#interventions-in-neuroscience-causal-inference)
   - [Representations & reachability](#representations-reachability)
+- [Representations](#representations)
+  - [Reachability](#reachability)
+  - [Understanding identification through derived properties of circuits (reachability rules)](#understanding-identification-through-derived-properties-of-circuits-reachability-rules)
   - [Figure DEMO: Applying CLINC to distinguish a pair of circuits](#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits)
 - [Theory / Prediction](#theory-prediction)
   - [Computing reachability (theory)](#computing-reachability-theory)
@@ -23,8 +26,11 @@
   - [Extracting circuit estimates (empirical)](#extracting-circuit-estimates-empirical)
   - [Information-theoretic measures of hypothesis ambiguity](#information-theoretic-measures-of-hypothesis-ambiguity)
 - [Results](#results)
-  - [Impact of node, network parameters on estimation performance](#impact-of-node-network-parameters-on-estimation-performance)
-  - [Impact of intervention & circuit structure](#impact-of-intervention-circuit-structure)
+  - [Interaction of intervention on circuit estimation](#interaction-of-intervention-on-circuit-estimation)
+    - [Intervening provides (categorical) improvements in inference power beyond passive observation](#intervening-provides-categorical-improvements-in-inference-power-beyond-passive-observation)
+    - [Stronger intervention results in more efficient, accuracy inference](#stronger-intervention-results-in-more-efficient-accuracy-inference)
+    - [Related sections](#related-sections)
+  - [Interaction of intervention & circuit structure](#interaction-of-intervention-circuit-structure)
 - [Discussion](#discussion)
 - [References](#references)
 - [Supplement](#supplement)
@@ -39,7 +45,6 @@
 
 ## Estimating causal interactions in the brain
 <img src="figures/core_figure_sketches/figure1_sketch.png" width="400"/>
-https://github.com/awillats/clinc/blob/main/figures/core_figure_sketches/figure1_sketch.png
 
 @ import "section_content/background_causal_network_id.md"
 
@@ -48,12 +53,10 @@ https://github.com/awillats/clinc/blob/main/figures/core_figure_sketches/figure1
 @ import "section_content/background_intervention_causal_inf.md"
 
 ## Representations & reachability
-@ import "section_content/background_representation_reach.md"
+@import "section_content/background_representation_reach.md"
 
 <img src="figures/core_figure_sketches/figure2_sketch.png" width="500"/>
-https://github.com/awillats/clinc/blob/main/figures/core_figure_sketches/figure2_sketch.png
 <img src="figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500"/>
-https://github.com/awillats/clinc/blob/main/figures/misc_figure_sketches/two_circuit_case_study_mockup.png
 
 <!-- ![](figures/misc_figure_sketches/closed_loop_severs_inputs.png) -->
 <!-- ![](figures/misc_figure_sketches/two_circuit_case_study_sketch.png) -->
@@ -72,10 +75,8 @@ https://github.com/awillats/clinc/blob/main/figures/misc_figure_sketches/two_cir
 # Simulation
 
 ## Network simulations (simulation)
-@adam
 
 ## Implementing interventions (simulation)
-@adam
 
 ## Extracting circuit estimates (empirical)
 @import "section_content/methods0_simulations_interventions_estimates.md"
@@ -87,13 +88,14 @@ https://github.com/awillats/clinc/blob/main/figures/misc_figure_sketches/two_cir
 
 # Results
 <!-- ## Characterizing circuit-pair ambiguity through reachability properties -->
-## Impact of node, network parameters on estimation performance
-![](figures/misc_figure_sketches/quant_r2_prediction_common.png)
+<!-- ## Impact of node, network parameters on estimation performance -->
 
+## Interaction of intervention on circuit estimation
 <!-- ## Impact of intervention on estimation performance -->
-## Impact of intervention & circuit structure
-![](figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
 @import "section_content/results1_impact_of_intervention.md"
+
+## Interaction of intervention & circuit structure
+@import "section_content/results2_circuit_x_intervention.md"
 
 ----
 
