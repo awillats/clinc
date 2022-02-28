@@ -14,11 +14,13 @@
   - [Interventions in neuroscience & causal inference](#interventions-in-neuroscience-causal-inference)
   - [Representations & reachability](#representations-reachability)
   - [Figure DEMO: Applying CLINC to distinguish a pair of circuits](#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits)
-- [Methods](#methods)
-  - [Network simulations](#network-simulations)
-  - [Implementing interventions](#implementing-interventions)
-  - [Extracting circuit estimates](#extracting-circuit-estimates)
-  - [Predicting correlation structure](#predicting-correlation-structure)
+- [Theory / Prediction](#theory-prediction)
+  - [Computing reachability (theory)](#computing-reachability-theory)
+  - [Predicting correlation structure (theory)](#predicting-correlation-structure-theory)
+- [Simulation](#simulation)
+  - [Network simulations (simulation)](#network-simulations-simulation)
+  - [Implementing interventions (simulation)](#implementing-interventions-simulation)
+  - [Extracting circuit estimates (empirical)](#extracting-circuit-estimates-empirical)
   - [Information-theoretic measures of hypothesis ambiguity](#information-theoretic-measures-of-hypothesis-ambiguity)
 - [Results](#results)
   - [Impact of node, network parameters on estimation performance](#impact-of-node-network-parameters-on-estimation-performance)
@@ -37,6 +39,7 @@
 
 ## Estimating causal interactions in the brain
 <img src="figures/core_figure_sketches/figure1_sketch.png" width="400"/>
+https://github.com/awillats/clinc/blob/main/figures/core_figure_sketches/figure1_sketch.png
 
 @ import "section_content/background_causal_network_id.md"
 
@@ -48,7 +51,9 @@
 @ import "section_content/background_representation_reach.md"
 
 <img src="figures/core_figure_sketches/figure2_sketch.png" width="500"/>
+https://github.com/awillats/clinc/blob/main/figures/core_figure_sketches/figure2_sketch.png
 <img src="figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500"/>
+https://github.com/awillats/clinc/blob/main/figures/misc_figure_sketches/two_circuit_case_study_mockup.png
 
 <!-- ![](figures/misc_figure_sketches/closed_loop_severs_inputs.png) -->
 <!-- ![](figures/misc_figure_sketches/two_circuit_case_study_sketch.png) -->
@@ -56,17 +61,24 @@
 <!-- @ import "section_content/background_id_demo.md" -->
 
 ----
-# Methods
+# Theory / Prediction 
 
-## Network simulations
-
-## Implementing interventions
-## Extracting circuit estimates
-@import "section_content/methods0_simulations_interventions_estimates.md"
-
-## Predicting correlation structure 
+## Computing reachability (theory)
+## Predicting correlation structure (theory)
 ![](figures/misc_figure_sketches/intervention_identifiability_concept.png)
 @import "section_content/methods1_predicting_correlation.md"
+
+----
+# Simulation
+
+## Network simulations (simulation)
+@adam
+
+## Implementing interventions (simulation)
+@adam
+
+## Extracting circuit estimates (empirical)
+@import "section_content/methods0_simulations_interventions_estimates.md"
 
 ## Information-theoretic measures of hypothesis ambiguity
 @import "section_content/methods2_hypothesis_entropy.md"
@@ -78,11 +90,10 @@
 ## Impact of node, network parameters on estimation performance
 ![](figures/misc_figure_sketches/quant_r2_prediction_common.png)
 
-
 <!-- ## Impact of intervention on estimation performance -->
 ## Impact of intervention & circuit structure
 ![](figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
-@import "section_content/results1_impact_of_interventions.md"
+@import "section_content/results1_impact_of_intervention.md"
 
 ----
 
