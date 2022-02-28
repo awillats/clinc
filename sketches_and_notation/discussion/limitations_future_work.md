@@ -38,7 +38,7 @@
   - highly spatially-correlated actuation not considered[^spatial]
 - we assume full observation - partial observation not considered
   - particularly unobserved common inputs
-- impact of time-bin size
+- impact of time-bin size[^bin_size]
 - only looked at small networks
   - small, in terms of # populations
 - *mostly focused on excitatory synapse weights*
@@ -46,6 +46,8 @@
   - e.g. synaptic plasticity
 
 - *(see also [technical_questions.md](../planning_big_picture/technical_questions.md) )*
+
+[^bin_size]: see Assessing the significance, and "The influence of filtering and downsampling on the estimation of transfer entropy"
 
 [^spatial]: see Pairwise Optogenetic Stimulation by Kording & Lepperod
 --- 

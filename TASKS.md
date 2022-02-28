@@ -29,8 +29,8 @@
     - [x] rescanned figures folder 
     - [x] created figures/figure_requests.md
     - [x] scan whiteboard archive
-    - [ ] scan demos 
-    - [ ] scan slides
+    - [x] scan demos 
+    - [x] scan slides
   - [ ] point to where source files (svg / g-drawing)
   
 - [ ] gather info from citations for intro - @matt 

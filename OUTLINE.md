@@ -127,8 +127,11 @@ see also [abstract_outline_planning.md](sketches_and_notation/planning_big_pictu
     - confound from common-input
     - several equivalent hypotheses
   - measures of dependence 
+    - see ["Assessing the significance of directed and multivariate dependence measures"](https://arxiv.org/pdf/2003.03887.pdf), 
+    , "Unifying Pairwise Interactions in Complex Dynamics", and technical_questions.md for comparisons  
     - correlation (granger causality, cross-correlation)
     - info theoretic (transfer entropy)
+    - contemporanoues v.s. time-directed
   - role of conditioning 
     - bivariate v.s. multivariate approaches
   - *( statistical testing )*
@@ -200,20 +203,23 @@ y=Cx+\eta
 \end{bmatrix}}_{x}
 \]
 - why consider multiple perspectives
-  
+
+
+[^best]: best-case meaning, parameters aren't pathological, you've collected enough data etc.
 ## Reachability
-- concept of **binary reachability** as a "best case scenario" for identification.
+- concept of **binary reachability** as a "best case scenario[^best]" for identification.
   - binary reachability describes which pairs of nodes we expect to have any correlation
   - can be used to predict "equivalence classes", i.e. circuits which may be indistinguishable under certain interventions
   - how binary reachability is computed 
+    - series of powers corresponds to projecting the network forward in time to see n-steps ahead
     - [...equations here...]
-- **graded reachability** can help predict the influence of parameter values (e.g. edge weights, time-constants) on identifiability
+- **graded(weighted) reachability** can help predict the influence of parameter values (e.g. edge weights, time-constants) on identifiability
   - quantifies impact of inputs, noise on outputs
   - easiest to describe/understand in linear-gaussian setting
   - [...equations here...]
 
 <a name='figure-reachability'></a>
-🏞️ **Figure:** illustrate reachability 🏞️
+🏞️ **Figure:** illustrate reachability *(skip for now)* 🏞️
   
   
 ## Understanding identification through derived properties of circuits (reachability rules)
@@ -247,6 +253,11 @@ y=Cx+\eta
 ## Network simulations 
 <a name='figure-gaussian'></a>
 ![](figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
+<details><summary>see also</summary>
+
+![](figures/whiteboard/signal_aggregation.jpeg)
+</details>
+
 ### Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2
 
 - all networks built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
@@ -263,6 +274,7 @@ y=Cx+\eta
     - simulated as direct current injection
     - but uniform across a population 
     - ( see [Kyle Johnsen's cleosim toolbox](https://cleosim.readthedocs.io/en/latest/index.html) for more detailed simulation of stimulation )
+    - ⚠️ closed-loop replay ? ⚠️ 
   - closed-loop stimulation
     - approaches for control 
       - going with "model-free" PID control of output rates

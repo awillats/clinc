@@ -18,6 +18,20 @@ clean up
 ![](whiteboard/signal_aggregation.jpeg)
 </details>
 
+##Figure DEMO: Applying CLINC to distinguish a pair of circuits (walkthrough)
+
+
+# Methods 
+## Network simulations 
+- something that shows neurons in networks
+
+## estimation pipeline:
+![](whiteboard/methods_xcorr_features.jpeg)
+![](whiteboard/methods_circuit_xcorr_sketch.png)
+![](../code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
+
+
+
 # Results
 ## Impact of intervention
 - [ ] put source variance on x-axis

@@ -33,5 +33,22 @@ I think it's also important to emphasize here that it's not clear that closed-lo
 - add virtual connections
 - gain of function experiment
 
+---
+### For any intervention to outperform the passive case:
+	The indirect correlations need to be strong enough to confound correlations
+  - Strong enough weights 
+  - But second order effects need to be comparable to direct effects
+   (weights not too strong, rates roughly balanced)
+
+### For closed-loop to outperform open-loop replay:
+- Feedback needs to matter
+  - There needs to be enough variability that replaying the stimulus leads to a different outcome 
+  - There also need to be strong within-network disturbances to reject 
+  - The target can’t be so strong that this feedforward effect swamps potential disturbances
+  - Flat targets emphasize the closed-loop open-loop difference most strongly!
+ - Closed-loop control needs to be effective
+    - The network properties can’t be so extreme that the controller is unable to reject the disturbances
+
+---
 
 [^wolff]: promise and perils of causal manipulations

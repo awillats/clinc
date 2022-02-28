@@ -16,6 +16,12 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
 
 ## Open methodological questions
 ![](../../figures/whiteboard/time_unrolled_representation.png)
+<details><summary>see also</summary>
+
+![](../../figures/whiteboard/concept_open_loop_contemporaneous.png)
+![](../../figures/whiteboard/concept_time_resolved.png)
+</details>
+
 - **time-resolved versus contemporaneous** inference domains
   - Contemp.: $\Delta_{sample} \approx \delta_{syn}$
     - categorical factors may matter more
@@ -28,12 +34,23 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
       
 
 
+[^assess]: "The measures implemented are: mutual information, conditional mutual information, Granger causality, and conditional Granger causality (each for univariate and multivariate linear-Gaussian processes). For completeness we have also included Pearson correlation and partial correlation for univariate processes (with a potentially multivariate conditional process)."
+
 - map of techniques available for inference
+  - see ["Assessing the Significance of Directed and Multivariate Measures of Linear Dependence Between Time Series"](https://arxiv.org/pdf/2003.03887.pdf), [code](https://github.com/olivercliff/assessing-linear-dependence)[^assess] and [Unifying Pairwise Interactions in Complex Dynamics](https://arxiv.org/abs/2201.11941)
   - bivariate v.s. multivariate 
   - conditioning
     - same signals past 
     - other signals 
     - on stimulus
+  - measures of dependence 
+    - correlation
+      - partial correlation
+      - time-lagged cross-correlation
+    - granger causality
+    - mutual information
+    - transfer entropy
+    
 
 - how does circuit structure imply impact of intervention?
   - decrease independent variance at terminals
@@ -50,6 +67,12 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
 
 - look into **r^2 as f(w)** function of homogenous weight parameter 
   - or w_shared and w_independent
+
+- does this generalize to circuits with negative weights?
+  
+- how much does **time-varying stimulus** help?
+  
+- does parameter heterogeneity matter?  
   
 - do **self-connections** matter?
   - currently we're implicitly adding in self connections
@@ -74,7 +97,7 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
   B_N = \sum^{N-1}_{k=0} \frac{(N-1)!}{k!(N-1-k)}B_k
   \]
   
-- effect of joint open-loop stim
+- effect of joint/multiple open-loop stim
   
 
 - how to **decompose intervention effect** into effect on subgraphs, motifs
@@ -100,6 +123,7 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
 - do we need to consider "fork-shaped" reachability?
 
 ## to read/think about pile 
+- field of "Structural identifiability"
 [jkbren/netrd](https://github.com/jkbren/netrd)
 - a library for reconstruction, comparison and dynamics on networks
   - works closely with networkx
