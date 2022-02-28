@@ -59,11 +59,17 @@
 # Methods
 
 ## Network simulations
+
 ## Implementing interventions
 ## Extracting circuit estimates
+@import "section_content/methods0_simulations_interventions_estimates.md"
+
 ## Predicting correlation structure 
 ![](figures/misc_figure_sketches/intervention_identifiability_concept.png)
+@import "section_content/methods1_predicting_correlation.md"
+
 ## Information-theoretic measures of hypothesis ambiguity
+@import "section_content/methods2_hypothesis_entropy.md"
 
 ----
 
@@ -72,9 +78,11 @@
 ## Impact of node, network parameters on estimation performance
 ![](figures/misc_figure_sketches/quant_r2_prediction_common.png)
 
+
 <!-- ## Impact of intervention on estimation performance -->
 ## Impact of intervention & circuit structure
 ![](figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
+@import "section_content/results1_impact_of_interventions.md"
 
 ----
 
