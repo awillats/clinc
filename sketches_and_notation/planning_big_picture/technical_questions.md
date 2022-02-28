@@ -13,7 +13,35 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
   - i might call these classes S+- and S-+ respectively
   - if open-loop stim results in S+ at an edge, I think closed-loop control results in S+- at that same edge
 - [ ] add this to python implementation
+
 ## Open methodological questions
+![](../../figures/whiteboard/time_unrolled_representation.png)
+- **time-resolved versus contemporaneous** inference domains
+  - Contemp.: $\Delta_{sample} \approx \delta_{syn}$
+    - categorical factors may matter more
+      - intervention has a more categorical impact
+  - Time-resolvable: $\Delta_{sample} \ll \delta_{syn}$
+    - generally, 
+    - quantitative factors may matter more
+    - reciprocal connections put an upper bound on resolvable $\delta_{syn}$
+      - $\Delta_{sample} \ll \delta_{syn} < \tau_{recurrent}$
+      
+
+
+- map of techniques available for inference
+  - bivariate v.s. multivariate 
+  - conditioning
+    - same signals past 
+    - other signals 
+    - on stimulus
+
+- how does circuit structure imply impact of intervention?
+  - decrease independent variance at terminals
+  - increase variance at sources
+  - interrupt indirect connections to reveal direct causal structure
+  
+
+
 - do we care about **permutations of circuits** as distinct entities?
 
 - how to integrate recent "per intervention location" identifiability with prior "per intervetnion type" results ?
@@ -57,6 +85,7 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
   - severs outputs
 - how to we "integrate" inference - i.e. combine results from multiple intervention conditions to arrive at a refined hypothesis?
 - **how to predict/describe the impact of delays on SNR** 
+  - time-augmented representation?
 
 - is it useful to sum component-wise identifiability across nodes → net identifiability?
   - what about dR2 / dSk

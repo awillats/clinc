@@ -6,9 +6,8 @@
     - for now, set aside unresolved technical details 
     - topic sentences for each paragraph
     - how many figures?
-    
   - [.] 🧿 review outline, check which outline is most up-to-date
-    - @ outline.md
+    - [~] outline.md
     - @ workflowy
     - ( ) sync both ways
     - [ ] archive old stuff
@@ -20,11 +19,18 @@
   - [ ] describe figures 
   
 - [ ] Resketch figures - @adam
-  - make sure they're aligned towards a core takeaway 
-  - make them concrete
-  - write the takeaway via caption 
-  - [ ] review outline 
-  - [ ] rescan demos folder, slides for new material 
+  - **planning**
+    - make sure they're aligned towards a core takeaway 
+    - make them concrete
+      - if there's a lot of missing content, hide the figure sketch
+    - write the takeaway via caption 
+  - [.] review outline 
+  - [~] rescan demos folder, slides for new material 
+    - [x] rescanned figures folder 
+    - [x] created figures/figure_requests.md
+    - [x] scan whiteboard archive
+    - [ ] scan demos 
+    - [ ] scan slides
   - [ ] point to where source files (svg / g-drawing)
   
 - [ ] gather info from citations for intro - @matt 

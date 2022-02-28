@@ -20,7 +20,7 @@
         - could be accomplished with a graph search / "path tracing" approach 
         - the result would be a nonlinear function of inputs $S$ and network parameters $\Theta$
           - this function would also depend on external disturbances in a more complicated way
-    - nodes being inhibited to 0 activity have 0 variance, and don't 
+    - nodes being inhibited to 0 activity have 0 variance
       - sort of like a "half closed-loop intervention"
         - in that inhibitory inputs won't be propagated downstream, effectively severing inputs 
         - but sufficiently excitatory inputs might push the system back above the 0 activity threshold 
@@ -30,10 +30,12 @@
 
   - higher order neuron dynamics - more biophysically rich neuron models
 ## other limitations
+- ⚠️ mostly considered the "contemporaneous" case where the timescale of interaction is less than or equal to the sampling period
+  - time lags can, potentially provide more distinguishability than estimatated here
 - heterogeneous neuronal dynamics / weights / parameters
 - only considered "direct current" injection 
   - opsin dynamics, actuator limits not considered
-  - highly spatially-correlated actuation not considered
+  - highly spatially-correlated actuation not considered[^spatial]
 - we assume full observation - partial observation not considered
   - particularly unobserved common inputs
 - impact of time-bin size
@@ -43,6 +45,9 @@
 - haven't considered state-dependent or nonstationary networks 
   - e.g. synaptic plasticity
 
+- *(see also [technical_questions.md](../planning_big_picture/technical_questions.md) )*
+
+[^spatial]: see Pairwise Optogenetic Stimulation by Kording & Lepperod
 --- 
 # future work
 - **sequential experimental design**

@@ -123,7 +123,9 @@ see also [abstract_outline_planning.md](sketches_and_notation/planning_big_pictu
       
 ## How? - Causal methods for network discovery from time-series
   - Challenges faced when estimating network connectivity
-    - [...]
+    - contributions from multiple sources overlap
+    - confound from common-input
+    - several equivalent hypotheses
   - measures of dependence 
     - correlation (granger causality, cross-correlation)
     - info theoretic (transfer entropy)
@@ -138,6 +140,12 @@ see also [abstract_outline_planning.md](sketches_and_notation/planning_big_pictu
   - *cite J.Runge*
     
 ## Interventions in neuro 
+  <details><summary> figure sketch 🖼️ </summary>
+    
+![](figures/misc_figure_sketches/neuro_intervention_background_sketch.png)
+    
+  </details>
+  
   - *(walkthrough from passive, open-loop, closed-loop with historic examples)*
     - **passive** detect seizure from EEG 
     - **open-loop** Penfield discovers spatial map of senses by electrical stimulation 
@@ -153,9 +161,16 @@ see also [abstract_outline_planning.md](sketches_and_notation/planning_big_pictu
   - core idea is that "stronger" interventions lead to "higher inferential power"
     - may mean identifying circuits with less data 
     - but may also mean distinguishing circuits which may have been "observationally equivalent" under weaker interventions 
+    - summarize there's both a *"graded/quantitative"* advantage (less data, higher SNR) and sometimes an additional *"categorical/qualitative"* advantage
+      - no amount of observational data will distinguish circuits in the same equivalence class
+        - but intervention might
+      - fancier inference algorithms are also insufficient[^obsv_limitations]
   - **Highlight that the impact of interventions may generalize across any particular choice of inference algorithm**
-  - intervention types 
-  
+  - intervention types[^intv_type] 
+  @import "sketches_and_notation/intro-background/causal_vs_expt.md"
+
+  [^obsv_limitations]: see abstract and abstract_extended for a more polished explanation. this has been pointed out by recent work
+  [^intv_type]: maybe this is more appropriate for supplement or discussion
 
 ## Multiple complementary perspectives (representations) of the same underlying network structure:
 <img src="figures/core_figure_sketches/figure2_sketch.png" width="500"/>

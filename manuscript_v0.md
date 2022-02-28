@@ -57,12 +57,12 @@
 
 ----
 # Methods
-![](figures/misc_figure_sketches/intervention_identifiability_concept.png)
 
 ## Network simulations
 ## Implementing interventions
 ## Extracting circuit estimates
 ## Predicting correlation structure 
+![](figures/misc_figure_sketches/intervention_identifiability_concept.png)
 ## Information-theoretic measures of hypothesis ambiguity
 
 ----
