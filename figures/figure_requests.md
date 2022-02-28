@@ -22,14 +22,20 @@ clean up
 
 
 # Methods 
+
+
 ## Network simulations 
 - something that shows neurons in networks
 
-## estimation pipeline:
+## Extracting circuit estimates
 ![](whiteboard/methods_xcorr_features.jpeg)
 ![](whiteboard/methods_circuit_xcorr_sketch.png)
 ![](../code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
 
+## Implementing interventions
+
+## Predicting correlation structure 
+🏞️ **Figure:** illustrate reachability *(skip for now)* 🏞️
 
 
 # Results

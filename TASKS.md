@@ -6,15 +6,16 @@
     - for now, set aside unresolved technical details 
     - topic sentences for each paragraph
     - how many figures?
-  - [.] 🧿 review outline, check which outline is most up-to-date
+  - [.] review outline, check which outline is most up-to-date
     - [~] outline.md
-    - @ workflowy
-    - ( ) sync both ways
-    - [ ] archive old stuff
-    
-  - [ ] map chapter files if needed
-  - [ ] write topic sentences into outline, than manuscript
-  - [ ] write results forecasts 
+    - [~] workflowy 
+      - [text outline](https://beta.workflowy.com/#/232d9f5210ee)
+        - includes some takeaway points
+      - [figure plan board](https://beta.workflowy.com/#/60a88f9b8aaa)
+  
+  - [~]🧿 map chapter files if needed
+  - [ ]🧿 write topic sentences into outline, then manuscript
+  <!-- - [ ] write results forecasts  -->
   - *switch to figures*
   - [ ] describe figures 
   
@@ -24,14 +25,14 @@
     - make them concrete
       - if there's a lot of missing content, hide the figure sketch
     - write the takeaway via caption 
-  - [.] review outline 
-  - [~] rescan demos folder, slides for new material 
+  - [~] review outline 
+  - [x] rescan demos folder, slides for new material 
     - [x] rescanned figures folder 
     - [x] created figures/figure_requests.md
     - [x] scan whiteboard archive
     - [x] scan demos 
     - [x] scan slides
-  - [ ] point to where source files (svg / g-drawing)
+  <!-- - [ ] point to where source files (svg / g-drawing) -->
   
 - [ ] gather info from citations for intro - @matt 
 - [ ] automatic writing session - results - @matt, @adam

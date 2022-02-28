@@ -93,6 +93,9 @@
     - [multivariate transfer entropy (muTE)](#multivariate-transfer-entropy-mute)
     - [statistical testing](#statistical-testing)
     - [Quantifying successful identification](#quantifying-successful-identification)
+  - [Extracting circuit estimates](#extracting-circuit-estimates-1)
+  - [Predicting correlation structure](#predicting-correlation-structure)
+  - [Information-theoretic measures of hypothesis ambiguity](#information-theoretic-measures-of-hypothesis-ambiguity)
 - [Results](#results)
   - [[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties](#binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties)
   - [Characterization of network estimation performance - Impact of node, network parameters](#characterization-of-network-estimation-performance-impact-of-node-network-parameters)
@@ -250,6 +253,8 @@ y=Cx+\eta
 ---
 # Methods 
 
+![](code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
+
 ## Network simulations 
 <a name='figure-gaussian'></a>
 ![](figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
@@ -257,8 +262,8 @@ y=Cx+\eta
 
 ![](figures/whiteboard/signal_aggregation.jpeg)
 </details>
-
 ### Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2
+🥡 **takeaway:** ??? 🚧
 
 - all networks built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
 - (delayed) linear-gaussian network 
@@ -266,8 +271,9 @@ y=Cx+\eta
     - [[brian_delayed_gaussian] repository ](https://github.com/awillats/brian_delayed_gaussian)
     - allows us to understand impact of variability in simplest setting
 - spiking network 
-  - includes additional difficulties associated with estimation based on spiking observations, nonlinearities
+  - introduces additional difficulties associated with estimation based on spiking observations, nonlinearities
 
+[^intv_type2]: see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)
 ## Implementing interventions
   - passive observation 
   - open-loop stimulation 
@@ -278,7 +284,7 @@ y=Cx+\eta
   - closed-loop stimulation
     - approaches for control 
       - going with "model-free" PID control of output rates
-    - comparison to randomization in traditional experiment design
+    - comparison to randomization in traditional experiment design[^intv_type2]
     - controller stregnth
       - gain
       - bandwidth
@@ -303,9 +309,17 @@ y=Cx+\eta
 
 <a name='figure-pipeline'></a>
 ![](figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
-<!-- ![](figures/core_figure_sketches/figure4a_sketch.png) -->
-<!-- ![](figures/misc_figure_sketches/data_xcorr_gaussian.png) -->
+
+<details><summary> see also </summary>
+
+![](figures/whiteboard/methods_xcorr_features.jpeg)
+![](figures/whiteboard/methods_circuit_xcorr_sketch.png)
+![](figures/core_figure_sketches/figure4a_sketch.png)
+![](figures/misc_figure_sketches/data_xcorr_gaussian.png)
+</details>
 ### Figure PIPELINE: Process of detecting connections in a network model
+🥡 **takeaway:** ??? 🚧
+
 ### Outputs of network 
 - spikes from populations of neurons 
 ### lagged cross-correlation 
@@ -345,15 +359,24 @@ y=Cx+\eta
 - *relevant "positive control" for comparison (?)*
 
 [^FC_methods]: "METHODS FOR STUDYING FUNCTIONAL INTERACTIONS AMONG NEURONAL POPULATIONS" - comes with MATLAB code, discusses time and trial shuffling, decomposing information (synergistic, redundant, independent)
+
+## Extracting circuit estimates
+## Predicting correlation structure 
+![](figures/misc_figure_sketches/intervention_identifiability_concept.png)
+## Information-theoretic measures of hypothesis ambiguity
+
 ---
 # Results 
 
 <a name='figure-binary'></a>
 ## [Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties
+
   - proportion of each ambiguity class as a function of circuit size
   - possibly weight proportions by observed frequency of triplet motifs
 ✂️️ **Figure:** ambiguity class by circuit size✂️ 🏞️
     - SCOPE: cut?
+    🥡 **takeaway:** ??? 🚧
+
     
 ## Characterization of network estimation performance - Impact of node, network parameters
 
@@ -391,13 +414,18 @@ y=Cx+\eta
 ![](figures/misc_figure_sketches/gaussian_impact_delay.png)
 ![](figures/misc_figure_sketches/intrinsic_network_params.png)
 ### Figure PROPS: impact of intrinsic network properties on identifiability   
+  🥡 **takeaway:** ??? 🚧
   - *(e.g. Identification of excitatory-inhibitory links and network topology in large-scale neuronal assemblies from multi-electrode recordings)*
   - comparison to predicted IDSNR 
+  - ⚠️ don't focus too much on intrinsic parameters, that is not a core takeaway ⚠️
   
 <a name='figure-predict'></a>
 ![](figures/misc_figure_sketches/quant_r2_prediction_common.png)
-🏞️
+![](figures/whiteboard/sketch_quant_OL_CL_variance.png)
+🏞️ 🚧 
+
 ### Figure PREDICT: Comparing predicted and emprical identification performance
+  🥡 **takeaway:** ??? 🚧
   - layout: scatterplot and curve fit of emprical vs predicted accuracy (false positives, false negatives)
     - segmented by circuit type?
   - could be part of figures above 
@@ -409,6 +437,7 @@ y=Cx+\eta
 🏞️
 ### Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses
   <!-- - SCOPE: can this be combined with case-study walkthrough? -->
+  🥡 **takeaway:** ??? 🚧
   - like a quantitative version of [binary proportion figure](#figure-binary)
   - in example: shows a dataset with many correlations, multiple plausible circuit hypotheses 
     - patterns of correlation become more specific with increasing intervention strength 
@@ -419,10 +448,9 @@ y=Cx+\eta
 ![](figures/literature_figs/spike_field_shanechi_crop.png)
 ![](figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png)  
 ### Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data 
+  🥡 **takeaway:** ??? 🚧
   - *metric:* \# of samples required to reach accuracy threshold
   - closed-loop > open-loop > passive 
-
-
 
 ## impact of circuit structure
 - degree of nodes 
@@ -437,7 +465,10 @@ y=Cx+\eta
 ![](figures/misc_figure_sketches/gaussian_impact_relative_sigma.png)
 ![](figures/misc_figure_sketches/filler_circuit_type_2021_10.png)
 ⚠️ numbers in this figure are out-dated, likely not representative ⚠️
+![](figures/whiteboard/accuracy_vs_degree.png)
+
 ### Figure MOTIF: Interaction of network structure and intervention location on identifiability
+🥡 **takeaway:** ??? 🚧
 
 
 
@@ -448,6 +479,7 @@ y=Cx+\eta
 
 ---
 # Discussion 
+*see also [limitations_future_work.md](sketches_and_notation/discussion/limitations_future_work.md)*
 - Comparison to related work
   - comparison to work in ANNs 
     - Kording, fakhar 
@@ -487,8 +519,7 @@ y=Cx+\eta
       - or stronger interventions may be required 
   
 - Future work
-  - tighter integration of knowledge of intervention into network estimation procedure 
-    - stimulus-conditional transfer entropy 
+    *see also [limitations_future_work.md](sketches_and_notation/discussion/limitations_future_work.md)*
 ---
 # Supplement 
 - organization of clinc-gen, clinc-analysis codebases

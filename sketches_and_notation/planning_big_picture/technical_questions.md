@@ -51,13 +51,14 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
     - mutual information
     - transfer entropy
     
+- tighter integration of knowledge of intervention into network estimation procedure 
+  - stimulus-conditional transfer entropy 
 
 - how does circuit structure imply impact of intervention?
   - decrease independent variance at terminals
   - increase variance at sources
   - interrupt indirect connections to reveal direct causal structure
   
-
 
 - do we care about **permutations of circuits** as distinct entities?
 
