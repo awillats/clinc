@@ -1,5 +1,16 @@
 [^exog]: the most important property of $e$ for the math to work, i believe, is that they're random variables independent of each other. This is not true in general if E is capturing input from common sources, other nodes in the network. I think to solve this, we'll need to have an endogenous independent noise term and an externally applied (potentially common) stimulus term.
 
+```mermaid
+graph TD
+  eA-->A
+  u(u)-->A
+  u-->C
+  A-->B
+  C-->B
+  eB-->B 
+  eC-->C
+```
+
 Different mathematical representations of circuits can elucidate different connectivity properties. For example, consider the circuit $A \rightarrow B \leftarrow C$. This circuit can be modeled by the dynamical system
 \[
 \begin{cases}
