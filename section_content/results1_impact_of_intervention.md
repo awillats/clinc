@@ -7,7 +7,7 @@
 
 [^node_repr]: nodes in such a graphical model may represent populations of neurons, distinct cell-types, different regions within the brain, or components of a latent variable represented in the brain.
 
-- [ ] quick readthrough, round out `structure of an experiment`
+- [~] quick readthrough, round out `structure of an experiment`
 - [ ] 20 minutes on Figure DISAMBIG
 - [ ] 20 minutes scaffolding quantitative section
 

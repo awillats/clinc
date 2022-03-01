@@ -1,4 +1,5 @@
 [^exog]: the most important property of $e$ for the math to work, i believe, is that they're random variables independent of each other. This is not true in general if E is capturing input from common sources, other nodes in the network. I think to solve this, we'll need to have an endogenous independent noise term and an externally applied (potentially common) stimulus term.
+[^sim_repr]: have to be careful with this. this almost looks like a dynamical system, but isn't. In simulation we're doing something like an SCM, where the circuit is sorted topologically then computed sequentially. And then I'm
 
 ```mermaid
 graph TD
@@ -21,10 +22,20 @@ Different mathematical representations of circuits can elucidate different conne
 \]
 where $e_A$, $e_B$, and $e_C$ represent exogenous inputs that are inputs from other variables and each other[^exog].
 
-When the system is linear we can use matrix notation to denote the impact of each node on the others. Denote the $p \times n$ matrix of data samples by $X$ and the $p \times n$ matrix of exogenous input values by $E$. We can then write
+When the system is linear we can use matrix notation to denote the impact of each node on the others. Denote the $p \times n$ matrix of data samples by $X$ and the $p \times n$ matrix of exogenous input values by $E$. We can then write[^sim_repr]
 \[
 X = X W + E,
 \]
+
+<!-- <details><summary>alt.</summary> -->
+
+Topologically sorted implementation:
+$$\begin{align}
+X^- &:= E\\
+X &:= X^-W + E
+\end{align}$$
+<!-- </details> -->
+
 where $W$ represents the *adjacency matrix*
 \[
 W = \begin{bmatrix}
