@@ -66,3 +66,10 @@ If the reachability of two circuits are unequal for a given intervention, differ
 
 ![](../figures/misc_figure_sketches/closed_loop_distinguishes_corticalEI.png)
 **Figure BACKGROUND>REPRESENTATION/REACH-1: Closed-loop control allows for two circuit hypotheses to be distinguished.** Two hypothesized circuits for the relationships between pyramidal (Pyr, excitatory), parvalbumin-positive (PV, inhibitory), and somatostain-expressing (Som, inhibitory) cells are shown in the two rows. Dashed lines in the right column represent connections whose effects are compensated for through closed-loop control of the Pyr node. By measuring correlations between recorded regions during closed-loop control it is possible to distinguish which hypothesized circuit better matches the data. Notably in the open-loop intervention, activity in all regions is correlated for both hypothesized circuits leading to ambiguity.
+
+!!!! - more figures
+<img src="../figures/core_figure_sketches/figure2_sketch.png" width="500"/>
+<img src="../figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500"/>
+
+<!-- ![](figures/misc_figure_sketches/closed_loop_severs_inputs.png) -->
+<!-- ![](figures/misc_figure_sketches/two_circuit_case_study_sketch.png) -->
