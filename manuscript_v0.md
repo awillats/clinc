@@ -13,9 +13,6 @@
   - [Estimating causal interactions in the brain](#estimating-causal-interactions-in-the-brain)
   - [Interventions in neuroscience & causal inference](#interventions-in-neuroscience-causal-inference)
   - [Representations & reachability](#representations-reachability)
-- [Representations](#representations)
-  - [Reachability](#reachability)
-  - [Understanding identification through derived properties of circuits (reachability rules)](#understanding-identification-through-derived-properties-of-circuits-reachability-rules)
   - [Figure DEMO: Applying CLINC to distinguish a pair of circuits](#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits)
 - [Theory / Prediction](#theory-prediction)
   - [Computing reachability (theory)](#computing-reachability-theory)
@@ -28,8 +25,7 @@
 - [Results](#results)
   - [Interaction of intervention on circuit estimation](#interaction-of-intervention-on-circuit-estimation)
     - [Intervening provides (categorical) improvements in inference power beyond passive observation](#intervening-provides-categorical-improvements-in-inference-power-beyond-passive-observation)
-    - [Stronger intervention results in more efficient, accuracy inference](#stronger-intervention-results-in-more-efficient-accuracy-inference)
-    - [Related sections](#related-sections)
+    - [Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias](#stronger-intervention-shapes-correlation-resulting-in-more-data-efficient-inference-with-less-bias)
   - [Interaction of intervention & circuit structure](#interaction-of-intervention-circuit-structure)
 - [Discussion](#discussion)
 - [References](#references)
@@ -55,11 +51,7 @@
 ## Representations & reachability
 @import "section_content/background_representation_reach.md"
 
-<img src="figures/core_figure_sketches/figure2_sketch.png" width="500"/>
-<img src="figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500"/>
 
-<!-- ![](figures/misc_figure_sketches/closed_loop_severs_inputs.png) -->
-<!-- ![](figures/misc_figure_sketches/two_circuit_case_study_sketch.png) -->
 ## Figure DEMO: Applying CLINC to distinguish a pair of circuits
 <!-- @ import "section_content/background_id_demo.md" -->
 
