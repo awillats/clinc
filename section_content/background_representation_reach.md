@@ -1,3 +1,5 @@
+[^exog]: the most important property of $e$ for the math to work, i believe, is that they're random variables independent of each other. This is not true in general if E is capturing input from common sources, other nodes in the network. I think to solve this, we'll need to have an endogenous independent noise term and an externally applied (potentially common) stimulus term.
+
 Different mathematical representations of circuits can elucidate different connectivity properties. For example, consider the circuit $A \rightarrow B \leftarrow C$. This circuit can be modeled by the dynamical system
 \[
 \begin{cases}
@@ -6,7 +8,7 @@ Different mathematical representations of circuits can elucidate different conne
 \dot{x}_C &= f_C(e_C),
 \end{cases}
 \]
-where $e_A$, $e_B$, and $e_C$ represent exogenous inputs that are inputs from other variables and each other.
+where $e_A$, $e_B$, and $e_C$ represent exogenous inputs that are inputs from other variables and each other[^exog].
 
 When the system is linear we can use matrix notation to denote the impact of each node on the others. Denote the $p \times n$ matrix of data samples by $X$ and the $p \times n$ matrix of exogenous input values by $E$. We can then write
 \[
@@ -22,7 +24,11 @@ W = \begin{bmatrix}
 \]
 In the circuit $A \rightarrow B \leftarrow C$, we would have $w_{AB} \neq 0$ and $w_{CB} \neq 0$.
 
-The adjacency matrix exposes directional first-order connections in the circuit: $w_{ij}$, for example, describes how activity in $x_j$ changes in response to activity in $x_i$. The directional $k^{\mathrm{th}}$-order connections in the circuit are similarly described by the matrix $W^k$, so the *weighted reachability matrix*
+The adjacency matrix exposes `(captures, describes?)` directional first-order connections in the circuit: $w_{ij}$, for example, describes how activity in $x_j$ changes in response to activity in $x_i$. 
+
+!!!!! - Adam: I'd like to restructure this less like "here are things you can derive from adjacency" and more like "our goal is to connect ground truth properties to things we can observe, to do that, reachability is a useful intermediate representation." Looks like you do cover that later, so it's mostly a question of sequencing
+
+The directional $k^{\mathrm{th}}$-order connections in the circuit are similarly described by the matrix $W^k$, so the *weighted reachability matrix*
 \[
     \widetilde{W} = \sum_{k=0}^{\infty} W^k
 \]
@@ -32,7 +38,7 @@ This representation allows us to determine when two nodes will be correlated (or
 
 Our goal is to reason about the relationship between underlying causal structure (which we want to understand) and the correlation or information shared by pairs of nodes in the circuit (which we can observe). The adjacency matrix and weighted reachability matrix bridge this gap by connecting the causal structure of a circuit to the correlation structure its nodes will produce. Moreover, as we will describe in Sections [REF] and [REF], quantities derived from these representations can also be used to describe the impact of open- and closed-loop interventions on circuit behavior, allowing us to quantitatively explore the impact of these interventions on the identifiability of circuits.
 
-[Matt to Adam --- I like the idea of an example here, but the details will likely need to change once the neighboring intro sections take shape]
+`[Matt to Adam --- I like the idea of an example here, but the details will likely need to change once the neighboring intro sections take shape]`
 
 Consider, for example, the hypotheses for cortical gain control in open-loop (Figure BACKGROUND>REPRESENTATION/REACH-1, left column). In both circuit 2a and 2b, PV cells are reachable from the Som cell node ($\widetilde{W}_{PV \to Som} \neq 0$), since Som activity can influence PV activity indirectly through the Pyr node. These circuits are therefore difficult to distinguish under open-loop intervention.
 
