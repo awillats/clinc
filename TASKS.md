@@ -2,7 +2,8 @@
 
 ## Monday Feb 28th
 - [.] scaffold methods, results - @adam 
-  - **planning**
+  - <details><summary>planning</summary>
+  
     - for now, set aside unresolved technical details 
     - topic sentences for each paragraph
     - how many figures?
@@ -12,33 +13,28 @@
       - [text outline](https://beta.workflowy.com/#/232d9f5210ee)
         - includes some takeaway points
       - [figure plan board](https://beta.workflowy.com/#/60a88f9b8aaa)
-  
-  - [~]🧿 map chapter files if needed
-  - [ ]🧿 write topic sentences into outline, then manuscript
+  - for now, we're splitting sections based on simulations, theory, summary rather than traditional methods, results
+    - reevaluate later
+  </details>
+  - [.] write topic sentences into outline, then manuscript
   <!-- - [ ] write results forecasts  -->
   - *switch to figures*
   - [ ] describe figures 
-  
+  - [ ] impact of intervention 
+    - [~s] layout experiment
+    - [ ] 
 - [ ] Resketch figures - @adam
   - **planning**
     - make sure they're aligned towards a core takeaway 
     - make them concrete
       - if there's a lot of missing content, hide the figure sketch
     - write the takeaway via caption 
-  - [~] review outline 
-  - [x] rescan demos folder, slides for new material 
-    - [x] rescanned figures folder 
-    - [x] created figures/figure_requests.md
-    - [x] scan whiteboard archive
-    - [x] scan demos 
-    - [x] scan slides
+  - [~] review outline
   <!-- - [ ] point to where source files (svg / g-drawing) -->
   
 - [ ] gather info from citations for intro - @matt 
-- [ ] automatic writing session - results - @matt, @adam
+- [x][.][ ] automatic writing session - results - @matt, @adam
   - evaluate alignment with core takeaways
-  - (look at teletype?)
-  
 - [ ] automatic writing session - methods - @matt, @adam
 
 ----
