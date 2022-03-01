@@ -24,9 +24,9 @@ W = \begin{bmatrix}
 \]
 In the circuit $A \rightarrow B \leftarrow C$, we would have $w_{AB} \neq 0$ and $w_{CB} \neq 0$.
 
-The adjacency matrix exposes `(captures, describes?)` directional first-order connections in the circuit: $w_{ij}$, for example, describes how activity in $x_j$ changes in response to activity in $x_i$. 
+The adjacency matrix captures directional first-order connections in the circuit: $w_{ij}$, for example, describes how activity in $x_j$ changes in response to activity in $x_i$.
 
-!!!!! - Adam: I'd like to restructure this less like "here are things you can derive from adjacency" and more like "our goal is to connect ground truth properties to things we can observe, to do that, reachability is a useful intermediate representation." Looks like you do cover that later, so it's mostly a question of sequencing
+Our goal is to reason about the relationship between underlying causal structure (which we want to understand) and the correlation or information shared by pairs of nodes in the circuit (which we can observe). Quantities based on the  adjacency matrix and weighted reachability matrix bridge this gap, connecting the causal structure of a circuit to the correlation structure its nodes will produce.
 
 The directional $k^{\mathrm{th}}$-order connections in the circuit are similarly described by the matrix $W^k$, so the *weighted reachability matrix*
 \[
@@ -34,9 +34,7 @@ The directional $k^{\mathrm{th}}$-order connections in the circuit are similarly
 \]
 describes the total impact --- through both first-order (direct) connections and higher-order (indirect) connections --- of each node on the others. Whether node $j$ is "reachable" (Skiena 2011) from node $i$ by a direct or indirect connection is thus indicated by $\widetilde{W}_{ij} \neq 0$, with the magnitude of $\widetilde{W}_{ij}$ indicating sensitive node $j$ is to a change in node $i$.
 
-This representation allows us to determine when two nodes will be correlated (or more generally, contain information about each other).
-
-Our goal is to reason about the relationship between underlying causal structure (which we want to understand) and the correlation or information shared by pairs of nodes in the circuit (which we can observe). The adjacency matrix and weighted reachability matrix bridge this gap by connecting the causal structure of a circuit to the correlation structure its nodes will produce. Moreover, as we will describe in Sections [REF] and [REF], quantities derived from these representations can also be used to describe the impact of open- and closed-loop interventions on circuit behavior, allowing us to quantitatively explore the impact of these interventions on the identifiability of circuits.
+This notion of reachability, encoded by the pattern of nonzero entries in $\widetilde{W}$, allows us to determine when two nodes will be correlated (or more generally, contain information about each other). Moreover, as we will describe in Sections [REF] and [REF], quantities derived from these representations can also be used to describe the impact of open- and closed-loop interventions on circuit behavior, allowing us to quantitatively explore the impact of these interventions on the identifiability of circuits.
 
 `[Matt to Adam --- I like the idea of an example here, but the details will likely need to change once the neighboring intro sections take shape]`
 
