@@ -99,7 +99,7 @@
   - [[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties](#binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties)
   - [Characterization of network estimation performance - Impact of node, network parameters](#characterization-of-network-estimation-performance-impact-of-node-network-parameters)
     - [Figure PROPS: impact of intrinsic network properties on identifiability](#figure-props-impact-of-intrinsic-network-properties-on-identifiability)
-    - [Figure PREDICT: Comparing predicted and emprical identification performance](#figure-predict-comparing-predicted-and-emprical-identification-performance)
+    - [Figure PREDICT: Comparing predicted and empirical identification performance](#figure-predict-comparing-predicted-and-empirical-identification-performance)
   - [Impact of intervention](#impact-of-intervention)
     - [Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses](#figure-disambig-stronger-intervention-facilitates-disambiguating-equivalent-hypotheses)
     - [Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data](#figure-data-analysis-of-simulated-circuits-suggest-stronger-intervention-facilitates-identification-with-less-data)
@@ -442,14 +442,53 @@ y=Cx+\eta
     - patterns of correlation become more specific with increasing intervention strength 
   - in aggregate: focuses on reduced bias, higher accuracy for "infinite" data limit
   - closed-loop > open-loop > passive 
-    
+
+- **Where you intervene** strongly determines the inference power of your experiment.
+- **secondary point:** having (binary) prediction helps capture this relationship
+- **Why does closed-loop control provide a categorical advantage?** Because it severs indirect links
+
+
+
+### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias
+- "here are the quantitative advantages"
+- "here's additional nuance"
+- wider range of observable correlations
+ - important because we sometimes want to minimize correlations for indirect links
+ - allows for more distinct outcomes w.r.t. circuit
+ - summarized as "closed-loop allows bidirectional control of variance"
+- higher infinite-data accuracy (i.e. less bias)
+  - lower bias likely comes from the categorical advantages above
+- less data required to get to threshold level of accuracy (more data-efficient)
+    - likely comes from improved "SNR" which can be thought of as a derived property of the per-edge correlations
+- breakdown false positives, false negatives
+- (quantitative prediction helps)
+
+
+#### Closed-loop enables bidirectional control of variance 
+- while you can deliver open-loop inputs with titrated amounts of variance, you're often only able to add variance rather than subtract it, and the amount of variance you would add to the system is hard to predict a priori
+- this is a key advantage of closed-loop control
+  - which can have bidirectional influence over variance
+- 
+- firing rates couple mean and variance
+- imperfect control - interpolates between open and closed-loop impact
+#### Closed-loop intervention enables wider range of shaping covariance across a network
+Implications for ID: more precise shaping of codependence across network`
+- `variance of node may increase or decrease correlation of pair of nodes`
+**Figure VAR: Stronger intervention allows better control of covariance**
+**shaping covariance**
+- having (quantitative) prediction helps capture this relationship
+- **Figure PREDICT: Comparing predicted and empirical correlation, identification performance**
+
+### Higher signal-to-noise means closed-loop interventions can recover circuit structure with less data
 <a name='figure-data'></a>
 ![](figures/literature_figs/spike_field_shanechi_crop.png)
 ![](figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png)  
-### Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data 
-  🥡 **takeaway:** ??? 🚧
-  - *metric:* \# of samples required to reach accuracy threshold
-  - closed-loop > open-loop > passive 
+> Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data 
+>  🥡 **takeaway:** ??? 🚧
+>  - *metric:* \# of samples required to reach accuracy threshold
+>  - closed-loop > open-loop > passive 
+
+----
 
 ## impact of circuit structure
 - degree of nodes 

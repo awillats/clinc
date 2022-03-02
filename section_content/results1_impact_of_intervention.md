@@ -7,11 +7,12 @@
 
 [^node_repr]: nodes in such a graphical model may represent populations of neurons, distinct cell-types, different regions within the brain, or components of a latent variable represented in the brain.
 
-- [x][x][ ] quick readthrough, round out `structure of an experiment`
+- [x] [x][ ] quick readthrough, round out `structure of an experiment`
   - moved to _steps_of_inference.md
-- [ ] 20 minutes scaffolding quantitative section
+- [x] [ ] 20 minutes scaffolding quantitative section
 - [ ] 20 minutes on Figure DISAMBIG
   - write caption freeform
+- [ ] why link severing
 
 ---
 
@@ -75,7 +76,11 @@ Next, we apply (steps 1-3 of) this circuit search procedure to a collection of c
 !!!! - Explain why closed-loop helps - bidirectional variance control - 40% done
 
 [^intrinsic_var]: below the level set by added, independent/"private" sources
+>- while you can deliver open-loop inputs with titrated amounts of variance, you're often only able to add variance rather than subtract it, and the amount of variance you would add to the system is hard to predict a priori
+>- this is a key advantage of closed-loop control
+>  - which can have bidirectional influence over variance  
 
+  
 While a primary advantage of closed-loop interventions for circuit inference is its ability to functionally lesion indirect connections, another, more nuanced `(quantitative)` advantage of closed-loop control lies in its capacity to bidirectionally control output variance. While the variance of an open-loop stimulus can be titrated to adjust the output variance at a node, in general, an open-loop stimulus cannot reduce this variance below its instrinsic[^intrinsic_var] variability. That is, if the system is linear with gaussian noise,
 $$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) \geq \mathbb{V}_{i}(C)$$
 More specifically, if the open-loop stimulus is statistically independent from the intrinsic variability[^open_loop_independent]
@@ -158,9 +163,7 @@ graph LR
 <a id="fig-var"></a>
 **Figure VAR: Stronger intervention allows better control of covariance**
 **shaping covariance**
-- while you can deliver open-loop inputs with titrated amounts of variance, you're often only able to add variance rather than subtract it, and the amount of variance you would add to the system is hard to predict a priori
-- this is a key advantage of closed-loop control
-  - which can have bidirectional influence over variance
+
     
 - having (quantitative) prediction helps capture this relationship
   <a id="fig-predict"></a>
@@ -171,6 +174,8 @@ graph LR
 
 
 !!!! - Explain why closed-loop helps - less bias - 5% done
+> - higher infinite-data accuracy (i.e. less bias)
+>    - lower bias likely comes from the categorical advantages above
 
 !!!! - Explain why closed-loop helps - more data efficient - 5% done
 

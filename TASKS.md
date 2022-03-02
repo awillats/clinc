@@ -7,20 +7,18 @@
     - for now, set aside unresolved technical details 
     - topic sentences for each paragraph
     - how many figures?
-  - [.] review outline, check which outline is most up-to-date
-    - [~] outline.md
-    - [~] workflowy 
-      - [text outline](https://beta.workflowy.com/#/232d9f5210ee)
-        - includes some takeaway points
-      - [figure plan board](https://beta.workflowy.com/#/60a88f9b8aaa)
-  - for now, we're splitting sections based on simulations, theory, summary rather than traditional methods, results
-    - reevaluate later
+    - [.] review outline, check which outline is most up-to-date
+      - [~] outline.md
+      - [~] workflowy 
+        - [text outline](https://beta.workflowy.com/#/232d9f5210ee)
+          - includes some takeaway points
+        - [figure plan board](https://beta.workflowy.com/#/60a88f9b8aaa)
+    - for now, we're splitting sections based on simulations, theory, summary rather than traditional methods, results
+      - reevaluate later
   </details>
-  - [.] write topic sentences into outline, then manuscript
-  <!-- - [ ] write results forecasts  -->
-  - *switch to figures*
+  
   - [ ] describe figures 
-  - [ ] impact of intervention 
+  - [~]🧿 impact of intervention 
     - [~] layout experiment (move to methods / discussion )
     - [ ] 
 - [ ] Resketch figures - @adam
@@ -32,10 +30,10 @@
   - [~] review outline
   <!-- - [ ] point to where source files (svg / g-drawing) -->
   
-- [ ] gather info from citations for intro - @matt 
-- [x][~][ ] automatic writing session - results - @matt, @adam
+- [~] gather info from citations for intro - @matt 
+- [x][x][ ]🧿 automatic writing session - results - @matt, @adam
   - evaluate alignment with core takeaways
-- [ ] automatic writing session - methods - @matt, @adam
+- [ ] :warning: automatic writing session - methods - @matt, @adam
 
 ----
 

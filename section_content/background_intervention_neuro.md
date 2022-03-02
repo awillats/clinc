@@ -9,4 +9,3 @@
       - Comparison to standard neuro system identification procedures (stim, lesions)
       - Stanley, Rozell prior work in closed-loop opto 
 
-`see also google slides`
