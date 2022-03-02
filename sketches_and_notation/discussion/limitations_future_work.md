@@ -47,7 +47,7 @@
 
 - *(see also [technical_questions.md](../planning_big_picture/technical_questions.md) )*
 
-[^bin_size]: see Assessing the significance, and "The influence of filtering and downsampling on the estimation of transfer entropy"
+[^bin_size]: see Assessing the significance, and "The influence of filtering and downsampling on the estimation of transfer entropy", also **Figure 6. Short bin widths generally improve performance** from "Extending Transfer Entropy Improves...", also also "bin size" tag on Zotero
 
 [^spatial]: see Pairwise Optogenetic Stimulation by Kording & Lepperod
 --- 

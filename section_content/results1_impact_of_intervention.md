@@ -7,60 +7,54 @@
 
 [^node_repr]: nodes in such a graphical model may represent populations of neurons, distinct cell-types, different regions within the brain, or components of a latent variable represented in the brain.
 
-- [x] [ ] 20 minutes scaffolding quantitative section
-  - [ ] bridge methods to results: shaping covariance 
-    - why does this matter
-  - [ ] write caption
-- [ ] 20 minutes on Figure DISAMBIG
-  - [ ] write caption freeform
 <!-- - [ ] why link severing - difficult, might leave to later -->
 
 ---
 
 ### Intervening provides (categorical) improvements in inference power beyond passive observation
 
-[Procedure for choosing & applying intervention](_steps_of_inference.md)
+[Methods: Procedure for choosing & applying intervention](_steps_of_inference.md)
 
 ----
-!!!! - Application to demo set, entropy over hypotheses - 10% done
-Next, we apply (steps 1-3 of) this circuit search procedure to a collection of closely related hypotheses for 3 interacting nodes[^node_repr] to illustrate the impact of intervention. 
+!!!! - Application to demo set, entropy over hypotheses - 50% done
+Next, we apply (steps 1-3 of) this circuit search procedure to a collection of closely related hypotheses for 3 interacting nodes[^node_repr] to illustrate the impact of intervention. 🚧 `most of the story in the figure caption for now` 🚧
 
 <a id="fig-disambig"></a>
 ![](../figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
-**Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses**🚧
-- lay out rows
-- lay out columns 
-- draw attention to "sameness" of correlations row
-- explain color scheme
-  - grey for indirect edges 
-  - color1 for increasing correlation
-  - color2 for decreasing correlation 
-  - color3 for severed edges
+> **Figure DISAMBIG: Interventions narrow the set of hypotheses consistent with observed correlations** 
+>**(A)** Directed adjacency matrices represent the true and hypothesized causal circuit structure
+>**(B)** Directed reachability matrices represent the direct *(black)* and indirect *(grey)* influences in a network. Notably, different adjacency matrices can have equivalent reachability matrices making distinguishing between similar causal structures difficult, even with open-loop control.
+>**(C)** Correlations between pairs of nodes. Under passive observation, the direction of influence is difficult to ascertain. In densely connected networks, many distinct ground-truth causal structures result in similar "all correlated with all" patterns providing little information about the true structure.
+>**(D-F)** The impact of open-loop intervention at each of the nodes in the network is illustrated by modifications to the passive correlation pattern. Thick orange[^edge_color] edges denote correlations which increase above their baseline value with high variance open-loop input. Thin blue[^edge_color] edges denote correlations which decrease, often as a result of increased connection-independent "noise" variance in one of the participating nodes. Grey edges are unaffected by intervention at that location.
+> A given hypotheses set (A) will result in an "intervention-specific fingerprint", that is a distribution of frequencies for observing patterns of modified correlations *(across a single row within D-F)*. If this fingerprint contains many examples of the same pattern of correlation (such as **B**), many hypotheses correspond to the same observation, and that experiment contributes low information to distinguish between structures. A maximally informative intervention would produce a unique pattern of correlation for each member of the hypothesis set.
+:construction:`caption too long`
+
+<!-- - purpose of the figure 
+  - conclusion: stronger intervention facilitates disambiguating equivalent hypotheses
+    - more distinct patterns in a row 
+    - few hypotheses have equivalent patterns
 - explain distribution across hypothesis for a given intervention
-  - build intuition for "more different circuits = better inference"
+  - build intuition for "more different circuits = better inference" -->
 
-
+[^edge_color]: will change the color scheme for final figure. Likely using orange and blue to denote closed and open-loop interventions. Will also add in indication of severed edges
 
 !!!! - Explain why closed-loop helps - link severing - 5% done
-`this is probably redundant with intro`
 
 **Why does closed-loop control provide a categorical advantage?** Because it severs indirect links
-
-`this is has to be backed up by aggregate results:`
+`is this redundant with intro?`
+`needs to be backed here up by aggregate results?`
 - this is especially relevant in recurrently connected networks where the reachability matrix becomes more dense. 
 - more stuff is connected to other stuff, so there are more indirect connections, and the resulting correlations look more similar (more circuits in the equivalence class)
 - patterns of correlation become more specific with increasing intervention strength 
   - more severed links → more unique adjacency-specific patterns of correlation  
   
 > **Where you intervene**[^where_place] strongly determines the inference power of your experiment.
-
-[^where_place]: Figure VAR shows this pretty well, perhaps sink this section until after discussing categorical and quantitative?
-
 > **secondary point:** having (binary) prediction helps capture this relationship
 
+[^where_place]: Figure VAR shows this pretty well, perhaps sink this section until after discussing categorical and quantitative?
 ---
 
-!!!! - Quantitative impact of closed-loop - 30% done
+!!!! - Quantitative impact of closed-loop - 70% done
 ### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias
 
 !!!! - Explain why closed-loop helps - bidirectional variance control - 40% done
@@ -111,14 +105,14 @@ In neural circuits, we're often interested in firing rates, which are non-negati
 [^cl_indp_practical]: practically, this requires very fast feedback to achieve fully independent control over mean and variance. In the case of firing rates, I suspect $\mu \leq \alpha\mathbb{V}$, so variances can be reduced, but for very low firing rates, there's still an upper limit on what the variance can be.
 
 
-!!!! - connect to [figvar](#fig-var) to empricially show this bidirectional control of output variance?
+!!!! - reference [figvar](#fig-var) to empricially show this bidirectional control of output variance?
 
 
 #### Impact of intervention location and variance on pariwise correlations
-> - Implications for ID: more precise shaping of codependence across network
+<!-- > - Implications for ID: more precise shaping of codependence across network
 > - wider dynamic range of observable correlations
 >   - important because we sometimes want to minimize correlations for indirect links
->   - allows for more distinct outcomes w.r.t. circuit
+>   - allows for more distinct outcomes w.r.t. circuit -->
 
 [related methods](methods1_predicting_correlation.md)
 
@@ -142,24 +136,38 @@ $$\text{Reach}(S_k → i) \neq 0 \\ \text{Reach}(S_k → j) \neq 0 \\ \text{Reac
 Notably, the impact of an intervention which is a "common cause" for both nodes depends on the relative weighted reachability between the source and each of the nodes. Correlations induced by a common cause are maximized when the input to each node is equal, that is $\widetilde{W}_{S_k→i} \approx \widetilde{W}_{S_k→j}$ (upper right * in [fig. variance](#fig-var)). If i→j are connected $\widetilde{W}_{S_k→i} \gg \widetilde{W}_{S_k→j}$ results in an variance-correlation relationship similar to the "upstream source" case (increasing source variance increases correlation $\frac{dR}{dS_k} > 0$),
  while $\widetilde{W}_{S_k→i} \ll \widetilde{W}_{S_k→j}$ results in a relationship similar to the "downstream source" case ($\frac{dR}{dS_k} < 0$)[^verify_drds]
 
-[^verify_drds]: not 100% sure this is true, the empirical results are really pointing to dR/dW<0 rather than dR/dS<0 
+[^verify_drds]: not 100% sure this is true, the empirical results are really pointing to dR/dW<0 rather than dR/dS<0. Also this should really be something like $\frac{d|R|}{dS}$ or $\frac{dr^2}{dS}$ since these effects decrease the *magnitude* of correlations. I.e. if $\frac{d|R|}{dS} < 0$ increasing $S$ might move $r$ from $-0.8$ to $-0.2$, i.e. decrease its magnitude not its value.
 
 <a id="fig-predict"></a>
-
-
 <a id="fig-var"></a>
-<img src="../figures/misc_figure_sketches/quant_r2_prediction_common.png" width=400>
-<img src="../figures/whiteboard/sketch_quant_OL_CL_variance.png" width=300>
-**Figure VAR: Stronger intervention allows better control of covariance**
-**shaping covariance**
-> - having (quantitative) prediction helps capture this relationship
-> - **(incidental) subfigure PREDICT: Comparing predicted and empirical correlation, identification performance**
+<img src="../figures/misc_figure_sketches/quant_r2_prediction_common.png" width=300><img src="../figures/whiteboard/sketch_quant_OL_CL_variance.png" width=230>
+> **Figure VAR: Location, variance, and type of intervention shape pairwise correlations**
+> **(CENTER)** A two-node linear gaussian network is simulated with a connection from A→B. Open-loop interventions *(blue)* consist of independent gaussian inputs with a range of variances $\sigma^2_S$. Closed-loop interventions *(orange)* consist of feedback control with an independent gaussian target with a range of variances. *Incomplete closed-loop interventions result in node outputs which are a mix of the control target and network-driven activity*. Connections from sources to nodes are colored by their impact on correlations between A and B; green denotes $dR/dS > 0$, red denotes $dR/dS<0$.
+> **(lower left)** Intervention "upstream" of the connection A→B increases the correlation $r^2(A,B)$.
+> **(lower right)** Intervention at the terminal of the connection A→B decreases the correlation $r^2(A,B)$ by adding connection-independent noise.
+> **(upper left)** Intervention with shared inputs to both nodes generally increases $r^2(A,B)$, *(even without A→B, see supplement)*.
+> **(upper right)** The impact of shared interventions depends on relative weighted reachability $\text{Reach}(S_k→A) / \text{Reach}(S_k→B)$, with highest correlations when these terms are matched (see *)
+> Closed-loop interventions *(orange)* generally result in larger changes in correlation across $\sigma^2_S$ than the equivalent open-loop intervention. Closed-loop control at B effectively lesions the connection A→B, resulting in near-zero correlation.
+> [^var_compare]
+
+
+[^var_compare]: compare especially to ["Transfer Entropy as a Measure of Brain Connectivity"](https://www.frontiersin.org/articles/10.3389/fncom.2020.00045/full), ["How Connectivity, Background Activity, and Synaptic Properties Shape the Cross-Correlation between Spike Trains"](https://www.jneurosci.org/content/29/33/10234) Figure 3.
+
+
+
+<details><summary>↪ additional notes:</summary>
+
+- contextualize increasing correlation is sometimes good, sometimes bad!
+- having (quantitative) prediction helps capture this relationship
+- **(incidental) subfigure PREDICT: Comparing predicted and empirical correlation, identification performance**
+</details>
 
 🚧
-The change in correlation as a function of changing intervention variance ($\frac{dR_{ij}}{dS}$) can therefore be used as an additional indicator of presence/absence and directionality of the connection between A,B
+The change in correlation as a function of changing intervention variance ($\frac{dr^2_{ij}}{dS}$) can therefore be used as an additional indicator of presence/absence and directionality of the connection between A,B *(see [fig. disambig. D.)](fig-disambig))*
 🚧
-#### Impact of intervention location and variance on pariwise correlations
-[Fig. variance](#fig-var) also demonstrates the relative dynamic range of correlations achievable under passive, open- and closed-loop intervention. In the passive case, correlations are determined by instrinsic properties of the network. These properties have influence over the observed correlations in a way that can be difficult to separate from differences due to the ground-truth circuit. With open-loop intervention we can observe the impact of increasing variance at a particular node, but the dynamic range of achievable correlations is bounded by not being able to reduce variance below its baseline level. With closed-loop control, the bidirectional control of the output variance for a node means a much wider range of correlations can be achieved [(blue v.s. orange in fig. variance)](#fig-var), resulting in a more sensitive signal reflecting the ground-truth connectivity.
+
+
+[Fig. variance](#fig-var) also demonstrates the relative dynamic range of correlations achievable under passive, open- and closed-loop intervention. In the passive case, correlations are determined by instrinsic properties of the network $\sigma^2_{base}$. These properties have influence over the observed correlations in a way that can be difficult to separate from differences due to the ground-truth circuit. With open-loop intervention we can observe the impact of increasing variance at a particular node, but the dynamic range of achievable correlations is bounded by not being able to reduce variance below its baseline level. With closed-loop control, the bidirectional control of the output variance for a node means a much wider range of correlations can be achieved [(blue v.s. orange in fig. variance)](#fig-var), resulting in a more sensitive signal reflecting the ground-truth connectivity.
 
 
 
@@ -174,7 +182,9 @@ The change in correlation as a function of changing intervention variance ($\fra
 ![](../figures/literature_figs/spike_field_shanechi_crop.png)
 </details>
 
-> Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data 
+> Figure DATA: Analysis of simulated circuits suggest stronger intervention facilitates identification with less data [^compare_data_accuracy]
+
+[^compare_data_accuracy]: "Extending Transfer Entropy Improves Identification of Effective Connectivity in a Spiking Cortical Network Model", "Evaluation of the Performance of Information Theory- Based Methods and Cross-Correlation to Estimate the Functional Connectivity in Cortical Networks"
 
 !!!! - Explain why closed-loop helps - less bias - 5% done
 > - higher infinite-data accuracy (i.e. less bias)

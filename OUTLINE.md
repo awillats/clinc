@@ -431,6 +431,7 @@ y=Cx+\eta
 
 
 ## Impact of intervention
+### Intervening provides (categorical) improvements in inference power beyond passive observation
 <a name='figure-disambig'></a>
 ![](figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
 🏞️
@@ -471,13 +472,18 @@ y=Cx+\eta
 - 
 - firing rates couple mean and variance
 - imperfect control - interpolates between open and closed-loop impact
-#### Closed-loop intervention enables wider range of shaping covariance across a network
-Implications for ID: more precise shaping of codependence across network`
+#### Impact of intervention location and variance on pariwise correlations
+- Closed-loop intervention enables wider range of shaping covariance across a network
+- Implications for ID: more precise shaping of codependence across network`
 - `variance of node may increase or decrease correlation of pair of nodes`
 **Figure VAR: Stronger intervention allows better control of covariance**
-**shaping covariance**
+- contextualize increasing correlation is sometimes good, sometimes bad!
 - having (quantitative) prediction helps capture this relationship
-- **Figure PREDICT: Comparing predicted and empirical correlation, identification performance**
+  - **Figure PREDICT: Comparing predicted and empirical correlation, identification performance**
+- sign of $\frac{dr^2_{ij}}{dS_k}$ is a key indicator
+  - both to summarize the impact of intervention for design 
+  - and post-experiment to narrow hypotheses
+
 
 ### Higher signal-to-noise means closed-loop interventions can recover circuit structure with less data
 <a name='figure-data'></a>
