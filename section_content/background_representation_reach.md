@@ -1,6 +1,8 @@
 [^exog]: the most important property of $e$ for the math to work, i believe, is that they're random variables independent of each other. This is not true in general if E is capturing input from common sources, other nodes in the network. I think to solve this, we'll need to have an endogenous independent noise term and an externally applied (potentially common) stimulus term.
 [^sim_repr]: have to be careful with this. this almost looks like a dynamical system, but isn't. In simulation we're doing something like an SCM, where the circuit is sorted topologically then computed sequentially. And then I'm
 
+<details><summary>↪ graph for shared v.s. private sources</summary>
+
 ```mermaid
 graph TD
   eA-->A
@@ -11,6 +13,7 @@ graph TD
   eB-->B 
   eC-->C
 ```
+</details>
 
 Different mathematical representations of circuits can elucidate different connectivity properties. For example, consider the circuit $A \rightarrow B \leftarrow C$. This circuit can be modeled by the dynamical system
 \[
@@ -28,13 +31,13 @@ X = X W + E,
 \]
 
 <!-- <details><summary>alt.</summary> -->
-
 Topologically sorted implementation:
 $$\begin{align}
 X^- &:= E\\
 X &:= X^-W + E
 \end{align}$$
 <!-- </details> -->
+!!!! - TODO Adam, write out the dynamical system version of this 
 
 where $W$ represents the *adjacency matrix*
 \[
@@ -67,7 +70,6 @@ If the reachability of two circuits are unequal for a given intervention, differ
 ![](../figures/misc_figure_sketches/closed_loop_distinguishes_corticalEI.png)
 **Figure BACKGROUND>REPRESENTATION/REACH-1: Closed-loop control allows for two circuit hypotheses to be distinguished.** Two hypothesized circuits for the relationships between pyramidal (Pyr, excitatory), parvalbumin-positive (PV, inhibitory), and somatostain-expressing (Som, inhibitory) cells are shown in the two rows. Dashed lines in the right column represent connections whose effects are compensated for through closed-loop control of the Pyr node. By measuring correlations between recorded regions during closed-loop control it is possible to distinguish which hypothesized circuit better matches the data. Notably in the open-loop intervention, activity in all regions is correlated for both hypothesized circuits leading to ambiguity.
 
-!!!! - more figures
 <img src="../figures/core_figure_sketches/figure2_sketch.png" width="500"/>
 <img src="../figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500"/>
 

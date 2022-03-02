@@ -1,4 +1,5 @@
-# Building blocks
+# Predicting network correlations
+## Building blocks
 
 Let $s \in \mathbb{R}^p$ denote exogenous inputs to each of the $p$ nodes, and $W \in \mathbb{R}^{p \times p}$ denote the matrix of connection strengths such that $$W_{ij} = \text{strength of $j \rightarrow i$ connection}.$$
 
@@ -11,7 +12,7 @@ For intuition, note that:
  - ...
  - $(\sum_{i=1}^p W^{i-1} s)_j$ denotes the total variance in node $j$.
 
-## Derivation of expression for (co)variances
+### Derivation of expression for (co)variances
 
 In a linear/gaussian network, we have $x = Wx + e$, where $x \in \mathbb{R}^p$ is the vector of values taken by the $p$ nodes of the circuit and $e \sim \mathcal{N}(0,\mathrm{diag}(s))$. Rearranging this expression yields $X = (I-W)^{-1} s$.
 
@@ -29,7 +30,7 @@ It is a fact that $(I-A)^{-1} = \sum_{n=0}^{\infty} A^n$ when $|\lambda_i(A)| < 
 
 To simplify a bit, we can equivalently write $$\Sigma_{ij} = \sum_{k=1}^p \widetilde{W}_{ik} \widetilde{W}_{jk} s_k.$$
 
-## Expression for $r(i,j)$ under passive observation
+### Expression for $r(i,j)$ under passive observation
 
 Using the expression for $\Sigma$ above, we have
 $$
@@ -53,6 +54,8 @@ The application of closed-loop control on node $c$ can be modeled as:
 2. Set the exogenous noise of node $c$ by setting $s_c$ to any arbitrary value. Because $c$'s inputs have been severed, this exogenous noise will be node $c$'s output variance.
 
 Note that step 1 above will result in $\widetilde{W}_{i,:} = 0$ except for $\widetilde{W}_{i,i} = 1$.
+
+!!!! - TODO for Adam, I think there's more interprettable stuff that can be said about the impact of closed-loop here. Largely based on intuition from the binary version
 
 ### Impact of CL control on $r(i,j)$
 

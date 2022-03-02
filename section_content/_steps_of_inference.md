@@ -56,9 +56,9 @@ $$S_i^* = \underset{i}{\arg\max}\,H(C|S_i)$$[^intv_notation]
 
 [^intv_notation]: will need to tighten up notation for intervention summarized as a variable, annotating its type (passive, open-, closed-loop) as well as its location. Also have to be careful about overloading $S_i$ as the impact of private variance and as a particular open-loop intervention
 
-🚧🚧🚧
-4. *(in experiment or detailed biophysical simulation)* apply intervention, collect data
-Using entropy as a metric to select a useful intervention, the next step is to conduct that interventional experiment, in-vivo or in a detailed simulation. Such an experiment may reveal outputs not fully captured by the linearized reachability representation. 
+🚧
+4. Apply intervention and collect data
+Using entropy as a metric to select a useful intervention, the next step is to conduct that interventional experiment, in-vivo or in a detailed simulation. Such an experiment may reveal outputs patterns not fully captured by the linearized reachability representation. 
 
 `[extract correlations ...]`
 [^practicalities]. 
