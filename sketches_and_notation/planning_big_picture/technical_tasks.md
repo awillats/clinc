@@ -58,7 +58,7 @@
   - [x] [.] compute **binary impact of CL**
     - [x] severs inputs 
     - [x] 🍐 PLOT concatenate binary correlations given control to big interventions X hypotheses plot
-      - [ ] overlay closed-loop and open-loop interventions 
+      - [~] overlay closed-loop and open-loop interventions 
       - [ ] think about which S to push with ctrl @ i 
     - [ ] ⚠️ bidirectional control of variance w/specific slope between target variance and edge correlation
       - 💡 do target → output and intrinsic→output need to be considered separately 
@@ -69,7 +69,8 @@
 ### [.] sketch core figures
   - [~] paste over recent figures
   - [~] paste over abstract, extended abstract into introduction    
-  - [ ] ⚠️ meet & reassess writing tasks
+  - [x]  meet & reassess writing tasks
+    - [x] write results draft
     - [ ] ⚠️ writing more methods
     <details><summary>future work</summary>
 
