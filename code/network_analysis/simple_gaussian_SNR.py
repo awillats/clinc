@@ -5,7 +5,6 @@ import numpy as np
 %load_ext autoreload
 %autoreload 2
 
-
 np.set_printoptions(precision=3,suppress=True)
 import matplotlib.pyplot as plt
 import plotting_functions as myplot
@@ -43,141 +42,126 @@ def pythag(a,b):
     return np.sqrt(a**2+b**2)
 
 #%%
+no_CTRL = sim.NONE_CTRL
+CTRL = sim.DEFAULT_CTRL
+CTRL['location'] = 1
+CTRL['target_fn'] = lambda nt: 10*np.sin(np.linspace(0,9000*np.pi,nt))
+CTRL['effectiveness'] = 0.001
+# CTRL['target_fn'] = lambda nt: np.random.randn(nt)/100
 
-# CTRL = sim.DEFAULT_CTRL
-CTRL = None
 
 nt = int(5e6)
 # W = 1.5*egcirc.get_curto_overrepresented_3node()[0]
-W = 1*np.array(
-[[.1,1,0],
+W = 2*np.array(
+[[0,1,0],
 [0,0,.5],
 [0,0,0]])
 
-#%%
+W_ctrl = net.sever_inputs(W, CTRL['location'])
 
+Rw_pasv = net.reachability_weight(W)
+Rw_ctrl = net.reachability_weight(W_ctrl)
+
+#%%
+'''
+Prepare for simulation
+'''
 N = W.shape[0]
-E = np.random.randn(nt,N)
-S = np.array([1,1,1])
-B = -rowmat(np.array([1,2,3]))*10
+# E = np.random.randn(nt,N)
+S = np.array([1,1,1]) # source standard deviations
+varS = S**2
+B = -rowmat(np.array([1,2,3]))*0
 u = colmat(sim.flat_fn(nt))
-#%%
-X = sim.sim_dg(nt, W, S, B,u, ctrl=CTRL)
 
+
+varS_ctrl = varS.copy()
+varS_ctrl[CTRL['location']] = np.var(CTRL['target_fn'](nt))
+varS
+varS_ctrl
+
+#%%
 '''
-- [ ] draw S 
-- [ ] draw Ctrl!
+Simulate both scenarios
 '''
+X     = sim.sim_dg(nt, W, S, B, u, ctrl=no_CTRL)
+Xctrl = sim.sim_dg(nt, W, S, B, u, ctrl=CTRL)
+
+
 Xts = X.copy()
+'''
+If the system is simulated as a discrete-time dynamical system,
+    need to do something like this to look for 1-lag correlations 
+    ( a more robust alternative is needed )
+'''
 # Xts[:,1] = np.roll(Xts[:,1],-1)
-if CTRL is None:
-    Rw = net.reachability_weight(W)
-else:
-    Rw = net.reachability_weight(net.sever_inputs(W,CTRL['location']))
-
-corr_pred = net.correlation_matrix_from_reachability(Rw, S**2)
-r2_pred  = corr_pred**2
-print(r2_pred,'\n')
-corr = np.corrcoef(Xts,rowvar=False) # this this computes r2
-r2_empr = corr**2 
-print(r2_empr)
-print(f'\nmax diff = {np.max(np.abs(r2_empr-r2_pred)):.1e}')
-
 
 #%%
-
-fig = netplot.plot_empirical_corrs(W,Rw,X, r2_pred, r2_empr)
-fig
-
-#%% markdown
-
-$$
-
-X = E S\\
-X \mathrel{+}= X(\widetilde{W}-I)
-$$ 
-#%%
-# 1-lag correlation-plot
-# if nt<1e5:
-#     fig,ax = plt.subplots(3,3,figsize=(5,5),subplot_kw=dict(box_aspect=1))
-#     for i in range(3):
-#         for j in range(3):
-#             # ax[i,j].plot(X[:-2,j],X[2:,i],'k.',markersize=.005)
-#             ax[i,j].plot(X[:-1,i],X[1:,j],'k.',markersize=500/nt)
-# 
-#     fig
-
-#%%
-# Archived XCORR plots
 '''
-# COMPUTE XCORR
-def xcorr(x,y):
-    # note, this normalizes by standard deviations... might not be what we want
-    xc=np.correlate(x/np.std(x), y/np.std(y), mode='same')
-    return xc/len(xc)
+Predict and quantify correlations
+'''
+def predict_and_quantify_correlations(Rw, varS, X, verbose=True):
+    '''
+    Rw - weighted reachability
+    varS - vector of source variances
+    X - timerseries [samples x nodes]
+    '''
     
-xx_xcorr = xcorr(x, x)
-yy_xcorr = xcorr(y, y)
-xy_xcorr = xcorr(x, y)
+    corr_pred = net.correlation_matrix_from_reachability(Rw, varS)
+    r2_pred  = corr_pred**2
+    corr_empr = np.corrcoef(X, rowvar=False) 
+    r2_empr = corr_empr**2 
+    
+    if verbose:
+        print(r2_pred,'\n')
+        print(r2_empr)
+        print(f'\nmax diff = {np.max(np.abs(r2_empr-r2_pred)):.1e}')
+    
+    return {'r2_pred':r2_pred,'r2_empr':r2_empr,'r_pred':corr_pred,'r_empr':corr_empr}
 
-# naive "shuffle correction" on y to predict "side-lobe variance" of xcorr
-_xy_xcorr = xcorr(x, rng.permutation(y))
-# the above will underestimate xcorr from auto-correlation
-# a more appropriate surrogate would be simulating a counterfactual DAG where
-# all common inputs are broken into independent paths
-# while this is infeasible without oracle knowledge, this may be an inroad to 
-# deriving an expression for the expected std.dev(xcorr(side_band))
+
+# total_ctrl_effect = net.multi_lerp(CTRL['effectiveness'],N)
+total_ctrl_effect = CTRL['effectiveness']
+print(total_ctrl_effect)
+Rw_ctrl_lerp = Rw_ctrl*total_ctrl_effect + Rw_pasv*(1-total_ctrl_effect) 
+Rw_ctrl_post = net.reachability_weight(net.__sever_inputs(W,CTRL))
+varS_ctrl_lerp = varS_ctrl*total_ctrl_effect + varS*(1-total_ctrl_effect)
 
 
-mid_lag = len(xx_xcorr)//2
-lags = np.arange(0,len(xx_xcorr))-mid_lag
+corrs_pasv = predict_and_quantify_correlations(Rw_pasv, varS, X)
+corrs_ctrl = predict_and_quantify_correlations(Rw_ctrl_post, varS_ctrl_lerp, Xctrl)
 
-side_std_xy = np.std(xy_xcorr[(nt//2+nplot//2):]) # has to do with autocorr!
-side_std_xx = np.std(xx_xcorr[(nt//2+nplot//2):]) # has to do with autocorr!
-side_std_yy = np.std(yy_xcorr[(nt//2+nplot//2):]) # has to do with autocorr!
-print(side_std_xy)
+
+n_plot = int(1e3)
 #%%
-
-
+corrs_pasv['r2_empr']
+corrs_ctrl['r2_empr']
 #%%
-
-fig,ax= plt.subplots(figsize=(10,4))
-ax.plot(lags, xy_xcorr,'k');
-# ax.plot(lags, _xy_xcorr,'b',linewidth=.5);
-1/pythag(pso_x,pso_y)
-1/pythag(np.std(x),np.std(y))
-
-noise_std = np.std(xy_xcorr[nt//2+1:])
-# noise_std = np.std(_xy_xcorr)
-ax.plot(0, pr_xy,'gx',markersize=10)
-ax.plot([-mid_lag, mid_lag], [noise_std,noise_std],'m--')
-ax.plot([-mid_lag, mid_lag], [-noise_std,-noise_std],'m--')
-ax.set_xlim([-nplot,nplot])
-xy_xcorr[nt//2]
-
-esnr_xcorr_xy = xy_xcorr[nt//2]/noise_std
-print(f'xcorr(lag=0) = {xy_xcorr[mid_lag]:.2f}, r2 = {er_xy:.2f}\n')
-print(f'          emp. 0-lag SNR = {esnr_xy:.3f}') 
-print(f'emp. peak/side xcorr SNR = {xy_xcorr[mid_lag] / side_std_xy:.3f}') # what we're measuring for analysis later
-ax.set_title('how can we predict the magenta bars? \nif we can, we predict XCORR-SNR');
-# peaksnr_xy = 2*xy_xcorr[nt//2] / (xx_xcorr[nt//2]+yy_xcorr[nt//2])
-# print(peaksnr_xy)
+'Plot correlations from uncontrolled network'
+fig = netplot.plot_empirical_corrs(W, Rw_pasv, X, corrs_pasv['r2_pred'], corrs_pasv['r2_empr'],n_plot)
 fig
 
 #%%
-'''
+W_ctrl
+wbar = lambda W: net.inf_sum_mat(W) - np.eye(W.shape[0])
+wbar(W)
+wbar(W_ctrl)
+#%%
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+net.inv_multi_lerp(.5,3)
+#%%
+Rw_ctrl
+fig,axs = netplot.plot_empirical_corrs(W_ctrl, Rw_ctrl, Xctrl, corrs_ctrl['r2_pred'], corrs_ctrl['r2_empr'],n_plot)
+axs[1][CTRL["location"]].set_title(f'CTRL @ {CTRL["location"]}')
+fig
+#%%
+plt.plot(Xctrl[:,0],Xctrl[:,2],'k.',markersize=0.01)
+# #%%
+# fig,ax=plt.subplots(figsize=(10,2))
+# ax.plot( Xctrl[:,CTRL['location']] ,'k',linewidth=1)
+# ax.plot( CTRL['target_fn'](nt) ,'g',linewidth=2) 
+# # ax.set_xlim([0,10000])
+# # ax.set_ylim([-5,5])
+# ax
+# fig
+# # Xctrl[:,CTRL['location']].sh
 #%%

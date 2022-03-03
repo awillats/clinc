@@ -48,7 +48,7 @@ def gu(nt, signal_type='gaussian'):
     return wave.T
 #%%
 def gen_ctrl_fn_from_spec(ctrl):
-    if ctrl is None:
+    if ctrl is None or ctrl['location'] is None:
         return None
     def ctrl_fn(X):
         nt = X.shape[0]
@@ -58,24 +58,44 @@ def gen_ctrl_fn_from_spec(ctrl):
         X[:,ctrl_idx] = ef*targ + (1-ef)*X[:,ctrl_idx]
         return X
     return ctrl_fn
-DEFAULT_CTRL = {'location':0, 'target_fn':gen_gauss,'effectiveness':0.99}
+DEFAULT_CTRL = {'location':0, 'target_fn':gen_gauss,'effectiveness':0.1}
+NONE_CTRL = {k:None for k in DEFAULT_CTRL}
 
 #%%
-def sim_contemporaneous(nt, W,S,B,u,ctrl_fn=None):
+def sim_contemporaneous(nt, W, Rw, S,B,u,ctrl_fn=None):
     '''
     This strategy side-steps having to simulate a dynamical system, 
     network influence happens within a single timestep
+    NOTE - influence of control is "hardcoded"
+        - that is, the way control affects the flow of correlation is 
+        - alt. implementation would be to to sim_contemporaneous
+            - but with W instead of W~
+            - at each iteration, implementing closed-loop control
+            - is this any less heavy handed?
+    
+    with ctrl_fn applied twice, control effectivness might be skewed?
     '''
-    N = W.shape[0]
+    N = Rw.shape[0]
     E = np.random.randn(nt,N)
     
     #Wt_ represents the sum n from 1 to inf of W^n
-    Wt_ =  net.inf_sum_mat(W) - np.eye(W.shape[0])
+    # Wt_ =  net.inf_sum_mat(W) - np.eye(W.shape[0])
+    # X += X @ Wt_ 
+    # Wt_ =  net.inf_sum_mat(W)
     
-    X = E @ np.diag(S)
+    X = E @ np.diag(S) + u @ B
     if ctrl_fn: X = ctrl_fn(X)
-    X += X @ Wt_ + u @ B
+
+    #HARDCODED REACHABILITY - DOES NOT HANDLE PARTIAL CONTROL
+    X = X @ Rw 
     if ctrl_fn: X = ctrl_fn(X)
+    
+    #only works without cycles! - not convinced this is the "right" way to sim
+    # for i in range(1,N):    
+    #     X += X @ W
+    #     # np.linalg.matrix_power(W,i)
+    #     if ctrl_fn: X = ctrl_fn(X)
+    
     return X
     
 def sim_discrete_time_dynamics_step(X,W,S,B,u):
@@ -104,10 +124,11 @@ def sim_discrete_time_dynamics_step(X,W,S,B,u):
     '''
     pass
 
+    
 def sim_dg(nt, W, S, B,u, ctrl=None, noise_gen=gen_gauss, input_gen=gen_gauss):
     '''
     Simulate  a directed graph
-    S - Nx1 vector of noise standard deviations
+    S - Nx1 vector of noise !standard deviations!
     u - 1xnt vector of stimulus intensities (scalar for now)
     TODO: 
     - enforce dimension checks
@@ -115,14 +136,15 @@ def sim_dg(nt, W, S, B,u, ctrl=None, noise_gen=gen_gauss, input_gen=gen_gauss):
     '''
     N = W.shape[0] #number of nodes
     # noise is independent of any input, can be precomputed 
-    E = np.random.randn(nt, N)
-    X = np.zeros((nt,N))
+    # E = np.random.randn(nt, N)
+    # X = np.zeros((nt,N))
     # X_prev = X[0,:]
 
+    Rw = net.reachability_weight_w_ctrl(W,ctrl)
 
     ctrl_fn = gen_ctrl_fn_from_spec(ctrl)
 
-    X = sim_contemporaneous(nt, W,S,B,u, ctrl_fn)
+    X = sim_contemporaneous(nt, W,Rw, S,B,u, ctrl_fn)
     
     '''
     This strategy treats the system as a discrete-time dynamical system 

@@ -4,7 +4,10 @@ import networkx as nx
 import coreachability_source_classification as coreach
 import network_analysis_functions as net
 import network_data_functions as netdata
+
 import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
+
 import plotting_functions as myplot
 #%%
 DEFAULT_NET_PLOT_OPTIONS = {
@@ -75,6 +78,11 @@ def draw_np_adj(adj, ax=None, more_options={}):
     core plotting function that renders an adjacency_matrix 
     - gets used is several other higher-level plotting functions
     '''
+    
+    # DROP non-finite edges (like None, np.NaN etc.)
+    adj = adj.copy()
+    adj[~np.isfinite(adj)] = 0
+    
     nx_adj = nx.from_numpy_matrix(adj, create_using=nx.DiGraph) 
     pos = clockwise_circular_layout(nx_adj)
     
@@ -296,8 +304,12 @@ def censor_diag(A, censor_val=0):
     n = C.shape[0]
     C[np.diag_indices(n)] = censor_val
     return C
+def fade_zero(M,censor_val=np.NaN):
+    F = M.copy()
+    F[F==0]=censor_val
+    return F
     
-def plot_empirical_corrs(A,Rw,X, r2_pred,r2_empr):
+def plot_empirical_corrs(A,Rw,X, r2_pred,r2_empr,n_plot=1000,node_colors=None):
     '''
     Draws matrices as both heatmaps and as graphs, alongside timeseries
     
@@ -306,40 +318,163 @@ def plot_empirical_corrs(A,Rw,X, r2_pred,r2_empr):
     X - time series [samples x nodes]
     r2_pred - predicted corelation matrix
     r2_empr - emprirical correlation matrix
-    ''' 
-    wid_ratios = [1,4,1,1,1]
-    fig,axs = plt.subplots(2,len(wid_ratios),figsize=(sum(wid_ratios)*3,2*3),gridspec_kw={'width_ratios': wid_ratios})
-
     
-    ax = axs[0,:]
+    - [ ] draw S 
+    - [ ] draw Ctrl!
+    ''' 
+    wid_ratios = [1,6,1,1,1]
+    ncols = len(wid_ratios)
+    N = A.shape[0]
+    # fig,axs = plt.subplots(2,len(wid_ratios),figsize=(sum(wid_ratios)*3,2*3),gridspec_kw={'width_ratios': wid_ratios})
+    fig = plt.figure(figsize=(3*sum(wid_ratios), 2*N))
+
+    gs = GridSpec(2*N,ncols, figure=fig,width_ratios=wid_ratios)
+    fasgs = lambda i,j: fig.add_subplot(gs[i,j])
+
+    # Construct panels of figure
+    axs = []
+    for i in range(5):
+        if i==1: 
+            _axs=[]
+            for i in range(N):
+                ii = 2*i
+                _ax = fasgs(slice(ii,(ii+2)),1)
+                _axs.append(_ax)
+            axs.append(_axs)
+        else:
+            ax_t = fasgs(slice(0,N),i)
+            ax_b = fasgs(slice(N,None),i)
+            axs.append([ax_t,ax_b])
+    '''
+    ----------------------------------------------------------------------------
+    |            |                         |           |           |           |
+    |            |       1, 0              |           |           |           |
+    |   0, 0     |_________________________|    2, 0   |   3, 0    |   4, 0    |
+    |            |                         |           |           |           |
+    |____________|       1, 1              |___________|___________|___________|
+    |            |                         |           |           |           |
+    |            |_________________________|           |           |           |
+    |   0, 1     |                         |    2, 1   |   3, 1    |   4, 1    |
+    |            |       1, 2              |           |           |           |
+    |____________|_________________________|___________|___________|___________|
+    '''
+    
+    if node_colors is None:
+        from matplotlib.cm import get_cmap
+        node_colors = get_cmap("tab10").colors
+    
+
+    for i,ax in enumerate(axs[1]):
+        ax.plot(X[:n_plot,i],linewidth=1,color=node_colors[i])
+        
+        plt.setp(ax.get_xticklabels(),visible=(i==N-1))
+        
+        
+    ax = [c[0] for c in axs]
+    
+    # fade_zero = lambda M:( M[M==0] := None)
+    A = fade_zero(A)
+    Rw = fade_zero(Rw)
+    
+
     ax[0].imshow(A)
     ax[0].set_title('adj')
 
-    ax[1].plot(X, linewidth=3)
-    ax[1].set_xlim([1,200])
+    # ax[1].plot(X, linewidth=3)
+    # ax[1].set_xlim([1,200])
 
-    ax[2].imshow(censor_diag(Rw), vmin=0)
+    ax[2].imshow(fade_zero(censor_diag(Rw)), vmin=0)
     ax[2].set_title('$\widetilde{W}$')
 
-    ax[3].imshow(censor_diag(r2_empr), vmin=0,vmax=1)
-    ax[3].set_title('$r^2$ empr.')
+    ax[3].imshow(censor_diag(r2_pred), vmin=0,vmax=1)
+    ax[3].set_title('$r^2$ pred.')
 
-    ax[4].imshow(censor_diag(r2_pred), vmin=0,vmax=1)
-    ax[4].set_title('$r^2$ pred.')
-    ax = axs[1,:]
+    ax[4].imshow(censor_diag(r2_empr), vmin=0,vmax=1)
+    ax[4].set_title('$r^2$ empr.')
+
+    ax = [c[1] for c in axs]
     draw_np_adj(A, ax[0])
-    myplot.unbox(ax[1],clear_labels=True)
+    # myplot.unbox(ax[1],clear_labels=True)
     draw_np_adj(Rw, ax[2])
-    draw_weighted_corr(r2_empr,ax[3])
-    draw_weighted_corr(r2_pred,ax[4])
-    return fig
+    draw_weighted_corr(r2_pred,ax[3])
+    draw_weighted_corr(r2_empr,ax[4])
+    return fig,axs
 
 
 #%%
 
 
 
+#%%
+# 1-lag correlation-plot
+# if nt<1e5:
+#     fig,ax = plt.subplots(3,3,figsize=(5,5),subplot_kw=dict(box_aspect=1))
+#     for i in range(3):
+#         for j in range(3):
+#             # ax[i,j].plot(X[:-2,j],X[2:,i],'k.',markersize=.005)
+#             ax[i,j].plot(X[:-1,i],X[1:,j],'k.',markersize=500/nt)
+# 
+#     fig
 
+#%%
+# Archived XCORR plots
+'''
+# COMPUTE XCORR
+def xcorr(x,y):
+    # note, this normalizes by standard deviations... might not be what we want
+    xc=np.correlate(x/np.std(x), y/np.std(y), mode='same')
+    return xc/len(xc)
+    
+xx_xcorr = xcorr(x, x)
+yy_xcorr = xcorr(y, y)
+xy_xcorr = xcorr(x, y)
+
+# naive "shuffle correction" on y to predict "side-lobe variance" of xcorr
+_xy_xcorr = xcorr(x, rng.permutation(y))
+# the above will underestimate xcorr from auto-correlation
+# a more appropriate surrogate would be simulating a counterfactual DAG where
+# all common inputs are broken into independent paths
+# while this is infeasible without oracle knowledge, this may be an inroad to 
+# deriving an expression for the expected std.dev(xcorr(side_band))
+
+
+mid_lag = len(xx_xcorr)//2
+lags = np.arange(0,len(xx_xcorr))-mid_lag
+
+side_std_xy = np.std(xy_xcorr[(nt//2+nplot//2):]) # has to do with autocorr!
+side_std_xx = np.std(xx_xcorr[(nt//2+nplot//2):]) # has to do with autocorr!
+side_std_yy = np.std(yy_xcorr[(nt//2+nplot//2):]) # has to do with autocorr!
+print(side_std_xy)
+#%%
+
+
+#%%
+
+fig,ax= plt.subplots(figsize=(10,4))
+ax.plot(lags, xy_xcorr,'k');
+# ax.plot(lags, _xy_xcorr,'b',linewidth=.5);
+1/pythag(pso_x,pso_y)
+1/pythag(np.std(x),np.std(y))
+
+noise_std = np.std(xy_xcorr[nt//2+1:])
+# noise_std = np.std(_xy_xcorr)
+ax.plot(0, pr_xy,'gx',markersize=10)
+ax.plot([-mid_lag, mid_lag], [noise_std,noise_std],'m--')
+ax.plot([-mid_lag, mid_lag], [-noise_std,-noise_std],'m--')
+ax.set_xlim([-nplot,nplot])
+xy_xcorr[nt//2]
+
+esnr_xcorr_xy = xy_xcorr[nt//2]/noise_std
+print(f'xcorr(lag=0) = {xy_xcorr[mid_lag]:.2f}, r2 = {er_xy:.2f}\n')
+print(f'          emp. 0-lag SNR = {esnr_xy:.3f}') 
+print(f'emp. peak/side xcorr SNR = {xy_xcorr[mid_lag] / side_std_xy:.3f}') # what we're measuring for analysis later
+ax.set_title('how can we predict the magenta bars? \nif we can, we predict XCORR-SNR');
+# peaksnr_xy = 2*xy_xcorr[nt//2] / (xx_xcorr[nt//2]+yy_xcorr[nt//2])
+# print(peaksnr_xy)
+fig
+
+#%%
+'''
 
 
 

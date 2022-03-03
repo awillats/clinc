@@ -18,12 +18,32 @@ TODO: some function(s) add the diagonal into the adjacency matrix
 '''
 
 #%%
+def multi_lerp(p, N):
+    return 1-(1-p)**N
+def inv_multi_lerp(P,N):
+    return 1-(1-P)**(1/N)
+    
+def __sever_inputs(adj, CTRL):
+    '''
+    [UNTESTED]
+    partially sever inputs
+    '''
+    new_adj = adj.copy()
+    if CTRL is not None and CTRL['location'] is not None:
+        new_adj[:,CTRL['location']] *= (1.0-CTRL['effectiveness'])          
+    return new_adj
+    
+    
 # control-related functions
 def sever_inputs(adj, ctrl_loc):
     '''
     could imagine an "imperfect" control which scales down inputs by a factor 
     instead of setting them to zero
     '''
+    print(ctrl_loc)
+    if ctrl_loc is None:
+        return adj
+        
     new_adj = adj.copy()
     new_adj[:,ctrl_loc] = 0
     return new_adj
@@ -63,6 +83,18 @@ def reachability_weight( adj ):
     #     reach += curr
     return reach
 
+def reachability_weight_w_ctrl(adj, CTRL):
+    '''
+    CTRL - dictionary specifying control
+    several other functions would benefit from using this
+    '''
+    if CTRL is None:
+        return reachability_weight(adj)
+    reach = reachability_weight(sever_inputs(adj,CTRL['location']))
+    # reach = reachability_weight(__sever_inputs(adj,CTRL))
+
+    return reach
+    
 def net_reach_per_node( adj ):
     '''
     useful in computing the steady state impact of connectivity

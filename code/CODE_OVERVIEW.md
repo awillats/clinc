@@ -14,6 +14,24 @@ if __name__ == "__main__":
 section at the bottom which executes if you call the file as a script (but not if you simply import it). This section is intended as a soft test of basic functionality, but also a demonstration of how to use functions.
 
 
+most commonly the following functions are imported with aliases like so:
+```python
+#external libraries
+import numpy as np
+import networkx as nx
+#data
+import network_data_functions as net_data
+import example_circuits as egcirc
+#sim
+import sim_simple_network_functions as sim
+#analysis
+import network_analysis_functions as net
+import network_plotting_functions as netplot
+#plotting
+import matplotlib.pyplot as plt
+import plotting_functions as myplot
+```
+
 ## network_analysis/
 
 - `simulation_functions/`  :star:
