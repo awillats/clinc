@@ -24,11 +24,7 @@ def colmat(v):
     return v[:,np.newaxis]
 def rowmat(v):
     return v[np.newaxis,:]
-def censor_diag(A, censor_val=0):
-    C = A.copy()
-    n = C.shape[0]
-    C[np.diag_indices(n)] = censor_val
-    return C
+
 # censor_diag = lambda x: x
 
 #%%
@@ -48,7 +44,8 @@ def pythag(a,b):
 
 #%%
 
-CTRL = sim.DEFAULT_CTRL
+# CTRL = sim.DEFAULT_CTRL
+CTRL = None
 
 nt = int(5e6)
 # W = 1.5*egcirc.get_curto_overrepresented_3node()[0]
@@ -62,7 +59,7 @@ W = 1*np.array(
 N = W.shape[0]
 E = np.random.randn(nt,N)
 S = np.array([1,1,1])
-B = -rowmat(np.array([1,2,3]))*0
+B = -rowmat(np.array([1,2,3]))*10
 u = colmat(sim.flat_fn(nt))
 #%%
 X = sim.sim_dg(nt, W, S, B,u, ctrl=CTRL)
@@ -84,46 +81,18 @@ print(r2_pred,'\n')
 corr = np.corrcoef(Xts,rowvar=False) # this this computes r2
 r2_empr = corr**2 
 print(r2_empr)
-
-#%%
-
+print(f'\nmax diff = {np.max(np.abs(r2_empr-r2_pred)):.1e}')
 
 
 #%%
 
-# print(np.round(corr,4))
-print(np.round(r2_empr,4))
-print()
-print(np.round(r2_pred,4))
-wid_ratios = [1,4,1,1,1]
-fig,axs = plt.subplots(2,len(wid_ratios),figsize=(sum(wid_ratios)*3,2*3),gridspec_kw={'width_ratios': wid_ratios})
-
-ax = axs[0,:]
-ax[0].imshow(W)
-ax[0].set_title('adj')
-
-ax[1].plot(X,linewidth=3)
-ax[1].set_xlim([1,200])
-
-ax[2].imshow(censor_diag(Rw), vmin=0)
-ax[2].set_title('$\widetilde{W}$')
-
-ax[3].imshow(censor_diag(r2_empr), vmin=0,vmax=1)
-ax[3].set_title('$r^2$ empr.')
-
-ax[4].imshow(censor_diag(r2_pred), vmin=0,vmax=1)
-ax[4].set_title('$r^2$ pred.')
-ax = axs[1,:]
-netplot.draw_np_adj(W,ax[0])
-myplot.unbox(ax[1],clear_labels=True)
-netplot.draw_np_adj(Rw, ax[2])
-netplot.draw_weighted_corr(r2_empr,ax[3])
-netplot.draw_weighted_corr(r2_pred,ax[4])
-
+fig = netplot.plot_empirical_corrs(W,Rw,X, r2_pred, r2_empr)
 fig
+
 #%% markdown
 
 $$
+
 X = E S\\
 X \mathrel{+}= X(\widetilde{W}-I)
 $$ 

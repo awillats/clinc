@@ -283,3 +283,76 @@ def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True):
     graph_pos = draw_adj_reach_corr(A, axs[0:3], add_titles, grey_correlations=True)
     draw_coreachability_by_source(df, axs[3:], graph_pos, add_titles)
     return fig
+    
+#%%
+def censor_diag(A, censor_val=0):
+    '''
+    adjacency and reachability matrices often have 1s along the diagonal 
+        which can skew colormaps
+    this function replaces values along the diagonal with a "censored" value for
+    better visualization
+    '''
+    C = A.copy()
+    n = C.shape[0]
+    C[np.diag_indices(n)] = censor_val
+    return C
+    
+def plot_empirical_corrs(A,Rw,X, r2_pred,r2_empr):
+    '''
+    Draws matrices as both heatmaps and as graphs, alongside timeseries
+    
+    A - (weighted) adjacency_matrix
+    Rw - weighted reachability
+    X - time series [samples x nodes]
+    r2_pred - predicted corelation matrix
+    r2_empr - emprirical correlation matrix
+    ''' 
+    wid_ratios = [1,4,1,1,1]
+    fig,axs = plt.subplots(2,len(wid_ratios),figsize=(sum(wid_ratios)*3,2*3),gridspec_kw={'width_ratios': wid_ratios})
+
+    
+    ax = axs[0,:]
+    ax[0].imshow(A)
+    ax[0].set_title('adj')
+
+    ax[1].plot(X, linewidth=3)
+    ax[1].set_xlim([1,200])
+
+    ax[2].imshow(censor_diag(Rw), vmin=0)
+    ax[2].set_title('$\widetilde{W}$')
+
+    ax[3].imshow(censor_diag(r2_empr), vmin=0,vmax=1)
+    ax[3].set_title('$r^2$ empr.')
+
+    ax[4].imshow(censor_diag(r2_pred), vmin=0,vmax=1)
+    ax[4].set_title('$r^2$ pred.')
+    ax = axs[1,:]
+    draw_np_adj(A, ax[0])
+    myplot.unbox(ax[1],clear_labels=True)
+    draw_np_adj(Rw, ax[2])
+    draw_weighted_corr(r2_empr,ax[3])
+    draw_weighted_corr(r2_pred,ax[4])
+    return fig
+
+
+#%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#%%

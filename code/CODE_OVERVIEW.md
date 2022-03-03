@@ -1,24 +1,33 @@
 # Purpose / scope
 
+🚧
 
 ----
 # Organization
 *see [README.md](../README.md) for more, high-level overview*
 
+most analysis files with many functions will also have an 
+```python 
+if __name__ == "__main__":
+  use_functions()
+```
+section at the bottom which executes if you call the file as a script (but not if you simply import it). This section is intended as a soft test of basic functionality, but also a demonstration of how to use functions.
+
+
 ## network_analysis/
 
 - `simulation_functions/`  :star:
-  - <details><summary>sim_simple_network_functions.py</summary>
-  
+  <!-- - <details><summary>sim_simple_network_functions.py</summary> -->
+  -sim_simple_network_functions
     - takes a circuit specification and generates output data
       - generates various forms of random noise
       - uses several ways of "realizing" network dynamics 
         - `sim_contemporaneous`
-        $$X^-:=E+Bu  \\X := X^-W$$
+        $$X^-:=E+Bu  \\X := X^-\bar{W} + X^- = X^-\widetilde{W}$$
           - matrix computation (faster)
           - for-loop computation (more flexible)
         - `sim_dynamic`
-        $$X_{t+1} = X_t W + E + Bu$$
+        $$X_{t+1} := X_t W + E + Bu$$
   
 </details>
 
@@ -68,7 +77,7 @@
 - `_demo_imgs/` - screenshots of progress
   
 ## MATLAB/
-Some early prototype code was written in MATLAB ... 
+Some early prototype code for computing reachability and correlation was written in MATLAB ... 
 
 ## _plotting/
 eventually plotting functions will get moved here ...
