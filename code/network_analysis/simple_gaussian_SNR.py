@@ -1,6 +1,7 @@
 import numpy as np
-# from numpy.random import default_rng
-# rng = default_rng()
+from numpy.random import default_rng
+
+# rng = default_rng(seed=123)
 
 %load_ext autoreload
 %autoreload 2
@@ -45,9 +46,10 @@ def pythag(a,b):
 no_CTRL = sim.NONE_CTRL
 CTRL = sim.DEFAULT_CTRL
 CTRL['location'] = 1
-CTRL['target_fn'] = lambda nt: 3*np.sin(np.linspace(0,9000*np.pi,nt))
-CTRL['effectiveness'] = 0.5
-# CTRL['target_fn'] = lambda nt: np.random.randn(nt)/100
+# CTRL['target_fn'] = lambda nt: 1*np.sin(np.linspace(0,9000*np.pi,nt))
+CTRL['effectiveness'] = 1.0
+CTRL['target_fn'] = lambda nt: default_rng(seed=123).standard_normal(nt)/3
+# np.random.randn(nt)*10
 
 
 nt = int(5e6)
@@ -129,14 +131,17 @@ CURRENTLY A MESS
 
 
 total_ctrl_effect = CTRL['effectiveness']
-varS_ctrl_lerp = lerp(varS,varS_ctrl, total_ctrl_effect**2.5)
+varS_ctrl_lerp = lerp(varS,varS_ctrl, total_ctrl_effect)
 
 0.9
 corrs_pasv = predict_and_quantify_correlations(Rw_pasv, varS, X)
 corrs_ctrl = predict_and_quantify_correlations(Rw_ctrl, varS_ctrl_lerp, Xctrl)
 
 #%%
-n_sweep = 300
+
+'''
+# Treating control effectiveness as a post-hoc hyperparameter
+n_sweep = 100
 es = np.linspace(0,1,n_sweep)
 ds = []
 for e in es:
@@ -153,8 +158,9 @@ a.plot(es,ds);
 a.plot(post_hoc_eff,post_hoc_err,'ro')
 a.plot(CTRL['effectiveness'],0,'x',color='limegreen',markersize=10)
 a.set_title(f'pre:{CTRL["effectiveness"]:.2f}, post:{post_hoc_eff:.3f}, post err = {post_hoc_err:.2e}')
-a.set_ylim([-1e-3,2e-1])
+# a.set_ylim([-1e-3,2e-1])
 f
+'''
 #%%
 n_plot = int(2e3)
 
@@ -179,7 +185,7 @@ fig,axs = netplot.plot_empirical_corrs(W_ctrl, Rw_ctrl, Xctrl, corrs_ctrl['r2_pr
 axs[1][CTRL["location"]].set_title(f'CTRL @ {CTRL["location"]}')
 fig
 #%%
-plt.plot(Xctrl[:,0],Xctrl[:,2],'k.',markersize=0.01)
+# plt.plot(Xctrl[:,0],Xctrl[:,2],'k.',markersize=0.01)
 # #%%
 # fig,ax=plt.subplots(figsize=(10,2))
 # ax.plot( Xctrl[:,CTRL['location']] ,'k',linewidth=1)

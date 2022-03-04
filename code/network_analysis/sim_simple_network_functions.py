@@ -95,8 +95,6 @@ def sim_contemporaneous(nt, W, Rw, S,B,u,ctrl_fn=None):
     for i in range(1,N):    
         Xp = Xp @ W
         X += Xp
-        # X += X @ W
-    #     # np.linalg.matrix_power(W,i)
     if ctrl_fn: X = ctrl_fn(X)
     
     return X
