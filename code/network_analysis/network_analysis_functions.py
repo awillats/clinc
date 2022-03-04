@@ -28,7 +28,7 @@ def __sever_inputs(adj, CTRL):
     [UNTESTED]
     partially sever inputs
     '''
-    new_adj = adj.copy()
+    new_adj = adj.copy().astype('float')
     if CTRL is not None and CTRL['location'] is not None:
         new_adj[:,CTRL['location']] *= (1.0-CTRL['effectiveness'])          
     return new_adj

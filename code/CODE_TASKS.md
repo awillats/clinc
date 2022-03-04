@@ -9,16 +9,17 @@
 - 🎯 verify quantitative match
 - 🎯 get sweeps infrastructure
 
-- [ ] 🧿 add closed-loop control in `sim_contemporaneous`
-  - [ ] add partial incomplete control parameter
+- [.] 🧿 add closed-loop control in `sim_contemporaneous`
+  - [~] add partial incomplete control parameter
     - [x] 🧿 run as-is
       - control behaves as expected, but prediction hasn't caught up yet
-      - [ ] bundle plot into function
-    - [ ] clean up $\bar{W}$ implementation
-    - [ ] NEW implementation tech
+      - [x] bundle plot into function
+    - [~] clean up $\bar{W}$ implementation
+    - [.] NEW implementation tech
     - [ ] extract data functions to utilities file
     - 🧵 verify whether this contemp. implementation is sensible 
-  - [ ] simply blends target and un-controlled variance
+      - it's not :grimacing:
+  - [~] simply blends target and un-controlled variance
   - [ ] 🎁 implementation writeup?
 - [ ] 🎁 extend implementations to discrete time dynamics
 ---

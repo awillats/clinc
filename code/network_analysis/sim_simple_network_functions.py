@@ -87,14 +87,17 @@ def sim_contemporaneous(nt, W, Rw, S,B,u,ctrl_fn=None):
     if ctrl_fn: X = ctrl_fn(X)
 
     #HARDCODED REACHABILITY - DOES NOT HANDLE PARTIAL CONTROL
-    X = X @ Rw 
-    if ctrl_fn: X = ctrl_fn(X)
+    # X = X @ Rw 
+    # if ctrl_fn: X = ctrl_fn(X)
     
     #only works without cycles! - not convinced this is the "right" way to sim
-    # for i in range(1,N):    
-    #     X += X @ W
+    Xp = X
+    for i in range(1,N):    
+        Xp = Xp @ W
+        X += Xp
+        # X += X @ W
     #     # np.linalg.matrix_power(W,i)
-    #     if ctrl_fn: X = ctrl_fn(X)
+    if ctrl_fn: X = ctrl_fn(X)
     
     return X
     
@@ -140,11 +143,14 @@ def sim_dg(nt, W, S, B,u, ctrl=None, noise_gen=gen_gauss, input_gen=gen_gauss):
     # X = np.zeros((nt,N))
     # X_prev = X[0,:]
 
+    # Wc = net.sever_inputs(W,ctrl['location']) #NOTE: DEBUG ONLY
+    Wc = net.__sever_inputs(W,ctrl) #NOTE: DEBUG ONLY
+
     Rw = net.reachability_weight_w_ctrl(W,ctrl)
 
     ctrl_fn = gen_ctrl_fn_from_spec(ctrl)
 
-    X = sim_contemporaneous(nt, W,Rw, S,B,u, ctrl_fn)
+    X = sim_contemporaneous(nt, Wc, Rw, S,B,u, ctrl_fn)
     
     '''
     This strategy treats the system as a discrete-time dynamical system 

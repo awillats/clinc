@@ -45,39 +45,43 @@ def pythag(a,b):
 no_CTRL = sim.NONE_CTRL
 CTRL = sim.DEFAULT_CTRL
 CTRL['location'] = 1
-CTRL['target_fn'] = lambda nt: 10*np.sin(np.linspace(0,9000*np.pi,nt))
-CTRL['effectiveness'] = 0.001
+CTRL['target_fn'] = lambda nt: 3*np.sin(np.linspace(0,9000*np.pi,nt))
+CTRL['effectiveness'] = 0.5
 # CTRL['target_fn'] = lambda nt: np.random.randn(nt)/100
 
 
 nt = int(5e6)
 # W = 1.5*egcirc.get_curto_overrepresented_3node()[0]
-W = 2*np.array(
+W = 1*np.array(
 [[0,1,0],
-[0,0,.5],
+[0,0,1],
 [0,0,0]])
 
-W_ctrl = net.sever_inputs(W, CTRL['location'])
+W_ctrl = net.__sever_inputs(W, CTRL)
 
 Rw_pasv = net.reachability_weight(W)
 Rw_ctrl = net.reachability_weight(W_ctrl)
 
 #%%
+
+
+def lerp(a,b,p):
+    return (1-p)*a + p*b
 '''
 Prepare for simulation
 '''
 N = W.shape[0]
 # E = np.random.randn(nt,N)
-S = np.array([1,1,1]) # source standard deviations
+S = np.array([1.,1.,1.]) # source standard deviations
 varS = S**2
-B = -rowmat(np.array([1,2,3]))*0
+B = -rowmat(np.array([1.,2.,3.]))*0
 u = colmat(sim.flat_fn(nt))
 
 
 varS_ctrl = varS.copy()
-varS_ctrl[CTRL['location']] = np.var(CTRL['target_fn'](nt))
-varS
-varS_ctrl
+test_targ = CTRL['target_fn'](nt)
+ci = CTRL['location']
+varS_ctrl[ci] = np.var(CTRL['target_fn'](nt))
 
 #%%
 '''
@@ -110,36 +114,57 @@ def predict_and_quantify_correlations(Rw, varS, X, verbose=True):
     r2_pred  = corr_pred**2
     corr_empr = np.corrcoef(X, rowvar=False) 
     r2_empr = corr_empr**2 
-    
+    max_diff = np.max(np.abs(r2_empr-r2_pred))
     if verbose:
         print(r2_pred,'\n')
         print(r2_empr)
-        print(f'\nmax diff = {np.max(np.abs(r2_empr-r2_pred)):.1e}')
+        print(f'\nmax diff = {max_diff:.1e}')
     
-    return {'r2_pred':r2_pred,'r2_empr':r2_empr,'r_pred':corr_pred,'r_empr':corr_empr}
+    return {'r2_pred':r2_pred,'r2_empr':r2_empr,'r_pred':corr_pred,'r_empr':corr_empr,'max_diff':max_diff}
 
 
-# total_ctrl_effect = net.multi_lerp(CTRL['effectiveness'],N)
+'''
+CURRENTLY A MESS
+'''
+
+
 total_ctrl_effect = CTRL['effectiveness']
-print(total_ctrl_effect)
-Rw_ctrl_lerp = Rw_ctrl*total_ctrl_effect + Rw_pasv*(1-total_ctrl_effect) 
-Rw_ctrl_post = net.reachability_weight(net.__sever_inputs(W,CTRL))
-varS_ctrl_lerp = varS_ctrl*total_ctrl_effect + varS*(1-total_ctrl_effect)
+varS_ctrl_lerp = lerp(varS,varS_ctrl, total_ctrl_effect**2.5)
 
-
+0.9
 corrs_pasv = predict_and_quantify_correlations(Rw_pasv, varS, X)
-corrs_ctrl = predict_and_quantify_correlations(Rw_ctrl_post, varS_ctrl_lerp, Xctrl)
+corrs_ctrl = predict_and_quantify_correlations(Rw_ctrl, varS_ctrl_lerp, Xctrl)
 
-
-n_plot = int(1e3)
 #%%
+n_sweep = 300
+es = np.linspace(0,1,n_sweep)
+ds = []
+for e in es:
+    _varS_ctrl_lerp = lerp(varS,varS_ctrl, e)
+    _corrs_ctrl = predict_and_quantify_correlations(Rw_ctrl, _varS_ctrl_lerp, Xctrl,False)
+    ds.append(_corrs_ctrl['max_diff'])
+#%%
+post_hoc_eff = es[np.argmin(ds)]
+post_hoc_err = min(ds)
+f,a = plt.subplots()
+print()
+a.plot([0,1],[0,0],'k--')
+a.plot(es,ds);
+a.plot(post_hoc_eff,post_hoc_err,'ro')
+a.plot(CTRL['effectiveness'],0,'x',color='limegreen',markersize=10)
+a.set_title(f'pre:{CTRL["effectiveness"]:.2f}, post:{post_hoc_eff:.3f}, post err = {post_hoc_err:.2e}')
+a.set_ylim([-1e-3,2e-1])
+f
+#%%
+n_plot = int(2e3)
+
 corrs_pasv['r2_empr']
 corrs_ctrl['r2_empr']
 #%%
 'Plot correlations from uncontrolled network'
-fig = netplot.plot_empirical_corrs(W, Rw_pasv, X, corrs_pasv['r2_pred'], corrs_pasv['r2_empr'],n_plot)
+fig,_ = netplot.plot_empirical_corrs(W, Rw_pasv, X, corrs_pasv['r2_pred'], corrs_pasv['r2_empr'],n_plot)
+print(corrs_pasv['r2_empr'])
 fig
-
 #%%
 W_ctrl
 wbar = lambda W: net.inf_sum_mat(W) - np.eye(W.shape[0])

@@ -305,7 +305,7 @@ def censor_diag(A, censor_val=0):
     C[np.diag_indices(n)] = censor_val
     return C
 def fade_zero(M,censor_val=np.NaN):
-    F = M.copy()
+    F = M.copy().astype('float')
     F[F==0]=censor_val
     return F
     
