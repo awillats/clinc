@@ -35,15 +35,16 @@ def __sever_inputs(adj, CTRL):
     
     
 # control-related functions
-def sever_inputs(adj, ctrl_loc):
+def sever_inputs(adj, ctrl_loc, verbose=False):
     '''
     could imagine an "imperfect" control which scales down inputs by a factor 
     instead of setting them to zero
     '''
-    print(ctrl_loc)
+    
     if ctrl_loc is None:
         return adj
-        
+    if verbose:
+        print(f'adding control at {ctrl_loc}')    
     new_adj = adj.copy()
     new_adj[:,ctrl_loc] = 0
     return new_adj
@@ -239,6 +240,27 @@ def correlation_matrix_from_each_control(A, S, verbose=False):
 
 # def corrcoeff_from_reachability_controlled(i,j):
 #%%  
+'''
+Predict and quantify correlations
+'''
+def predict_and_quantify_correlations(Rw, varS, X, verbose=False):
+    '''
+    Rw - weighted reachability
+    varS - vector of source variances
+    X - timerseries [samples x nodes]
+    '''
+    
+    corr_pred = correlation_matrix_from_reachability(Rw, varS)
+    r2_pred  = corr_pred**2
+    corr_empr = np.corrcoef(X, rowvar=False) 
+    r2_empr = corr_empr**2 
+    max_diff = np.max(np.abs(r2_empr-r2_pred))
+    if verbose:
+        print(r2_pred,'\n')
+        print(r2_empr)
+        print(f'\nmax diff = {max_diff:.1e}')
+    
+    return {'r2_pred':r2_pred,'r2_empr':r2_empr,'r_pred':corr_pred,'r_empr':corr_empr,'max_diff':max_diff}
 
 #%%
 

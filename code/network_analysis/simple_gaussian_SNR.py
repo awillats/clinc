@@ -48,7 +48,7 @@ CTRL = sim.DEFAULT_CTRL
 CTRL['location'] = 1
 # CTRL['target_fn'] = lambda nt: 1*np.sin(np.linspace(0,9000*np.pi,nt))
 CTRL['effectiveness'] = 1.0
-CTRL['target_fn'] = lambda nt: default_rng(seed=123).standard_normal(nt)/3
+CTRL['target_fn'] = lambda nt: default_rng(seed=123).standard_normal(nt)*1/2
 # np.random.randn(nt)*10
 
 
@@ -168,8 +168,9 @@ corrs_pasv['r2_empr']
 corrs_ctrl['r2_empr']
 #%%
 'Plot correlations from uncontrolled network'
-fig,_ = netplot.plot_empirical_corrs(W, Rw_pasv, X, corrs_pasv['r2_pred'], corrs_pasv['r2_empr'],n_plot)
+fig,axs = netplot.plot_empirical_corrs(W, Rw_pasv, X, corrs_pasv['r2_pred'], corrs_pasv['r2_empr'],n_plot)
 print(corrs_pasv['r2_empr'])
+axs[3][1].text(-.4,0,f'pred err:\n {corrs_pasv["max_diff"]:.1e}',color='grey',fontsize=15)
 fig
 #%%
 W_ctrl

@@ -12,8 +12,9 @@ def gen_poisson(nt, lam=1):
     '''
     return np.random.poisson(lam, nt)
 
-def gen_gauss(nt):
-    return np.random.randn(nt)
+def gen_gauss(nt,seed=None):
+    _rng = default_rng(seed)
+    return _rng.standard_normal(nt)
 def sample_gauss(t):
     return gen_gauss(1)
     
