@@ -19,15 +19,20 @@ DEFAULT_NET_PLOT_OPTIONS = {
         'connectionstyle':"arc3,rad=0.1",
     }
 # Network plotting  
-def draw_weighted_corr(W, ax=None, min_w=0,max_w=10, more_options={}):
+def draw_weighted_corr(W, ax=None, min_w=0,max_w=10, more_options={},pos_override=None):
     G = nx.from_numpy_matrix(W, create_using=nx.Graph) 
     weights = np.array(list(nx.get_edge_attributes(G,'weight').values()))
     weights = rescale(weights, min_w,max_w, 0,1)
     
-    pos = clockwise_circular_layout(G)
+    if pos_override is None:
+        pos = clockwise_circular_layout(G)
+    else:
+        pos = pos_override
     
     options = DEFAULT_NET_PLOT_OPTIONS.copy()
     options.update({'ax':ax,'pos':pos})
+    
+        
     options.update({'width':weights,'node_size':100})
     nx.draw(G, **options)
     ax.set_aspect('equal')
@@ -108,7 +113,7 @@ def indicate_intervention(ax, pos_i, type='open-loop'):
     see also indicate_ctrl
     '''
     arrow_mag = 0.4
-    arrow_c = 'k'
+    arrow_c = 'dodgerblue' if type=='open-loop' else 'orange'
     # start from "outside" the node
     x0 = pos_i[0]*(1+arrow_mag)
     y0 = pos_i[1]*(1+arrow_mag)
