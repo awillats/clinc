@@ -1,14 +1,17 @@
 # writing tasks 
-- [ ] get results figures to show up in both section content and results
-- [ ] summarize completness 
+- [~] summarize completness 
   - sync outline → manuscript → section content
-  - several results sections unwritten, but demphasized
+    - [ ] review outline 
+      - [ ] check for sections
+      - ( ) transcribe doneness
+  - *several results sections unwritten, but demphasized*
   
+---
   
-  
-  - (?) 3 main chunks of methods writing to do?
+  - [ ] generate overall manuscript.html
+  - (?) 4 main chunks of methods writing to do?
   - [ ] check methods figures
-  - [ ] quarantine speculative methods
+  - [.] quarantine speculative methods
   
   
   
@@ -17,7 +20,8 @@
 - [ ] write methods sections
 
 - [ ] poll CotN about circuit ambiguity, entropy
-
+- [ ] pandoc [crossref](https://github.com/lierdakil/pandoc-crossref) for equations, figures
+- [ ] better metadata integration *see "front matter"*
 ---- 
 
 
@@ -73,6 +77,8 @@
 - [x] read the abstract
   - looks good, will need revisiting after scope of results, conclusions is finalized 
 
+- [x] get results figures to show up in both section content and results
+  - use absolute paths
 
 
 ----
