@@ -21,9 +21,11 @@ Associated code is managed in the following repositories:
 # Main plots
 ![](code/network_analysis/results/effect_of_control_horiz.png)
 ![](code/network_analysis/results/hypo_x_intv_3node.png)
+![](figures/from_code/bidirectional_correlation.png)
 🚧
 
 # Appendix / supplemental plots
+![](figures/from_code/direct_indirect_circuit_snr.png)
 🚧
 
 

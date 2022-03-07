@@ -7,9 +7,9 @@
 
 
 ## See also
-  - `sketches_and_notation/notation1_circuits.md`
-  - `sketches_and_notation/notation2_do_calculus.md`
-  - `sketches_and_notation/notation3_pearl.md`
+  - [notation1_circuits.md](../sketches_and_notation/notation/notation1_circuits.md)
+  - [notation2_do_calculus.md](../sketches_and_notation/notation/notation2_do_calculus.md)
+  - [notation3_pearl.md](../sketches_and_notation/notation/notation3_pearl.md)
 
 ## Draft
 

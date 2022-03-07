@@ -15,28 +15,21 @@
     - reevaluate later
 </details>
 
-- [ ] describe figures 
-- [~]🧿 impact of intervention 
-  - [~] layout experiment (move to methods / discussion )
-  - [ ] 
-- [ ] Resketch figures - @adam
-- **planning**
-  - make sure they're aligned towards a core takeaway 
-  - make them concrete
-    - if there's a lot of missing content, hide the figure sketch
-  - write the takeaway via caption 
-<!-- - [ ] point to where source files (svg / g-drawing) -->
 
-- [~] gather info from citations for intro - @matt 
-- [x][x][ ]🧿 automatic writing session - results - @matt, @adam
+- [ ] high level review of scope and completeness
+  - what to focus on this week
+  - compare length, figure count to target papers
+- [ ] review, update methods outlines
 - [ ] :warning: automatic writing session - methods - @matt, @adam
+  
 
 ----
 
 # Technical loose-ends 
+- [ ] summarizing relationship between intervention utility (across-hypoth entropy) and circuit properties
 - [ ] predicting time-lagged correlation 
 - [ ] quantitative match between gaussian sims & theory
-- [ ] summarizing relationship between intervention utility and circuit properties 
+
 
 --- 
-see also [technical_tasks.md](sketches_and_notation/technical_tasks.md) and [low_priority_tasks.md](sketches_and_notation/low_priority_tasks.md)
+see also [technical_tasks.md](sketches_and_notation/technical_tasks.md) and [writing_tasks.md](sketches_and_notation/planning_big_picture/writing_tasks.md)
