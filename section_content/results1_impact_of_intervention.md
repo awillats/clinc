@@ -176,13 +176,18 @@ The change in correlation as a function of changing intervention variance ($\fra
 
 
 !!!! - Explain why closed-loop helps - more data efficient - 5% done
+
+
+
 > - less data required to get to threshold level of accuracy (more data-efficient)
 >      - likely comes from improved "SNR" which can be thought of as a derived property of the per-edge correlations
 🚧
 
+![](../figures/from_code/direct_indirect_circuit_snr.png)
+![](../figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png) 
+
 <details><summary> figure sketches </summary>
 
-![](../figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png) 
 ![](../figures/literature_figs/spike_field_shanechi_crop.png)
 </details>
 
