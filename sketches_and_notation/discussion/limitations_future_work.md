@@ -45,7 +45,7 @@
 - haven't considered state-dependent or nonstationary networks 
   - e.g. synaptic plasticity
 
-- *(see also [technical_questions.md](../planning_big_picture/technical_questions.md) )*
+- *(see also [technical_questions.md](sketches_and_notation/planning_big_picture/technical_questions.md) )*
 
 [^bin_size]: see Assessing the significance, and "The influence of filtering and downsampling on the estimation of transfer entropy", also **Figure 6. Short bin widths generally improve performance** from "Extending Transfer Entropy Improves...", also also "bin size" tag on Zotero
 

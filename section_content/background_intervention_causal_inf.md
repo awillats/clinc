@@ -7,20 +7,20 @@
 
 
 ## See also
-  - [notation1_circuits.md](../sketches_and_notation/notation/notation1_circuits.md)
-  - [notation2_do_calculus.md](../sketches_and_notation/notation/notation2_do_calculus.md)
-  - [notation3_pearl.md](../sketches_and_notation/notation/notation3_pearl.md)
+  - [notation1_circuits.md](/sketches_and_notation/notation/notation1_circuits.md)
+  - [notation2_do_calculus.md](/sketches_and_notation/notation/notation2_do_calculus.md)
+  - [notation3_pearl.md](/sketches_and_notation/notation/notation3_pearl.md)
 
 ## Draft
 
 A rich theoretical literature has confirmed the central role of interventions in inferring causal structure from data \cite{pearl2009causality, eberhardt2007interventions}. Consistent with intuition from neuroscience literature, data in which some variables are experimentally intervened on is typically much more powerful than observational data alone. For example, observational data of two correlated variables $x$ and $y$ does not allow a scientist to determine whether $x$ is driving $y$, $y$ is driving $x$, or if the two variables are being independently driven by a hidden confounder. Experimentally manipulating $x$ and observing the output of $y$, however, allows the scientist to begin to establish which potential causal interaction pattern is at work.
 
 
-![](../figures/misc_figure_sketches/neuro_intervention_background_sketch.png)
+![](/figures/misc_figure_sketches/neuro_intervention_background_sketch.png)
 > **Fig: Examples of the role of interventions in discoveries in neuroscience**  (A) Identifying when a patient is having a seizure, from **passive recordings** alone (B) through **systematic open-loop stimulation experiments,** Penfield was able to uncover the spatial organization of how senses and movement are mapped in the cortex [^HW] (C) **Feedback control** allows us to specify activity in the brain in terms of outputs. Allows us to reject disturbances, respond to changes
 
 [^HW]: Another great example of open-loop mapping: Hubel, D.H., Wiesel, T.N.: Receptive fields of single neurones in the cat’s striate cortex. The Journal of physiology 148(3), 574–591 (1959)
-![](../figures/misc_figure_sketches/HW_open_loop.png)
+![](/figures/misc_figure_sketches/HW_open_loop.png)
 
 [^specific]: probably needs to get more specific sooner, @Adam can fill in
 

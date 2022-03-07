@@ -4,7 +4,7 @@
 
 ----
 # Organization
-*see [README.md](../README.md) for more, high-level overview*
+*see [README.md](/README.md) for more, high-level overview*
 
 most analysis files with many functions will also have an 
 ```python 
@@ -70,7 +70,7 @@ import plotting_functions as myplot
     - `mermaid_str_to_networkx()` - parses a mermaid-js syntax string to a networkx Graph object
       <details><summary>demo</summary>  
       
-      ![](network_analysis/_demo_imgs/mermaid_parser_demo.png) </details>
+      ![](/code/network_analysis/_demo_imgs/mermaid_parser_demo.png) </details>
     - `nx_to_np_adj()` - extracts numpy adjacency from networkx Graph
   - example_circuits.py - functions for generating sets of circuit hypotheses
   - `motif_data/` - circuit motifs transcribed from other papers
@@ -81,7 +81,7 @@ import plotting_functions as myplot
   - sweep_gaussian_SNR.py
     <details><summary>demo</summary>  
     
-    ![](../figures/from_code/bidirectional_correlation.png) </details>
+    ![](/figures/from_code/bidirectional_correlation.png) </details>
   - plot_hypotheses_x_interventions.py
   
 - `plotting_functions/`
@@ -91,7 +91,7 @@ import plotting_functions as myplot
     - gradient_of_r2_demo.py - $\nabla_S \,{r^2}$
       <details><summary>demo</summary>  
       
-      ![](network_analysis/_demo_imgs/correlation_reachability_gradient_results.png) </details>
+      ![](/code/network_analysis/_demo_imgs/correlation_reachability_gradient_results.png) </details>
       
   
   

@@ -23,7 +23,7 @@ clean up
 
 # Methods 
 🚧 figure request: flowchart for steps of intervention experiment 🚧
-see [section_content/_steps_of_inference.md](../section_content/_steps_of_inference.md)
+see [section_content/_steps_of_inference.md](/section_content/_steps_of_inference.md)
 
 ## Network simulations 
 - something that shows neurons in networks
@@ -31,7 +31,7 @@ see [section_content/_steps_of_inference.md](../section_content/_steps_of_infere
 ## Extracting circuit estimates
 ![](whiteboard/methods_xcorr_features.jpeg)
 ![](whiteboard/methods_circuit_xcorr_sketch.png)
-![](../code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
+![](/code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
 
 
 

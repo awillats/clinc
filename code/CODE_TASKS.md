@@ -1,11 +1,11 @@
 ## working towards this figure:
-![](../figures/core_figure_sketches/figvar_sketch.png)
-[text for fig here](../section_content/results1_impact_of_intervention.md#fig-var)
+![](/figures/core_figure_sketches/figvar_sketch.png)
+[text for fig here](/section_content/results1_impact_of_intervention.md#fig-var)
 
 ---
 
 ## Current tasks
-*see also [technical_tasks](../sketches_and_notation/planning_big_picture/technical_tasks.md)*
+*see also [technical_tasks](/sketches_and_notation/planning_big_picture/technical_tasks.md)*
 - 🎯 [x] verify quantitative match
   - doesn't work for partially effective control, otherwise works well
 

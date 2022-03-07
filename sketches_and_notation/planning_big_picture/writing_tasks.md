@@ -1,15 +1,29 @@
 # writing tasks 
+- [ ] get results figures to show up in both section content and results
 - [ ] summarize completness 
+  - sync outline → manuscript → section content
   - several results sections unwritten, but demphasized
+  
+  
+  
   - (?) 3 main chunks of methods writing to do?
   - [ ] check methods figures
   - [ ] quarantine speculative methods
-- [ ] write methods overview 
+  
+  
+  
+- [ ] write methods overview 1k words
   - find a good example of this
 - [ ] write methods sections
 
+- [ ] poll CotN about circuit ambiguity, entropy
+
 ---- 
+
+
 # Mostly complete
+
+- [ ] reading through [A Step by Step Guide to Writing a Scientific Manuscript](https://intmed.vcu.edu/media/intmed-dev/documents/facdev/A6StepbyStepGuidetoWritingaScientificManuscriptbyWenzeletal.pdf)
 - [x] reading through [10 simple rules for structuring papers](https://www.biorxiv.org/content/10.1101/088278v5.full.pdf+html)
   
   - [x] transcribe followup tasks
@@ -63,6 +77,9 @@
 
 ----
 # Low priority / archived:
+## code tasks 
+- [ ] demo python notebooks for improved documentation, usability
+
 ## intro / methods tasks
   
  - [ ] add more closed-loop references to intro[^ctrl_sys_id]
@@ -95,6 +112,7 @@
 
 
 ## formatting tasks 
+- [ ] read the Guide to Authors for our target journal
 - add figure references to table of contents  
 
 ## organization tasks

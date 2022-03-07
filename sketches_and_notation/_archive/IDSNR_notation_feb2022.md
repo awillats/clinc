@@ -165,7 +165,7 @@ resulting in S1 having a shared contribution to A & B
 
 where $S_i →→ N_j$ is a boolean reporting whether the reachability matrix $\mathcal{R}_{ij} \neq 0$.[^binarycomp]
 
-[^binarycomp]: this can be solved through boolean operations on $R$, see [coreachability_source_classification.py](../../code/network_analysis/coreachability_source_classification.py)
+[^binarycomp]: this can be solved through boolean operations on $R$, see [coreachability_source_classification.py](/../code/network_analysis/coreachability_source_classification.py)
 ```python
 # set up functions for computing whether a source can reach both A and B
 def and_coreach(R,i,j):
