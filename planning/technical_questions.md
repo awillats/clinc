@@ -21,7 +21,6 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
 ![](/../figures/whiteboard/concept_open_loop_contemporaneous.png)
 ![](/../figures/whiteboard/concept_time_resolved.png)
 </details>
-
 - **time-resolved versus contemporaneous** inference domains
   - Contemp.: $\Delta_{sample} \approx \delta_{syn}$
     - categorical factors may matter more

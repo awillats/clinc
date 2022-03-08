@@ -67,7 +67,7 @@
 # Theory / Prediction 
 >*(OVERVIEW)*
 ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png)
-<!-- ![](figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
+<!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
 ## Computing reachability (theory)
 ## Predicting correlation structure (theory)
 @import "/section_content/methods1_predicting_correlation.md"

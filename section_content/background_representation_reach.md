@@ -73,5 +73,5 @@ If the reachability of two circuits are unequal for a given intervention, differ
 <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/>
 <img src="/figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500"/>
 
-<!-- ![](figures/misc_figure_sketches/closed_loop_severs_inputs.png) -->
-<!-- ![](figures/misc_figure_sketches/two_circuit_case_study_sketch.png) -->
+<!-- ![](/figures/misc_figure_sketches/closed_loop_severs_inputs.png) -->
+<!-- ![](/figures/misc_figure_sketches/two_circuit_case_study_sketch.png) -->

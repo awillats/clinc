@@ -19,7 +19,7 @@
 - [x] high level review of scope and completeness
   - what to focus on this week
   - [ ] compare length, figure count to target papers
-- [ ] review, update methods outlines
+- [~] review, update methods outlines
 - [ ]  ⚠️ automatic writing session - methods - @matt, @adam
   
 

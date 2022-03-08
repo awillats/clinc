@@ -1,14 +1,14 @@
 # writing tasks 
   
----
-- (?) 4 main chunks of methods writing to do?
-- [ ] check methods figures
-- [.] quarantine speculative methods
-  
-  
-- [ ] write methods overview 1k words
+- [ ] :eye: write methods overview 1k words
   - find a good example of this
 - [ ] write methods sections
+---
+- [.] quarantine speculative methods
+  - "currently in scope"
+  - "would like this to be in scope but isn't currently"
+  - "definitely future work"
+    
 
 - [ ] poll CotN about circuit ambiguity, entropy
 - [ ] pandoc [crossref](https://github.com/lierdakil/pandoc-crossref) for equations, figures
@@ -18,7 +18,6 @@
 
 # Mostly complete
 
-- [ ] reading through [A Step by Step Guide to Writing a Scientific Manuscript](https://intmed.vcu.edu/media/intmed-dev/documents/facdev/A6StepbyStepGuidetoWritingaScientificManuscriptbyWenzeletal.pdf)
 - [x] reading through [10 simple rules for structuring papers](https://www.biorxiv.org/content/10.1101/088278v5.full.pdf+html)
   
   - [x] transcribe followup tasks
