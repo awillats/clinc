@@ -6,6 +6,9 @@
 # Refine these figures 🚧
 ![](misc_figure_sketches/network_estimation_pipeline_sketch.png)
 # Intro 
+- shared v.s. private variance
+some variant on:
+![](https://journals.physiology.org/cms/10.1152/jn.00197.2004/asset/images/large/z9k0090440740001.jpeg)
 ## Interventions in Neuro
 ![](misc_figure_sketches/neuro_intervention_background_sketch.png)
 - merge into causal diagram?
