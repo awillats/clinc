@@ -56,3 +56,6 @@
 >     
 > ![](/figures/misc_figure_sketches/intervention_timeseries_flat.png)
 > 
+
+
+[^intv_type2]: see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)

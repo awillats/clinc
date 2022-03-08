@@ -80,6 +80,12 @@
     </details>
   
 ## unsorted 
+- [ ] shared vs private variability (see zotero/network_inference/spike train analysis/shared vs private variability)
+  - esp.  Circuit models of low dimensional shared variability in cortical networks
+  - we're mostly talking about within-trial variance
+    - are we overloading neuro terms that may refer to across-trial variance?
+    - when is this admissable?
+    - which do we actually mean?
 - [~] port [simple_gaussian_R2.m](code/network_analysis/simple_gaussian_R2.m) to python
   - [ ] sweep pairs of weights to investigate matched weight hypothesis
 
