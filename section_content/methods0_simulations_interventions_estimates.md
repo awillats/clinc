@@ -28,9 +28,12 @@
 ![](/figures/whiteboard/concept_open_loop_contemporaneous.png)
 ![](/figures/whiteboard/concept_time_resolved.png)
 </details>
+
+
 - linear-gaussian v.s. spiking/rate 💫
 
 - matrix series / matrix exponential
+
 
 - parameter specification 💫
   - :rocket: heterogeneity
@@ -59,13 +62,17 @@
 --- 
 
 ## Implementing interventions
+### passive
+- baseline drive comes from independent, "private", noise sources
 
 ### open-loop 
 - variance modulated ✅ 
 - replay 💫
 
 ### closed-loop
-- partial
+- perfect
+- emulated partial
+- practical PID
 
 <!-- ## Implementing interventions (binary?) -->
 

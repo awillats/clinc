@@ -59,6 +59,10 @@
 !!!! - 60% done:
 @import "/section_content/background_representation_reach.md"
 
+- [ ] @adam finalize a circuit pair -> produce the image
+  - sketch the flow of the argument
+- [ ] @matt to round out writing demo / example walkthrough
+
 
 ## Figure DEMO: Applying CLINC to distinguish a pair of circuits
 <!-- @ import "section_content/background_id_demo.md" -->
@@ -68,8 +72,15 @@
 >*(OVERVIEW)*
 ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png)
 <!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
-## Computing reachability (theory)
+<!-- ## Computing reachability (theory) -->
 ## Predicting correlation structure (theory)
+
+- [ ] @matt turn predicting_correlations into more manuscript style
+  - from, to notation 
+  - r versus r2
+  - (ignore IDSNR)
+  
+  
 @import "/section_content/methods1_predicting_correlation.md"
 
 ----
@@ -86,7 +97,10 @@
 
 
 ----
-
+- [ ] @matt @adam skim entire manuscript :warning:
+  - any big results gaps?
+  - are pieces in the right order?
+  
 # Results
 <!-- ## Characterizing circuit-pair ambiguity through reachability properties -->
 <!-- ## Impact of node, network parameters on estimation performance -->
