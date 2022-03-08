@@ -93,7 +93,7 @@
     - [statistical testing](#statistical-testing)
     - [Quantifying successful identification](#quantifying-successful-identification)
   - [Extracting circuit estimates](#extracting-circuit-estimates-1)
-  - [Predicting correlation structure](#predicting-correlation-structure)
+  - [Predicting correlation structure (now in theory)](#predicting-correlation-structure-now-in-theory)
   - [Information-theoretic measures of hypothesis ambiguity](#information-theoretic-measures-of-hypothesis-ambiguity)
 - [Results](#results)
   - [[Binary Sim.] - Characterizing circuit-pair ambiguity through binary reachability properties](#binary-sim-characterizing-circuit-pair-ambiguity-through-binary-reachability-properties)
@@ -364,7 +364,7 @@ y=Cx+\eta
 [^FC_methods]: "METHODS FOR STUDYING FUNCTIONAL INTERACTIONS AMONG NEURONAL POPULATIONS" - comes with MATLAB code, discusses time and trial shuffling, decomposing information (synergistic, redundant, independent)
 
 ## Extracting circuit estimates
-## Predicting correlation structure 
+## Predicting correlation structure (now in theory)
 ![](figures/misc_figure_sketches/intervention_identifiability_concept.png)
 ## Information-theoretic measures of hypothesis ambiguity
 
@@ -558,7 +558,8 @@ y=Cx+\eta
   - assumed measurement from entire network
   - homogeneity in network parameters
   - understanding mediating effect of spike counts
-
+- **Summarize / recap value of closed-loop**
+  - see [value_of_closed_loop_notes.md](/sketches_and_notation/misc_brainstorm/value_of_closed_loop_notes.md)
 - **Recommendations for designing network discovery experiments**
   - At the experiment-design phase, analyze competing hypotheses
     - through the lens of CLINC reachability / IDSNR 

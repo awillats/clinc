@@ -1,18 +1,9 @@
 # writing tasks 
-- [~] summarize completness 
-  - sync outline → manuscript → section content
-    - [ ] review outline 
-      - [ ] check for sections
-      - ( ) transcribe doneness
-  - *several results sections unwritten, but demphasized*
   
 ---
-  
-  - [ ] generate overall manuscript.html
-  - (?) 4 main chunks of methods writing to do?
-  - [ ] check methods figures
-  - [.] quarantine speculative methods
-  
+- (?) 4 main chunks of methods writing to do?
+- [ ] check methods figures
+- [.] quarantine speculative methods
   
   
 - [ ] write methods overview 1k words

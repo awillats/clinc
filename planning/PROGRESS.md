@@ -1,4 +1,5 @@
 > This file is intended to be a single-page, at-a-glance overview of how complete sections of the paper are
+see also https://www.notion.so/Mapping-out-Aim-3-left-to-do-261969b3b5724873b893b93fd115dc2d
 
 ⭐️ denotes high-priority sections
 

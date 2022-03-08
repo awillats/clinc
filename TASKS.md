@@ -16,19 +16,22 @@
 </details>
 
 
-- [ ] high level review of scope and completeness
+- [x] high level review of scope and completeness
   - what to focus on this week
-  - compare length, figure count to target papers
+  - [ ] compare length, figure count to target papers
 - [ ] review, update methods outlines
-- [ ] :warning: automatic writing session - methods - @matt, @adam
+- [ ]  ⚠️ automatic writing session - methods - @matt, @adam
   
 
 ----
 
+- [~] table of closed-loop advantages
+  - [ ] which ones are we demonstrating here
+
 # Technical loose-ends 
 - [ ] summarizing relationship between intervention utility (across-hypoth entropy) and circuit properties
-- [ ] predicting time-lagged correlation 
-- [ ] quantitative match between gaussian sims & theory
+- [ ] ⚠️ predicting time-lagged correlation 
+- [ ] quantitative match between gaussian sims & theory [~]
 
 
 --- 

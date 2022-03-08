@@ -14,6 +14,9 @@
 - [Introduction](#introduction)
   - [Estimating causal interactions in the brain](#estimating-causal-interactions-in-the-brain)
   - [Interventions in neuroscience & causal inference](#interventions-in-neuroscience-causal-inference)
+  - [Outline](#outline)
+  - [See also](#see-also)
+  - [Draft](#draft)
   - [Representations & reachability](#representations-reachability)
   - [Figure DEMO: Applying CLINC to distinguish a pair of circuits](#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits)
 - [Theory / Prediction](#theory-prediction)
@@ -49,9 +52,8 @@
 @ import "/section_content/background_causal_network_id.md"
 
 ## Interventions in neuroscience & causal inference
-<!-- @ import "/section_content/background_intervention_neuro.md" -->
 !!!! - 50% done:
-@ import "/section_content/background_intervention_causal_inf.md"
+@import "/section_content/background_intervention_causal_inf.md"
 
 ## Representations & reachability
 !!!! - 60% done:
@@ -64,9 +66,10 @@
 ----
 # Theory / Prediction 
 >*(OVERVIEW)*
+![](/figures/misc_figure_sketches/intervention_identifiability_concept.png)
+<!-- ![](figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
 ## Computing reachability (theory)
 ## Predicting correlation structure (theory)
-![](/figures/misc_figure_sketches/intervention_identifiability_concept.png)
 @import "/section_content/methods1_predicting_correlation.md"
 
 ----
