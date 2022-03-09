@@ -17,7 +17,11 @@ probably want
 
 ![](/code/network_analysis/results/effect_of_control_horiz.png)
 ![](/figures/misc_figure_sketches/two_circuit_case_study_mockup.png)
-- [ ] :warning: :dart: find and document the script that generates this
+- [ ] find and include frequent circuit (curto + motif)
+- [~] :warning: :dart: find and document the script that generates this
+  - `network_plotting_functions.draw_controlled_adj_correlations()`
+  - `draw_coreachability_by_source()`
+- [ ] wrap circuits we want in `example_circuits.py`
 - [ ] alt method of displaying indirect paths?
   - https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.simple_paths.all_simple_paths.html#networkx.algorithms.simple_paths.all_simple_paths
 
