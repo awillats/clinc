@@ -20,15 +20,22 @@
   - [Representations & reachability](#representations-reachability)
   - [Figure DEMO: Applying CLINC to distinguish a pair of circuits](#figure-demo-applying-clinc-to-distinguish-a-pair-of-circuits)
 - [Theory / Prediction](#theory-prediction)
-  - [Computing reachability (theory)](#computing-reachability-theory)
   - [Predicting correlation structure (theory)](#predicting-correlation-structure-theory)
-- [Predicting network correlations](#predicting-network-correlations)
-  - [Building blocks](#building-blocks)
-  - [Impact of control](#impact-of-control)
 - [Simulation](#simulation)
-  - [Network simulations (simulation)](#network-simulations-simulation)
-  - [Implementing interventions (simulation)](#implementing-interventions-simulation)
-  - [Extracting circuit estimates (empirical)](#extracting-circuit-estimates-empirical)
+  - [Methods overview](#methods-overview)
+  - [Network simulations](#network-simulations)
+  - [Network simulations - outline](#network-simulations-outline)
+  - [Implementing interventions](#implementing-interventions)
+  - [Implementing interventions (outline)](#implementing-interventions-outline)
+  - [Extracting circuit estimates](#extracting-circuit-estimates)
+  - [Extracting circuit estimates (outline)](#extracting-circuit-estimates-outline)
+  - [Modeling network structure and dynamics](#modeling-network-structure-and-dynamics)
+- [Unsorted:](#unsorted)
+  - [Network simulations - outline](#network-simulations-outline-1)
+  - [Implementing interventions](#implementing-interventions-1)
+  - [Implementing interventions (outline)](#implementing-interventions-outline-1)
+  - [Extracting circuit estimates](#extracting-circuit-estimates-1)
+  - [Extracting circuit estimates (outline)](#extracting-circuit-estimates-outline-1)
   - [Information-theoretic measures of hypothesis ambiguity](#information-theoretic-measures-of-hypothesis-ambiguity)
 - [Results](#results)
   - [Interaction of intervention on circuit estimation](#interaction-of-intervention-on-circuit-estimation)
@@ -74,13 +81,7 @@
 <!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
 <!-- ## Computing reachability (theory) -->
 ## Predicting correlation structure (theory)
-
-- [ ] @matt turn predicting_correlations into more manuscript style
-  - from, to notation 
-  - r versus r2
-  - (ignore IDSNR)
-  
-  
+    
 @import "/section_content/methods1_predicting_correlation.md"
 
 ----

@@ -19,8 +19,8 @@ Associated code is managed in the following repositories:
 - see [awillats/clinc-analysis](https://github.com/awillats/clinc-analysis) for network estimation using IDTxl
 
 # Main plots
-![](code/network_analysis/results/effect_of_control_horiz.png)
-![](code/network_analysis/results/hypo_x_intv_3node.png)
+![](/code/network_analysis/results/effect_of_control_horiz.png)
+![](/code/network_analysis/results/hypo_x_intv_3node.png)
 ![](/figures/from_code/bidirectional_correlation.png)
 🚧
 

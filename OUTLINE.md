@@ -254,7 +254,7 @@ y=Cx+\eta
 ---
 # Methods 
 
-![](code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
+![](/code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
 
 ## Network simulations 
 <a name='figure-gaussian'></a>

@@ -12,8 +12,6 @@
 - discuss 2 key dimensions of complexity
   - linear-gaussian v.s. spiking (LIF - Poisson?) 💫
   - contemporaneous v.s. delayed connections 💫
-    - if $\Delta_{sample} \leq \delta_{syn}$, measured correlations will be effectively contemporaneous
-    - especially simple to study in LG case
 - [ ] discuss brian implementation (supplement) 💫
 
 
@@ -22,13 +20,11 @@
 We sought to understand both general principles (abstracted across particulars of network implementation) as well as *some* practical considerations introduced by dealing with spikes and synapses.
 
 ### Stochastic network dynamics
-> **Neural dyanmics**
 > - 1. linear-gaussian v.s. spiking/rate 💫
 
+The first approach is accomplished with a network of nodes with gaussian noise sources, linear interactions, and linear dynamics. The second approach is achieved with a network of nodes consisting of populations of leaky integrate-and-fire (LIF) neurons. These differ from the simpler case in their nonlinear-outputs, arising from inclusion of a spiking threshold. Interactions between neurons happen through spiking synapses, meaning information is passed between neurons sparsely in time[^fr]. 
 
-The first approach is achieved with a network of nodes with gaussian noise sources, linear interactions, and linear dynamics. The second approach is achieved with  a network of nodes consisting of populations of leaky integrate-and-fire (LIF) neurons. These differ from the simpler case in their nonlinear-outputs, arising from inclusion of a spiking threshold. Interactions between neurons happen through spiking synapses, meaning information is passed between neurons sparsely in time[^fr]. 
-
-Leaky integrate-and-fire dynamics:
+Neuron dynamics:
 \[
 \frac{dV}{dt} = \frac{V_0 + I - V}{\tau_m} + \sigma_m \sqrt{\tau_m} \xi(t)
 \]

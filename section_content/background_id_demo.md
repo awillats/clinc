@@ -1,3 +1,58 @@
+probably want 
+- two circuits which look clearly different
+  - ! but which have equivalent reachability 
+  - possibly with reciprocal connections 
+  - possssibly with common modulation 
+- adj, reach, corr, open-loop middle, closed-loop 
+  - IF we want to make two points OL>corr, CL>OL, may need 3 circuits ... 
+- do we need to reflect back from set of possible observations to consistent hypotheses? 
+  - possibly lasso groups of equivalent observations?
+    - mention markov equivalence classes explicitly?
+    
+    
+    
+| adj   | reach     | corr    | OL @ mid | CL @ mid |
+| ----- | --------- | ------- | -------- | -------- |
+| a→b→c | a→b→c,a→c | a↔b↔c↔a | ++-      | ++0      |
+
+![](/code/network_analysis/results/effect_of_control_horiz.png)
+![](/figures/misc_figure_sketches/two_circuit_case_study_mockup.png)
+- [ ] :warning: :dart: find and document the script that generates this
+- [ ] alt method of displaying indirect paths?
+  - https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.simple_paths.all_simple_paths.html#networkx.algorithms.simple_paths.all_simple_paths
+
+
+
+<details><summary> ↪see also</summary>
+
+more inspiration:
+- Combining multiple functional connectivity methods to improve causal inferences
+- Advancing functional connectivity research from association to causation
+- Fig1. of "Systematic errors in connectivity"
+
+> this figure does a great job of:
+> - setting up a key 
+> - incrementally adding confounds 
+> - highlighting severed edges
+> this figure does NOT 
+> - explicitly address mutliple hypotheses
+
+![](/figures/misc_figure_sketches/closed_loop_severs_inputs.png)
+**Figure 11: Closed-loop control compensates for inputs to a node in simple circuits:** The left column shows a simple circuit and recording and stimulation sites for an open-loop experiment. The right column shows the functional circuit which results from closed-loop control of the output of region A. Generally, assuming perfectly effective control, the impact of other inputs to a controlled node is nullified and therefore crossed off the functional circuit diagram.
+
+> this figure does a great job of:
+> - using a minimal version of the key above 
+> - showing two competing hypotheses
+> - (throughs latent / common modulation in for fun)
+
+![](/figures/misc_figure_sketches/closed_loop_distinguishes_corticalEI.png)
+**Figure 12: Closed-loop control allows for two circuit hypotheses to be distinguished.** Two hypothesized circuits for the relationships between pyramidal (Pyr, excitatory), parvalbumin-positive (PV, inhibitory), and somatostain-expressing (Som, inhibitory) cells are shown in the two rows. Dashed lines in the right column represent connections whose effects are compensated for through closed-loop control of the Pyr node. By measuring correlations between recorded regions during closed-loop control it is possible to distinguish which hypothesized circuit better matches the data. Notably in the open-loop intervention, activity in all regions is correlated for both hypothesized circuits leading to ambiguity.
+</details>
+
+
+
+---
+
 - intuitive explanation using binary reachability rules
   <!-- - consider postponing until we introduce intervention? 
   - i.e. have one figure that walks through both reachability and impact of intervention -->

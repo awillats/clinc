@@ -15,7 +15,7 @@
 >   - assume readers aren't going to pore over the details
 
 ---
-![](code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
+![](/code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
 
 
 ---
