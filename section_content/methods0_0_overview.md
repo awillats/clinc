@@ -16,6 +16,8 @@
 
 
 ---
+<details><summary>↪overview sections:</summary>
+
 ## Network simulations
 
 <details><summary>↪outline</summary>
@@ -145,8 +147,6 @@
 
 ### Figure PIPELINE: Process of detecting connections in a network model
 
-## Extracting circuit estimates 
-
 </details>
 
 <details><summary>↪longer outline</summary>
@@ -207,5 +207,7 @@
 > 
 > [^FC_methods]: "METHODS FOR STUDYING FUNCTIONAL INTERACTIONS AMONG NEURONAL POPULATIONS" - comes with MATLAB code, discusses time and trial shuffling, decomposing information (synergistic, redundant, independent)
 > 
+
+</details>
 
 </details>

@@ -1,6 +1,10 @@
 [^exog]: the most important property of $e$ for the math to work, i believe, is that they're random variables independent of each other. This is not true in general if E is capturing input from common sources, other nodes in the network. I think to solve this, we'll need to have an endogenous independent noise term and an externally applied (potentially common) stimulus term.
 [^sim_repr]: have to be careful with this. this almost looks like a dynamical system, but isn't. In simulation we're doing something like an SCM, where the circuit is sorted topologically then computed sequentially. And then I'm
 
+<img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/>
+
+> (old draft) **Background overview figure**
+
 <details><summary>↪ graph for shared v.s. private sources</summary>
 
 ```mermaid
@@ -63,6 +67,10 @@ This notion of reachability, encoded by the pattern of nonzero entries in $\wide
 
 `[Matt to Adam --- I like the idea of an example here, but the details will likely need to change once the neighboring intro sections take shape]`
 
+!!!! - transition from reachability to 2-circuit ID demo is now in [background_id_demo.md](background_id_demo.md)
+
+<details><summary>↪old reachability → ID demo text </summary>
+
 Consider, for example, the hypotheses for cortical gain control in open-loop (Figure BACKGROUND>REPRESENTATION/REACH-1, left column). In both circuit 2a and 2b, PV cells are reachable from the Som cell node ($\widetilde{W}_{PV \to Som} \neq 0$), since Som activity can influence PV activity indirectly through the Pyr node. These circuits are therefore difficult to distinguish under open-loop intervention.
 
 If the reachability of two circuits are unequal for a given intervention, differences in correlation between observed regions will be sufficient to distinguish between the two hypotheses. Looking at these same circuits under closed-loop control of the pyramidal population (Figure BACKGROUND>REPRESENTATION/REACH-1, right column), dashed lines reveal that there is no longer an indirect functional connection from Som to PV cells. As such, in circuit 2a, PV cells are no longer reachable from the Som population, whereas they are reachable under circuit 2b. This difference in reachability corresponds to the difference in correlational structure that allows us to distinguish these two hypotheses under closed-loop control.
@@ -70,7 +78,7 @@ If the reachability of two circuits are unequal for a given intervention, differ
 ![](/figures/misc_figure_sketches/closed_loop_distinguishes_corticalEI.png)
 **Figure BACKGROUND>REPRESENTATION/REACH-1: Closed-loop control allows for two circuit hypotheses to be distinguished.** Two hypothesized circuits for the relationships between pyramidal (Pyr, excitatory), parvalbumin-positive (PV, inhibitory), and somatostain-expressing (Som, inhibitory) cells are shown in the two rows. Dashed lines in the right column represent connections whose effects are compensated for through closed-loop control of the Pyr node. By measuring correlations between recorded regions during closed-loop control it is possible to distinguish which hypothesized circuit better matches the data. Notably in the open-loop intervention, activity in all regions is correlated for both hypothesized circuits leading to ambiguity.
 
-<img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/>
+</details>
 
 <!-- ![](/figures/misc_figure_sketches/closed_loop_severs_inputs.png) -->
 <!-- ![](/figures/misc_figure_sketches/two_circuit_case_study_sketch.png) -->

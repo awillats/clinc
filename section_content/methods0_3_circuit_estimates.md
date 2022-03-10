@@ -1,20 +1,17 @@
-> scope markers:
-> - ✅ - currently in scope 
-> - 💫 - want to be in scope, have a head-start
-> - 🚀  - want to be in scope, would require substantial work
-> - 🙈 - not intended to be in scope, future work
+
+## Extracting circuit estimates 
+!!!! - 10% done
+
+<a name='figure-pipeline'></a>
+![](/figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
+
+<details><summary>↪outline</summary>
 
 > be sure to reference / not reinvent
 section: **Inferring causal interactions from time series.**  in [background_causal_network_id.md](background_causal_network_id.md)
 
----
-!!!! - 10% done
-## Extracting circuit estimates 
-<a name='figure-pipeline'></a>
-![](/figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
-
 ### Outputs of network 
-- spikes from populations of neurons 
+<!-- - spikes from populations of neurons  -->
 
 ### What is cross-correlation
 <details><summary> see also </summary>
@@ -24,10 +21,13 @@ section: **Inferring causal interactions from time series.**  in [background_cau
 ![](/figures/core_figure_sketches/figure4a_sketch.png)
 ![](/figures/misc_figure_sketches/data_xcorr_gaussian.png)
 </details>
-### Figure PIPELINE: Process of detecting connections in a network model
-🥡 **takeaway:** ??? 🚧
 
-## Extracting circuit estimates (outline)
+### Figure PIPELINE: Process of detecting connections in a network model
+
+</details>
+
+<details><summary>↪longer outline</summary>
+
 > 
 > - map of techniques available for inference
   > - see ["Assessing the Significance of Directed and Multivariate Measures of Linear Dependence Between Time Series"](https://arxiv.org/pdf/2003.03887.pdf), [code](https://github.com/olivercliff/assessing-linear-dependence)[^assess] and [Unifying Pairwise Interactions in Complex Dynamics](https://arxiv.org/abs/2201.11941)
@@ -84,3 +84,5 @@ section: **Inferring causal interactions from time series.**  in [background_cau
 > 
 > [^FC_methods]: "METHODS FOR STUDYING FUNCTIONAL INTERACTIONS AMONG NEURONAL POPULATIONS" - comes with MATLAB code, discusses time and trial shuffling, decomposing information (synergistic, redundant, independent)
 > 
+
+</details>

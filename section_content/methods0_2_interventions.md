@@ -1,13 +1,11 @@
-> scope markers:
-> - ✅ - currently in scope 
-> - 💫 - want to be in scope, have a head-start
-> - 🚀  - want to be in scope, would require substantial work
-> - 🙈 - not intended to be in scope, future work
+
+## Implementing interventions
+!!!! - 10% done
+
+<details><summary>↪ short outline</summary>
 
 > be sure to reference / not reinvent [background_intervention_causal_inf.md](background_intervention_causal_inf.md)
 
-!!!! - 10% done
-## Implementing interventions
 ### passive
 - baseline drive comes from independent, "private", noise sources
 
@@ -24,7 +22,10 @@
 
 - :rocket: stimulus-conditional transfer entropy 
 
-## Implementing interventions (outline)
+</details>
+
+<details><summary>↪ long outline</summary>
+
 > - passive observation 
 > - open-loop stimulation 
 >   - simulated as direct current injection
@@ -56,7 +57,9 @@
 >     
 >     
 > ![](/figures/misc_figure_sketches/intervention_timeseries_flat.png)
-> 
+
+</details>
+
 
 
 [^intv_type2]: see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)

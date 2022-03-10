@@ -1,11 +1,6 @@
-> scope markers:
-> - ✅ - currently in scope 
-> - 💫 - want to be in scope, have a head-start
-> - 🚀  - want to be in scope, would require substantial work
-> - 🙈 - not intended to be in scope, future work
-
-
----
+## Modeling network structure and dynamics
+!!!! - 60% done
+<details><summary>↪to do</summary>
 
 - [~] read e.g.
 - [ ] discuss networks - adj ✅
@@ -14,8 +9,8 @@
   - contemporaneous v.s. delayed connections 💫
 - [ ] discuss brian implementation (supplement) 💫
 
-!!!! - 60% done
-## Modeling network structure and dynamics
+</details>
+
 
 We sought to understand both general principles (abstracted across particulars of network implementation) as well as *some* practical considerations introduced by dealing with spikes and synapses.
 
@@ -46,8 +41,13 @@ Additionally we study two domains of interactions between populations; contempor
 >correlation across positive and negative lags between two outputs 
 
 In the delay-resolvable domain, directionality of connections may be inferred even under passive observations by looking at temporal precedence - whether the past of one signal is more strongly correlated with future lags of another signal *(i.e. cross-correlation)*. In the contemporaneous domain, network influences act within the time of a single sample[^contemp_sample] so this temporal precedence clue is lost (although directionality can still be inferred in the presence of intervention).
+<details><summary>↪concept figures</summary>
+
 ![](/figures/whiteboard/concept_time_resolved.png)
 ![](/figures/whiteboard/concept_open_loop_contemporaneous.png)
+
+</details>
+
 
 [^contemp_sample]: the effective \Delta_{sample} would be broadened in the presence of jitter in connection delay, measurement noise, or temporal smoothing applied post-hoc, leading
 
@@ -62,26 +62,30 @@ Both linear-gaussian and spiking networks are simulated with code built from the
 
 ----
 
-# Unsorted:  
-> - graph → connections: 0. adjacency represents between-population synapses
+<details><summary>↪outline</summary>
 
+![](/code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
 
+- contemporaneous vs lagged 💫
+![](/figures/whiteboard/time_unrolled_representation.png)
 <details><summary>see also</summary>
 
-![](/figures/whiteboard/time_unrolled_representation.png)
-![](/figures/whiteboard/concept_time_resolved.png)
 ![](/figures/whiteboard/concept_open_loop_contemporaneous.png)
+![](/figures/whiteboard/concept_time_resolved.png)
 </details>
 
 
+- linear-gaussian v.s. spiking/rate 💫
 
-### key parameters
-- parameter specification 💫 (supplement?)
+- matrix series / matrix exponential
+
+
+- parameter specification 💫
   - :rocket: heterogeneity
-  
+</details>
 
+<details><summary>↪longer outline</summary>
 
-## Network simulations - outline
 <a name='figure-gaussian'></a>
 ![](/figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
 <details><summary>see also</summary>
@@ -89,7 +93,32 @@ Both linear-gaussian and spiking networks are simulated with code built from the
 ![](/figures/whiteboard/signal_aggregation.jpeg)
 </details>
 ### Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2
+🥡 **takeaway:** ??? 🚧
+
+- all networks built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
+- (delayed) linear-gaussian network 
+  - required custom functionality to implement 
+    - [[brian_delayed_gaussian] repository ](https://github.com/awillats/brian_delayed_gaussian)
+    - allows us to understand impact of variability in simplest setting
+- spiking network 
+  - introduces additional difficulties associated with estimation based on spiking observations, nonlinearities
+
+[^intv_type2]: see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)
+
+
+</details>
 
 
 
+<details><summary>see also</summary>
 
+> - graph → connections: 0. adjacency represents between-population synapses
+
+### key parameters
+- parameter specification 💫 (supplement?)
+  - :rocket: heterogeneity
+    
+![](/figures/whiteboard/time_unrolled_representation.png)
+![](/figures/whiteboard/concept_time_resolved.png)
+![](/figures/whiteboard/concept_open_loop_contemporaneous.png)
+</details>

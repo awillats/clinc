@@ -1,3 +1,6 @@
+<!-- ## Interaction of intervention on circuit estimation
+!!!! - overall, 40% done -->
+
 <details><summary>going to assume these have already been discussed</summary>
 
 - predicting correlation
