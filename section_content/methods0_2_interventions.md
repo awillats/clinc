@@ -6,6 +6,7 @@
 
 > be sure to reference / not reinvent [background_intervention_causal_inf.md](background_intervention_causal_inf.md)
 
+!!!! - 10% done
 ## Implementing interventions
 ### passive
 - baseline drive comes from independent, "private", noise sources

@@ -8,6 +8,7 @@
 section: **Inferring causal interactions from time series.**  in [background_causal_network_id.md](background_causal_network_id.md)
 
 ---
+!!!! - 10% done
 ## Extracting circuit estimates 
 <a name='figure-pipeline'></a>
 ![](/figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)

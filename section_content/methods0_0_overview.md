@@ -62,6 +62,8 @@
 --- 
 
 ## Implementing interventions
+<details><summary>↪ short outline</summary>
+
 ### passive
 - baseline drive comes from independent, "private", noise sources
 
@@ -78,7 +80,10 @@
 
 - :rocket: stimulus-conditional transfer entropy 
 
-## Implementing interventions (outline)
+</details>
+
+<details><summary>↪ long outline</summary>
+
 > - passive observation 
 > - open-loop stimulation 
 >   - simulated as direct current injection
@@ -110,7 +115,8 @@
 >     
 >     
 > ![](/figures/misc_figure_sketches/intervention_timeseries_flat.png)
-> 
+
+</details>
 
 ---
 ## Extracting circuit estimates 
@@ -118,7 +124,7 @@
 ![](/figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
 
 ### Outputs of network 
-- spikes from populations of neurons 
+<!-- - spikes from populations of neurons  -->
 
 ### What is cross-correlation
 <details><summary> see also </summary>
@@ -128,10 +134,13 @@
 ![](/figures/core_figure_sketches/figure4a_sketch.png)
 ![](/figures/misc_figure_sketches/data_xcorr_gaussian.png)
 </details>
-### Figure PIPELINE: Process of detecting connections in a network model
-🥡 **takeaway:** ??? 🚧
 
-## Extracting circuit estimates (outline)
+### Figure PIPELINE: Process of detecting connections in a network model
+
+## Extracting circuit estimates 
+
+<details><summary>↪longer outline</summary>
+
 > 
 > - map of techniques available for inference
   > - see ["Assessing the Significance of Directed and Multivariate Measures of Linear Dependence Between Time Series"](https://arxiv.org/pdf/2003.03887.pdf), [code](https://github.com/olivercliff/assessing-linear-dependence)[^assess] and [Unifying Pairwise Interactions in Complex Dynamics](https://arxiv.org/abs/2201.11941)
@@ -188,3 +197,5 @@
 > 
 > [^FC_methods]: "METHODS FOR STUDYING FUNCTIONAL INTERACTIONS AMONG NEURONAL POPULATIONS" - comes with MATLAB code, discusses time and trial shuffling, decomposing information (synergistic, redundant, independent)
 > 
+
+</details>

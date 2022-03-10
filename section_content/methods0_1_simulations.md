@@ -14,7 +14,7 @@
   - contemporaneous v.s. delayed connections 💫
 - [ ] discuss brian implementation (supplement) 💫
 
-
+!!!! - 60% done
 ## Modeling network structure and dynamics
 
 We sought to understand both general principles (abstracted across particulars of network implementation) as well as *some* practical considerations introduced by dealing with spikes and synapses.
@@ -79,9 +79,6 @@ Both linear-gaussian and spiking networks are simulated with code built from the
 - parameter specification 💫 (supplement?)
   - :rocket: heterogeneity
   
-
-
-
 
 
 ## Network simulations - outline

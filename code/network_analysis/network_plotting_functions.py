@@ -11,6 +11,12 @@ from matplotlib.gridspec import GridSpec
 import plotting_functions as myplot
 from aenum import Flag,auto
 #%%
+'''
+TODO:
+- [ ] clean up: def __draw() functions
+'''
+
+#%%
 DEFAULT_NET_PLOT_OPTIONS = {
         'node_color': 'lightgrey',
         'node_size': 1000, #1000
@@ -101,8 +107,9 @@ def draw_np_adj(adj, ax=None, more_options={}):
     options.update(more_options)
     
     nx.draw_networkx(nx_adj, arrows=True, **options)
+    
+    #DEBUG: DRAW arrowheads on again, because matplotlib doesn't like dotted arrows
     if options.get('style') == ':' or options.get('style') == '--':
-        #DRAW arrowheads on again, because matplotlib doesn't like dotted arrows
         options.update({'width':0,'arrowsize':40,'style':'-','arrowstyle':'-|>'})
         nx.draw_networkx(nx_adj, arrows=True, **options)
 
