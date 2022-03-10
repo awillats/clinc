@@ -66,7 +66,7 @@
 @import "/section_content/methods1_predicting_correlation.md"
 
 ----
-# Simulation
+# Simulation Methods
 
 <!-- ## Network simulations (simulation)
 ## Implementing interventions (simulation)

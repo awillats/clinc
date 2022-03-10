@@ -49,7 +49,7 @@ In the delay-resolvable domain, directionality of connections may be inferred ev
 </details>
 
 
-[^contemp_sample]: the effective \Delta_{sample} would be broadened in the presence of jitter in connection delay, measurement noise, or temporal smoothing applied post-hoc, leading
+[^contemp_sample]: the effective $\Delta_{sample}$ would be broadened in the presence of jitter in connection delay, measurement noise, or temporal smoothing applied post-hoc, leading
 
 > - in the linear gaussian case we focus on "contemporaneous" domain, for simplicity, then extend to the connections-with-delay case
 
