@@ -272,9 +272,9 @@ def predict_and_quantify_correlations(Rw, varS, X, verbose=False):
 
 if __name__ == "__main__":
     import network_plotting_functions as netplot
-    A = np.array([[1,2,0],
-                  [1,1,0],
-                  [0,4,1]])
+    A = np.array([[0,.1,0],
+                  [1,0,0],
+                  [0,4,0]])
     
     rA = reachability(A);
     rwA = reachability_weight(A);
@@ -295,7 +295,7 @@ if __name__ == "__main__":
     # plt.savefig('effect_of_control_horiz.png',dpi=100,facecolor='w')
     
     #%%
-    fig, ax = plt.subplots(4,3,figsize=(11,17))
+    fig, ax = plt.subplots(4,3,figsize=(6,8))
     netplot.draw_controlled_representations(ax, A)
     # plt.savefig('effect_of_control_grid.png',dpi=100,facecolor='w')
     fig

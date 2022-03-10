@@ -13,7 +13,7 @@ import plotting_functions as myplot
 DEFAULT_NET_PLOT_OPTIONS = {
         'node_color': 'lightgrey',
         'node_size': 1000, #1000
-        'width': 5,
+        'width': 4,
         'arrowstyle': '-|>',
         'arrowsize':25,
         'connectionstyle':"arc3,rad=0.1",
@@ -78,6 +78,11 @@ def clockwise_circular_layout(G):
     pos = rotate_layout(pos, np.pi/3, True)
     return pos
 #%%    
+def _gen_layout_from_adj(adj):
+    nx_adj = nx.from_numpy_matrix(adj, create_using=nx.DiGraph) 
+    pos = clockwise_circular_layout(nx_adj)
+    return pos
+    
 def draw_np_adj(adj, ax=None, more_options={}):
     '''
     core plotting function that renders an adjacency_matrix 
@@ -96,14 +101,23 @@ def draw_np_adj(adj, ax=None, more_options={}):
     options.update(more_options)
     
     nx.draw_networkx(nx_adj, arrows=True, **options)
+    if options.get('style') == ':':
+        #DRAW arrowheads on again, because matplotlib doesn't like dotted arrows
+        options.update({'width':0,'arrowsize':40,'style':'-','arrowstyle':'-|>'})
+        nx.draw_networkx(nx_adj, arrows=True, **options)
+
     
     myplot.unbox(ax)
     # myplot.expand_bounds(ax)
     return pos
 #%%
+from matplotlib import patches
+straight_arrow_style = patches.ArrowStyle.Curve()
 def straight_edge_style(color):
     return {'edge_color':color,'connectionstyle':'arc3,rad=0','arrowstyle':'-'}
-    
+    # return {'edge_color':color,'connectionstyle':'arc3,rad=0','style':'--','arrowstyle':straight_arrow_style}
+
+
 def indicate_ctrl(ax, pos_i, markersize=30, color='darkorange'):
     # ms of 30 corresponds to a node size of 1000
     ax.plot(pos_i[0],pos_i[1],'o',color=color,markersize=markersize,markeredgewidth=4,fillstyle='none')
@@ -125,7 +139,8 @@ def indicate_intervention(ax, pos_i, type='open-loop'):
     # https://stackoverflow.com/questions/27598976/matplotlib-unknown-property-headwidth-and-head-width/27611041
     arrow_spec =  dict(arrowstyle='->, head_width=0.2',
         color=arrow_c,
-        connectionstyle='arc3')
+        connectionstyle='arc3',
+        lw=5)
         
     ax.annotate("", xy=(x0+dx,y0+dy), xycoords='data',
                     xytext=(x0,y0), textcoords='data',
@@ -142,7 +157,10 @@ def draw_reachability(A,R=None,ax=None, reach_edge_style=None):
     draw_np_adj(R, ax=ax, more_options=reach_edge_style)
     draw_np_adj(A, ax=ax)
     
-def draw_correlations(A,Corr=None,ax=None,grey_correlations=False):
+def draw_correlations(A,Corr=None,ax=None,grey_correlations=False,base_options={}):
+    '''
+    grey_correlations - if False, direct correlations are colored green, indirect correlations are colored red
+    '''
     if Corr is None:
         Corr = net.binary_correlations(A)
     #NOTE: does it make sense to have "yellow" correlations which are in the reachability but NOT the adj 
@@ -150,6 +168,13 @@ def draw_correlations(A,Corr=None,ax=None,grey_correlations=False):
     
     good_corr_style = straight_edge_style('lightgreen') if not grey_correlations else straight_edge_style('lightgrey')
     bad_corr_style = straight_edge_style('lightcoral') if not grey_correlations else straight_edge_style('lightgrey')
+    
+    # good_corr_style = base_options.copy()
+    # good_corr_style.update(_good_corr_style)
+    # bad_corr_style = base_options.copy()
+    # bad_corr_style.update(_bad_corr_style)
+    good_corr_style.update(base_options)
+    bad_corr_style.update(base_options)
     
     draw_np_adj(Corr, ax=ax, more_options=good_corr_style)
     pos = draw_np_adj(net.illusory_correlations(A,Corr), ax=ax, more_options=bad_corr_style)
@@ -177,7 +202,7 @@ def draw_controlled_representations(ax, adj, adj_ctrls=None, reach_ctrls=None, c
         reach_ctrls = net.each_closed_loop_reachability(adj) #pass through is_binary?
         corr_ctrls = net.each_closed_loop_correlations(adj) #pass through is_binary?
     N = len(adj_ctrls)
-    ctrl_marker_color = 'darkorange'
+    ctrl_marker_color = 'darkorange' #unused?
     severed_edge_style = {'edge_color':'moccasin','style':':'}
     
     pos = draw_adj_reach_corr(adj, ax[0,:],grey_correlations=True)
@@ -194,7 +219,7 @@ def draw_controlled_representations(ax, adj, adj_ctrls=None, reach_ctrls=None, c
         for _ax in ax_row:
             indicate_ctrl(_ax, pos[i])
                 
-def draw_controlled_correlations(ax, adj,  adj_ctrls=None, corr_ctrls=None, add_titles=True):
+def draw_controlled_correlations(ax, adj,  adj_ctrls=None,corr_ctrls=None, add_titles=True):
     '''
     expects ax to be 1 x (N) subplot axes
     '''
@@ -203,16 +228,54 @@ def draw_controlled_correlations(ax, adj,  adj_ctrls=None, corr_ctrls=None, add_
         corr_ctrls = net.each_closed_loop_correlations(adj) #pass through is_binary?
     N = len(adj_ctrls)
     
+    dusty_orange = '#b4a390'
     for i in range(N):
         _ax = ax[i]
         pos = draw_correlations(adj_ctrls[i], Corr=corr_ctrls[i],
             ax=_ax, grey_correlations=True)
-        indicate_ctrl(_ax, pos[i],color='#b4a390')
+        indicate_ctrl(_ax, pos[i],color=dusty_orange)
         if add_titles:
             _ax.set_title(f'ctrl$_{i}$')
         # myplot.expand_bounds(_ax)
+#%%
+def __draw_ctrl_adj_at_source(ax,adj,intv_loc,adj_ctrl=None,
+        node_position=None,add_title=True):
+    if adj_ctrl is None:
+        adj_ctrl = net.sever_inputs(adj,intv_loc)
+    if node_position is None:
+        node_position = _gen_layout_from_adj(adj)
+    
+    severed_direct_style = {'edge_color':'#936d4699','style':'--'}
+    severed_indirect_style = {'edge_color':'#ece3de99','style':'--'}
 
     
+    myplot.unbox(ax)
+    r = net.reachability(adj)
+    draw_np_adj(r,        ax=ax, more_options=severed_indirect_style)
+    draw_np_adj(adj,      ax=ax, more_options=severed_direct_style)
+    draw_np_adj(adj_ctrl, ax=ax)
+    indicate_ctrl(ax, node_position[intv_loc])
+    
+    if add_title:
+        ax.set_title(f'ctrl @ {intv_loc}')
+
+def __draw_ctrl_correlations_at_source(ax,adj, intv_loc, adj_ctrl=None,corr_ctrl=None,
+    node_position=None,grey_correlations=False,add_title=True):
+    if adj_ctrl is None:
+        adj_ctrl = net.sever_inputs(adj,intv_loc)
+    if corr_ctrl is None:
+        corr_ctrl  = net.closed_loop_correlations(adj, intv_loc, is_binary=True)
+    if node_position is None:
+        node_position = _gen_layout_from_adj(adj)
+    
+    #draw background, indirect correlations
+    draw_correlations(adj, ax=ax, grey_correlations=grey_correlations,base_options={'style':':','edge_color':'#dfa3a3'})
+    
+    draw_correlations(adj_ctrl, Corr=corr_ctrl, ax=ax, grey_correlations=grey_correlations)
+    indicate_ctrl(ax, node_position[intv_loc])
+    if add_title:
+        ax.set_title(f'corr\nw/ctrl @ {intv_loc}')
+#%%
 def draw_controlled_adj_correlations(ax, adj, adj_ctrls=None, corr_ctrls=None):
     '''
     expects ax to be 2 x (3+N) subplot axes
@@ -222,7 +285,7 @@ def draw_controlled_adj_correlations(ax, adj, adj_ctrls=None, corr_ctrls=None):
         corr_ctrls = net.each_closed_loop_correlations(adj) #pass through is_binary?
     
     N = len(adj_ctrls)
-    ctrl_marker_color = 'darkorange'
+    ctrl_marker_color = 'darkorange' #unused?
     severed_edge_style = {'edge_color':'moccasin','style':':'}
 
     #draw unmodified circuit in lower left 3 panels
@@ -255,7 +318,22 @@ def draw_controlled_adj_correlations(ax, adj, adj_ctrls=None, corr_ctrls=None):
     return ax
 #%%
 # Plotting functions
-def draw_coreachability_by_source(df, axs, node_position, add_titles=True):
+def __draw_coreachability_by_source(adj, axs, node_position=None, add_titles=True, grey_correlations=False):
+    '''
+    refactoring with a more standard interface, work in progress
+    '''
+    if node_position is None:
+        node_position = _gen_layout_from_adj(adj)
+    # if df is None:
+    df = coreach.compute_coreachability_tensor(net.reachability(adj))
+    draw_coreachability_by_source(df=df, axs=axs, node_position=node_position, add_titles=add_titles, grey_correlations=grey_correlations)
+
+def __draw_coreachability_at_source(adj,ax,intv_loc,df=None, node_position=None, add_titles=True, grey_correlations=False):
+    
+    if df is None:
+        df = coreach.compute_coreachability_tensor(net.reachability(adj))
+    if node_position is None:
+        node_position = _gen_layout_from_adj(adj)
     pos_edge_style = straight_edge_style('peachpuff')
     pos_edge_style.update({'width':10})
     neg_edge_style = straight_edge_style('lightblue')
@@ -263,6 +341,38 @@ def draw_coreachability_by_source(df, axs, node_position, add_titles=True):
     neut_edge_style = straight_edge_style('lightgrey')
     neut_edge_style.update({'width':5})
     
+    if grey_correlations:
+        pos_edge_style['edge_color'] = 'lightgrey'
+        neg_edge_style['edge_color'] = 'lightgrey'
+        neut_edge_style['edge_color'] = 'lightgrey'
+    pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df,intv_loc)
+    draw_np_adj(neut_edges, ax, neut_edge_style)
+    draw_np_adj(pos_edges, ax, pos_edge_style)
+    draw_np_adj(neg_edges, ax, neg_edge_style)
+    indicate_intervention(ax, node_position[intv_loc])
+    # print(node_position)
+    if add_titles:
+        ax.set_title(f'corr\nw/open-loop @ $S_{intv_loc}$')
+    
+def draw_coreachability_by_source(df, axs, node_position, add_titles=True, grey_correlations=False):
+    '''
+    ! requires dataframe, which can be generated from ...
+    indicates increased, decreased and neutral correlations
+    - e.g. as a result of open-loop intervention at each node
+    
+    - [ ] TODO: move default styles elsewhere
+    '''
+    pos_edge_style = straight_edge_style('peachpuff')
+    pos_edge_style.update({'width':10})
+    neg_edge_style = straight_edge_style('lightblue')
+    neg_edge_style.update({'width':2})
+    neut_edge_style = straight_edge_style('lightgrey')
+    neut_edge_style.update({'width':5})
+    
+    if grey_correlations:
+        pos_edge_style['edge_color'] = 'lightgrey'
+        neg_edge_style['edge_color'] = 'lightgrey'
+        neut_edge_style['edge_color'] = 'lightgrey'
     #NOTE: temporarily overriding rendering style
     # pos_edge_style['edge_color'] = 'lightgrey'
     # neg_edge_style['edge_color'] = 'lightgrey'
@@ -270,17 +380,21 @@ def draw_coreachability_by_source(df, axs, node_position, add_titles=True):
     #TODO: scale these by IDSNR weighted co-reachability
     n = len(df['iA'].unique())
     for i in range(n):
-        pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df,i)
-        
-        draw_np_adj(neut_edges, axs[i], neut_edge_style)
-        draw_np_adj(pos_edges, axs[i], pos_edge_style)
-        draw_np_adj(neg_edges, axs[i], neg_edge_style)
-        indicate_intervention(axs[i],node_position[i])
-        # print(node_position)
-        if add_titles:
-            axs[i].set_title(f'open-loop $S_{i}$')
-            #effect of $S_{i}$
+        __draw_coreachability_at_source(adj, ax, df=df,intv_loc=i,
+            node_position=node_position,add_titles=add_titles, 
+            grey_correlations=grey_correlations)
             
+        # pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df,i)
+        # 
+        # draw_np_adj(neut_edges, axs[i], neut_edge_style)
+        # draw_np_adj(pos_edges, axs[i], pos_edge_style)
+        # draw_np_adj(neg_edges, axs[i], neg_edge_style)
+        # indicate_intervention(axs[i],node_position[i])
+        # # print(node_position)
+        # if add_titles:
+        #     axs[i].set_title(f'open-loop $S_{i}$')
+            #effect of $S_{i}$
+    #        
 def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True):    
     n = A.shape[0]
     n_plot = 3+n;  
