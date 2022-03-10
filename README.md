@@ -20,11 +20,10 @@ Associated code is managed in the following repositories:
 
 # Main plots
 ![](/figures/misc_figure_sketches/circuit_walkthrough_2circuits_key_sketch.png)
-<!-- ![](/code/network_analysis/results/effect_of_control_horiz.png) -->
-<!-- ![](/code/network_analysis/results/hypo_x_intv_3node.png) -->
 ![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
 ![](/figures/from_code/bidirectional_correlation.png)
-
+<!-- ![](/code/network_analysis/results/effect_of_control_horiz.png) -->
+<!-- ![](/code/network_analysis/results/hypo_x_intv_3node.png) -->
 # Appendix / supplemental plots
 ![](/figures/from_code/direct_indirect_circuit_snr.png)
 
