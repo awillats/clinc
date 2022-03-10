@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
 import plotting_functions as myplot
+from aenum import Flag,auto
 #%%
 DEFAULT_NET_PLOT_OPTIONS = {
         'node_color': 'lightgrey',
@@ -32,7 +33,6 @@ def draw_weighted_corr(W, ax=None, min_w=0,max_w=10, more_options={},pos_overrid
     options = DEFAULT_NET_PLOT_OPTIONS.copy()
     options.update({'ax':ax,'pos':pos})
     
-        
     options.update({'width':weights,'node_size':100})
     nx.draw(G, **options)
     ax.set_aspect('equal')
@@ -523,9 +523,83 @@ def plot_empirical_corrs(A,Rw,X, r2_pred,r2_empr,n_plot=1000,node_colors=None):
 
 
 #%%
+def strip_trailing_int(str,delim='@'):
+    return int(str.split(delim)[1])
+# from aenum import Flag, auto
 
+# see https://github.com/awillats/clinc-gen/blob/main/small_circuit_scripts/circuit_functions/run_PID_ctrl.py 
+# for another usage of Flag, auto
+# some discussion of enum vs aenum here: https://stackoverflow.com/questions/60635855/python-enum-flag-with-one-flag-that-is-used-by-some-others
 
-
+class NetPlotType(Flag):
+    ADJ = auto() 
+    REACH = auto()
+    CORR = auto() 
+    CTRL = auto()
+    OPEN = auto()
+    ADJ_CTRL = ADJ | CTRL
+    CORR_CTRL = CORR | CTRL
+    REACH_CTRL = REACH | CTRL
+    
+    def __init__(self,flag_val):
+        # Flag.__init__(self) #replace with super?
+        # super(NetPlotType, self).__init__()
+        super().__init__()
+        self.intervention_location=None
+    def set_intervention_location(self, loc):
+    
+        self.intervention_location = loc
+    # 
+    def __repr__(self):
+        r = f'{self.name}'
+        if hasattr(self,'intervention_location') and self.intervention_location is not None:
+            r +=f'@{self.intervention_location}'
+        return r
+    def __str__(self):
+        return self.__repr__()
+        
+def parse_plot_type(plot_str):
+    plot_str = plot_str.lower()
+    pt = NetPlotType(0)
+    '''
+    Note, the resulting plot type can combine ADJ/REACH/CORR with CTRL 
+    - this is achieved by using the OR:| operation with flags
+    '''
+    
+    if 'adj' in plot_str:
+        pt |= NetPlotType.ADJ
+    if 'reach' in plot_str:
+        pt |= NetPlotType.REACH
+    if 'corr' in plot_str:
+        pt |= NetPlotType.CORR
+    if 'ctrl' in plot_str:
+        pt |= NetPlotType.CTRL
+        pt.set_intervention_location(strip_trailing_int(plot_str))
+    if 'open' in plot_str:
+        pt |= NetPlotType.OPEN
+        pt.set_intervention_location(strip_trailing_int(plot_str))        
+    return pt
+    
+def plot_adj_by_plot_type(ax, A, plot_type,add_titles=True):
+    grey=True
+    plot_funs = {
+        NetPlotType(0):         lambda adj,ax,intv_loc: adj*2,
+        NetPlotType.ADJ:        lambda adj,ax,intv_loc: draw_np_adj(adj,ax=ax),
+        NetPlotType.REACH:      lambda adj,ax,intv_loc: draw_reachability(adj,ax=ax),
+        NetPlotType.CORR:       lambda adj,ax,intv_loc: draw_correlations(adj,ax=ax,grey_correlations=grey),
+        NetPlotType.ADJ_CTRL:   lambda adj,ax,intv_loc: __draw_ctrl_adj_at_source(adj=adj,ax=ax,intv_loc=intv_loc),
+        NetPlotType.CORR_CTRL:  lambda adj,ax,intv_loc: __draw_ctrl_correlations_at_source(adj=adj,ax=ax,intv_loc=intv_loc,grey_correlations=grey),
+        # NetPlotType.REACH_CTRL :  lambda adj,ax,intv_loc: netplot.__draw_coreachability_at_source(adj,ax=ax,intv_loc=intv_loc),
+        # NetPlotType.CTRL :  lambda adj,ax,intv_loc: netplot.__draw_coreachability_at_source(adj,ax=ax,intv_loc=intv_loc),
+        NetPlotType.OPEN:       lambda adj,ax,intv_loc: __draw_coreachability_at_source(adj,ax=ax,intv_loc=intv_loc,grey_correlations=grey),
+    }
+    this_plot_fun = plot_funs.get(plot_type)
+    
+    this_plot_fun(A, ax, plot_type.intervention_location)
+    if add_titles:
+        ax.set_title(str(plot_type),color='lightgrey')
+    else:
+        ax.set_title('')
 #%%
 # 1-lag correlation-plot
 # if nt<1e5:

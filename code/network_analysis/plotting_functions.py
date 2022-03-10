@@ -28,8 +28,8 @@ def expand_bounds(ax,expansion_factor=1.1):
     - useful in conjunction with networkx+matplotlib
     - which sometimes results in axes clipping the edge of nodes
     '''
-    ax.set_xlim([1.1*x for x in ax.get_xlim()])
-    ax.set_ylim([1.1*y for y in ax.get_ylim()])
+    ax.set_xlim([expansion_factor*x for x in ax.get_xlim()])
+    ax.set_ylim([expansion_factor*y for y in ax.get_ylim()])
     return ax
     
 def expand_bounds_each(ax, expansion_factor=None):
