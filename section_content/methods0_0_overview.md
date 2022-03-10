@@ -14,12 +14,13 @@
 >   - key innovative methods
 >   - assume readers aren't going to pore over the details
 
----
-![](/code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
-
 
 ---
 ## Network simulations
+
+<details><summary>↪outline</summary>
+
+![](/code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
 
 - contemporaneous vs lagged 💫
 ![](/figures/whiteboard/time_unrolled_representation.png)
@@ -37,8 +38,10 @@
 
 - parameter specification 💫
   - :rocket: heterogeneity
+</details>
 
-## Network simulations - outline
+<details><summary>↪longer outline</summary>
+
 > <a name='figure-gaussian'></a>
 > ![](/figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
 > <details><summary>see also</summary>
@@ -57,6 +60,9 @@
 >   - introduces additional difficulties associated with estimation based on spiking observations, nonlinearities
 > 
 > [^intv_type2]: see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)
+
+
+</details>
 
 
 --- 
@@ -123,6 +129,8 @@
 <a name='figure-pipeline'></a>
 ![](/figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
 
+<details><summary>↪outline</summary>
+
 ### Outputs of network 
 <!-- - spikes from populations of neurons  -->
 
@@ -138,6 +146,8 @@
 ### Figure PIPELINE: Process of detecting connections in a network model
 
 ## Extracting circuit estimates 
+
+</details>
 
 <details><summary>↪longer outline</summary>
 
