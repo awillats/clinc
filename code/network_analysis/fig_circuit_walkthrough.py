@@ -38,13 +38,17 @@ import coreachability_source_classification as coreach
 A = np.array([[0, .1, 0],
               [1, 0,  0],
               [1, 4,  0]])
-A0 = np.array([[0, .1, 0],
-              [1, 0,  0],
-              [0, 4,  0]])
-A1 = np.array([[0, .1, 0],
-              [1, 0,  0],
-              [1, 4,  0]])                           
+              
 
+A0 = np.array([[0, 1, 0],
+              [1, 0,  0],
+              [0, 1,  0]])
+A1 = np.array([[0, 1, 0],
+              [1, 0,  0],
+              [1, 1,  0]])                           
+A2 = np.array([[0, 1, 0],
+              [0, 0,  0],
+              [1, 1,  0]])
 # rA = net.reachability(A);
 # rwA = net.reachability_weight(A);
 # corrA = net.binary_correlations(A)
@@ -132,8 +136,7 @@ def parse_plot_type(plot_str):
     return pt
 # ---- 
 
-def plot_adj_by_plot_type(ax, A, plot_type):
-    add_titles = True
+def plot_adj_by_plot_type(ax, A, plot_type,add_titles=True):
     grey=True
     plot_funs = {
         NetPlotType(0) : lambda adj,ax,intv_loc: adj*2,
@@ -153,17 +156,24 @@ def plot_adj_by_plot_type(ax, A, plot_type):
     this_plot_fun(A, ax, plot_type.intervention_location)
     if add_titles:
         ax.set_title(str(plot_type),color='lightgrey')
-    myplot.expand_bounds(ax)
-    return ax
+    else:
+        ax.set_title('')
+        
+    # myplot.expand_bounds(ax)
+    # return ax
 #-----
+
 cols = ['adj','reach','corr','open@1','adj ctrl@1','corr ctrl@1']
 plot_types = [parse_plot_type(p) for p in cols]
-
-fig,ax = plt.subplots(2,len(cols),figsize=(3*len(cols),7))
-for j,_A in enumerate([A0,A1]):
+As = [A0,A1]
+fig,ax = plt.subplots(len(As),len(cols),figsize=(3*len(cols),3.5*len(As)),sharex=True,sharey=True)
+for j,_A in enumerate(As):
     for i,pt in enumerate(plot_types):    
-        plot_adj_by_plot_type(ax[j][i],_A,pt)
-# fig
+        plot_adj_by_plot_type(ax[j][i],_A,pt,add_titles=(j==0))
+myplot.expand_bounds(ax[j][i])
+
+myplot.savefig(f'results/circuit_walkthrough_{len(As)}circuits.png',this_file='/code/fig_circuit_walkthrough.py')        
+fig
 #%%
 fig,ax = plt.subplots(1,3,figsize=(9,3))
 df = coreach.compute_coreachability_tensor(net.reachability(A))

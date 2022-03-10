@@ -101,7 +101,7 @@ def draw_np_adj(adj, ax=None, more_options={}):
     options.update(more_options)
     
     nx.draw_networkx(nx_adj, arrows=True, **options)
-    if options.get('style') == ':':
+    if options.get('style') == ':' or options.get('style') == '--':
         #DRAW arrowheads on again, because matplotlib doesn't like dotted arrows
         options.update({'width':0,'arrowsize':40,'style':'-','arrowstyle':'-|>'})
         nx.draw_networkx(nx_adj, arrows=True, **options)
@@ -245,8 +245,10 @@ def __draw_ctrl_adj_at_source(ax,adj,intv_loc,adj_ctrl=None,
     if node_position is None:
         node_position = _gen_layout_from_adj(adj)
     
-    severed_direct_style = {'edge_color':'#936d4699','style':'--'}
-    severed_indirect_style = {'edge_color':'#ece3de99','style':'--'}
+    light_orange = '#936d4699'
+    dark_orange = '#ece3de99'
+    severed_direct_style = {'edge_color':'#53535366','style':'--'}
+    severed_indirect_style = {'edge_color':'#b5b5b566','style':'--'}
 
     
     myplot.unbox(ax)
@@ -269,7 +271,7 @@ def __draw_ctrl_correlations_at_source(ax,adj, intv_loc, adj_ctrl=None,corr_ctrl
         node_position = _gen_layout_from_adj(adj)
     
     #draw background, indirect correlations
-    draw_correlations(adj, ax=ax, grey_correlations=grey_correlations,base_options={'style':':','edge_color':'#dfa3a3'})
+    # draw_correlations(adj, ax=ax, grey_correlations=grey_correlations,base_options={'style':':','edge_color':'#dfa3a3'})
     
     draw_correlations(adj_ctrl, Corr=corr_ctrl, ax=ax, grey_correlations=grey_correlations)
     indicate_ctrl(ax, node_position[intv_loc])
