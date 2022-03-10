@@ -14,17 +14,22 @@ Other metrics quantify directional interaction stemming from more general or com
 
 Information-theoretic and transfer-entropy-based methods used to quantify the strength of causal interactions typically require knowledge of the ground truth causal relationships that exist \cite{janzing2013quantifying} or the ability to perturb the system \cite{ay2008information} \cite{lizier2010differentiating}. In practice, these quantities are often interpreted as "information transfer," and a variety of estimation strategies and methods to automatically select variables and time lags to condition are used (e.g., \cite{shorten2021estimating). Multivariate conditional transfer entropy approaches using various variable selection schemes can differentiate between direct interactions, indirect interactions, and common causes. The results from these methods can often differ based on binning strategies used to discretize continuous signals, the specific statistical tests used, and the estimator used to compute transfer entropy. `[If we end up making the jump to IDTxl in our results: In our empirical results using transfer-entropy-based notions of directional influence we use the IDTxl toolbox \cite{wollstadt2019idtxl}.]` Despite their mathematical differences, however, previous work has found that cross-correlation-based metrics and information-based metrics tend to produce qualitatively similar results \cite{garofalo2009evaluation} \cite{maybe: ito2011extending (shows CC generally underperforms their TE method, but mostly similar??)}.
 
+
+<details><summary>↪reviews to read/cite: (todo) </summary>
+
 !!!!! note todo - skim through these papers for methods/material to cite
 
-- reviews to read/cite:
-    - specific to neuro
-        - \cite{TODO-chicharro2012when}
-        - \cite{TODO-dean2016dangers}
-        - \cite{TODO-garofalo2009evaluation}
-        - \cite{TODO-knox1981detection
-        - \cite{TODO-salinas2001correlated}
-        - \cite{TODO-wibral2014directed}
-    - maybe...
-        - \cite{TODO-lacasa2015network}
-        - \cite{TODO-melssen1987detection}
-- see `sketches_and_notation/background_why_control.md`
+- specific to neuro
+    - \cite{TODO-chicharro2012when}
+    - \cite{TODO-dean2016dangers}
+    - \cite{TODO-garofalo2009evaluation}
+    - \cite{TODO-knox1981detection
+    - \cite{TODO-salinas2001correlated}
+    - \cite{TODO-wibral2014directed}
+- maybe...
+    - \cite{TODO-lacasa2015network}
+    - \cite{TODO-melssen1987detection}
+
+</details>
+
+*see also [why_control.md](sketches_and_notation/background_why_control.md)*

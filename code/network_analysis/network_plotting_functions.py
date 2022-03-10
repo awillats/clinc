@@ -14,6 +14,11 @@ from aenum import Flag,auto
 '''
 TODO:
 - [ ] clean up: def __draw() functions
+- [ ] debug styling dotted arrows 
+    see:
+    https://stackoverflow.com/questions/51413834/networkx-arrows-ploting
+    https://stackoverflow.com/questions/66889224/networkx-not-drawing-arrows-in-directed-graph
+    https://stackoverflow.com/questions/47894931/increase-thickness-in-a-matplotlib-annotation-double-sided-arrow
 '''
 
 #%%

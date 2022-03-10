@@ -34,14 +34,17 @@ When the system is linear we can use matrix notation to denote the impact of eac
 X = X W + E,
 \]
 
-<!-- <details><summary>alt.</summary> -->
+<details><summary>various implementations</summary>
+
 Topologically sorted implementation:
 $$\begin{align}
 X^- &:= E\\
 X &:= X^-W + E
 \end{align}$$
-<!-- </details> -->
+
 !!!! - TODO Adam, write out the dynamical system version of this 
+
+</details>
 
 where $W$ represents the *adjacency matrix*
 \[

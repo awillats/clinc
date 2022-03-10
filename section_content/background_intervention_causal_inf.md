@@ -24,7 +24,7 @@ A rich theoretical literature has confirmed the central role of interventions in
 
 
 ![](/figures/misc_figure_sketches/neuro_intervention_background_sketch.png)
-> **Fig: Examples of the role of interventions in discoveries in neuroscience**  (A) Identifying when a patient is having a seizure, from **passive recordings** alone (B) through **systematic open-loop stimulation experiments,** Penfield was able to uncover the spatial organization of how senses and movement are mapped in the cortex [^HW] (C) **Feedback control** allows us to specify activity in the brain in terms of outputs. Allows us to reject disturbances, respond to changes
+> (close to final, but could be significantly cut down / merged with other figure) **Figure: Examples of the role of interventions in discoveries in neuroscience**  (A) Identifying when a patient is having a seizure, from **passive recordings** alone (B) through **systematic open-loop stimulation experiments,** Penfield was able to uncover the spatial organization of how senses and movement are mapped in the cortex [^HW] (C) **Feedback control** allows us to specify activity in the brain in terms of outputs. Allows us to reject disturbances, respond to changes
 
 [^HW]: Another great example of open-loop mapping: Hubel, D.H., Wiesel, T.N.: Receptive fields of single neurones in the cat’s striate cortex. The Journal of physiology 148(3), 574–591 (1959)
 ![](/figures/misc_figure_sketches/HW_open_loop.png)

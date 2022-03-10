@@ -26,6 +26,7 @@
 - [References](#references)
 - [Supplement](#supplement)
 <!-- /code_chunk_output -->
+
 # Abstract
 @import "/section_content/abstract.md"
 ----
@@ -34,8 +35,10 @@
 ## Estimating causal interactions in the brain
 <img src="/figures/core_figure_sketches/figure1_sketch.png" width="400"/>
 
+> 🚧 (very rough draft) **Figure INTRO: (conceptual overview of interacting regions, intervention, DAGs etc.)**
+
 !!!! - 40% done:
-@ import "/section_content/background_causal_network_id.md"
+@import "/section_content/background_causal_network_id.md"
 
 ## Interventions in neuroscience & causal inference
 !!!! - 50% done:
@@ -76,12 +79,9 @@
 ----
   
 # Results
-<!-- prior scope:
-## Characterizing circuit-pair ambiguity through reachability properties
-## Impact of node, network parameters on estimation performance -->
+!!!! - overall, 40% done
 
 ## Impact of intervention on estimation performance
-!!!! - overall, 40% done
 @import "/section_content/results1_impact_of_intervention.md"
 
 ## Interaction of intervention & circuit structure
@@ -92,6 +92,7 @@
 
 # Discussion
 @import "/section_content/discussion.md"
+
 # References
 *see [pandoc pandoc-citations](https://github.com/shd101wyy/markdown-preview-enhanced/blob/master/docs/pandoc-bibliographies-and-citations.md)*
 
