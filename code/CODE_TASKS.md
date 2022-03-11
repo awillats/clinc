@@ -9,14 +9,71 @@ working towards automating:
 ![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
 
 
+
+pipeline
+```mermaid
+graph TD
+a[adj]-->|w/ctrl?|c
+c(comp. coreach)-->|coreach df|T(mats to string-fingerprint-token)
+
+aggr-->|token freq dict|d-->E[entropy of tokens]
+d(distro)-->dp[distro plot]
+```
+
+---
+```mermaid
+graph TD
+S[S_k].->|S^/Sv/S=/Sx|ab
+subgraph corr
+  A(A_i)---ab( )
+  ab-->B(B_j)
+  end
+```
+
+stages:
+- adj 
+  - ( modified by severing )
+- df of coreach tensor: iA	jB	kS src→corr
+  ```python
+  df = compute_coreachability_tensor(net.reachability(adj))
+  ```
+  - e.g. demo_fingerprint.csv
+  - redundant directionality removed hear on creation so we don't have to think about it at token stage?
+  - self-correlation seems to be left in for some reason
+    - remove this! so fingerprint will only have 3 ordered subtokens
+  - for registering dfs across hypo, maybe it makes sense to have a compact, unique adj ID
+- df to compact fingerprint strings:
+  - `extract_circuit_signature_single_df()`
+- token frequency 
+  ```python
+  tf = count_unique_frequency(data, do_normalize=True)
+  ```
+- entropy of tokens 
+  ```python
+  H = entropy_of_dict(tf, entr_base)
+  H_max = max_entropy_of_dict(tf, entr_base)
+  ```
+
+
 ### warmup 
-- [ ] find entropy files
-  - network_pattern_entropy.py
+- [~] find entropy files
+  - `network_pattern_entropy.py`
     - if name main 
-    - are these used anywhere else?
-  - plot_hypotheses_x_interventions.py
+  - relies on `coreachability_source_classification.py` 
+    - to compute coreach tensor
+    - `partition_sources_ab()` is core function
     
-- [ ] carve out script
+  - plot_hypotheses_x_interventions.py
+    - handles plotting infrastructure, layout for left side 
+    - but doesn't actually compute anything entropy-related
+    
+- [ ] 🧿 carve out script
+- [ ] :dart: needs infrastructure for storing info associated with each hypothesis
+  - but which is also accessible across hypotheses 
+  - big table?
+    - nested df?
+    - or just matrix?
+       
 
 ### Computing infrastructure 
 - extract fingerprint string 

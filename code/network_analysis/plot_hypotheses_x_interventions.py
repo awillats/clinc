@@ -64,9 +64,9 @@ for i,_A in enumerate(As):
     #interlace open-loop and closed-loop columns
     ax_ol = ax_row[[0,1,2, 3,5,7]]
     ax_cl = ax_row[[4,6,8]]
-    netplot.draw_adj_reach_corr_coreach(_A, axs=ax_ol, add_titles=(i==0),grey_correlations=True)  
+    netplot.draw_adj_reach_corr_coreach(_A, axs=ax_ol, add_titles=(i==0), grey_correlations=True)  
     # cor.draw_adj_reach_corr_coreach(_A, axs=axsax_, add_titles=(i==0))
-    netplot.draw_controlled_correlations(ax_cl, _A, add_titles=(i==0),ctrl_color=ctrl_color) 
+    netplot.draw_controlled_correlations(ax_cl, _A, add_titles=(i==0), ctrl_color=ctrl_color) 
 
 'HACK: transfer titles to bottom row'
 for i,_ax in enumerate(ax_row):
