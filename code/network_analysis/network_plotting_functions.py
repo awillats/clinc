@@ -231,7 +231,7 @@ def draw_controlled_representations(ax, adj, adj_ctrls=None, reach_ctrls=None, c
         for _ax in ax_row:
             indicate_ctrl(_ax, pos[i])
                 
-def draw_controlled_correlations(ax, adj,  adj_ctrls=None,corr_ctrls=None, add_titles=True):
+def draw_controlled_correlations(ax, adj,  adj_ctrls=None,corr_ctrls=None, add_titles=True, ctrl_color=None):
     '''
     expects ax to be 1 x (N) subplot axes
     '''
@@ -241,11 +241,15 @@ def draw_controlled_correlations(ax, adj,  adj_ctrls=None,corr_ctrls=None, add_t
     N = len(adj_ctrls)
     
     dusty_orange = '#b4a390'
+    dark_orange = 'darkorange'
+    if ctrl_color is None:
+        ctrl_color = dark_orange
+
     for i in range(N):
         _ax = ax[i]
         pos = draw_correlations(adj_ctrls[i], Corr=corr_ctrls[i],
             ax=_ax, grey_correlations=True)
-        indicate_ctrl(_ax, pos[i],color=dusty_orange)
+        indicate_ctrl(_ax, pos[i],color=ctrl_color)
         if add_titles:
             _ax.set_title(f'ctrl$_{i}$')
         # myplot.expand_bounds(_ax)
@@ -342,7 +346,7 @@ def __draw_coreachability_by_source(adj, axs, node_position=None, add_titles=Tru
     df = coreach.compute_coreachability_tensor(net.reachability(adj))
     draw_coreachability_by_source(df=df, axs=axs, node_position=node_position, add_titles=add_titles, grey_correlations=grey_correlations)
 
-def __draw_coreachability_at_source(adj,ax,intv_loc,df=None, node_position=None, add_titles=True, grey_correlations=False):
+def __draw_coreachability_at_source(adj, ax,intv_loc,df=None, node_position=None, add_titles=True, grey_correlations=False):
     
     if df is None:
         df = coreach.compute_coreachability_tensor(net.reachability(adj))
@@ -394,22 +398,22 @@ def draw_coreachability_by_source(df, axs, node_position, add_titles=True, grey_
     #TODO: scale these by IDSNR weighted co-reachability
     n = len(df['iA'].unique())
     for i in range(n):
-        __draw_coreachability_at_source(adj, ax, df=df,intv_loc=i,
-            node_position=node_position,add_titles=add_titles, 
-            grey_correlations=grey_correlations)
+        # __draw_coreachability_at_source(adj=None, ax=axs[i], df=df,intv_loc=i,
+        #     node_position=node_position,add_titles=add_titles, 
+        #     grey_correlations=grey_correlations)
             
-        # pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df,i)
-        # 
-        # draw_np_adj(neut_edges, axs[i], neut_edge_style)
-        # draw_np_adj(pos_edges, axs[i], pos_edge_style)
-        # draw_np_adj(neg_edges, axs[i], neg_edge_style)
-        # indicate_intervention(axs[i],node_position[i])
-        # # print(node_position)
-        # if add_titles:
-        #     axs[i].set_title(f'open-loop $S_{i}$')
-            #effect of $S_{i}$
+        pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df,i)
+        
+        draw_np_adj(neut_edges, axs[i], neut_edge_style)
+        draw_np_adj(pos_edges, axs[i], pos_edge_style)
+        draw_np_adj(neg_edges, axs[i], neg_edge_style)
+        indicate_intervention(axs[i],node_position[i])
+        # print(node_position)
+        if add_titles:
+            axs[i].set_title(f'open-loop $S_{i}$')
+            # effect of $S_{i}$
     #        
-def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True):    
+def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True, grey_correlations=False):    
     n = A.shape[0]
     n_plot = 3+n;  
     if df is None:
@@ -422,7 +426,7 @@ def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True):
         fig = axs[0].get_figure()
 
     graph_pos = draw_adj_reach_corr(A, axs[0:3], add_titles, grey_correlations=True)
-    draw_coreachability_by_source(df, axs[3:], graph_pos, add_titles)
+    draw_coreachability_by_source(df, axs[3:], graph_pos, add_titles, grey_correlations=grey_correlations)
     return fig
     
 #%%
