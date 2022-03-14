@@ -9,12 +9,6 @@ key:
 --- 
 ## Most important, least complete figures
 
-- [ ] Empirical/simulation methods overview 
-  - 🗺️ biggest challenge is complexity of layout, deciding what to keep
-    - outputs
-    - intervention as timeseries
-    - correlation matrices or xcorr
-    - circuit estimates
 
 - [ ] hypothesis entropy figure 
   - 🤖 requires some coding to finish 
@@ -26,6 +20,8 @@ key:
   - 🤖🤖 requires major technical work - namely committing to how to turn correlations into circuit inference
   - ✂️ as such, may end up having to cut this
   - ... but if we end up connecting back to the more detailed empirical sims, this will be necessary
+
+  - [~] Empirical/simulation methods overview 
 
 ## bonus figures 
 - [ ] Theory overview 
@@ -76,29 +72,35 @@ prior draft
 
 
 # Theory overview
-> **Layout:** Graph ← Dynamics ← Data
-> **Source:** [google drawing](https://docs.google.com/drawings/d/1rp0UHjsVCUolM5hQLj3dEhqiFzvdaUOqkU1JEC0yBrQ/edit?usp=sharing)
+![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
+> **Source:** [google drawing](https://docs.google.com/drawings/d/1rp0UHjsVCUolM5hQLj3dEhqiFzvdaUOqkU1JEC0yBrQ/edit)
+> graph theoretic and matrix/dynamics views are related
 > - adj→reach→corr 
 > - impact of OL, CL
-> - 3 circuit walkthrough
->   - OL is enough 
->   - CL is required
-> 
+>
 >verbally forecast other quantitative considerations
 > - indirect effects / confounds
 > - estimating connection strength quantitatively
 > - CL increases the precision of estimates
 > - CL removes/minimizes unrelated sources of variance
 
-<img src="/figures/core_figure_sketches/figure2_sketch.png" width="400"/>
-
 > 👨‍💻 needs commitment to concrete time-series data
 > 🗺️ needs layout / illustration cleaning up
 > but overall, conceptually, close enough to write a caption for
 
 
+<details><summary>↪prior drafts 
+</summary>
 
->✂️ merge with conceptual overview figure
+<img src="/figures/core_figure_sketches/figure2_sketch.png" width="400"/>
+
+**Optimizing intervention:**
+
+<img src="/figures/misc_figure_sketches/intervention_identifiability_concept.png" width=400>
+
+> ⚠️ very loose sketch, need to decide what we want here
+
+</details>
 
 
 
@@ -108,11 +110,6 @@ prior draft
 
 ---
 
-# Optimizing intervention
-
-<img src="/figures/misc_figure_sketches/intervention_identifiability_concept.png" width=400>
-
-> ⚠️ very loose sketch, need to decide what we want here
 
 ---
 
@@ -122,6 +119,9 @@ prior draft
 ## Implementing interventions
 ## Estimating circuits from data
 
+<details><summary>↪big pile of timeseries methods sketches. for now relying on theory-methods overview pipeline to communicate this</summary>
+
+
 <img src="/figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png" width=400>
 <img src="/figures/misc_figure_sketches/intervention_timeseries_flat.png" width=400>
 <img src="/figures/misc_figure_sketches/intervention_timeseries_and_corr.png" width=400>
@@ -130,6 +130,9 @@ prior draft
 > see also google slides ... 
 > 🖋️ something that shows neurons in networks on left side
 > ✂️ not sure whether extracting co-dependence and statistical tests will be in scope for the paper
+
+</details>
+
 
 <details><summary>↪see also, xcorr, predicting correlation</summary>
 
@@ -144,6 +147,7 @@ prior draft
 ---
 ⚠️🚧 **figure request:** flowchart for steps of intervention experiment 🚧⚠️
 see [section_content/_steps_of_inference.md](/section_content/_steps_of_inference.md)
+- merge or reference with pipeline overview?
 
 ---
 # Results
@@ -252,3 +256,4 @@ graph TD
 <img src="/figures/whiteboard/time_unrolled_representation.png" width=500>  
 <img src="/figures/whiteboard/concept_time_resolved.png" width=300>
 <img src="/figures/whiteboard/concept_open_loop_contemporaneous.png" width=300>
+
