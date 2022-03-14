@@ -11,33 +11,29 @@ key:
 
 
 - [ ] hypothesis entropy figure 
+  - [ ] tack on summary stastic
   - 🤖 requires some coding to finish 
     - need some infrastructure for computing entropy across many conditions 
     - needs some summary statistics across a well-defined hypothesis set 
   - 🗺️ will likely require layout iterations
 
+---
+## bonus figures 
+
 - [ ] improved data efficiency & bias
   - 🤖🤖 requires major technical work - namely committing to how to turn correlations into circuit inference
   - ✂️ as such, may end up having to cut this
   - ... but if we end up connecting back to the more detailed empirical sims, this will be necessary
-
-  - [~] Empirical/simulation methods overview 
-
-## bonus figures 
-- [ ] Theory overview 
-  - predicting correlation structure 
-  - predicting intervention's impact on correlation 
-- [ ] flowchart for steps of intervention experiment
-
----
-# more ... 
+  
 - [ ] "Extensions" discussion figure 
   - "it works for spiking, with time-delay"
+
 - [ ] extending the graph representation to include quantitative terms 
   - input, output variance 
   - shared v.s. private variance 
   - relevance to neuro
 
+- [ ] flowchart for steps of intervention experiment
   
 ----
 
