@@ -33,9 +33,6 @@
 # Introduction
 
 ## Estimating causal interactions in the brain
-<img src="/figures/core_figure_sketches/figure1_sketch.png" width="400"/>
-
-> 🚧 (very rough draft) **Figure INTRO: (conceptual overview of interacting regions, intervention, DAGs etc.)**
 
 !!!! - 40% done:
 @import "/section_content/background_causal_network_id.md"
@@ -56,11 +53,11 @@
 
 ----
 # Theory / Prediction 
->*(Draft overview)*
-![](/figures/misc_figure_sketches/intervention_identifiability_concept.png)
+<!-- <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/> -->
+![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
+> **Figure OVERVIEW:** ...
 
 <!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
-<!-- ## Computing reachability (theory) -->
 ## Predicting correlation structure (theory)
     
 @import "/section_content/methods1_predicting_correlation.md"

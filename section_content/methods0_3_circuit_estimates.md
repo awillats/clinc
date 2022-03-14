@@ -2,10 +2,12 @@
 ## Extracting circuit estimates 
 !!!! - 10% done
 
-<a name='figure-pipeline'></a>
-![](/figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
+> *refer to methods overview figure*
 
 <details><summary>↪outline</summary>
+
+<a name='figure-pipeline'></a>
+![](/figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
 
 > be sure to reference / not reinvent
 section: **Inferring causal interactions from time series.**  in [background_causal_network_id.md](background_causal_network_id.md)
