@@ -33,22 +33,46 @@ key:
   - predicting intervention's impact on correlation 
 - [ ] flowchart for steps of intervention experiment
 
+---
+# more ... 
+- [ ] "Extensions" discussion figure 
+  - "it works for spiking, with time-delay"
+- [ ] extending the graph representation to include quantitative terms 
+  - input, output variance 
+  - shared v.s. private variance 
+  - relevance to neuro
+
   
 ----
 
 # Intro / background
-<img src="/figures/core_figure_sketches/figure1_sketch.png" width="400"/>
+<img src="/figures/core_figure_sketches/figure1_sketch.png" width="600"/>
 
-> 🗺️ needs layout / illustration cleaning up
-> 🖊️ top panel, needs a lot of excess cutting out 
-> ✂️ bottom panel, need to decide whether we want to use this language to talk about the effect of intervention
-> ✂️ overall, is this figure redundant with 2 circuit walktrhough?
+> 🗺️ needs minor illustration cleaning up
+> 🖋️ check we can use figures on right or illustration
+> *source:* this [google drawing](https://docs.google.com/drawings/d/1letFGuAi145hcUv7OEP0vwAecq-6KH3GrDHlfsla-TI/edit)
+> add puzzle - "where would you intervene to distinguish these hypotheses?" 
+
+# Theory overview
+> **Layout:** Graph ← Dynamics ← Data
+> - adj→reach→corr 
+> - impact of OL, CL
+> - 3 circuit walkthrough
+>   - OL is enough 
+>   - CL is required
+> 
+>verbally forecast other quantitative considerations
+> - indirect effects / confounds
+> - estimating connection strength quantitatively
+> - CL increases the precision of estimates
+> - CL removes/minimizes unrelated sources of variance
 
 <img src="/figures/core_figure_sketches/figure2_sketch.png" width="400"/>
 
 > 👨‍💻 needs commitment to concrete time-series data
 > 🗺️ needs layout / illustration cleaning up
 > but overall, conceptually, close enough to write a caption for
+
 
 
 >✂️ merge with conceptual overview figure
@@ -186,6 +210,12 @@ see [section_content/_steps_of_inference.md](/section_content/_steps_of_inferenc
 Fig2. in ["Combining multiple functional connectivity methods to improve causal inferences"](https://www.researchgate.net/publication/337282433_Combining_multiple_functional_connectivity_methods_to_improve_causal_inferences)
 ---
 ---
+# Discussion
+*see especially [value_of_cl_case_studies.md](sketches_and_notation/discussion/value_of_cl_case_studies.md)*
+## Hidden confounds 
+## Severing loops 
+## Direct v.s. indirect effects 
+
 # Supplement 
 
 **shared v.s. private variance**

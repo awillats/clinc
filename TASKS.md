@@ -33,6 +33,9 @@
 - [ ] ⚠️ predicting time-lagged correlation 
 - [ ] quantitative match between gaussian sims & theory [~]
 
+# minor tasks 
+@ matt - causal notation for open-loop inputs? 
+  - how would you write x = x + u_OL ? - see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)
 
 --- 
 see also [technical_tasks.md](sketches_and_notation/technical_tasks.md) and [writing_tasks.md](sketches_and_notation/planning_big_picture/writing_tasks.md)
