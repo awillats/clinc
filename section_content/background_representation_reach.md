@@ -16,6 +16,7 @@ When the system is linear we can use matrix notation to denote the impact of eac
 X = X W + E,
 \]
 
+!!!! - TODO Adam, write out the dynamical system version of this 
 <!-- <details><summary>various implementations</summary>
 
 Topologically sorted implementation:
@@ -24,7 +25,6 @@ X^- &:= E\\
 X &:= X^-W + E
 \end{align}
 
-!!!! - TODO Adam, write out the dynamical system version of this 
 
 </details> -->
 
