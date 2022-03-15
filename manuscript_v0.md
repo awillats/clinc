@@ -73,7 +73,7 @@ author:
 @import "/section_content/methods2_hypothesis_entropy.md"
 
 # Results
-!!!! - overall, 40% done
+!!!! - overall, 60% done
 
 ## Impact of intervention on estimation performance
 <!-- PANDOC YAML MAPPING ERROR -->

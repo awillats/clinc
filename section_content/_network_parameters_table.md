@@ -1,21 +1,24 @@
 
-|                          descr. | name           | value[^cv] | units                   |                 | also in LG |
-| -------------------------------:| -------------- | ----------:|:----------------------- | --------------- | ---------- |
-|  number of neurons in each node | $n_{neurons}$  |        100 | #                       | `N_sub`         |            |
-|   number of nodes (populations) | $N_{pop}$      |          3 | #                       | `N_pop`         |            |
-|        time-step for simulation | $\Delta_t$     |        0.1 | $ms$                    |                 |            |
-|             equilibrium voltage | $V_{0}$        |          0 | $mV$                    | `v0`            |            |
-|                   reset voltage | $V_{reset}$    |          0 | $mV$[^V_dim]            | `v_r`           | ❌         |
-|       spiking threshold voltage | $V_{\theta}$   |          1 | $mV$                    | `v_th`          | ❌         |
-|      absolute refractory period | $\tau_{ref}$   |          2 | $ms$                    | `tau_ref`       | ❌         |
-|          membrane time-constant | $\tau_{m}$     |         10 | $ms$                    | `tau_syn`       |            |
-|      private voltage noise[^xi] | $\sigma_m$     |          1 | $\frac{1}{\sqrt{sec.}}$ | `sigma`         |            |
-|                                 |                |            |                         |                 |            |
-|   sensitivity to current inputs | $B$            |          1 | $\Omega$                | `R`             |            |
-|                                 |                |            |                         |                 |            |
-|                 synaptic weight | $w$            |        1.0 |                         | `w`             |            |
-| synaptic connection probability | $p$            |        1.0 |                         | `p`             |            |
-|                  synaptic delay | $\delta_{syn}$ |    {0,1,2} | $ms$                    | `synapse.delay` |            |
+|                          descr. | name                | value[^cv] | units                   |                 | also in LG |
+| -------------------------------:| ------------------- | ----------:|:----------------------- | --------------- | ---------- |
+|  number of neurons in each node | $n_{neurons}$       |        100 | #                       | `N_sub`         |            |
+|   number of nodes (populations) | $N_{pop}$           |          3 | #                       | `N_pop`         |            |
+|        time-step for simulation | $\Delta_t$          |        0.1 | $ms$                    |                 |            |
+|             equilibrium voltage | $V_{0}$             |          0 | $mV$                    | `v0`            |            |
+|                   reset voltage | $V_{reset}$         |          0 | $mV$[^V_dim]            | `v_r`           | ❌         |
+|       spiking threshold voltage | $V_{\theta}$        |          1 | $mV$                    | `v_th`          | ❌         |
+|      absolute refractory period | $\tau_{ref}$        |          2 | $ms$                    | `tau_ref`       | ❌         |
+|          membrane time-constant | $\tau_{m}$          |         10 | $ms$                    | `tau_syn`       |            |
+|      private voltage noise[^xi] | $\sigma_m$          |          1 | $\frac{1}{\sqrt{sec.}}$ | `sigma`         |            |
+|                                 |                     |            |                         |                 |            |
+|   sensitivity to current inputs | $B$                 |          1 | $\Omega$                | `R`             |            |
+|                                 |                     |            |                         |                 |            |
+|                 synaptic weight | $w$                 |        1.0 | .                       | `w`             |            |
+| synaptic connection probability | $p$                 |        1.0 | .                       | `p`             |            |
+|                  synaptic delay | $\delta_{syn}$      |    {0,1,2} | $ms$                    | `synapse.delay` |            |
+|                                 |                     |            |                         |                 |            |
+|        controller effectiveness | $\gamma$            |    0.0-1.0 | .                       |                 |            |
+|            PID controller gains | $K=\{k_P,k_I,k_D\}$ |          . | .                       |                 |            |
 
 
 <!-- |             equilibrium voltage | $V_{0}$        |    ?? | $mV$                         | `v_r`     | ❌         |
@@ -35,6 +38,9 @@ when a presynaptic neuron spikes, simulate a "dirac delta-function"[^delta_gerst
 \[
 V_j = V_j+w_{ij}
 \]
+
+
+
 
 ---
 

@@ -1,90 +1,16 @@
 
 ## Extracting circuit estimates 
 !!!! - 10% done
-
+<!-- ![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png) -->
 > *refer to methods overview figure*
 
-<details><summary>↪outline</summary>
+[^inf_techniques]: *inference techniques mentioned in the intro...*
+[^corr_prototype]: what does "prototype" mean here? something like MI and corr are equivalent in the linear-Gaussian case, ...
+[^corr_hyperparameter]: not sure how important this is. would prefer to set this threshold at some ad-hoc value since we're sweeping other properties. But a more in-depth analysis could look at a receiver-operator curve with respect to this threshold
 
-<a name='figure-pipeline'></a>
-![](/figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
+While a broad range of techniques[^inf_techniques] exist for inferring functional relationships from observational data, `(for the majority of this work)` we choose to focus on simple bivariate correlation as a measure of dependence in the linear-Gaussian network. The impact of intervention on this metric is analytically tractable *(see [methods1_predicting_correlation.md](methods1_predicting_correlation.md))*, and can be thought of as a prototype[^corr_prototype] for more sophisticated measures of dependence such as time-lagged cross-correlations, bivariate and multivariate transfer entropy.
 
-> be sure to reference / not reinvent
-section: **Inferring causal interactions from time series.**  in [background_causal_network_id.md](background_causal_network_id.md)
 
-### Outputs of network 
-<!-- - spikes from populations of neurons  -->
+We implement a naive comparison strategy to estimate the circuit adjacency from emprical correlations; Thresholded empirical correlation matrices are compared to correlation matrices predicted from each circuit in a hypothesis set. Any hypothesized cirucits which are predicted to have a similar correlation structure as is observed (i.e. corr. mats equal after thresholding) are marked as "plausible circuits."[^circuit_search] If only one circuit amongst the hypothesis set is a plausible match, this is considered to be the estimated circuit. The threshold for "binarizing" the empirical correlation matrix is treated as a hyperparameter to be swept at the time of analysis.[^corr_hyperparameter]
 
-### What is cross-correlation
-<details><summary> see also </summary>
-
-![](/figures/whiteboard/methods_xcorr_features.jpeg)
-![](/figures/whiteboard/methods_circuit_xcorr_sketch.png)
-![](/_archive/figure4a_sketch.png)
-![](/figures/misc_figure_sketches/data_xcorr_gaussian.png)
-</details>
-
-### Figure PIPELINE: Process of detecting connections in a network model
-
-</details>
-
-<details><summary>↪longer outline</summary>
-
-> 
-> - map of techniques available for inference
-  > - see ["Assessing the Significance of Directed and Multivariate Measures of Linear Dependence Between Time Series"](https://arxiv.org/pdf/2003.03887.pdf), [code](https://github.com/olivercliff/assessing-linear-dependence)[^assess] and [Unifying Pairwise Interactions in Complex Dynamics](https://arxiv.org/abs/2201.11941)
-  > - bivariate v.s. multivariate 
-  > - conditioning
-    > - same signals past 
-    > - other signals 
-    > - on stimulus
-  > - measures of dependence 
-    > - correlation
-      > - partial correlation (conditioning)
-      > - time-lagged cross-correlation
-    > - granger causality
-    > - mutual information
-    > - transfer entropy
->     
-> [^assess]: "The measures implemented are: mutual information, conditional mutual information, Granger causality, and conditional Granger causality (each for univariate and multivariate linear-Gaussian processes). For completeness we have also included Pearson correlation and partial correlation for univariate processes (with a potentially multivariate conditional process)."
-> 
-> ### lagged cross-correlation 
-> - connection to / equivalence with Granger Causality (GC)
-  > - review of GC in neuro
-  > - requisite assumptions
-  > - limitations of GC [^GC_problems]
-> - xcorr features 
-  > - peak-SNR
-  > - prominence 
-  > - time of peak
-> - window of time-lags considered for direct connections
-  > - some multiple of expected synaptic delay
-> 
-> [^GC_problems]: a study of problems encountered in Granger causality analysis from a neuroscience perspective
-> 
-> ### multivariate transfer entropy (muTE)
-> - advantages above usual GC approach
-> 
-> ### statistical testing 
-> - *for muTE, handled by IDTxl*
-  > - includes appropriate multiple-comparison testing
-> 
-> ### Quantifying successful identification
-> - binary "classification" metrics
-  > - accuracy, F1 score (Wang & Shanechi 2019)
-  > - AUC (Pastore)
-  > - Jaccard index (Lepage, Ching, and Kramer 2013)
-  > - true/false positives, true/false negatives 
-> - graded metrics (*not a core focus here*)
-  > - distance between identified connection strength and ground-truth
-    > - MSE [(Lepperod et al. 2018)](https://www.biorxiv.org/content/10.1101/463760v2)
-  > - error in output reconstruction
-> - *relevant "negative control" for comparison (?)*
-  > - identified connectivity for random network?
-  > - some shuffled data-surrogate procedure? [^FC_methods]
-> - *relevant "positive control" for comparison (?)*
-> 
-> [^FC_methods]: "METHODS FOR STUDYING FUNCTIONAL INTERACTIONS AMONG NEURONAL POPULATIONS" - comes with MATLAB code, discusses time and trial shuffling, decomposing information (synergistic, redundant, independent)
-> 
-
-</details>
+[^circuit_search]: TODO? formalize notation for this
