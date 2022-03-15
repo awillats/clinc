@@ -75,7 +75,7 @@ output:
 
 ## Impact of intervention on estimation performance
 <!-- PANDOC YAML MAPPING ERROR -->
-@ import "/section_content/results1_impact_of_intervention.md"
+@import "/section_content/results1_impact_of_intervention.md"
 
 ## Interaction of intervention & circuit structure
 !!!! - needs significant technical work and theory!
