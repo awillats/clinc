@@ -1,5 +1,5 @@
 ---
-title: Closed-Loop Identifiability in Neural Circuits 
+title: Closed-Loop Identifiability in Neural Circuits
 output:
   pdf_document:
      path: /publish/manuscript_pandoc.pdf
@@ -35,7 +35,7 @@ output:
 # Introduction
 ## Estimating causal interactions in the brain
 
-!!!! - 40% done:
+!!!! - 40% done -> closer now, awaiting some neuro-writing and status reassessment by Adam
 @import "/section_content/background_causal_network_id.md"
 
 ## Interventions in neuroscience & causal inference
