@@ -1,20 +1,14 @@
 ---
 title: Closed-Loop Identifiability in Neural Circuits
-author:
--name: Adam Willats
--affiliation: Georgia Institute of Technology and Emory University
--email: awillats3@gatech.edu
--name: Matt O'Shaughnessy
--affiliation: Georgia Institute of Technology
--email: matthewoshaughnessy@gatech.edu
-bibliography: bib/closedloopcausal.bib
+
 output:
   pdf_document:
      path: /publish/manuscript_pandoc.pdf
+xnumberedsections: true
+author:
+  - name: Adam Willats, Matthew O'Shaughnessy
 ---
 
-# Closed-Loop Identifiability in Neural Circuits {ignore=True}
-**Authors:** Adam Willats, Matt O'Shaughnessy
 <!-- see also _meta folder, consider formatting as "YAML front matter" for pandoc -->
 
 <!-- # Table of Contents {ignore=True} -->
@@ -85,10 +79,9 @@ output:
 <!-- PANDOC YAML MAPPING ERROR -->
 @import "/section_content/results1_impact_of_intervention.md"
 
-## Interaction of intervention & circuit structure
+<!-- ## Interaction of intervention & circuit structure
 !!!! - needs significant technical work and theory!
-@import "/section_content/near_future_work/results2_circuit_x_intervention.md"
-
+@ import "/section_content/near_future_work/results2_circuit_x_intervention.md" -->
 
 # Discussion
 @import "/section_content/discussion.md"
