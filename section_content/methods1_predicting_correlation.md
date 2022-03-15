@@ -4,20 +4,20 @@ Note that $\left[(W^T) s\right]_j$ gives the variance at node $j$ due to length-
 
 Our goal is to connect private variances and connection strengths to observed pairwise correlations in the circuit. Defining $X \in \mathbb{R}^{p \times n}$ as the matrix of $n$ observations of each node, we have[^covariance-derivation]
 $$
-\begin{align*}
+\begin{aligned}
     \Sigma &= \mathrm{cov}(X) = \mathbb{E}\left[X X^T\right] \\
     &= (I-W^T)^{-1} \mathrm{diag}(s) (I-W^T)^{-T} \\
     &= \widetilde{W} \mathrm{diag}(s) \widetilde{W}^T,
-\end{align*}
+\end{aligned}
 $$
 where $\widetilde{W} = \sum_{k=0}^{\infty} (W)^k$ denotes the *weighted reachability matrix*, whose $(i,j)^\mathrm{th}$ entry indicates the total influence of node $i$ on node $j$ through both direct and indirect connections.[^sum-limits] That is, $\widetilde{W}_{ij}$ tells us how much variance at node $j$ would result from injecting a unit of private variance at node $i$. We can equivalently write $\Sigma_{ij} = \sum_{k=1}^p \widetilde{W}_{ik} \widetilde{W}_{jk} s_k$.
 
 Under passive observation, the squared correlation coefficient can thus be written as
 $$
-\begin{align*}
+\begin{aligned}
     r^2(i,j) &= \frac{\Sigma_{ij}}{\Sigma_{ii} \Sigma_{jj}} \\
     &= \frac{\left( \sum_{k=1}^p \widetilde{W}_{ik} \widetilde{W}_{jk} s_k \right)^2}{\left(\sum_{k=1}^p \widetilde{W}_{ik}^2 s_k\right)\left(\sum_{k=1}^p \widetilde{W}_{jk}^2 s_k\right)}.
-\end{align*}
+\end{aligned}
 $$
 
 ==TODO do a quick matlab simulation to check all of this -- some errors may have been introduced when changing notation==

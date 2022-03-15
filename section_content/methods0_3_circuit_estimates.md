@@ -20,7 +20,7 @@ section: **Inferring causal interactions from time series.**  in [background_cau
 
 ![](/figures/whiteboard/methods_xcorr_features.jpeg)
 ![](/figures/whiteboard/methods_circuit_xcorr_sketch.png)
-![](/figures/core_figure_sketches/figure4a_sketch.png)
+![](/_archive/figure4a_sketch.png)
 ![](/figures/misc_figure_sketches/data_xcorr_gaussian.png)
 </details>
 

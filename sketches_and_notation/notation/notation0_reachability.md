@@ -2,9 +2,7 @@
 
 We begin with the simple linear dynamical system
 \[
-\begin{equation}
-    \begin{cases} \dot{x} = Ax \\ y = Cx + \eta \end{cases}
-\end{equation}
+\begin{cases} \dot{x} = Ax \\ y = Cx + \eta \end{cases}
 \]
 where $A$ is the adjacency matrix
 \[

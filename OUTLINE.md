@@ -180,8 +180,8 @@ see also [abstract_outline_planning.md](sketches_and_notation/planning_big_pictu
   [^intv_type]: maybe this is more appropriate for supplement or discussion
 
 ## Multiple complementary perspectives (representations) of the same underlying network structure:
-<img src="figures/core_figure_sketches/figure2_sketch.png" width="500"/>
-<img src="figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500"/>
+<img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/>
+<img src="/figures/misc_figure_sketches/two_circuit_case_study_mockup.png" width="500"/>
 - The circuit view
   - (A) → (B) ↔ (C)
 - The dynamical system view
@@ -317,7 +317,7 @@ y=Cx+\eta
 
 ![](/figures/whiteboard/methods_xcorr_features.jpeg)
 ![](/figures/whiteboard/methods_circuit_xcorr_sketch.png)
-![](/figures/core_figure_sketches/figure4a_sketch.png)
+![](/_archive/figure4a_sketch.png)
 ![](/figures/misc_figure_sketches/data_xcorr_gaussian.png)
 </details>
 ### Figure PIPELINE: Process of detecting connections in a network model

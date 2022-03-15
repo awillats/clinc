@@ -1,37 +1,38 @@
+---
+title: Closed-Loop Identifiability in Neural Circuits 
+output:
+  pdf_document:
+     path: /publish/manuscript_pandoc.pdf
+---
+
 # Closed-Loop Identifiability in Neural Circuits {ignore=True}
 **Authors:** Adam Willats, Matt O'Shaughnessy
 <!-- see also _meta folder, consider formatting as "YAML front matter" for pandoc -->
 
-# Table of Contents
+<!-- # Table of Contents {ignore=True} -->
 
 <!-- @ import "[TOC]" {cmd="toc" depthFrom=1 depthTo=2 orderedList=false} -->
 <!-- code_chunk_output -->
-- [Table of Contents](#table-of-contents)
-- [Abstract](#abstract)
+<!-- - [Abstract](#abstract)
 - [Introduction](#introduction)
   - [Estimating causal interactions in the brain](#estimating-causal-interactions-in-the-brain)
   - [Interventions in neuroscience & causal inference](#interventions-in-neuroscience-causal-inference)
+  - [Draft](#draft)
   - [Representations & reachability](#representations-reachability)
 - [Theory / Prediction](#theory-prediction)
   - [Predicting correlation structure (theory)](#predicting-correlation-structure-theory)
-- [Simulation](#simulation)
-  - [Methods overview](#methods-overview)
-  - [Implementing interventions](#implementing-interventions)
-  - [Extracting circuit estimates](#extracting-circuit-estimates)
-  - [Information-theoretic measures of hypothesis ambiguity](#information-theoretic-measures-of-hypothesis-ambiguity)
+- [Simulation Methods](#simulation-methods)
 - [Results](#results)
-  - [Interaction of intervention on circuit estimation](#interaction-of-intervention-on-circuit-estimation)
-  <!-- - [Interaction of intervention & circuit structure](#interaction-of-intervention-circuit-structure) -->
+  - [Impact of intervention on estimation performance](#impact-of-intervention-on-estimation-performance)
+  - [Interaction of intervention & circuit structure](#interaction-of-intervention-circuit-structure)
 - [Discussion](#discussion)
-- [References](#references)
-- [Supplement](#supplement)
+- [References](#references) -->
 <!-- /code_chunk_output -->
 
 # Abstract
 @import "/section_content/abstract.md"
-----
-# Introduction
 
+# Introduction
 ## Estimating causal interactions in the brain
 
 !!!! - 40% done:
@@ -48,7 +49,7 @@
 !!!! - 15% done -> much closer now, awaiting reassesment by Adam
 @import "/section_content/background_id_demo.md"
 
-----
+
 # Theory / Prediction
 <!-- <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/> -->
 ![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
@@ -59,7 +60,6 @@
 
 @import "/section_content/methods1_predicting_correlation.md"
 
-----
 # Simulation Methods
 
 <!-- ## Network simulations (simulation)
@@ -70,19 +70,17 @@
 <!-- ## Information-theoretic measures of hypothesis ambiguity -->
 @import "/section_content/methods2_hypothesis_entropy.md"
 
-----
-
 # Results
 !!!! - overall, 40% done
 
 ## Impact of intervention on estimation performance
-@import "/section_content/results1_impact_of_intervention.md"
+<!-- PANDOC YAML MAPPING ERROR -->
+@ import "/section_content/results1_impact_of_intervention.md"
 
 ## Interaction of intervention & circuit structure
 !!!! - needs significant technical work and theory!
 @import "/section_content/near_future_work/results2_circuit_x_intervention.md"
 
-----
 
 # Discussion
 @import "/section_content/discussion.md"

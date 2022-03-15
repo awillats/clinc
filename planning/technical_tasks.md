@@ -28,12 +28,12 @@
   - [~] ⚠️🍐 add partial incomplete control parameter 
     - simply blends target and un-controlled variance 
     - :gift: implementation writeup?
-<img src="figures/whiteboard/sketch_quant_OL_CL_variance.png" width="200"/>
+<img src="/figures/whiteboard/sketch_quant_OL_CL_variance.png" width="200"/>
 
 <details><summary>bonus / future work</summary>
 
 - [x] examine R2 = f(w)
-<img src="figures/misc_figure_sketches/quant_r2_prediction_common.png" width="500"/>
+<img src="/figures/misc_figure_sketches/quant_r2_prediction_common.png" width="500"/>
 - [ ] decompose terms in $r^2$
   - increase interpretability, intuitive understanding 
   - get a sense for when $r^2$ is monotonic w.r.t. source variance, weights
