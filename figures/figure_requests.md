@@ -10,15 +10,10 @@ key:
 ## Most important, least complete figures
 
 
-- [ ] hypothesis entropy figure 
-  - [ ] tack on summary stastic
-  - 🤖 requires some coding to finish 
-    - need some infrastructure for computing entropy across many conditions 
-    - needs some summary statistics across a well-defined hypothesis set 
+- [~] hypothesis entropy figure 
+  - [~] tack on summary statistic
+  - 🤖 requires some coding to finish
   - 🗺️ will likely require layout iterations
-
-- [ ] 
-
 ---
 ## bonus figures 
 
@@ -155,14 +150,21 @@ see [section_content/_steps_of_inference.md](/section_content/_steps_of_inferenc
 ## Impact of intervention
 
 ### Intervening provides (categorical) improvements in inference power beyond passive observation
-![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
+![](/figures/core_figure_sketches/circuit_entropy_sketch.png)
+<!-- ![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png) -->
 > **Figure DISAMBIG: Interventions narrow the set of hypotheses consistent with observed correlations** 
+*source: [google drawing](https://docs.google.com/drawings/d/1CBp1MhOW7OGNuBvo7OkIuzqnq8kmN8EEX_AkFuKpVtM/edit)*
 >**(A)** Directed adjacency matrices represent the true and hypothesized causal circuit structure
 >**(B)** Directed reachability matrices represent the direct *(black)* and indirect *(grey)* influences in a network. Notably, different adjacency matrices can have equivalent reachability matrices making distinguishing between similar causal structures difficult, even with open-loop control.
 >**(C)** Correlations between pairs of nodes. Under passive observation, the direction of influence is difficult to ascertain. In densely connected networks, many distinct ground-truth causal structures result in similar "all correlated with all" patterns providing little information about the true structure.
 >**(D-F)** The impact of open-loop intervention at each of the nodes in the network is illustrated by modifications to the passive correlation pattern. Thick orange[^edge_color] edges denote correlations which increase above their baseline value with high variance open-loop input. Thin blue[^edge_color] edges denote correlations which decrease, often as a result of increased connection-independent "noise" variance in one of the participating nodes. Grey edges are unaffected by intervention at that location.
 > A given hypotheses set (A) will result in an "intervention-specific fingerprint", that is a distribution of frequencies for observing patterns of modified correlations *(across a single row within D-F)*. If this fingerprint contains many examples of the same pattern of correlation (such as **B**), many hypotheses correspond to the same observation, and that experiment contributes low information to distinguish between structures. A maximally informative intervention would produce a unique pattern of correlation for each member of the hypothesis set.
 :construction:`caption too long`
+
+<details><summary>↪prev</summary>
+
+![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
+</details>
 
 
 ### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias
@@ -180,8 +182,6 @@ see [section_content/_steps_of_inference.md](/section_content/_steps_of_inferenc
 > Closed-loop interventions *(orange)* generally result in larger changes in correlation across $\sigma^2_S$ than the equivalent open-loop intervention. Closed-loop control at B effectively lesions the connection A→B, resulting in near-zero correlation.
 > [^var_compare]
 > but may need to layout panels by parts of the circuit like old sketch:
-
-
 
 
 <details><summary>↪old sketch</summary>

@@ -26,8 +26,10 @@
 Next, we apply (steps 1-3 of) this circuit search procedure to a collection of closely related hypotheses for 3 interacting nodes[^node_repr] to illustrate the impact of intervention. 🚧 `most of the story in the figure caption for now` 🚧
 
 <a id="fig-disambig"></a>
-![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
+![](/figures/core_figure_sketches/circuit_entropy_sketch.png)
+<!-- ![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png) -->
 > **Figure DISAMBIG: Interventions narrow the set of hypotheses consistent with observed correlations** 
+*source: [google drawing](https://docs.google.com/drawings/d/1CBp1MhOW7OGNuBvo7OkIuzqnq8kmN8EEX_AkFuKpVtM/edit)*
 >**(A)** Directed adjacency matrices represent the true and hypothesized causal circuit structure
 >**(B)** Directed reachability matrices represent the direct *(black)* and indirect *(grey)* influences in a network. Notably, different adjacency matrices can have equivalent reachability matrices making distinguishing between similar causal structures difficult, even with open-loop control.
 >**(C)** Correlations between pairs of nodes. Under passive observation, the direction of influence is difficult to ascertain. In densely connected networks, many distinct ground-truth causal structures result in similar "all correlated with all" patterns providing little information about the true structure.
