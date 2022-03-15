@@ -2,7 +2,7 @@
 **Authors:** Adam Willats, Matt O'Shaughnessy
 <!-- see also _meta folder, consider formatting as "YAML front matter" for pandoc -->
 
-# Table of Contents 
+# Table of Contents
 
 <!-- @ import "[TOC]" {cmd="toc" depthFrom=1 depthTo=2 orderedList=false} -->
 <!-- code_chunk_output -->
@@ -45,21 +45,18 @@
 !!!! - 60% done:
 @import "/section_content/background_representation_reach.md"
 
-!!!! - 15% done
+!!!! - 15% done -> much closer now, awaiting reassesment by Adam
 @import "/section_content/background_id_demo.md"
 
-- [ ] @adam sketch the flow of the argument
-- [ ] @matt to round out writing demo / example walkthrough
-
 ----
-# Theory / Prediction 
+# Theory / Prediction
 <!-- <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/> -->
 ![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
 > **Figure OVERVIEW:** ...
 
 <!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
 ## Predicting correlation structure (theory)
-    
+
 @import "/section_content/methods1_predicting_correlation.md"
 
 ----
@@ -74,7 +71,7 @@
 @import "/section_content/methods2_hypothesis_entropy.md"
 
 ----
-  
+
 # Results
 !!!! - overall, 40% done
 
