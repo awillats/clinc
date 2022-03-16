@@ -85,6 +85,11 @@ author:
 
 # Simulation Methods
 
+!!!! todo - pull all into theory / methods overview section
+!!!! todo - 4.1.2 - time-resolvable goes in discussion?
+!!!! todo - 4.3 - merge "estimating circuits" into inference pipeline steps
+!!!! todo - 4.4 - info theoretic measures could simply be combined with results section
+
 <!-- ## Network simulations (simulation)
 ## Implementing interventions (simulation)
 ## Extracting circuit estimates (empirical) -->

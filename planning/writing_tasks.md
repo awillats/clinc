@@ -1,25 +1,34 @@
-# writing tasks 
-  
-- [ ] :eye: write methods overview 1k words
-  - find a good example of this
-- [ ] write methods sections
----
-- [.] quarantine speculative methods
-  - "currently in scope"
-  - "would like this to be in scope but isn't currently"
-  - "definitely future work"
-    
+Word count:
 
-- [ ] poll CotN about circuit ambiguity, entropy
-- [ ] pandoc [crossref](https://github.com/lierdakil/pandoc-crossref) for equations, figures
-- [ ] better metadata integration *see "front matter"*
----- 
+# Organization / structure / flow 
+- [ ] where does methods pipeline figure go?
+- [ ] integrate _steps_of_inference.md as overview at the end of intro
+  - [ ] also use steps as sections of methods overview
+  - [ ] merge more detailed content into sections of methods overview
+  - [ ] ? create hypotheses-set-focused methods overview figure ?
+    - current figure really focuses on the fate of one circuit at a time
 
 
-# Mostly complete
 
-- [x] reading through [10 simple rules for structuring papers](https://www.biorxiv.org/content/10.1101/088278v5.full.pdf+html)
-  
+# Mechanical
+- [ ] deemphasize / soften language around "tools for causality"
+  - really bringing in ideas from causality, but not using formal tools
+- [ ] flip matrix convention 
+  - use dynamical system throughout
+    - live with $W_{j→i} = W[i,j]$
+
+----
+# Archive
+
+<details><summary>↪see more tasks</summary>
+
+
+
+## Mostly complete
+- [x] reading through [10 simple rules for structuring papers](https://www.biorxiv.org/content/10.1101/088278v5.full.pdf+html)<details><summary>↪
+<details><summary>↪ details
+</summary>  
+
   - [x] transcribe followup tasks
     - [ ] what's the one idea we're communicating
     - [ ] check context-content-conclusion structure
@@ -64,15 +73,26 @@
             - final summary statistics
 
             
-- [x] read the abstract
-  - looks good, will need revisiting after scope of results, conclusions is finalized 
+</details>
 
-- [x] get results figures to show up in both section content and results
-  - use absolute paths
+# Low priority
+## writing tasks 
+  
+- [ ] write methods overview 1k words
+  - find a good example of this
+- [ ] write methods sections
+---
+- [.] quarantine speculative methods
+  - "currently in scope"
+  - "would like this to be in scope but isn't currently"
+  - "definitely future work"
+    
 
+- [ ] poll CotN about circuit ambiguity, entropy
+- [ ] pandoc [crossref](https://github.com/lierdakil/pandoc-crossref) for equations, figures
+- [ ] better metadata integration *see "front matter"*
+---- 
 
-----
-# Low priority / archived:
 ## code tasks 
 - [ ] demo python notebooks for improved documentation, usability
 
@@ -117,7 +137,8 @@
 
 -----
 
-# Archived:
+<details><summary>↪Archived:
+</summary>
 
 ## planning tasks 
 - evaluate scope, potentially combine / cut figures
@@ -145,3 +166,8 @@
       - can we do design of experiments without brute-force search of all control locations?
   - probably not 
     - predicting nonlinear case 
+
+</details>
+
+<!-- end of see-more-tasks -->
+</details> 

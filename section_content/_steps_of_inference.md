@@ -4,7 +4,6 @@
 [^refine]: see [Advancing functional connectivity](https://www.nature.com/articles/s41593-019-0510-4), fig. 2
 [^more_expt]: more than just an experiment, this is a "hypothesis search." Is this procedure what we're going to brand as the "CLINC" process?
 
-
 !!!! - Structure of an experiment / CLINC framework - 85% done - (move to methods/discussion?)
 **We envision the structure of an experiment[^more_expt]** to include the following broad stages:
 
