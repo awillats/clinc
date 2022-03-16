@@ -32,23 +32,42 @@ author:
 <!-- /code_chunk_output -->
 
 # Abstract
+
+!!!! Todo 3/16: - Mention basic science applications of CL control - Maybe more forecasting idea of shaping correlations? (don't want reader to be surprised by structure of paper's argument)
+
 @import "/section_content/abstract.md"
 
+
 # Introduction
+
 ## Estimating causal interactions in the brain
 
-!!!! - 40% done -> closer now, awaiting some neuro-writing and status reassessment by Adam
+!!!! - 70% done
+
+!!!! Todo 3/16: - "We first propose..." paragraph (could build out or move or change focus away from the 'framework') - think about condensing and/or moving "Inferring causal interactions from time series" subsection - Maybe add half a paragraph or so in the discussion about how causal inference tools can help above correlation analysis (e.g., PC algorithm)
+
 @import "/section_content/background_causal_network_id.md"
 
 ## Interventions in neuroscience & causal inference
-!!!! - 50% done:
+
+!!!! - 70% done
+
+!!!! Todo 3/16: - Get language more precise and effective ([Adam:] revisit related work, try to distill down our core argument about why intervention > passive observation) - Reframe $x \to y$ vs $x \leftarrow y$ argument to focus on distinguishing between members of a hypotheses set (hypothesis first, data second) - Add example demonstrating why location of stimulation matters to "The inferential power of interventions..." paragraphs - [Matt:] editing pass on last paragraph, qualify last paragraph (lean toward 'we are starting simple, blazing a trail for future research')
+
 @import "/section_content/background_intervention_causal_inf.md"
 
 ## Representations & reachability
-!!!! - 60% done:
+
+!!!! - 60% done
+
+!!!! todo - Rewrite X=XW+E as vector version (and resolve contemporaneous setting in methods>simulation section) - Describe what 'reachability' is (we're interested in net directional impact of one node on another, which includes both effects from direct and indirect connections) - Tentatively, bump 2.3 into theory section
+
 @import "/section_content/background_representation_reach.md"
 
-!!!! - 15% done -> much closer now, awaiting reassesment by Adam
+!!!! - 70% done
+
+!!!! todo - Talk about what 'reachability' means (total direct+indirect impact) - [Matt:] Rewrite first paragraph to not use notation (place this box before any theory/notation sections) - [Matt:] Set expectation here that we're talking about linear Gaussian circuits
+
 @import "/section_content/background_id_demo.md"
 
 
@@ -61,6 +80,8 @@ author:
 ## Predicting correlation structure (theory)
 
 @import "/section_content/methods1_predicting_correlation.md"
+
+!!!! todo - Some redundancy with simulation methods; cut and paste anything useful in 4.2 and put into 3.1 / 3.2
 
 # Simulation Methods
 
