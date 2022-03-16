@@ -11,12 +11,13 @@ Different mathematical representations of circuits can elucidate different conne
 \]
 where $e_A$, $e_B$, and $e_C$ represent exogenous inputs that are inputs from other variables and each other[^exog].
 
-When the system is linear we can use matrix notation to denote the impact of each node on the others. Denote the $p \times n$ matrix of data samples by $X$ and the $p \times n$ matrix of exogenous input values by $E$. We can then write[^sim_repr]
+When the system is linear we can use matrix notation to describe the impact of each node on the others:[^sim_repr]
 \[
-X = X W + E,
+x_{t+1} = W x_t + e_t,
 \]
+where $x_t \in \mathbb{R}^p$ denotes the state of each of the $p$ nodes at time $t$, and $e_t \in \mathbb{R}^p$ denotes the instantiation of each node's (independent and identically-distributed) private noise variance at time $t$.
 
-!!!! - TODO Adam, write out the dynamical system version of this 
+!!!! - TODO Adam, write out the dynamical system version of this
 <!-- <details><summary>various implementations</summary>
 
 Topologically sorted implementation:
@@ -49,21 +50,3 @@ The directional $k^{\mathrm{th}}$-order connections in the circuit are similarly
 describes the total impact --- through both first-order (direct) connections and higher-order (indirect) connections --- of each node on the others. Whether node $j$ is "reachable" (Skiena 2011) from node $i$ by a direct or indirect connection is thus indicated by $\widetilde{W}_{ij} \neq 0$, with the magnitude of $\widetilde{W}_{ij}$ indicating sensitive node $j$ is to a change in node $i$.
 
 This notion of reachability, encoded by the pattern of nonzero entries in $\widetilde{W}$, allows us to determine when two nodes will be correlated (or more generally, contain information about each other). Moreover, as we will describe in Sections [REF] and [REF], quantities derived from these representations can also be used to describe the impact of open- and closed-loop interventions on circuit behavior, allowing us to quantitatively explore the impact of these interventions on the identifiability of circuits.
-
-`[Matt to Adam --- I like the idea of an example here, but the details will likely need to change once the neighboring intro sections take shape]`
-
-!!!! - transition from reachability to 2-circuit ID demo is now in [background_id_demo.md](background_id_demo.md)
-
-<details><summary>↪old reachability → ID demo text </summary>
-
-Consider, for example, the hypotheses for cortical gain control in open-loop (Figure BACKGROUND>REPRESENTATION/REACH-1, left column). In both circuit 2a and 2b, PV cells are reachable from the Som cell node ($\widetilde{W}_{PV \to Som} \neq 0$), since Som activity can influence PV activity indirectly through the Pyr node. These circuits are therefore difficult to distinguish under open-loop intervention.
-
-If the reachability of two circuits are unequal for a given intervention, differences in correlation between observed regions will be sufficient to distinguish between the two hypotheses. Looking at these same circuits under closed-loop control of the pyramidal population (Figure BACKGROUND>REPRESENTATION/REACH-1, right column), dashed lines reveal that there is no longer an indirect functional connection from Som to PV cells. As such, in circuit 2a, PV cells are no longer reachable from the Som population, whereas they are reachable under circuit 2b. This difference in reachability corresponds to the difference in correlational structure that allows us to distinguish these two hypotheses under closed-loop control.
-
-![](/figures/misc_figure_sketches/closed_loop_distinguishes_corticalEI.png)
-**Figure BACKGROUND>REPRESENTATION/REACH-1: Closed-loop control allows for two circuit hypotheses to be distinguished.** Two hypothesized circuits for the relationships between pyramidal (Pyr, excitatory), parvalbumin-positive (PV, inhibitory), and somatostain-expressing (Som, inhibitory) cells are shown in the two rows. Dashed lines in the right column represent connections whose effects are compensated for through closed-loop control of the Pyr node. By measuring correlations between recorded regions during closed-loop control it is possible to distinguish which hypothesized circuit better matches the data. Notably in the open-loop intervention, activity in all regions is correlated for both hypothesized circuits leading to ambiguity.
-
-</details>
-
-<!-- ![](/figures/misc_figure_sketches/closed_loop_severs_inputs.png) -->
-<!-- ![](/figures/misc_figure_sketches/two_circuit_case_study_sketch.png) -->
