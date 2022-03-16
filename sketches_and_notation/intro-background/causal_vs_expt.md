@@ -2,8 +2,8 @@
 | -------------------- | -------------------------------------- |
 | observe              | correlations                           |
 | condition            | adjusting, partial correlations        |
-| perturb              | x+= val, instrumental variables?       |
-| ↪ sweep input        | x+= $∀v \in {\text{values}}$           |
+| perturb              | x += val, instrumental variables?      |
+| ↪ sweep input        | x += $∀v \in {\text{values}}$          |
 | clamp                | $\text{do}(x⇐\text{val})$              |
 | ↪ lesion             | $\text{do}(x⇐\empty)$                  |
 | ↪ sweep output[^ACE] | $\text{do}(x⇐∀v \in {\text{values}} )$ |
