@@ -8,6 +8,22 @@ Word count:
   - [ ] ? create hypotheses-set-focused methods overview figure ?
     - current figure really focuses on the fate of one circuit at a time
 
+- [ ] split sim methods elsewhere
+    - [ ] pull all into theory / methods overview section
+    - [ ] 4.1.2 - time-resolvable goes in discussion?
+    - [ ] 4.3 - merge "estimating circuits" into inference pipeline steps
+    - [ ] 4.4 - info theoretic measures could simply be combined with results section
+- [ ] Tentatively, bump 2.3 into theory section
+
+# Writing 
+
+- [ ] (in background-interventions) get language more precise and effective about value of intervention
+  - ([Adam:] revisit related work, try to distill down our core argument about why intervention > passive observation) 
+  - Reframe $x \to y$ vs $x \leftarrow y$ argument to focus on distinguishing between members of a hypotheses set (hypothesis first, data second) 
+  - Add example demonstrating why location of stimulation matters to "The inferential power of interventions..." paragraphs 
+  - [Matt:] editing pass on last paragraph, qualify last paragraph (lean toward 'we are starting simple, blazing a trail for future research')
+
+- [ ] Describe what 'reachability' is (we're interested in net directional impact of one node on another, which includes both effects from direct and indirect connections) 
 
 
 # Mechanical
@@ -16,6 +32,11 @@ Word count:
 - [ ] flip matrix convention 
   - use dynamical system throughout
     - live with $W_{j→i} = W[i,j]$
+- [ ] Rewrite X=XW+E as vector version (and resolve contemporaneous setting in methods>simulation section) 
+
+- [ ] (in background) Talk about what 'reachability' means (total direct+indirect impact) 
+- [ ] [Matt:] (in background) Rewrite first paragraph to not use notation (place this box before any theory/notation sections) 
+- [ ] [Matt:] Set expectation here that we're talking about linear Gaussian circuits
 
 ----
 # Archive
