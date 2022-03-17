@@ -57,6 +57,7 @@ def condense_source_type_labels(S):
 
 def partition_and_label_sources(R,i,j):
     return condense_source_type_labels(partition_sources_ab(R,i,j))
+    
 def compute_coreachability_tensor(R):
     n = R.shape[0]
     df = pd.DataFrame(columns=['iA','jB','kS','type'])
@@ -104,7 +105,8 @@ if __name__ == '__main__':
     # G = nx.DiGraph({'U':['V'],'V':['zA','zB'],'zZ':['zB'],'zA':['zB']})
     # G = nx.DiGraph({'A':['B'],'B':['A','C']})
     # G = nx.DiGraph({'A':['B','C']})
-    G = nx.DiGraph({'A':['B'],'B':['A'],'C':['A']})
+    G = nx.DiGraph({'A':['B','E'],'B':['C','D'],'C':['B']})
+    # G = nx.DiGraph({'A':['B'],'B':['A'],'C':['A','B']})
 
     '''mermaid vis from networkx
     https://blog.mdb977.de/rendering-networkx-graphs-or-graphml-files-via-mermaid/
@@ -133,7 +135,13 @@ if __name__ == '__main__':
     df = compute_coreachability_tensor(R)
     df['node_color'] = df.apply(lambda row: label_colors[row['type']],axis=1)
     df['node_size'] = df.apply(lambda row: _idx_to_node_size(row['kS'],row['iA'],row['jB']),axis=1)
-    # df.to_csv('results/demo_fingerprint.csv')
+    df.to_csv('results/demo_fingerprint.csv')
+    
+    demo_adj_file = open('results/demo_adj.txt','w')
+    demo_adj_file.write(str(G.edges))
+    demo_adj_file.close()
+    
+    
     #%%
     
     fig, ax = plt.subplots(1,3,figsize=(12,4))

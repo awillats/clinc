@@ -30,6 +30,7 @@ DEFAULT_NET_PLOT_OPTIONS = {
         'arrowsize':25,
         'connectionstyle':"arc3,rad=0.1",
     }
+_ABC_DICT = {number:chr(letter) for (number,letter) in zip(range(26),range(ord('A'),ord('Z')+1))}
 # Network plotting  
 def draw_weighted_corr(W, ax=None, min_w=0,max_w=10, more_options={},pos_override=None):
     G = nx.from_numpy_matrix(W, create_using=nx.Graph) 
@@ -94,7 +95,7 @@ def _gen_layout_from_adj(adj):
     pos = clockwise_circular_layout(nx_adj)
     return pos
     
-def draw_np_adj(adj, ax=None, more_options={}):
+def draw_np_adj(adj, ax=None, do_rename_abc=True, more_options={}):
     '''
     core plotting function that renders an adjacency_matrix 
     - gets used is several other higher-level plotting functions
@@ -105,6 +106,9 @@ def draw_np_adj(adj, ax=None, more_options={}):
     adj[~np.isfinite(adj)] = 0
     
     nx_adj = nx.from_numpy_matrix(adj, create_using=nx.DiGraph) 
+    if do_rename_abc:
+        nx_adj = nx.relabel_nodes(nx_adj, _ABC_DICT)
+    
     pos = clockwise_circular_layout(nx_adj)
     
     options = DEFAULT_NET_PLOT_OPTIONS.copy()

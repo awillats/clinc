@@ -1,16 +1,12 @@
-
----
-
 # Current tasks
 *see also [technical_tasks](/sketches_and_notation/planning_big_picture/technical_tasks.md)*
 
 ##Entropy
-working towards automating:
+**big picture goal:** working towards automating
 ![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
 
+<details><summary>↪pipeline</summary>
 
-
-pipeline
 ```mermaid
 graph TD
 a[adj]-->|w/ctrl?|c
@@ -30,7 +26,10 @@ subgraph corr
   end
 ```
 
-stages:
+</details>
+
+<details><summary>↪functions to accomplish these stages:</summary>
+
 - adj 
   - ( modified by severing )
 - df of coreach tensor: iA	jB	kS src→corr
@@ -54,31 +53,58 @@ stages:
   H_max = max_entropy_of_dict(tf, entr_base)
   ```
 
+</details>
+
+
+**entropy files**:
+- `network_pattern_entropy.py`
+  - if name main 
+- relies on `coreachability_source_classification.py` 
+  - to compute coreach tensor
+  - `partition_sources_ab()` is core function
+  
+- `plot_hypotheses_x_interventions.py`
+  - handles plotting infrastructure, layout for left side 
+  - but doesn't actually compute anything entropy-related
+- `network_data_functions.py`
 
 ### warmup 
-- [~] find entropy files
-  - `network_pattern_entropy.py`
-    - if name main 
-  - relies on `coreachability_source_classification.py` 
-    - to compute coreach tensor
-    - `partition_sources_ab()` is core function
-    
-  - plot_hypotheses_x_interventions.py
-    - handles plotting infrastructure, layout for left side 
-    - but doesn't actually compute anything entropy-related
-    
 - [ ] 🧿 carve out script
+  -  got distracted thinking about tables 
 - [ ] :dart: needs infrastructure for storing info associated with each hypothesis
   - but which is also accessible across hypotheses 
+    - does this require "wide-format" tables?
   - big table?
     - nested df?
     - or just matrix?
        
 
 ### Computing infrastructure 
-- extract fingerprint string 
-  - for OL 
-  - for CL :star:
+- [ ] graph to string - string to graph
+  - want something reversible (at least for binary adjacency)
+  - something relatively compact 
+  - matrix convention is unlikely to matter
+    - likely implies store as edgelist rather than matrix?
+  proposed solution:
+    - `str(G.edges)`
+    - `nx.to_pandas_edgelist(G)`
+  - seems silly to have huge strings as entries for each node 
+    - what about multi-level indices?
+    - or what about ENUMs which are keys to lookup table of adjacency
+      - this has problem of requiring the dictionary to be saved with the csv and not being human readable
+    
+- [ ] extract fingerprint string 
+  - for OL - `mostly done`
+  - for CL - `do next`
+---
+## Observations
+-  think I can reconstruct the reachability from the open-loop fingerprint! 
+  - i.e. with all single-site interventions, can recover (binary) reachability
+  
+
+
+
+---
   
 ### Plotting 
 - [~] plot matrix, w/ circuits as columns 

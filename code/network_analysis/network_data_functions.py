@@ -33,11 +33,18 @@ def mermaid_str_to_networkx(merm_graph, verbose=False):
             if verbose: print(f'{src} → {targ}')
     return G
     
-def nx_to_np_adj(G):
+def nx_to_np_adj(G,min_nodes=None):
     '''
     Converts a NetworkX graph to a dense adjacency matrix (via numpy)
     '''
-    return nx.adjacency_matrix(G, nodelist=sorted(G.nodes())).todense()
+    
+    if min_nodes is not None:
+        nodelist = np.arange(min_nodes)
+    else:
+        nodelist = sorted(G.nodes())
+    adj =  nx.adjacency_matrix(G, nodelist=nodelist).todense()
+    n = adj.shape[0]
+    return adj
     
 #%%
 
@@ -53,6 +60,10 @@ if __name__ == "__main__":
     '''
     G = mermaid_str_to_networkx(mg)
     print(G.edges)
+    gs = str(G.edges)
+    print(nx.to_pandas_edgelist(G))
+    
+    
     #%% 
     nx.draw_networkx(G)
     #%%
