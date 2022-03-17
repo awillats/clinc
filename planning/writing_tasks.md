@@ -2,7 +2,7 @@ Word count:
 
 # Organization / structure / flow
 - [ ] where does methods pipeline figure go?
-- [ ] integrate _steps_of_inference.md as overview at the end of intro
+- [ ] integrate steps_of_inference.md as overview at the end of intro
   - [ ] also use steps as sections of methods overview
   - [ ] merge more detailed content into sections of methods overview
   - [ ] ? create hypotheses-set-focused methods overview figure ?
@@ -14,9 +14,18 @@ Word count:
     - [ ] 4.3 - merge "estimating circuits" into inference pipeline steps
     - [ ] 4.4 - info theoretic measures could simply be combined with results section
 - [ ] Tentatively, bump 2.3 into theory section
+- [ ] proposed methods order - could be overwritten by order suggested by "steps of intervention"
+  - *simple linear Gaussian case*
+  - Interventions - 2.2 → to end of introduction 
+  - reachability - 2.3→ new 3.1 
+  - predicting corr  - 3.1→ new 3.2 
+  - inferring cause from time series  - 2.1B→ new 3.3 
+    - minimize granger, IDTxl
+- [ ] Either need to write a "results summary" section or smooth transition from quantitative results to discussion
+- [ ] add steps of inference to end of introduction
 
-# Writing
-
+# Writing 
+- [ ] sketch discussion
 - [ ] (in background-interventions) get language more precise and effective about value of intervention
   - ([Adam:] revisit related work, try to distill down our core argument about why intervention > passive observation)
   - **(Matt-done)** Reframe $x \to y$ vs $x \leftarrow y$ argument to focus on distinguishing between members of a hypotheses set (hypothesis first, data second)
@@ -38,7 +47,10 @@ Word count:
 - [ ] [Matt:] (in background) Rewrite first paragraph to not use notation (place this box before any theory/notation sections)
 - [ ] [Matt:] Set expectation here that we're talking about linear Gaussian circuits
 
-----
+# Technical 
+- [ ] Need to push for a last results section
+
+" ----
 # Archive
 
 <details><summary>↪see more tasks</summary>
