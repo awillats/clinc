@@ -58,14 +58,20 @@ def condense_source_type_labels(S):
 def partition_and_label_sources(R,i,j):
     return condense_source_type_labels(partition_sources_ab(R,i,j))
     
-def compute_coreachability_tensor(R):
+def compute_coreachability_tensor(R, ignore_self_connections=True):
     n = R.shape[0]
     df = pd.DataFrame(columns=['iA','jB','kS','type'])
+    
+    j_offset = 1 if ignore_self_connections else 0
+    
     for i in range(n):
-        for j in range(i,n):
+        for j in range(i+j_offset, n):
             _s_labels = partition_and_label_sources(R,i,j)
             for k in range(n):
                 df = df.append({'iA':i,'jB':j,'kS':k,'type':_s_labels[k]},ignore_index=True)
+    
+    #set up multi-index        
+    df = df.set_index(['kS','iA','jB']).sort_values(['kS','iA','jB'])
     return df
 #%%
 # Data parsing functions
@@ -87,8 +93,40 @@ def get_coreachability_from_source(df, kS):
 
     
 #%%
-
-
+def reconstruct_reach_from_coreach_df(df):
+    '''
+    Reconstructs a circuit's reachability from its "CoReachability tensor"
+        ...that is a map of which correlations between pairs of nodes increased or decreased 
+        as a result of open-loop stimulation at each node 
+    if corr(A,B | OL@A) > corr(A,B), A→→B
+    
+    NOTE: think this assumes all excitatory weights
+    NOTE: Expects df to have kS,iA,jB as mutliindex
+    '''
+    
+    'Only care about connections adjacent to the source node'
+    c1 = df.index.get_level_values('kS')==df.index.get_level_values('iA')
+    c2 = df.index.get_level_values('kS')==df.index.get_level_values('jB')
+    dft_local = df.loc[np.logical_or(c1,c2)]
+    
+    ReR = nx.DiGraph()
+    for i,row in dft_local.iterrows():
+        # print(row['type'])
+        # print(i)
+        nodes = i[1:]
+        node_self = i[0]
+        
+        other_nodes = list(nodes)
+        other_nodes.remove(node_self)
+        node_other = other_nodes[0]
+        
+        if row['type'] == 'S+':
+            ReR.add_edge(node_self,node_other)
+        # adding this back in seems to reconstruct fork-shaped reachability
+        # elif row['type'] == 'S-':
+            # R.add_edge(node_other,node_self)
+            pass
+    return ReR
 
 #%%
 
