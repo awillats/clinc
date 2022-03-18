@@ -2,6 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.rcParams.update({'font.size': 15})#25
 
+def subplots(nrows,ncols, figsize=None,w=3):
+    
+    
+    if figsize is None:
+        figsize = (w*ncols,w*nrows)
+    fig,ax = plt.subplots(nrows,ncols,figsize=figsize, sharex=True,sharey=True)
+    return fig,ax
 def unbox(ax, clear_labels=False):
     '''
     removes edges of subplot frame

@@ -6,6 +6,8 @@ import scipy.linalg as linalg
 import network_data_functions as netdata
 import matplotlib.pyplot as plt
 import plotting_functions as myplot
+import network_plotting_functions as netplot
+import coreachability_source_classification as coreach
 DYNAMIC = 0
 # %load_ext autoreload
 # %autoreload 2
@@ -264,7 +266,30 @@ def predict_and_quantify_correlations(Rw, varS, X, verbose=False):
 
 #%%
 
+def compute_view_by_plot_type(A,plot_type_loc):
+    '''
+    TODO: do we need a binary and a quanatitative analysis option?
+    TODO: option which sweeps across intv locations?
+    '''
+    plot_type = plot_type_loc['plot_type']
+    intv_loc = plot_type_loc['intervention_location']
+    npt = netplot.NetPlotType
+    view_funs = {
+        npt(0):            lambda adj,intv_loc: adj,
+        npt.ADJ:           lambda adj,intv_loc: adj,
+        npt.REACH:         lambda adj,intv_loc: reachability(adj),
+        npt.CORR:          lambda adj,intv_loc: binary_correlations(adj),
+        npt.OPEN:          lambda adj,intv_loc: coreach.compute_coreachability_from_src(adj, src_loc=intv_loc),
+        npt.ADJ_CTRL:      lambda adj,intv_loc: sever_inputs(adj,i=intv_loc),
+        npt.CORR_CTRL:     lambda adj,intv_loc: closed_loop_correlations(adj,ctrl_loc=intv_loc),
+        npt.COREACH_CTRL:  lambda adj,intv_loc: coreach.compute_coreachability_from_src(sever_inputs(adj,i=intv_loc), src_loc=intv_loc),
+    }
+    this_view_fun = view_funs.get(plot_type)
+    return this_view_fun(A, intv_loc)
     
+# def compute_each_view_by_plot_type(As,plot_types):
+#     pass
+            
     
 
 

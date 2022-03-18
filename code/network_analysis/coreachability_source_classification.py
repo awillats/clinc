@@ -13,23 +13,65 @@ the if __name__ == '__main__' is far too complicated
 '''
 
 
+#%%
+def add_self_reach(R):
+    return np.logical_or(R, np.eye(R.shape[0])) 
+def _coreach_logic_from_src(R,i,j,s,logic_fn):
+    R = add_self_reach(R)
+    #NOTE: adjacency convention dependent
+    return logic_fn(R[s,i],R[s,j])
+def and_coreach_from_src(R,i,j,s):
+    return _coreach_logic_from_src(R,i,j,s,np.logical_and)
+def xor_coreach_from_src(R,i,j,s):
+    return _coreach_logic_from_src(R,i,j,s,np.logical_xor)
+def nor_coreach_from_src(R,i,j,s):
+    return _coreach_logic_from_src(R,i,j,s, lambda a,b : np.logical_not(np.logical_or(a,b)))
 
+incr_ij_from_src = and_coreach_from_src
+decr_ij_from_src = xor_coreach_from_src
+indp_ij_from_src = nor_coreach_from_src
+
+def label_coreach_from_src(R,i,j,s):
+    if and_coreach_from_src(R,i,j,s): return 'S^' 
+    if xor_coreach_from_src(R,i,j,s): return 'Sv' 
+    if nor_coreach_from_src(R,i,j,s): return 'S0'
+    else:
+        return None
+
+def compute_coreachability_from_src(R, src_loc, ignore_self_connections=True, to_multiindex=False):
+    n = R.shape[0]
+    df = pd.DataFrame(columns=['iA','jB','kS','type'])
+    
+    j_offset = 1 if ignore_self_connections else 0
+    
+    for i in range(n):
+        for j in range(i+j_offset, n):
+            # _s_labels = partition_and_label_sources(R,i,j)
+            this_label = label_coreach_from_src(R,i,j,src_loc)
+            # for k in range(n):
+            df = df.append({'iA':i,'jB':j,'kS':src_loc,'type':this_label},ignore_index=True)
+    if to_multiindex:
+        df = add_multiindex_to_coreach(df)
+    return df
+                  
 #%%
 # set up functions for computing whether a source can reach both A and B
+# this section slices across all sources
+#NOTE: adjacency convention dependent
 def and_coreach(R,i,j):
     return np.logical_and(R[:,i],R[:,j])
 def xor_coreach(R,i,j):
     return np.logical_xor(R[:,i],R[:,j])
 def nor_coreach(R,i,j):
     return np.logical_not(np.logical_or(R[:,i],R[:,j]))
-    
+
 def partition_sources_ab(R,i,j):
     '''
     assumes IN x OUT convention for reachability R
     '''
     # adds diagonal elements if they don't already exist
     # this represents the assumption that sources can access every node
-    R = np.logical_or(R, np.eye(R.shape[0])) 
+    R = add_self_reach(R)
     return {'S+':and_coreach(R,i,j),
             'S-':xor_coreach(R,i,j),
             'S0':nor_coreach(R,i,j)}
@@ -62,7 +104,12 @@ def add_multiindex_to_coreach(df):
     return df.set_index(['kS','iA','jB']).sort_values(['kS','iA','jB'])
     
 def compute_coreachability_tensor(R, ignore_self_connections=True, to_multiindex=False):
-    n = R.shape[0]
+    n = R.shape[0] 
+    df = pd.DataFrame()
+    for k in range(1,n):
+        df = df.append(compute_coreachability_from_src(R,k, ignore_self_connections=ignore_self_connections, to_multiindex=to_multiindex))
+        
+    '''
     df = pd.DataFrame(columns=['iA','jB','kS','type'])
     
     j_offset = 1 if ignore_self_connections else 0
@@ -76,7 +123,7 @@ def compute_coreachability_tensor(R, ignore_self_connections=True, to_multiindex
     #set up multi-index        
     if to_multiindex:
         df = add_multiindex_to_coreach(df)
-    
+    '''
     return df
 #%%
 # Data parsing functions

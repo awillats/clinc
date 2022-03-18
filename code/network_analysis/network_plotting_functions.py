@@ -206,7 +206,9 @@ def draw_correlations(A,Corr=None,ax=None,grey_correlations=False,base_options={
     pos = draw_np_adj(net.illusory_correlations(A,Corr), ax=ax, more_options=bad_corr_style)
     return pos
 
-def draw_adj_reach_corr(A, axs, add_titles=True, grey_correlations=False):
+def draw_adj_reach_corr(A, axs=None, add_titles=True, grey_correlations=True, expand_bounds=None):
+    if axs is None:
+        fig,axs = myplot.subplots(1,3)
     pos = draw_np_adj(A, ax=axs[0])
     draw_reachability(A, None, axs[1])
     draw_correlations(A, None, axs[2], grey_correlations=grey_correlations)
@@ -214,6 +216,8 @@ def draw_adj_reach_corr(A, axs, add_titles=True, grey_correlations=False):
         axs[0].set_title('adj')
         axs[1].set_title('reach')
         axs[2].set_title('correlations')
+    if expand_bounds:
+        myplot.expand_bounds(axs[0],expand_bounds)
     return pos
 
 
@@ -559,7 +563,10 @@ def plot_empirical_corrs(A,Rw,X, r2_pred,r2_empr,n_plot=1000,node_colors=None):
 
 #%%
 def strip_trailing_int(str,delim='@'):
-    return int(str.split(delim)[1])
+    if delim in str:
+        return int(str.split(delim)[1])
+    else:
+        return None
 # from aenum import Flag, auto
 
 # see https://github.com/awillats/clinc-gen/blob/main/small_circuit_scripts/circuit_functions/run_PID_ctrl.py 
@@ -567,14 +574,17 @@ def strip_trailing_int(str,delim='@'):
 # some discussion of enum vs aenum here: https://stackoverflow.com/questions/60635855/python-enum-flag-with-one-flag-that-is-used-by-some-others
 
 class NetPlotType(Flag):
+    '- NOTE: this is probably useful in analysis also... so maybe these types should live elsewhere'
     ADJ = auto() 
     REACH = auto()
     CORR = auto() 
+    COREACH = auto()
     CTRL = auto()
     OPEN = auto()
     ADJ_CTRL = ADJ | CTRL
     CORR_CTRL = CORR | CTRL
     REACH_CTRL = REACH | CTRL
+    COREACH_CTRL = COREACH | CTRL
     
     def __init__(self,flag_val):
         # Flag.__init__(self) #replace with super?
@@ -582,7 +592,9 @@ class NetPlotType(Flag):
         super().__init__()
         self.intervention_location=None
     def set_intervention_location(self, loc):
-    
+        '''
+        DANGER: this is acting like a class-level property
+        '''
         self.intervention_location = loc
     # 
     def __repr__(self):
@@ -595,10 +607,12 @@ class NetPlotType(Flag):
         
 def parse_plot_type(plot_str):
     plot_str = plot_str.lower()
-    pt = NetPlotType(0)
+    intv_loc = strip_trailing_int(plot_str)
+    pt = NetPlotType.ADJ & NetPlotType.REACH
     '''
     Note, the resulting plot type can combine ADJ/REACH/CORR with CTRL 
     - this is achieved by using the OR:| operation with flags
+    
     '''
     
     if 'adj' in plot_str:
@@ -609,14 +623,18 @@ def parse_plot_type(plot_str):
         pt |= NetPlotType.CORR
     if 'ctrl' in plot_str:
         pt |= NetPlotType.CTRL
-        pt.set_intervention_location(strip_trailing_int(plot_str))
+        # pt.set_intervention_location(strip_trailing_int(plot_str))
     if 'open' in plot_str:
         pt |= NetPlotType.OPEN
-        pt.set_intervention_location(strip_trailing_int(plot_str))        
-    return pt
-    
-def plot_adj_by_plot_type(ax, A, plot_type,add_titles=True):
+        
+        # pt.set_intervention_location(strip_trailing_int(plot_str))        
+    return {'plot_type':pt,'intervention_location':intv_loc}
+
+
+def plot_adj_by_plot_type(ax, A, plot_type_loc, add_titles=True):
     grey=True
+    plot_type = plot_type_loc['plot_type']
+    intervention_location = plot_type_loc['intervention_location']
     plot_funs = {
         NetPlotType(0):         lambda adj,ax,intv_loc: adj*2,
         NetPlotType.ADJ:        lambda adj,ax,intv_loc: draw_np_adj(adj,ax=ax),
@@ -630,7 +648,7 @@ def plot_adj_by_plot_type(ax, A, plot_type,add_titles=True):
     }
     this_plot_fun = plot_funs.get(plot_type)
     
-    this_plot_fun(A, ax, plot_type.intervention_location)
+    this_plot_fun(A, ax, intervention_location)
     if add_titles:
         ax.set_title(str(plot_type),color='lightgrey')
     else:
