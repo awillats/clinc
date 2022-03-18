@@ -262,7 +262,7 @@ if __name__ == "__main__":
     #%% 
     netplot.draw_nx(G)
     #%%
-    
+    #Convert back and forth between string and graph representations
     arrg = 'A←B,C,D;C↔E'
     AG = arrow_str_to_networkx(arrg,line_delim=';')
 

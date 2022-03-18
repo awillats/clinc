@@ -52,19 +52,28 @@ A2 = np.array([[0, 1, 0],
 pos = netplot._gen_layout_from_adj(A)
 
 #%%
+netplot.draw_adj_reach_corr_coreach(As[0])
+#%%
 '''
 can specify what you want in the columns 
 ( see network_plotting_functions/parse_plot_type() for )
 '''
 cols = ['adj','reach','corr','open@1','adj ctrl@1','corr ctrl@1']
 plot_types = [netplot.parse_plot_type(p) for p in cols]
+plot_types
 As = [A0,A1]
 
-fig,ax = plt.subplots(len(As),len(cols),figsize=(3*len(cols),3.5*len(As)),sharex=True,sharey=True)
-for j,_A in enumerate(As):
-    for i,pt in enumerate(plot_types):    
-        netplot.plot_adj_by_plot_type(ax[j][i],_A,pt,add_titles=(j==0))
-myplot.expand_bounds(ax[0][0],1.3)
-
-myplot.savefig(f'results/circuit_walkthrough_{len(As)}circuits.png',this_file='/code/fig_circuit_walkthrough.py')        
+fig=netplot.plot_each_adj_by_plot_type(None,As,plot_types)
+# 
+# '''
+# get_coreachability_from_source not working 
+# '''
+# 
+# fig,ax = plt.subplots(len(As),len(cols),figsize=(3*len(cols),3.5*len(As)),sharex=True,sharey=True)
+# for j,_A in enumerate(As):
+#     for i,pt in enumerate(plot_types):    
+#         netplot.plot_adj_by_plot_type(ax[j][i],_A, pt, add_titles=(j==0))
+# # myplot.expand_bounds(ax[0][0],1.3)
+# # 
+# # myplot.savefig(f'results/circuit_walkthrough_{len(As)}circuits.png',this_file='/code/fig_circuit_walkthrough.py')        
 fig

@@ -71,6 +71,9 @@ subgraph corr
 ### warmup 
 - [ ] 🧿 carve out script
   -  got distracted thinking about tables 
+  - and then about str ↔ graph
+  - and then about fingerprint → reach
+  
 - [ ] :dart: needs infrastructure for storing info associated with each hypothesis
   - but which is also accessible across hypotheses 
     - does this require "wide-format" tables?
@@ -78,20 +81,25 @@ subgraph corr
     - nested df?
     - or just matrix?
        
-
 ### Computing infrastructure 
-- [ ] graph to string - string to graph
-  - want something reversible (at least for binary adjacency)
-  - something relatively compact 
-  - matrix convention is unlikely to matter
-    - likely implies store as edgelist rather than matrix?
-  proposed solution:
-    - `str(G.edges)`
-    - `nx.to_pandas_edgelist(G)`
-  - seems silly to have huge strings as entries for each node 
-    - what about multi-level indices?
-    - or what about ENUMs which are keys to lookup table of adjacency
-      - this has problem of requiring the dictionary to be saved with the csv and not being human readable
+<details><summary>↪- [x] graph to string - string to graph
+</summary>  
+
+- see `network_data_functions.graph_components_to_arrow_str()` 
+- want something reversible (at least for binary adjacency)
+- something relatively compact 
+- matrix convention is unlikely to matter
+  - likely implies store as edgelist rather than matrix?
+proposed solution:
+  - `str(G.edges)`
+  - `nx.to_pandas_edgelist(G)`
+- seems silly to have huge strings as entries for each node 
+  - what about multi-level indices?
+  - or what about ENUMs which are keys to lookup table of adjacency
+    - this has problem of requiring the dictionary to be saved with the csv and not being human readable
+
+</details>
+
     
 - [ ] extract fingerprint string 
   - for OL - `mostly done`
@@ -100,9 +108,9 @@ subgraph corr
 ## Observations
 -  think I can reconstruct the reachability from the open-loop fingerprint! 
   - i.e. with all single-site interventions, can recover (binary) reachability
-  
-
-
+  - in hindsight, this is probably trivial for theoretical coreach, since this is simply an augmentation of reachability...
+    - but this is potentially useful as a recipe for computing reachability from empirical (changes) in correlation 
+  - but also note this may depend on influences being excitatory
 
 ---
   

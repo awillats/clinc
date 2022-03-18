@@ -57,8 +57,11 @@ def condense_source_type_labels(S):
 
 def partition_and_label_sources(R,i,j):
     return condense_source_type_labels(partition_sources_ab(R,i,j))
+
+def add_multiindex_to_coreach(df):
+    return df.set_index(['kS','iA','jB']).sort_values(['kS','iA','jB'])
     
-def compute_coreachability_tensor(R, ignore_self_connections=True):
+def compute_coreachability_tensor(R, ignore_self_connections=True, to_multiindex=False):
     n = R.shape[0]
     df = pd.DataFrame(columns=['iA','jB','kS','type'])
     
@@ -71,20 +74,28 @@ def compute_coreachability_tensor(R, ignore_self_connections=True):
                 df = df.append({'iA':i,'jB':j,'kS':k,'type':_s_labels[k]},ignore_index=True)
     
     #set up multi-index        
-    df = df.set_index(['kS','iA','jB']).sort_values(['kS','iA','jB'])
+    if to_multiindex:
+        df = add_multiindex_to_coreach(df)
+    
     return df
 #%%
 # Data parsing functions
 def df_edgelist_to_numpy_adj(df, source_key, target_key, node_list):
-    return nx.to_numpy_matrix(nx.from_pandas_edgelist(df, source_key, target_key, create_using=nx.DiGraph),nodelist=node_list)
+    return nx.to_numpy_matrix(nx.from_pandas_edgelist(df, source_key, target_key, create_using=nx.DiGraph), nodelist=node_list)
+
+def get_node_names_from_coreach(df):
+    return list(set(df['iA'].unique()) | set(df['jB'].unique()))
 
 def get_coreachability_from_source(df, kS):
     df_rows = df[df['kS']==kS]
+    # df_rows = df.xs(kS,level='kS')
     df_pos  = df_rows[df_rows['type']=='S+']
     df_neg  = df_rows[df_rows['type']=='S-']
     df_neut = df_rows[df_rows['type']=='S0']
     
-    nodes = df_rows['iA'].unique()
+    nodes = get_node_names_from_coreach(df_rows)
+    
+    # nodes = df.index.unique(level='iA')
     pos_edges = df_edgelist_to_numpy_adj(df_pos,  'iA','jB',nodes)
     neg_edges = df_edgelist_to_numpy_adj(df_neg,  'iA','jB',nodes)
     neut_edges = df_edgelist_to_numpy_adj(df_neut,'iA','jB',nodes)

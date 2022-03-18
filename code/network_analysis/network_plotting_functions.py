@@ -98,7 +98,7 @@ def _gen_layout_from_adj(adj):
 def relabel_nodes_abc(G,do_uppercase=True):
     abc = string.ascii_uppercase if do_uppercase else string.ascii_lowercase
     return nx.relabel_nodes(G, dict(zip(G,abc)))
-def draw_np_adj(adj, ax=None, do_rename_abc=True, node_labels=None, more_options={}):
+def draw_np_adj(adj, ax=None, more_options={}, do_rename_abc=True, node_labels=None):
     '''
     core plotting function that renders an adjacency_matrix 
     - gets used is several other higher-level plotting functions
@@ -364,6 +364,7 @@ def __draw_coreachability_at_source(adj, ax,intv_loc,df=None, node_position=None
     
     if df is None:
         df = coreach.compute_coreachability_tensor(net.reachability(adj))
+        
     if node_position is None:
         node_position = _gen_layout_from_adj(adj)
     pos_edge_style = straight_edge_style('peachpuff')
@@ -378,9 +379,10 @@ def __draw_coreachability_at_source(adj, ax,intv_loc,df=None, node_position=None
         neg_edge_style['edge_color'] = 'lightgrey'
         neut_edge_style['edge_color'] = 'lightgrey'
     pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df,intv_loc)
-    draw_np_adj(neut_edges, ax, neut_edge_style)
-    draw_np_adj(pos_edges, ax, pos_edge_style)
-    draw_np_adj(neg_edges, ax, neg_edge_style)
+    
+    draw_np_adj(neut_edges, ax, more_options=neut_edge_style)
+    draw_np_adj(pos_edges, ax, more_options=pos_edge_style)
+    draw_np_adj(neg_edges, ax, more_options=neg_edge_style)
     indicate_intervention(ax, node_position[intv_loc])
     # print(node_position)
     if add_titles:
@@ -410,7 +412,10 @@ def draw_coreachability_by_source(df, axs, node_position, add_titles=True, grey_
     # neg_edge_style['edge_color'] = 'lightgrey'
 
     #TODO: scale these by IDSNR weighted co-reachability
-    n = len(df['iA'].unique())
+    n = len(coreach.get_node_names_from_coreach(df))
+    
+    node_names = list(node_position.keys())
+    
     for i in range(n):
         # __draw_coreachability_at_source(adj=None, ax=axs[i], df=df,intv_loc=i,
         #     node_position=node_position,add_titles=add_titles, 
@@ -421,7 +426,7 @@ def draw_coreachability_by_source(df, axs, node_position, add_titles=True, grey_
         draw_np_adj(neut_edges, axs[i], neut_edge_style)
         draw_np_adj(pos_edges, axs[i], pos_edge_style)
         draw_np_adj(neg_edges, axs[i], neg_edge_style)
-        indicate_intervention(axs[i],node_position[i])
+        indicate_intervention(axs[i], node_position[node_names[i]])
         # print(node_position)
         if add_titles:
             axs[i].set_title(f'open-loop $S_{i}$')
@@ -434,7 +439,7 @@ def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True, grey_corr
         df = coreach.compute_coreachability_tensor(net.reachability(A))
 
     if axs is None:
-        fig, axs =  plt.subplots(1,n_plot, figsize=((n_plot)*5, 2*2.5),sharey=True,aspect='equal')
+        fig, axs =  plt.subplots(1,n_plot, figsize=((n_plot)*5, 2*2.5),sharey=True)#, aspect='equal')
         print('INFO: creating axes')
     else:
         fig = axs[0].get_figure()
@@ -621,7 +626,7 @@ def plot_adj_by_plot_type(ax, A, plot_type,add_titles=True):
         NetPlotType.CORR_CTRL:  lambda adj,ax,intv_loc: __draw_ctrl_correlations_at_source(adj=adj,ax=ax,intv_loc=intv_loc,grey_correlations=grey),
         # NetPlotType.REACH_CTRL :  lambda adj,ax,intv_loc: netplot.__draw_coreachability_at_source(adj,ax=ax,intv_loc=intv_loc),
         # NetPlotType.CTRL :  lambda adj,ax,intv_loc: netplot.__draw_coreachability_at_source(adj,ax=ax,intv_loc=intv_loc),
-        NetPlotType.OPEN:       lambda adj,ax,intv_loc: __draw_coreachability_at_source(adj,ax=ax,intv_loc=intv_loc,grey_correlations=grey),
+        NetPlotType.OPEN:       lambda adj,ax,intv_loc: __draw_coreachability_at_source(adj=adj,ax=ax,intv_loc=intv_loc,grey_correlations=grey),
     }
     this_plot_fun = plot_funs.get(plot_type)
     
@@ -630,6 +635,21 @@ def plot_adj_by_plot_type(ax, A, plot_type,add_titles=True):
         ax.set_title(str(plot_type),color='lightgrey')
     else:
         ax.set_title('')
+
+def plot_each_adj_by_plot_type(ax, As, plot_types,ax_padding=1.2):
+    N_circ = len(As)
+    N_plots = len(plot_types)
+    if ax is None:
+        h = 5 #panel height
+        fs = (h*N_plots, (h+.5)*N_circ)
+        fig,ax = plt.subplots(N_circ,N_plots, figsize=fs, sharex=True,sharey=True)
+    else:
+        fig = ax.gcf()
+    for j,A in enumerate(As):
+        for i,plot_type in enumerate(plot_types):
+            plot_adj_by_plot_type(ax[j][i],A,plot_type, add_titles=(j==0))
+    myplot.expand_bounds(ax[0][0], ax_padding)
+    return fig
 #%%
 # 1-lag correlation-plot
 # if nt<1e5:

@@ -1,5 +1,6 @@
 import numpy as np
 import networkx as nx
+import network_data_functions as netdata
 '''
 write case studies for exampination as a function returning multiple candidate hypotheses
 
@@ -8,6 +9,14 @@ TODO
 - [ ] import "generate all N-node circuits" functions
 '''
 
+#single N-node circuit
+# N = 10
+# p = 0.8*N/N**2
+# G = nx.fast_gnp_random_graph(N,p, directed=True)
+
+def gen_random_circuit_set(N_circ=6, N_nodes=3, p_connect=.1):
+    nx_circs = [nx.fast_gnp_random_graph(N_nodes, p_connect) for i in range(N_circ)]
+    return [netdata.nx_to_np_adj(nxc,N_nodes) for nxc in nx_circs]
 
 def get_all_2node():
     A0 = np.array([[0,0],[0,0]])
