@@ -19,6 +19,8 @@ most commonly the following functions are imported with aliases like so:
 #external libraries
 import numpy as np
 import networkx as nx
+import pandas as pd
+
 #data
 import network_data_functions as net_data
 import example_circuits as egcirc
@@ -27,6 +29,7 @@ import sim_simple_network_functions as sim
 #analysis
 import network_analysis_functions as net
 import network_plotting_functions as netplot
+import coreachability_source_classification as cor
 #plotting
 import matplotlib.pyplot as plt
 import plotting_functions as myplot

@@ -28,7 +28,7 @@ DEFAULT_NET_PLOT_OPTIONS = {
         'width': 4,
         'arrowstyle': '-|>',
         'arrowsize':25,
-        'connectionstyle':"arc3,rad=0.1",
+        'connectionstyle':"arc3,rad=-0.1",
     }
 _ABC_DICT = {number:chr(letter) for (number,letter) in zip(range(26),range(ord('A'),ord('Z')+1))}
 # Network plotting  
@@ -122,10 +122,12 @@ def draw_np_adj(adj, ax=None, do_rename_abc=True, more_options={}):
         options.update({'width':0,'arrowsize':40,'style':'-','arrowstyle':'-|>'})
         nx.draw_networkx(nx_adj, arrows=True, **options)
 
-    
-    myplot.unbox(ax)
+    if ax is not None:
+        myplot.unbox(ax)
     # myplot.expand_bounds(ax)
     return pos
+def draw_nx(G, ax=None, do_rename_abc=True, more_options={}):
+    return draw_np_adj(netdata.nx_to_np_adj(G),ax=ax,do_rename_abc=do_rename_abc, more_options=more_options)
 #%%
 from matplotlib import patches
 straight_arrow_style = patches.ArrowStyle.Curve()

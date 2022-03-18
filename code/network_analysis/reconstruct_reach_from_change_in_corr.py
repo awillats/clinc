@@ -4,7 +4,6 @@ import networkx as nx
 %load_ext autoreload
 %autoreload 2
 
-
 import pandas as pd
 import example_circuits as egcirc
 import network_analysis_functions as net
