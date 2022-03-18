@@ -270,6 +270,7 @@ def compute_view_by_plot_type(A,plot_type_loc):
     '''
     TODO: do we need a binary and a quanatitative analysis option?
     TODO: option which sweeps across intv locations?
+    TODO: layer of standardization of results format - df v.s. adj?
     '''
     plot_type = plot_type_loc['plot_type']
     intv_loc = plot_type_loc['intervention_location']
@@ -280,9 +281,11 @@ def compute_view_by_plot_type(A,plot_type_loc):
         npt.REACH:         lambda adj,intv_loc: reachability(adj),
         npt.CORR:          lambda adj,intv_loc: binary_correlations(adj),
         npt.OPEN:          lambda adj,intv_loc: coreach.compute_coreachability_from_src(adj, src_loc=intv_loc),
-        npt.ADJ_CTRL:      lambda adj,intv_loc: sever_inputs(adj,i=intv_loc),
+        npt.ADJ_CTRL:      lambda adj,intv_loc: sever_inputs(adj,ctrl_loc=intv_loc),
         npt.CORR_CTRL:     lambda adj,intv_loc: closed_loop_correlations(adj,ctrl_loc=intv_loc),
-        npt.COREACH_CTRL:  lambda adj,intv_loc: coreach.compute_coreachability_from_src(sever_inputs(adj,i=intv_loc), src_loc=intv_loc),
+        #NOTE: DANGER: this is incorrect! doesn't account for zero-correlations
+        npt.COREACH_CTRL:  lambda adj,intv_loc: 
+            coreach.compute_coreachability_from_src(sever_inputs(adj,ctrl_loc=intv_loc), src_loc=intv_loc),
     }
     this_view_fun = view_funs.get(plot_type)
     return this_view_fun(A, intv_loc)

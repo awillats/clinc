@@ -61,7 +61,7 @@ adj
 '''
 
 # experiments = ['adj','corr']+[f'corr open@{i}' for i in range(N)]+[f'corr ctrl@{i}' for i in range(N)]
-experiments = ['adj','open@0','open@1','open@2','corr ctrl@2','corr ctrl@0','corr ctrl@1']
+experiments = ['adj','open@0','open@1','open@2','coreach ctrl@0','coreach ctrl@1','coreach ctrl@2']
 print(experiments)
 
 p = netplot.parse_plot_type(experiments[-1])
@@ -76,7 +76,7 @@ print(plot_types)
 f,ax = myplot.subplots(1,len(plot_types),w=5)
 
 
-def coreach_to_weighted_corr(df, N=3,weight_dict = {'S^':5,'Sv':.1,'S0':.5}):
+def coreach_to_weighted_corr(df, N=3,weight_dict = {'S^':5,'Sv':.1,'S=':.5}):
     df['weight'] = df['type'].apply(lambda sl: weight_dict[sl])
     wc = np.zeros((N,N))
     for i,r in df.iterrows():

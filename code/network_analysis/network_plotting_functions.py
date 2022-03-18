@@ -584,7 +584,7 @@ class NetPlotType(Flag):
     ADJ_CTRL = ADJ | CTRL
     CORR_CTRL = CORR | CTRL
     REACH_CTRL = REACH | CTRL
-    COREACH_CTRL = COREACH | CTRL
+    COREACH_CTRL = REACH | COREACH | CTRL
     
     def __init__(self,flag_val):
         # Flag.__init__(self) #replace with super?
@@ -621,6 +621,8 @@ def parse_plot_type(plot_str):
         pt |= NetPlotType.REACH
     if 'corr' in plot_str:
         pt |= NetPlotType.CORR
+    if 'coreach' in plot_str:
+        pt |= NetPlotType.COREACH
     if 'ctrl' in plot_str:
         pt |= NetPlotType.CTRL
         # pt.set_intervention_location(strip_trailing_int(plot_str))
