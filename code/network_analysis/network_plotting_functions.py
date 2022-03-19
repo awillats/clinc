@@ -579,8 +579,11 @@ class NetPlotType(Flag):
     REACH = auto()
     CORR = auto() 
     COREACH = auto()
-    CTRL = auto()
+
+    PASV = auto()
     OPEN = auto()
+    CTRL = auto()
+    
     ADJ_CTRL = ADJ | CTRL
     CORR_CTRL = CORR | CTRL
     REACH_CTRL = REACH | CTRL
@@ -590,17 +593,40 @@ class NetPlotType(Flag):
         # Flag.__init__(self) #replace with super?
         # super(NetPlotType, self).__init__()
         super().__init__()
-        self.intervention_location=None
-    def set_intervention_location(self, loc):
-        '''
-        DANGER: this is acting like a class-level property
-        '''
-        self.intervention_location = loc
-    # 
+    #     self.intervention_location=None
+    # def set_intervention_location(self, loc):
+    #     '''
+    #     DANGER: this is acting like a class-level property
+    #     '''
+    #     self.intervention_location = loc
+    
+    def color(self):
+        if self & NetPlotType.PASV:
+            return 'grey'
+        if self & NetPlotType.OPEN:
+            return 'dodgerblue'
+        if self & NetPlotType.CTRL:
+            return 'orange'
+        return 'black'
+    def lightcolor(self):
+        if self & NetPlotType.PASV:
+            return 'lightgrey'
+        if self & NetPlotType.OPEN:
+            return '#b0d3f0'
+        if self & NetPlotType.CTRL:
+            return '#ffd6a8'
+        return 'white'
+
+    def __hash__(self):
+        #custom has function, hopefully so object can be used as key
+        # https://stackoverflow.com/questions/4901815/object-of-custom-type-as-dictionary-key
+        return hash(str(self))
+    def __eq__(self, other):
+        return str(self) == str(other)
     def __repr__(self):
         r = f'{self.name}'
-        if hasattr(self,'intervention_location') and self.intervention_location is not None:
-            r +=f'@{self.intervention_location}'
+    #     if hasattr(self,'intervention_location') and self.intervention_location is not None:
+    #         r +=f'@{string.ascii_uppercase[self.intervention_location]}'
         return r
     def __str__(self):
         return self.__repr__()
@@ -631,7 +657,11 @@ def parse_plot_type(plot_str):
         
         # pt.set_intervention_location(strip_trailing_int(plot_str))        
     return {'plot_type':pt,'intervention_location':intv_loc}
-
+def plot_type_loc_to_str(plot_type_loc):
+    s = str(plot_type_loc['plot_type'])
+    if plot_type_loc['intervention_location'] is not None:
+        s += f' @ {string.ascii_uppercase[plot_type_loc["intervention_location"]]}'
+    return s
 
 def plot_adj_by_plot_type(ax, A, plot_type_loc, add_titles=True):
     grey=True

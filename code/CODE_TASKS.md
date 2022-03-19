@@ -3,7 +3,7 @@
 
 ##Entropy
 **big picture goal:** working towards automating
-![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
+![](/figures/core_figure_sketches/circuit_entropy_sketch.png)
 
 <details><summary>↪pipeline</summary>
 
@@ -37,7 +37,7 @@ subgraph corr
   df = compute_coreachability_tensor(net.reachability(adj))
   ```
   - e.g. demo_fingerprint.csv
-  - redundant directionality removed hear on creation so we don't have to think about it at token stage?
+  - redundant directionality removed here on creation so we don't have to think about it at token stage?
   - self-correlation seems to be left in for some reason
     - remove this! so fingerprint will only have 3 ordered subtokens
   - for registering dfs across hypo, maybe it makes sense to have a compact, unique adj ID
@@ -56,24 +56,22 @@ subgraph corr
 </details>
 
 
-**entropy files**:
+<details><summary>↪<b>entropy files</b></summary>
+
 - `network_pattern_entropy.py`
   - if name main 
 - relies on `coreachability_source_classification.py` 
   - to compute coreach tensor
   - `partition_sources_ab()` is core function
-  
 - `plot_hypotheses_x_interventions.py`
   - handles plotting infrastructure, layout for left side 
   - but doesn't actually compute anything entropy-related
 - `network_data_functions.py`
+- 🧿 `analyze_hypothesis_entropy.py`
+</details>
 
-### warmup 
-- [ ] 🧿 carve out script
-  -  got distracted thinking about tables 
-  - and then about str ↔ graph
-  - and then about fingerprint → reach
-  
+
+### warmup / active
 - [ ] :dart: needs infrastructure for storing info associated with each hypothesis
   - but which is also accessible across hypotheses 
     - does this require "wide-format" tables?
@@ -82,6 +80,22 @@ subgraph corr
     - or just matrix?
        
 ### Computing infrastructure 
+    
+- [ ] extract fingerprint string 
+  - for OL - `mostly done`
+  - for CL - `do next`
+## Hopper 
+- [ ] compare binary closed-loop CoReachability to quantitative (see animation idea)
+---
+## Observations
+-  think I can reconstruct the reachability from the open-loop fingerprint! 
+  - i.e. with all single-site interventions, can recover (binary) reachability
+  - in hindsight, this is probably trivial for theoretical coreach, since this is simply an augmentation of reachability...
+    - but this is potentially useful as a recipe for computing reachability from empirical (changes) in correlation 
+  - but also note this may depend on influences being excitatory
+
+---
+## Bonus features - data processing 
 <details><summary>↪- [x] graph to string - string to graph
 </summary>  
 
@@ -100,20 +114,6 @@ proposed solution:
 
 </details>
 
-    
-- [ ] extract fingerprint string 
-  - for OL - `mostly done`
-  - for CL - `do next`
----
-## Observations
--  think I can reconstruct the reachability from the open-loop fingerprint! 
-  - i.e. with all single-site interventions, can recover (binary) reachability
-  - in hindsight, this is probably trivial for theoretical coreach, since this is simply an augmentation of reachability...
-    - but this is potentially useful as a recipe for computing reachability from empirical (changes) in correlation 
-  - but also note this may depend on influences being excitatory
-
----
-  
 ### Plotting 
 - [~] plot matrix, w/ circuits as columns 
   - [x] labels off to left side then

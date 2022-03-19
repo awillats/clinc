@@ -13,7 +13,9 @@ import coreachability_source_classification as cor
 
 import matplotlib.pyplot as plt
 import plotting_functions as myplot
+#%%
 
+    
 #%%
 #GENERATE hypothesis set 
 N_circ = 4
@@ -61,7 +63,8 @@ adj
 '''
 
 # experiments = ['adj','corr']+[f'corr open@{i}' for i in range(N)]+[f'corr ctrl@{i}' for i in range(N)]
-experiments = ['adj','open@0','open@1','open@2','coreach ctrl@0','coreach ctrl@1','coreach ctrl@2']
+ctrl_view = 'coreach'
+experiments = ['adj','open@0',f'{ctrl_view} ctrl@0','open@1',f'{ctrl_view} ctrl@1','open@2',f'{ctrl_view} ctrl@2']
 print(experiments)
 
 p = netplot.parse_plot_type(experiments[-1])
@@ -73,27 +76,65 @@ print(p)
 plot_types = [netplot.parse_plot_type(p) for p in experiments]
 print(plot_types)
 #%%
-f,ax = myplot.subplots(1,len(plot_types),w=5)
+p = plot_types[2]['plot_type']
+p & netplot.NetPlotType.PASV
+
+for p in plot_types:
+    print(p['plot_type'])
+    print('-',p['plot_type'].color(),'\n')
+
+#%%
+'''
+- connect compute_view_by_plot_type to plot 
+- unify view output format? 
+    - df_edgelist_to_numpy_adj
+    - dataframe v.s. numpy adj 
+better annotation for correlations 
+    https://stackoverflow.com/questions/28372127/add-edge-weights-to-plot-output-in-networkx
+'''
+A
+# coreach.compute_coreachability_from_src(
+#%%
 
 
-def coreach_to_weighted_corr(df, N=3,weight_dict = {'S^':5,'Sv':.1,'S=':.5}):
+print(el)
+#%%
+f,ax = myplot.subplots(1,len(plot_types))
+
+
+def coreach_to_weighted_corr(df, N=3,weight_dict = {'S^':5,'Sv':.1,'S=':.5,'Sx':0}):
     df['weight'] = df['type'].apply(lambda sl: weight_dict[sl])
     wc = np.zeros((N,N))
-    for i,r in df.iterrows():
-        wc[r['iA']][r['jB']]=r['weight']
+    I = df['iA'].astype(int)
+    J = df['jB'].astype(int)
+    wc[I,J] = df['weight']
     return wc
 
+# x
 for i,p in enumerate(plot_types):
     x = net.compute_view_by_plot_type(A,p)
     x
     if type(x)==type(pd.DataFrame()):
         wc = coreach_to_weighted_corr(x)
         print(wc)
+        
         netplot.draw_weighted_corr(wc,ax[i])
         
+        #quick annotation of correlation at edges
+        G = nx.from_numpy_matrix(wc,create_using=nx.DiGraph)
+        pos = netplot.clockwise_circular_layout(G)
+        # df to edge label dictionary
+        ij = zip(x.iA,x.jB)
+        ijt = zip(ij,x.type)
+        el = dict(ijt)
+        # print(el)
+        # nx.draw_networkx_edge_labels(G, pos=pos,edge_labels=el,ax=ax[i],font_color='#ff0000',font_weight='bold',font_size=20,bbox={'color':'#ffffff00','edgecolor':None})
     else:
         netplot.draw_np_adj(x,ax[i])
-    ax[i].set_title(f"{p['plot_type']} @ {p['intervention_location']}")
-myplot.expand_bounds(ax[0],1)
+        
+    
+    ax[i].set_title(netplot.plot_type_loc_to_str(p),fontsize=15,
+        backgroundcolor=p['plot_type'].lightcolor())
+# myplot.expand_bounds(ax[0], 0.7)
 f
     

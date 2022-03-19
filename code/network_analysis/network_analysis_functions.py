@@ -280,14 +280,18 @@ def compute_view_by_plot_type(A,plot_type_loc):
         npt.ADJ:           lambda adj,intv_loc: adj,
         npt.REACH:         lambda adj,intv_loc: reachability(adj),
         npt.CORR:          lambda adj,intv_loc: binary_correlations(adj),
-        npt.OPEN:          lambda adj,intv_loc: coreach.compute_coreachability_from_src(adj, src_loc=intv_loc),
+        npt.OPEN:          lambda adj,intv_loc: coreach.compute_coreachability_from_src(reachability(adj), src_loc=intv_loc),
         npt.ADJ_CTRL:      lambda adj,intv_loc: sever_inputs(adj,ctrl_loc=intv_loc),
         npt.CORR_CTRL:     lambda adj,intv_loc: closed_loop_correlations(adj,ctrl_loc=intv_loc),
         #NOTE: DANGER: this is incorrect! doesn't account for zero-correlations
         npt.COREACH_CTRL:  lambda adj,intv_loc: 
-            coreach.compute_coreachability_from_src(sever_inputs(adj,ctrl_loc=intv_loc), src_loc=intv_loc),
+            coreach.compute_coreachability_from_src(reachability(sever_inputs(adj,ctrl_loc=intv_loc)), src_loc=intv_loc),
     }
     this_view_fun = view_funs.get(plot_type)
+    if this_view_fun is None:
+        # print(view_funs[plot_type])
+        pass
+        
     return this_view_fun(A, intv_loc)
     
 # def compute_each_view_by_plot_type(As,plot_types):
