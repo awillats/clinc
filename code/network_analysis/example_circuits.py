@@ -15,7 +15,7 @@ TODO
 # G = nx.fast_gnp_random_graph(N,p, directed=True)
 
 def gen_random_circuit_set(N_circ=6, N_nodes=3, p_connect=.1):
-    nx_circs = [nx.fast_gnp_random_graph(N_nodes, p_connect) for i in range(N_circ)]
+    nx_circs = [nx.fast_gnp_random_graph(N_nodes, p_connect,directed=True) for i in range(N_circ)]
     return [netdata.nx_to_np_adj(nxc,N_nodes) for nxc in nx_circs]
 
 def get_all_2node():
@@ -173,7 +173,7 @@ def get_curto_5node():
     GE = nx.DiGraph({1:[4,5],2:[5],3:[2,4],4:[3],5:[1,2]})
     return [nx.to_numpy_matrix(G) for G in [GB,GC,GD,GE]]
 
-def get_random_3node():
+def get_nonrandom_3node():
     '''
     "from highly nonrandom features of synaptic connectivity" figure 4
     1-10 without 4,8

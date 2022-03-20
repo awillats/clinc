@@ -283,7 +283,6 @@ def compute_view_by_plot_type(A,plot_type_loc):
         npt.OPEN:          lambda adj,intv_loc: coreach.compute_coreachability_from_src(reachability(adj), src_loc=intv_loc),
         npt.ADJ_CTRL:      lambda adj,intv_loc: sever_inputs(adj,ctrl_loc=intv_loc),
         npt.CORR_CTRL:     lambda adj,intv_loc: closed_loop_correlations(adj,ctrl_loc=intv_loc),
-        #NOTE: DANGER: this is incorrect! doesn't account for zero-correlations
         npt.COREACH_CTRL:  lambda adj,intv_loc: 
             coreach.compute_coreachability_from_src(reachability(sever_inputs(adj,ctrl_loc=intv_loc)), src_loc=intv_loc),
     }

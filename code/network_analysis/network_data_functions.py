@@ -46,8 +46,8 @@ def ug_longest_path(DG,nodes=None):
                 if len(p)>maxlen:
                     maxpath = p 
                     maxlen = len(p)
-    if maxlen == len(DG.nodes()):
-        print('victory! path covers entire graph')
+    # if maxlen == len(DG.nodes()):
+    #     print('victory! path covers entire graph')
     return maxpath
     
 class direction(enum.Flag):
@@ -68,10 +68,10 @@ def query_edge_direction(G,A,B):
         dir |= direction.LEFT
     return dir 
     
-def path_to_arrow_str(path):
+def path_to_arrow_str(path,G):
     path_str=''
     for a,b in zip(path[:-1],path[1:]):
-        dir = query_edge_direction(AG,a,b)
+        dir = query_edge_direction(G,a,b)
         path_str += str(a)
         path_str += dir.to_arrow()
     path_str +=str(b)
@@ -183,7 +183,7 @@ def graph_components_to_arrow_str(G,line_delim='\n'):
     '''
     arrow_str = ''
     for component in sorted(nx.connected_components(nx.Graph(G)), key=len, reverse=True):
-        component_str = path_to_arrow_str(ug_longest_path(G, list(component)))
+        component_str = path_to_arrow_str(ug_longest_path(G, list(component)),G)
         arrow_str += component_str
         arrow_str += line_delim
         

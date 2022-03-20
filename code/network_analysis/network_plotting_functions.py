@@ -45,12 +45,13 @@ def draw_weighted_corr(W, ax=None, min_w=0,max_w=10, more_options={},pos_overrid
     
     options = DEFAULT_NET_PLOT_OPTIONS.copy()
     options.update({'ax':ax,'pos':pos})
+    options.update({'width':weights,'node_size':150})
+    options.update(more_options)
     
-    options.update({'width':weights,'node_size':100})
     nx.draw(G, **options)
     ax.set_aspect('equal')
     # nx.draw_networkx_edge_labels(G, pos=pos)
-    myplot.expand_bounds(ax)
+    # myplot.expand_bounds(ax)
     return pos
     
 def rescale(x,out_min=0, out_max=1, in_min=None,in_max=None,clip_min=True,clip_max=True):
@@ -86,7 +87,10 @@ def rotate_layout(pos,angle=np.pi/3,flip_h=True):
     transform = flipper(flip_h) @ rotor(angle)
     new_pos = {k:np.dot(transform,v) for k,v in pos.items()}
     return new_pos
-def clockwise_circular_layout(G):
+def clockwise_circular_layout(G=None):
+    if G is None:
+        G = nx.DiGraph()
+        G.add_nodes_from([0,1,2])
     pos = nx.circular_layout(G)
     pos = rotate_layout(pos, np.pi/3, True)
     return pos
@@ -144,7 +148,7 @@ def straight_edge_style(color):
     # return {'edge_color':color,'connectionstyle':'arc3,rad=0','style':'--','arrowstyle':straight_arrow_style}
 
 
-def indicate_ctrl(ax, pos_i, markersize=30, color='darkorange'):
+def indicate_ctrl(ax, pos_i, markersize=20, color='darkorange'):
     # ms of 30 corresponds to a node size of 1000
     ax.plot(pos_i[0],pos_i[1],'o',color=color,markersize=markersize,markeredgewidth=4,fillstyle='none')
 
@@ -173,6 +177,13 @@ def indicate_intervention(ax, pos_i, type='open-loop'):
                     arrowprops=arrow_spec,
                         zorder=100
                     )    
+
+def indicate_intervention_from_plot_type_loc(ax, pos, ptl):
+    i = ptl['intervention_location']
+    if ptl['plot_type'] & NetPlotType.OPEN:
+        indicate_intervention(ax,pos[i])
+    if ptl['plot_type'] & NetPlotType.CTRL:
+        indicate_ctrl(ax,pos[i])
 
 # %%    
 def draw_reachability(A,R=None,ax=None, reach_edge_style=None):
