@@ -6,7 +6,7 @@ import coreachability_source_classification as coreach
 
 import random
 #%% markdown
-
+'''
 to-do list
 - [ ] compute entropy across hypotheses
     - mega df?
@@ -32,6 +32,7 @@ to-do list
     - compute entropy across tokens
         - simply requires counting occurences
     - ( weight by prior )
+'''
 
 #%%
 '''
@@ -222,7 +223,9 @@ def extract_circuit_signature_single_df(df):
     iAs = df.sort_values(sort_order).groupby('kS').agg({'iA':list})
     jBs = df.sort_values(sort_order).groupby('kS').agg({'jB':list})
     #tuples of (i,j) associated with each link
-    ij_fingerprint = list(zip(iAs.loc[0].item(),jBs.loc[0].item()))
+    
+    ij_fingerprint = 'NOT IMPLEMENTED'; #list(zip(iAs.loc[0].item(),jBs.loc[0].item()))
+    # ij_fingerprint = list(zip(iAs.loc[0].item(),jBs.loc[0].item()))
     #TODO: check this ordering is consistent across kS
     
     fingerprint_str = df.sort_values(sort_order).groupby('kS').agg({'type':' '.join})

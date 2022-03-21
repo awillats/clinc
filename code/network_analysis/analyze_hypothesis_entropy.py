@@ -9,6 +9,7 @@ import example_circuits as egcirc
 import network_analysis_functions as net
 import network_plotting_functions as netplot
 import network_data_functions as netdata
+import network_pattern_entropy as neth
 import coreachability_source_classification as cor
 
 import matplotlib.pyplot as plt
@@ -79,7 +80,6 @@ A
 
 
 #%%
-f,ax = myplot.subplots(len(As),len(plot_types),w=5)
 
 
 def coreach_to_weighted_corr(df, N=N,weight_dict = {'S^':5,'Sv':.1,'S=':.5,'Sx':0}):
@@ -90,9 +90,10 @@ def coreach_to_weighted_corr(df, N=N,weight_dict = {'S^':5,'Sv':.1,'S=':.5,'Sx':
     wc[I,J] = df['weight']
     return wc
 
-# x
+#%%
 df = pd.DataFrame()
 
+f,ax = myplot.subplots(len(As),len(plot_types),w=5)
 for ai,A in enumerate(As):
     Astr = netdata.graph_components_to_arrow_str(nx.DiGraph(A),line_delim=';')
     for i,p in enumerate(plot_types):
@@ -126,8 +127,57 @@ for ai,A in enumerate(As):
                 backgroundcolor=p['plot_type'].lightcolor())
         
         df_row = pd.DataFrame()
-        df = df.append({'adj':Astr,'view_type':str(p['plot_type']),'intv_loc':p['intervention_location'],'result':x},ignore_index=True)
+        print(x)
+        df = df.append({'adj':Astr,
+                    'view_type':str(p['plot_type']),
+                    'intv_loc':p['intervention_location'],
+                    'result':x}, 
+                    ignore_index=True)
 # myplot.expand_bounds(ax[0][0], .15)
 f    
+
 #%%
 df
+#%%
+dfc = df[(df['view_type']=='COREACH_CTRL') | (df['view_type']=='OPEN')]
+dfc = dfc.reset_index()
+df0 = dfc.loc[0]
+neth.extract_circuit_signature_single_df(df0['result'])['fingerprint_dict']
+
+pd.options.display.max_colwidth=100
+print(df0['result'])
+df0['result'].groupby('kS').agg({'type':' '.join})
+
+def get_first_value(d):
+    assert( len(d.values()) == 1)
+    return list(d.values())[0]
+    
+df_to_fingerprint = lambda df: get_first_value(neth.extract_circuit_signature_single_df(df)['fingerprint_dict'])
+# df_to_fingerprint = lambda df: df.agg({'type':''.join})
+# dfc['fingerprint'] = dfc['result'].apply( lambda d: d.groupby('kS').agg({'type':' '.join}))
+
+# sort_order = ['kS','iA','jB']
+# iAs = dfc['result'].apply( lambda d: d.sort_values(sort_order).groupby('kS').agg({'iA':list}))
+
+#%%
+dfc['fingerprint'] = dfc['result'].apply(df_to_fingerprint)
+# print(dfc['fingerprint'])
+dfc
+dfcs = dfc[['view_type','intv_loc','adj','fingerprint']]
+idx_cols = ['intv_loc','view_type','adj']
+dfcs.index = pd.MultiIndex.from_frame(dfcs[idx_cols])
+dfcs = dfcs.drop(idx_cols,axis=1)
+
+dfcs = dfcs.sort_values(idx_cols)
+dfcs
+#%%
+dfcs
+dfp = dfcs.unstack()
+dfp
+# pivot(index=idx_cols[:2],columns='adj',values='fingerprint')
+#%%
+# dfc['result']
+
+# '''
+# TODO: assert fingerprint_idx are all equal ...
+# '''
