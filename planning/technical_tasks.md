@@ -80,6 +80,12 @@
     </details>
   
 ## unsorted 
+- [ ] reconnect entropy and circuit-pair ambiguity 
+  - prob of ambiguous pair = $\sum{p_i^2}$
+  - entropy = $\sum{p_i \log\frac{1}{p_i}}$
+  - by Jensen's inequality: 
+    $2^{-H} \leq Pr(\text{dupe}) $
+  - prob.dupe shortcuts having to empirically compare pairs of circuits! scales with num circuits rather than num circuits squared
 - [ ] shared vs private variability (see zotero/network_inference/spike train analysis/shared vs private variability)
   - esp.  Circuit models of low dimensional shared variability in cortical networks
   - we're mostly talking about within-trial variance
