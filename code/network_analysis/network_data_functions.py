@@ -70,6 +70,7 @@ def query_edge_direction(G,A,B):
     
 def path_to_arrow_str(path,G):
     path_str=''
+    b=''
     for a,b in zip(path[:-1],path[1:]):
         dir = query_edge_direction(G,a,b)
         path_str += str(a)
@@ -161,13 +162,22 @@ def arrow_str_to_networkx(arrow_graph, line_delim='\n',node_delim = ','):
             _connect(G, pieces[0], pieces[1], dir)
 
     return G
-def graph_edge_list_to_arrow_str(G, line_delim='; '):
+    
+def arrow_str_to_np_adj(arrow_graph, line_delim=';',node_delim = ',',min_nodes=None):
+    G = arrow_str_to_networkx(arrow_graph, line_delim=line_delim, node_delim =node_delim)
+    return nx_to_np_adj(G, min_nodes=min_nodes)
+
+def np_adj_to_arrow_str(A, line_delim=';',node_delim=','):
+    return graph_components_to_arrow_str(nx.DiGraph(A),line_delim=line_delim,node_delim=node_delim)
+    # assert(np.array_equal(a, netdata.arrow_str_to_np_adj(netdata.np_adj_to_arrow_str(a))))
+
+def graph_edge_list_to_arrow_str(G, line_delim='; ',node_delim=','):
     edges = nx.to_dict_of_lists(G)
     graph_str = ''
     for in_nodes,out_nodes in edges.items():
         prev_out_nodes = ''
         in_nodes_str = str(in_nodes)
-        out_nodes_str = ','.join(str(o) for o in out_nodes)
+        out_nodes_str = node_delim.join(str(o) for o in out_nodes)
 
         if out_nodes:
             if in_nodes_str != prev_out_nodes:
@@ -176,7 +186,7 @@ def graph_edge_list_to_arrow_str(G, line_delim='; '):
     graph_str = graph_str.lstrip(line_delim)
     return graph_str
         
-def graph_components_to_arrow_str(G,line_delim='\n'):
+def graph_components_to_arrow_str(G,line_delim='\n',node_delim=','):
     '''
     composes arrow string by finding largest connected component
     generally leads to a compact, fewest-lines solution
@@ -193,7 +203,7 @@ def graph_components_to_arrow_str(G,line_delim='\n'):
         # print(sorted(G_.nodes()))
         # print(sorted(drawn_g.nodes()))
         leftover_g = nx.DiGraph(G_.edges() - drawn_g.edges())
-        leftover_str = graph_edge_list_to_arrow_str(leftover_g,line_delim)
+        leftover_str = graph_edge_list_to_arrow_str(leftover_g,line_delim=line_delim,node_delim=node_delim)
         arrow_str += leftover_str
         arrow_str += line_delim  
     return arrow_str.rstrip(line_delim)          
@@ -228,17 +238,27 @@ def mermaid_str_to_networkx(merm_graph, verbose=False):
             if verbose: print(f'{src} → {targ}')
     return G
     
-def nx_to_np_adj(G,min_nodes=None):
+def nx_to_np_adj(G, min_nodes=None):
     '''
     Converts a NetworkX graph to a dense adjacency matrix (via numpy)
     '''
-    
     if min_nodes is not None:
-        nodelist = np.arange(min_nodes)
+        '''
+        for some reason the str() is required here, otherwise get matrix of 0s
+        '''
+        G=nx.convert_node_labels_to_integers(G)
+        nodelist = [i for i in range(min_nodes)]
+        # print(nodelist)
+        # print(G.nodes())
     else:
         nodelist = sorted(G.nodes())
-    adj =  nx.adjacency_matrix(G, nodelist=nodelist).todense()
-    n = adj.shape[0]
+        min_nodes = len(nodelist)
+
+    adj =  nx.to_numpy_matrix(G, nodelist=nodelist)
+    assert(adj.shape[0]==min_nodes)
+    if len(G.edges()) > 0:
+        # Shouldn't produce an empty adjacency_matrix if the graph isn't empty!
+        assert(np.all(adj==0) == False)
     return adj
     
 #%%

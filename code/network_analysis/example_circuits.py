@@ -1,6 +1,7 @@
 import numpy as np
 import networkx as nx
 import network_data_functions as netdata
+import pickle
 '''
 write case studies for exampination as a function returning multiple candidate hypotheses
 
@@ -14,9 +15,101 @@ TODO
 # p = 0.8*N/N**2
 # G = nx.fast_gnp_random_graph(N,p, directed=True)
 
+def merge_lists_of_circuits(A, B=None, min_nodes=None):
+    '''
+    note this set function may lose original ordering
+    '''
+    if B is None:
+        B = A
+        
+    def hash_np(A):
+        return pickle.dumps(A)
+    def unhash_np(H):
+        return pickle.loads(H)
+    unique_circs = set(hash_np(S) for S in A+B)
+    
+    #DEBUG only
+
+    return [unhash_np(u) for u in unique_circs]
+#%%
+def _all_arrow_str_to_adj(all_arrow_strings, min_nodes=3):
+    return [netdata.arrow_str_to_np_adj(g,line_delim=';',min_nodes=min_nodes) for g in all_arrow_strings]
+def get_walktrhough_trio():
+    g0 = 'A→B←C→A' #C-A-B triangle
+    g1 = 'A↔B←C'
+    g2 = 'A↔B←C→A'
+    gs_circs = [g0,g1,g2]
+    return _all_arrow_str_to_adj(gs_circs)
+
+def get_hypothesis_fig_set():
+    '''
+    should be same as get_chainlike_3node (but reverse order)
+    '''
+    g0 = 'A↔B↔C↔A'    # all-to-all
+    g1 = 'A→B,C; C→B' # A-C-B triangle
+    g2 = 'A→B,C'      # fork
+    g3 = 'C→A→B; C→B' # C-A-B triangle
+    g4 = 'C→A→B'      # chain
+    g5 = 'B,C→A'      # collider
+    gs_circs = [g0,g1,g2,g3,g4,g5]
+    return _all_arrow_str_to_adj(gs_circs)
+ 
+def get_large_hypothesis_set():
+    g0 = 'A↔B←C'
+    g1 = 'A↔B←C→A'
+    
+    g2 = 'A↔B↔C↔A'    # all-to-all
+    g3 = 'A→B,C; C→B' # A-C-B triangle
+    g4 = 'A→B,C'      # fork
+    g5 = 'C→A→B; C→B' # C-A-B triangle
+    g6 = 'C→A→B'      # chain
+    g7 = 'B,C→A'      # collider
+    gs_circs = [g0,g1,g2,g3,g4,g5,g6,g7]
+    return _all_arrow_str_to_adj(gs_circs)
+ 
+    
+      
+#%%
+def _get_circuit_size():
+    pass
+    
 def gen_random_circuit_set(N_circ=6, N_nodes=3, p_connect=.1):
-    nx_circs = [nx.fast_gnp_random_graph(N_nodes, p_connect,directed=True) for i in range(N_circ)]
-    return [netdata.nx_to_np_adj(nxc,N_nodes) for nxc in nx_circs]
+    # print(N_circ)
+    nx_circs = [nx.fast_gnp_random_graph(N_nodes, p_connect,directed=True) for i in range(N_circ)]    
+    # for nxc in nx_circs:
+    #     print(nxc.edges())
+    #     a = netdata.nx_to_np_adj(nxc,min_nodes=N_nodes) 
+    #     if a.shape[0] < N_nodes:
+    #         print(nxc)
+    return [netdata.nx_to_np_adj(nxc, min_nodes=N_nodes) for nxc in nx_circs]
+    # return nx_circs 
+    
+def gen_random_unique_circuit_set(N_circ=6, N_nodes=3, p_connect=.1, n_tries_max=200):
+    '''
+    WARNING: uses a while loop, could be (non-deterministically) slow
+    '''
+    As = []
+    N_unique = 0
+    n_tries = 0
+    
+    while (N_unique < N_circ) and (n_tries < n_tries_max):
+        A_gen = gen_random_circuit_set(N_circ-N_unique, N_nodes, p_connect)
+        # print(f'lens: {len(As)}+{len(A_gen)}')
+        As = merge_lists_of_circuits(A=As, B=A_gen, min_nodes=N_nodes)
+        # DEBUG: this re-merging should NOT be necessary
+        As = merge_lists_of_circuits(A=As,min_nodes=N_nodes)
+        
+        # print(f'={len(As)}')
+        # for a in A_gen:
+        #     if a.shape[0] < N_nodes:
+        #         print(a)
+        
+        N_unique = len(As)
+        n_tries += 1
+        # print(N_unique)
+    print(n_tries,'attempts')
+    assert(n_tries < n_tries_max) # took too long to generate circuits
+    return As
 
 def get_all_2node():
     A0 = np.array([[0,0],[0,0]])

@@ -610,7 +610,12 @@ class NetPlotType(Flag):
     #     DANGER: this is acting like a class-level property
     #     '''
     #     self.intervention_location = loc
-    
+    def intv_type(self):
+        for t in [NetPlotType.PASV,NetPlotType.OPEN,NetPlotType.CTRL]:
+            if self & t:
+                return t
+        return None
+        
     def color(self):
         if self & NetPlotType.PASV:
             return 'grey'

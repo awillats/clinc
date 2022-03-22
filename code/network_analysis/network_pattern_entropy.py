@@ -113,10 +113,23 @@ def compute_prob_dupe_from_freq(token_freq):
     sum of probabilities squared, i.e p(AA) + p(BB) + p(CC)
     '''
     probs = np.array(list(token_freq.values()))
-    print(probs)
-    print(type(probs))
     probs = probs/np.sum(probs)
     return sum(probs**2)
+
+def compute_expected_equivalence_class_size_from_freq(token_freq, total_symbols=None):    
+    '''
+    how big is the category you expect to end up in?
+    - smaller numbers mean you've learned more
+    requires token_freq to be un-normalized, or to know the total number of symbols
+    '''
+    if total_symbols is None:
+        total_symbols = sum(token_freq.values())
+    # print(total_symbols)
+    # Sum( pi * Ni ) = Sum( Ni/Ntotal * Ni ) 
+    # = Sum( pi * pi * Ntotal) 
+    # = Ntotal * sum(pi*pi)
+    return total_symbols*compute_prob_dupe_from_freq(token_freq)
+    
     
 def lower_bound_prob_dupe_from_entropy(H, base=2):
     '''
