@@ -33,7 +33,9 @@ indp_ij_from_src = nor_coreach_from_src
 
 def label_coreach_from_src(R,i,j,s):
     if and_coreach_from_src(R,i,j,s): return 'S^' 
-    if R[i,j] == 0: return 'Sx'
+    # not sure this is correct: should use correlations()
+    # if R[i,j] == 0 and R[j,i] == 0: return 'Sx'
+    if net.binary_correlations(R)[i,j]==0: return 'Sx'
     if xor_coreach_from_src(R,i,j,s): return 'Sv' 
     if nor_coreach_from_src(R,i,j,s): return 'S='
     else:

@@ -113,7 +113,9 @@ def compute_prob_dupe_from_freq(token_freq):
     sum of probabilities squared, i.e p(AA) + p(BB) + p(CC)
     '''
     probs = np.array(list(token_freq.values()))
-    probs /= sum(probs)
+    print(probs)
+    print(type(probs))
+    probs = probs/np.sum(probs)
     return sum(probs**2)
     
 def lower_bound_prob_dupe_from_entropy(H, base=2):

@@ -291,7 +291,7 @@ def compute_view_by_plot_type(A,plot_type_loc):
         # print(view_funs[plot_type])
         pass
         
-    return this_view_fun(A, intv_loc)
+    return this_view_fun(A.copy(), intv_loc)
     
 # def compute_each_view_by_plot_type(As,plot_types):
 #     pass

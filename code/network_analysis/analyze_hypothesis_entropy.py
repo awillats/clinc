@@ -23,7 +23,7 @@ N_circ = 6
 # N = 3
 p = 0.2
 # As = egcirc.gen_random_circuit_set(N_circ, N, p)
-As = egcirc.get_common_3node()
+As = egcirc.get_chainlike_3node()
 N_circ = len(As)
 N = As[0].shape[0]
 
@@ -93,13 +93,21 @@ def coreach_to_weighted_corr(df, N=N,weight_dict = {'S^':5,'Sv':.1,'S=':.5,'Sx':
 #%%
 df = pd.DataFrame()
 
+As[0]
+print(net.reachability(As[0]))
+net.compute_view_by_plot_type(As[0],plot_types[2])
+#%%
+
+
 f,ax = myplot.subplots(len(As),len(plot_types),w=5)
 for ai,A in enumerate(As):
     Astr = netdata.graph_components_to_arrow_str(nx.DiGraph(A),line_delim=';')
     for i,p in enumerate(plot_types):
         _ax = ax[ai,i]
         
-        x = net.compute_view_by_plot_type(A,p)
+        x = net.compute_view_by_plot_type(A, p)
+        
+        
         pos = netplot.clockwise_circular_layout(nx.Graph(A))
         if type(x)==type(pd.DataFrame()):
             wc = coreach_to_weighted_corr(x)
@@ -139,6 +147,9 @@ f
 #%%
 df
 #%%
+print(df.loc[10])
+print(df.loc[11])
+#%%
 dfc = df[(df['view_type']=='COREACH_CTRL') | (df['view_type']=='OPEN')]
 dfc = dfc.reset_index()
 df0 = dfc.loc[0]
@@ -174,6 +185,14 @@ dfcs
 dfcs
 dfp = dfcs.unstack()
 dfp
+ 
+dfp['distro'] = dfp.apply( lambda d: neth.count_unique_frequency(list(d.values)), axis=1)
+dfp['H'] = dfp['distro'].apply(lambda d: neth.entropy_of_dict(d))
+dfp['pr distinct'] = dfp['distro'].apply(lambda d: 100*(1-neth.compute_prob_dupe_from_freq(d)))
+print('---------------')
+print(dfp['distro'])
+dfp
+
 # pivot(index=idx_cols[:2],columns='adj',values='fingerprint')
 #%%
 # dfc['result']
