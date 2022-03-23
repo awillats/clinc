@@ -88,6 +88,8 @@ def arrow_str_to_networkx(arrow_graph, line_delim='\n',node_delim = ','):
     can be specified over multiple lines
         A→B,C 
         C↔D
+    
+    NOTE: currently it does *not* sort node lables alphabetically, it 
     '''
     right_arrow = '→'
     left_arrow = '←'
@@ -246,7 +248,7 @@ def nx_to_np_adj(G, min_nodes=None):
         '''
         for some reason the str() is required here, otherwise get matrix of 0s
         '''
-        G=nx.convert_node_labels_to_integers(G)
+        G=nx.convert_node_labels_to_integers(G,ordering='sorted')
         nodelist = [i for i in range(min_nodes)]
         # print(nodelist)
         # print(G.nodes())

@@ -10,6 +10,7 @@ TODO
 - [ ] import "generate all N-node circuits" functions
 '''
 
+#%%
 #single N-node circuit
 # N = 10
 # p = 0.8*N/N**2
@@ -34,6 +35,39 @@ def merge_lists_of_circuits(A, B=None, min_nodes=None):
 #%%
 def _all_arrow_str_to_adj(all_arrow_strings, min_nodes=3):
     return [netdata.arrow_str_to_np_adj(g,line_delim=';',min_nodes=min_nodes) for g in all_arrow_strings]
+
+def _are_all_adj_unique(As):
+    return len(As) == len(merge_lists_of_circuits(As))
+    
+def get_all_3node_motifs():
+    '''
+    ignores rotations and reflections of these graphs 
+    ignores self-connections
+        - that should lead to 2^9 = 512 graphs
+    https://mathinsight.org/image/three_node_motifs
+    '''
+    g0 = ''
+    g1 = 'A→B'
+    g2 = 'A↔B'
+    g3 = 'A→B,C'
+    
+    g4 = 'A←B,C'
+    g5 = 'C→A→B'
+    g6 = 'C→A↔B'
+    g7 = 'C←A↔B'
+    
+    g8 = 'C↔A↔B'
+    g9 = 'C←A→B←C'   
+    g10 = 'C→A→B→C' 
+    g11 = 'C→A,B; A↔B'
+    
+    g12 = 'A↔B; A→C→B'
+    g13 = 'A↔B; A,B→C'
+    g14 = 'C↔A↔B←C'
+    g15 = 'C↔A↔B↔C'
+    gs_circs = [g0,g1,g2,g3, g4,g5,g6,g7, g8,g9,g10,g11, g12,g13,g14,g15]
+    return _all_arrow_str_to_adj(gs_circs,min_nodes=3)
+    
 def get_walktrhough_trio():
     g0 = 'A→B←C→A' #C-A-B triangle
     g1 = 'A↔B←C'
@@ -293,3 +327,49 @@ def get_nonrandom_3node():
                     [1,0,0],
                     [1,0,0]]) 
     return [A1,A2,A3,A5,A6,A7,A9]
+
+#%%
+
+if __name__ == "__main__":
+    import numpy as np
+    import network_plotting_functions as netplot
+    import matplotlib.pyplot as plt
+    import plotting_functions as myplot
+    import _svg_draw as svg
+    # import netgraph
+    # import pyviz
+    # netv = pyvis.network.Network(notebook=True)
+    
+    
+    M = get_all_3node_motifs()
+    assert(_are_all_adj_unique(M))
+    Gs = [nx.DiGraph(m) for m in M]
+    
+    fig,ax = myplot.subplots(4,4)
+    pos = netplot.clockwise_circular_layout(initial_rot=np.pi/6, do_relabel_abc=False)
+    
+    draw_opts = {'connectionstyle':'arc3,rad=0','node_size':300,'node_color':'k'}
+    draw_opts.update({'pos':pos})
+    
+    for i in range(4):
+        for j in range(4):
+            k = i*4 + j
+            
+            # netplot.draw_np_adj(M[k],ax[i][j],more_options=draw_opts)
+            
+            _,svgg = svg.nx_to_svg_img(Gs[k],node_size=8,do_label=False,
+                arrow_head_width=20,
+                arrow_width=6,
+                arrow_displace_ratio = 0.7,
+                node_face_color='black',pos=pos,
+                save_png_file=f'motif_data/motif{k}.png'
+                )
+                
+            myplot.imshow_png(ax[i][j],svgg,do_unbox=True)
+            ax[i][j].text(0,0,f'{k+1}',ha='center')
+
+    myplot.expand_bounds(ax[0][0])
+    # myplot.savefig('3node_motifs.png')
+    fig
+    
+    

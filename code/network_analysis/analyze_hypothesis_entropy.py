@@ -25,6 +25,12 @@ TODO
 
 - [ ] add summary plot
 
+
+- [ ] find adj which map to the most common reachability !
+    - across 512
+        - only 16 distinct
+        
+
 - [ ] refine example hypothesis set 
     - ideally including walkthrough hypotheses?
         - more powerful if these could be distinct from walkthrough ... 
@@ -45,8 +51,14 @@ CLEANUP:
 - split sweep and plot into two separate functions 
 - file away / relocate 
     - def coreach_to_weighted_corr
+    
 FUTURE WORK:
 - parallelize sweep across hypothesis, intervention
+
+PARAMETER DOMAINS where closed-loop works well 
+
+5 nodes 
+    pc = .5
 
 '''
     
@@ -54,7 +66,7 @@ FUTURE WORK:
 #GENERATE hypothesis set 
 N_circ = 100
 N = 5
-p = 0.1 # 50ish max
+p = 0.3 # 50ish max
 
 # As = egcirc.gen_random_unique_circuit_set(N_circ, N, p)
 

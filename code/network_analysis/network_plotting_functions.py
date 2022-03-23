@@ -20,6 +20,33 @@ TODO:
     https://stackoverflow.com/questions/51413834/networkx-arrows-ploting
     https://stackoverflow.com/questions/66889224/networkx-not-drawing-arrows-in-directed-graph
     https://stackoverflow.com/questions/47894931/increase-thickness-in-a-matplotlib-annotation-double-sided-arrow
+- [ ] list commonly editted networkx / matplotlib style options
+----
+looking into alternate network visualization libraries:
+- comparison of 3 libs: https://towardsdatascience.com/visualizing-networks-in-python-d70f4cbeb259
+## python:
+    - pyviz - https://pyvis.readthedocs.io/en/latest/tutorial.html
+        - nice, includes interactivity, but writes to html
+        - see also pygraphviz: https://pygraphviz.github.io/documentation/stable/auto_examples/index.html
+        
+    - igraph - https://igraph.org/python/tutorial/latest/tutorial.html    
+    - ? scikit-network viz? https://scikit-network.readthedocs.io/en/latest/reference/visualization.html#graphs
+
+## python via plotly / Dash:
+    - ploty + networkx: https://plotly.com/python/network-graphs/
+        - cumbersome, but interactive
+    - dash cytoscape: https://www.linuxtut.com/en/4b187020daff72667208/
+    - vis-dash (visj): 
+        
+## not python:
+- SVG: 
+    - see svg_draw.py
+    
+- cytoscape (standalone)
+- gephi (standalone)
+- PGF/TIKZ
+
+
 '''
 
 #%%
@@ -87,12 +114,14 @@ def rotate_layout(pos,angle=np.pi/3,flip_h=True):
     transform = flipper(flip_h) @ rotor(angle)
     new_pos = {k:np.dot(transform,v) for k,v in pos.items()}
     return new_pos
-def clockwise_circular_layout(G=None):
+def clockwise_circular_layout(G=None, initial_rot=0, do_relabel_abc=False):
     if G is None:
         G = nx.DiGraph()
         G.add_nodes_from([0,1,2])
     pos = nx.circular_layout(G)
-    pos = rotate_layout(pos, np.pi/3, True)
+    pos = rotate_layout(pos, np.pi/3 + initial_rot, True)
+    if do_relabel_abc:
+        pos = relabel_pos_abc(pos)
     return pos
 #%%    
 def _gen_layout_from_adj(adj):
@@ -102,6 +131,9 @@ def _gen_layout_from_adj(adj):
 def relabel_nodes_abc(G,do_uppercase=True):
     abc = string.ascii_uppercase if do_uppercase else string.ascii_lowercase
     return nx.relabel_nodes(G, dict(zip(G,abc)))
+def relabel_pos_abc(pos_dict, do_uppercase=True):
+    abc = string.ascii_uppercase if do_uppercase else string.ascii_lowercase
+    return {abc[k]:v for k,v in pos_dict.items()}
 def draw_np_adj(adj, ax=None, more_options={}, do_rename_abc=True, node_labels=None):
     '''
     core plotting function that renders an adjacency_matrix 
