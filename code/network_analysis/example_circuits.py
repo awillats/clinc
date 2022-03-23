@@ -45,6 +45,8 @@ def get_all_3node_motifs():
     ignores self-connections
         - that should lead to 2^9 = 512 graphs
     https://mathinsight.org/image/three_node_motifs
+    could put this motifs on the x-ticks with this approach:
+    https://stackoverflow.com/questions/8733558/how-can-i-make-the-xtick-labels-of-a-plot-be-simple-drawings-using-matplotlib
     '''
     g0 = ''
     g1 = 'A→B'
@@ -351,18 +353,22 @@ if __name__ == "__main__":
     draw_opts = {'connectionstyle':'arc3,rad=0','node_size':300,'node_color':'k'}
     draw_opts.update({'pos':pos})
     
+    
+    do_save_plots = True
+    
     for i in range(4):
         for j in range(4):
             k = i*4 + j
             
             # netplot.draw_np_adj(M[k],ax[i][j],more_options=draw_opts)
-            
+            this_png_name = f'motif_data/motif{k}.png' if do_save_plots else None
             _,svgg = svg.nx_to_svg_img(Gs[k],node_size=8,do_label=False,
                 arrow_head_width=20,
                 arrow_width=6,
                 arrow_displace_ratio = 0.7,
                 node_face_color='black',pos=pos,
-                save_png_file=f'motif_data/motif{k}.png'
+                border_padding=0,
+                save_png_file=this_png_name
                 )
                 
             myplot.imshow_png(ax[i][j],svgg,do_unbox=True)

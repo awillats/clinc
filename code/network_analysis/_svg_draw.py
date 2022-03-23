@@ -102,6 +102,12 @@ def draw_arrow(start, end=None, diff=None,r_back=0,displace_x=0,
     s = translate(s,start[0],start[1])
     
     return s
+
+# def draw_curved_arrow():
+    # not yet implemented, use https://github.com/awillats/circuit-visualizer-p5/blob/6499bf8d79921cad9401ddf529dc5811661c6787/plotFuns.js
+    # as reference
+
+    # pass
 #%%
 # Network SVG plotting 
 # consider moving this to network_plotting_functions
