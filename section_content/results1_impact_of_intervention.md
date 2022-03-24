@@ -60,7 +60,8 @@ Next, we apply (steps 1-3 of) this circuit search procedure to a collection of c
 > **secondary point:** having (binary) prediction helps capture this relationship
 
 [^where_place]: Figure VAR shows this pretty well, perhaps sink this section until after discussing categorical and quantitative?
----
+
+-- 
 
 !!!! - Quantitative impact of closed-loop - 70% done
 ### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias

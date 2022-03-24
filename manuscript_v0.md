@@ -1,13 +1,17 @@
 ---
 title: Closed-Loop Identifiability in Neural Circuits
-
+author:
+  - name: Adam Willats, Matthew O'Shaughnessy
 output:
   pdf_document:
      path: /publish/manuscript_pandoc.pdf
-xnumberedsections: true
-author:
-  - name: Adam Willats, Matthew O'Shaughnessy
+
+bibliography: [bib/moshaughnessy.bib, bib/misc.bib, bib/mega_causal_bib.bib]
+numberedsections: true
 ---
+<!-- id: "hide-todo" -->
+<!-- uncomment `id: hide-todo` to hide to-do list items and collapsible section -->
+@import "publish/publish_style.less"
 
 <!-- see also _meta folder, consider formatting as "YAML front matter" for pandoc -->
 

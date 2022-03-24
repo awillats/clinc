@@ -34,7 +34,9 @@
 - [ ] quantitative match between gaussian sims & theory [~]
 
 # minor tasks 
-@ matt - causal notation for open-loop inputs? 
+- [ ] pandoc filter to remove to-do list items?
+
+- update causal notation for open-loop inputs? 
   - how would you write x = x + u_OL ? - see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)
 
 --- 
