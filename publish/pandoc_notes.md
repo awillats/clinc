@@ -4,6 +4,19 @@ pandoc -f markdown+tex_math_single_backslash --pdf-engine=xelatex --numbered-sec
 pandoc -f markdown+tex_math_single_backslash --pdf-engine=xelatex -o test.pdf test.md ; open test.pdf
 pandoc -f markdown+tex_math_single_backslash -o /Users/adam/Documents/Research/Manuscripts/clinc/publish/test.pdf --pdf-engine=pdflatex
 ```
+
+compile markdown with panflute filters:
+```bash
+pandoc -f markdown+tex_math_single_backslash+yaml_metadata_block -o panman.md -F panflute manuscript_v0.md             
+
+pandoc -f markdown+tex_math_single_backslash+yaml_metadata_block -o publish/panman.md -F panflute manuscript_v0_.md
+source markdown_to_mp3.sh                                                  
+```
+
+right now, the necessary flow seems to be:
+- `right-click>save as markdown` (manu_v0_.md)
+- pandoc -o panfilt.md -F panflute manu_v0_.md 
+
 ## Options
 https://pandoc.org/MANUAL.html#extension-tex_math_single_backslash
 

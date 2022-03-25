@@ -12,7 +12,7 @@ Most applications of closed-loop control to neuroscience to date have used “ac
 
 While many such new actuation and measurement tools have recently become available for neural systems, we require the development of principled algorithmic tools for designing feedback controllers to use these neural interfaces. Our collaborators have previously demonstrated successful closed-loop optogenetic control (CLOC) in-vitro (Newman et al. 2015) and in-vivo (Bolus et al. 2018) to track naturalistic, time-varying trajectories of firing rate.
 
--> Also add citation to \cite{ramot2022closedloop}
+- [ ] Also add citation to \cite{ramot2022closedloop}
 
 </details>
 

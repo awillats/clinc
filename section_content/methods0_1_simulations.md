@@ -30,13 +30,14 @@ The first approach is accomplished with a network of nodes with gaussian noise s
 
 Additionally we study two domains of interactions between populations; contemporaneous and delay-resolvable connections. These domains represent the relative timescales of measurement versus timescale of synaptic delay.
 
-\[
+==DANGER doesnt work with pandoc==
+<!-- \[
 \text{domain} = 
 \begin{cases}
 \text{contemporaneous}, &\delta_{syn} \lt \Delta_{sample}\\
 \text{delay-resolvable}, &\delta_{syn} \geq \Delta_{sample}\\
 \end{cases}
-\]
+\] -->
 
 >correlation across positive and negative lags between two outputs 
 
