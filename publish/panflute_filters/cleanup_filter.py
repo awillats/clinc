@@ -1,18 +1,9 @@
 #!/usr/bin/env python3
 # https://github.com/sergiocorreia/panflute/blob/master/examples/panflute/comments.py
-import sys,os
-if sys.version_info[0] < 3:
-    raise Exception("Python 3 or a more recent version is required.")
+# import sys,os
+# if sys.version_info[0] < 3:
+#     raise Exception("Python 3 or a more recent version is required.")
 import panflute as pf
-# try:
-#     
-# except:
-#     with open('err.txt', 'w') as f:
-#         sys.stdout = f 
-#         print('ERROR: cant find panflute from:')
-#         print(os.getcwd())
-#         print (os.environ['CONDA_DEFAULT_ENV'])
-#     raise Exception("Cant find panflute")
 import re
 
 '''
@@ -29,7 +20,6 @@ remove YAML with MetaBlocks ?
 -----
 TODO: figure out raw find and replace within a paragraph 
     - just run a python script on the text file?
-    
     
 TODO: add spoken version of LaTeX math 
     - would need to do this *before* mume renders latex to imgs
@@ -107,6 +97,10 @@ def prepare(doc):
 
   
 def genfn_delete_between_marks(start_ignore="<!--", end_ignore="-->",replace_with=None):
+    '''
+    NOTE! because we're using re.search, may need to escape certain characters 
+        such as brackets
+    '''
     selector_fn = lambda e: True # change this to apply selectively
     
     def comment_fn(elem,doc):
@@ -188,27 +182,47 @@ def standardize_equation_delims(elem,doc):
     #     # elem.text = 'QQQQQQQQQQQQQQQQQ'
     return elem
 
-def no_cite_fn(elem,doc, rep_msg=None):
-    if isinstance(elem,pf.Citation):
-        # can't seem to replace citations with different classes ... 
-        return []
-    if isinstance(elem, pf.Cite):
-        'might get false positive on @import ... '
-        # elem.args = '???'
-        return replace_or_not(rep_msg)
+def gen_no_cite_fns(rep_msg=None):
     
+    def blank_cite(elem,doc):
+        if isinstance(elem,pf.Citation):
+            # deleles [@author] mpe-style citations
+            # but also turns [@author] to \[@author\] sometimes? 
+            # - this plaintext can then be filtered with other methods later
+            # return pf.Citation(id='blank')
+            return []
+        pass
+            
+        # if isinstance(elem, pf.Cite):
+        #     '''
+        #     might get false positive on @import ... 
+        #     '''
+        #     # elem.args = '???'
+        #     return replace_or_not(rep_msg)
+            # return 
+    # 
     # \\cite{[\w]+}
     no_tex_cite = genfn_delete_between_marks("\\\(cite|ref)","}", rep_msg)
-    return no_tex_cite(elem,doc)
+    #need the \[ here because panflute does weird things when deleting citations
+    no_mpe_cite = genfn_delete_between_marks("\[@","]", rep_msg)
+    no_mpe_cite2 = genfn_delete_between_marks("\@"," ", rep_msg)
+
+    
+    return [blank_cite, no_tex_cite,no_mpe_cite, no_mpe_cite2]
+    # no_tex_cite]
+    # return [no_tex_cite, no_mpe_cite]
+    # return []
+    # return no_tex_cite(elem,doc)
     
 # no_todo = genfn_delete_between_marks("!!!!","\n",'<todo delete>')
 # no_comment = genfn_delete_between_marks("<!--","-->",'<comment deleted>')
 # no_equations = genfn_delete_between_marks("$$","$$",'eq')
 
 #%%
-def frontload_all_yaml(elem,doc):
-    if isinstance(elem, pf.MetaBlocks):
-        doc.content.insert(0, pf.Para(pf.Str('TOP OF THE WORLD')))
+# def frontload_all_yaml(elem,doc):
+    # see transplant_yaml.py instead
+#     if isinstance(elem, pf.MetaBlocks):
+#         doc.content.insert(0, pf.Para(pf.Str('TOP OF THE WORLD')))
     
 def finalize(doc):
     # doc.content.insert(0, pf.Para(pf.Str('TOP OF THE WORLD')))
@@ -223,8 +237,8 @@ def finalize(doc):
 #%%
 def main(doc=None):
     use_rep_msg = False
-    to_audio = True
-    is_hyper_focused = True
+    to_audio = False
+    do_remove_citations = True #maybe causes weird things to happen?
     do_standardize_eq = True
     
     cmt_rep_msg  = '<comment deleted>' if use_rep_msg else None
@@ -234,7 +248,7 @@ def main(doc=None):
     
     no_comment  = genfn_delete_between_marks("<!--","-->", cmt_rep_msg)
     no_todo     = genfn_delete_between_marks("!!!!","\n",  todo_rep_msg)
-    no_cite     = lambda e,d: no_cite_fn(e,d, cite_rep_msg)
+    no_cite_fns     = gen_no_cite_fns(cite_rep_msg)
     no_equations= lambda e,d: no_equations_fn(e,d, eq_rep_msg)
     # no_img = genfn_delete_between_marks('<img src=','/>')
     # no_collapse = genfn_delete_between_marks('<details>','</details>')
@@ -246,9 +260,13 @@ def main(doc=None):
          # ('- [','\n'),
         # (']:','\n','foot?')
         # ('![](',')','figure'),
+        
+        
+    #NOTE: details filter fails on nested details ... 
+    #make sure todo items have line between them and content to be kept in, otherwise it'll be seen as part of the todo
     focus_delims =[('==','=='),
-                   ('!!!!','\n'),
-                   ('<details>','</details>'), #no collapsible sections 
+                   ('!!!!','\n'), 
+                   ('<details>','</details>'), #no collapsible sections
                    ('@ import','"'),]
             
     audio_delims = [('<img src="https://latex','/>','X'), #replaces rendered latex with 'X'
@@ -262,35 +280,28 @@ def main(doc=None):
     # focus_funs = []
     # audio_funs = []
     focus_funs = [no_todo, no_comment]+gather_delim_fns(focus_delims)
-    audio_funs = [speak_header, no_cite]+gather_delim_fns(audio_delims)
+    audio_funs = [speak_header, no_cite_fns]+gather_delim_fns(audio_delims)
     
     funs = []
+    
     if do_standardize_eq:
         funs += [standardize_equation_delims]
-        
-    funs += focus_funs
+    if do_remove_citations:
+        funs += no_cite_fns
 
+    
+    #always include focus functions
+    funs += focus_funs
+    # sometimes include audio functions
     if to_audio:
         funs += audio_funs
-    if is_hyper_focused:
-        funs += [no_cite]
-    
-    # pf.run_filters(funs,      doc=doc, prepare=prepare)
-    pf.run_filter(standardize_equation_delims,      doc=doc, prepare=prepare)
-    
-    # null function
-    # pf.run_filter(lambda e,d: e, doc=doc, prepare=prepare)
 
-    # no_tex_cite = genfn_delete_between_marks("\\\cite{","}", cite_rep_msg)
-    # pf.run_filter(no_tex_cite, doc=doc, prepare=prepare) #, replace_with = rep_msg)
-    # pf.toJSONFilter(comment, prepare=prepare)
     
+    pf.run_filters(funs,      doc=doc, prepare=prepare)
+    
+    # DO NOTHING (for debug only)
+    # pf.run_filter(lambda e,d: e, doc=doc, prepare=prepare)    
     return
 
 if __name__ == "__main__":
     main()
-# #%%
-
-# #%%
-# if __name__ == "__main__":
-#     main()

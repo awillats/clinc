@@ -1,19 +1,14 @@
 Word count:
 
 # Organization / structure / flow
-- [ ] where does methods pipeline figure go?
-- [ ] integrate steps_of_inference.md as overview at the end of intro
-  - [ ] also use steps as sections of methods overview
-  - [ ] merge more detailed content into sections of methods overview
-  - [ ] ? create hypotheses-set-focused methods overview figure ?
-    - current figure really focuses on the fate of one circuit at a time
-
 - [ ] split sim methods elsewhere
     - [ ] pull all into theory / methods overview section
     - [ ] 4.1.2 - time-resolvable goes in discussion?
     - [ ] 4.3 - merge "estimating circuits" into inference pipeline steps
     - [ ] 4.4 - info theoretic measures could simply be combined with results section
+
 - [ ] Tentatively, bump 2.3 into theory section
+
 - [ ] proposed methods order - could be overwritten by order suggested by "steps of intervention"
   - *simple linear Gaussian case*
   - Interventions - 2.2 → to end of introduction 
@@ -21,6 +16,15 @@ Word count:
   - predicting corr  - 3.1→ new 3.2 
   - inferring cause from time series  - 2.1B→ new 3.3 
     - minimize granger, IDTxl
+    
+- [ ] where does methods pipeline figure go?
+
+- [ ] integrate steps_of_inference.md as overview at the end of intro
+  - [ ] also use steps as sections of methods overview
+  - [ ] merge more detailed content into sections of methods overview
+  - [ ] ? create hypotheses-set-focused methods overview figure ?
+    - current figure really focuses on the fate of one circuit at a time
+
 - [ ] Either need to write a "results summary" section or smooth transition from quantitative results to discussion
 - [ ] add steps of inference to end of introduction
 
@@ -38,10 +42,12 @@ Word count:
 # Mechanical
 - [ ] deemphasize / soften language around "tools for causality"
   - really bringing in ideas from causality, but not using formal tools
-- [ ] flip matrix convention
+
+- [ ] 🔧 flip matrix convention
   - use dynamical system throughout
     - live with $W_{j→i} = W[i,j]$
-- [ ] Rewrite X=XW+E as vector version (and resolve contemporaneous setting in methods>simulation section)
+
+- [ ] 🔧 Rewrite X=XW+E as vector version (and resolve contemporaneous setting in methods>simulation section)
 
 - [ ] (in background) Talk about what 'reachability' means (total direct+indirect impact)
 - [ ] [Matt:] (in background) Rewrite first paragraph to not use notation (place this box before any theory/notation sections)
@@ -50,7 +56,7 @@ Word count:
 # Technical 
 - [ ] Need to push for a last results section
 
-" ----
+----
 # Archive
 
 <details><summary>↪see more tasks</summary>

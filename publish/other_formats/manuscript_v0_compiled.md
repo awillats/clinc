@@ -2,7 +2,7 @@
 title: 'Closed-Loop Identifiability in Neural Circuits'
 output:
     pdf_document: {path: /publish/manuscript_pandoc.pdf}
-xnumberedsections: true
+xnumbersections: true
 author:
     - {name: 'Adam Willats, Matthew O''Shaughnessy'}
 ---  

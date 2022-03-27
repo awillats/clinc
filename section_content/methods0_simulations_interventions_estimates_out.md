@@ -1,22 +1,12 @@
 <!-- PANDOC ERROR HERE - thinks its yaml -->
-@ import "methods0_0_overview.md"
+<!-- @ import "methods0_0_overview.md" -->
 <!-- PANDOC ERROR HERE - undefined ctrl sequence -->
 <!--imported from "methods0_1_simulations.md" -->
 ## Modeling network structure and dynamics
-!!!! - 70% done
-<details><summary>↪to do</summary>
-
-- [~] read e.g.
-- [ ] discuss networks - adj ✅
-- discuss 2 key dimensions of complexity
-  - linear-gaussian v.s. spiking (LIF - Poisson?) 💫
-  - contemporaneous v.s. delayed connections 💫
-- [ ] discuss brian implementation (supplement) 💫
-
-</details>
-
-
 We sought to understand both general principles (abstracted across particulars of network implementation) as well as some practical considerations introduced by dealing with spikes and synapses.
+
+!!!! - 70% done
+
 
 ### Stochastic network dynamics
 
@@ -33,18 +23,16 @@ The first approach is accomplished with a network of nodes with gaussian noise s
 ### Time-resolvable interactions
 
 Additionally we study two domains of interactions between populations; contemporaneous and delay-resolvable connections. These domains represent the relative timescales of measurement versus timescale of synaptic delay.
-
-==DANGER doesnt work with pandoc==
+[^cases]
+[^cases]: cases doesnt work with pandoc yet, also want to talk about positive and negative lags here
 <!-- \[
+==DANGER cases doesnt work with pandoc==
 \text{domain} = 
 \begin{cases}
 \text{contemporaneous}, &\delta_{syn} \lt \Delta_{sample}\\
 \text{delay-resolvable}, &\delta_{syn} \geq \Delta_{sample}\\
 \end{cases}
 \] -->
-
->correlation across positive and negative lags between two outputs 
-
 In the delay-resolvable domain, directionality of connections may be inferred even under passive observations by looking at temporal precedence - whether the past of one signal is more strongly correlated with future lags of another signal *(i.e. cross-correlation)*. In the contemporaneous domain, network influences act within the time of a single sample[^contemp_sample] so this temporal precedence clue is lost (although directionality can still be inferred in the presence of intervention).
 
 The following work is presented with the linear-Gaussian and contemporaneous domains as the default for simplicity and conciseness. 

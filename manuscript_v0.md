@@ -10,12 +10,12 @@ output:
      path: /publish/manuscript_pandoc.pdf
 classoption: twocolumn
 geometry: margin=1.5cm
-numberedsections: true
+numbersections: true
+id: "hide-todo"
 ---
 
-<!-- id: "hide-todo" -->
 <!-- uncomment `id: hide-todo` to hide to-do list items and collapsible section -->
-<!-- @ import "publish/publish_style.less" -->
+@import "publish/publish_style.less"
 
 <!-- see also _meta folder, consider formatting as "YAML front matter" for pandoc -->
 
@@ -44,7 +44,6 @@ numberedsections: true
 !!!! Todo 3/16: - Mention basic science applications of CL control - Maybe more forecasting idea of shaping correlations? (don't want reader to be surprised by structure of paper's argument)
 
 @import "/section_content/abstract.md"
-
 
 # Introduction
 

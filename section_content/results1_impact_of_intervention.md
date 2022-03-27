@@ -11,12 +11,11 @@
 
 <details><summary>↪notes, see also </summary>
 
-<details><summary>going to assume these have already been discussed</summary>
+going to assume these have already been discussed:
 
 - predicting correlation
 - measuring dependence
 - markov equivalence
-</details>
 
 [Methods: Procedure for choosing & applying intervention](_steps_of_inference.md)
 
@@ -62,9 +61,11 @@ Next, we apply (steps 1-3 of) this circuit search procedure to a collection of c
 
 
 !!!! - Quantitative impact of closed-loop - 70% done
+
 ### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias
 
 !!!! - Explain why closed-loop helps - bidirectional variance control - 60% done
+
 [^dof]: need a more specific way of stating this. I mean degrees of freedom in the sense that mean and variance can be controlled independent of each other. And also, that the range of achievable correlation coefficients is wider for closed-loop than open-loop (where instrinsic variability constrains the minimum output variance)
   
 [^intrinsic_var]: below the level set by added, independent/"private" sources

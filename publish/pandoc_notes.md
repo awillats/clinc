@@ -92,6 +92,12 @@ pandoc -f markdown+tex_math_single_backslash -o html_pf.pdf --pdf-engine=xelatex
 
 ## Troubleshooting 
 
+### when using panflute filters, check section headings to make sure all the important pieces are still there 
+sometimes checking for delimiters deletes more than you expected. 
+if you have nested delimiters, you'll often have this situation:
+`A A B B` → `cut:{A a b} B` rather than: `cut:{A-a-b-B}`
+- will require fancier regex to fix 
+
 ### save to markdown produces latex embeds 
 - save as markdown seems to be required to compile imports...but converts equations 
   - see `Math Rendering Online Service ` in settings
@@ -150,3 +156,21 @@ see: https://tex.stackexchange.com/questions/284538/align-aligned-and-r-markdown
  https://stackoverflow.com/questions/24208889/how-to-specify-numbered-sections-in-pandocs-front-matter
  
 - extending MPE in js: https://shd101wyy.github.io/markdown-preview-enhanced/#/extend-parser
+
+
+
+## Useful Panflute notes 
+
+`run_filter(action, *args, **kwargs)`
+
+`run_filters(actions[, prepare, finalize, ...])`
+to run multiple filters
+
+`debug(*args, **kwargs)`
+Same as print, but prints to stderr (which is not intercepted by Pandoc).
+
+`stringify(element[, newlines])`
+Return the raw text version of an element (and its children elements).
+
+
+
