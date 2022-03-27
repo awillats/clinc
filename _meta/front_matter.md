@@ -7,6 +7,13 @@ author:
   -name: Matthew O'Shaughnessy
     affiliation: Georgia Institute of Technology
     email: matthewoshaughnessy@gatech.edu
-bibliography: bib/closedloopcausal.bib
-output: pandoc_output.pdf
+bibliography: [bib/moshaughnessy.bib, bib/misc.bib, bib/mega_causal_bib.bib]
+output:
+  pdf_document:
+     path: /publish/auto_pandoc.pdf
+classoption: twocolumn
+geometry: margin=1.5cm
+numberedsections: true
+panflute-filters: [cleanup_filter]
+panflute-path: 'publish/panflute_filters'
 ---

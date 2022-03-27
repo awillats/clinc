@@ -15,18 +15,18 @@
 >   - assume readers aren't going to pore over the details
 
 ---
-![](/code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
+![](code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
 
 
 ---
 ## Network simulations
 
 - contemporaneous vs lagged 💫
-![](/figures/whiteboard/time_unrolled_representation.png)
+![](figures/whiteboard/time_unrolled_representation.png)
 <details><summary>see also</summary>
 
-![](/figures/whiteboard/concept_open_loop_contemporaneous.png)
-![](/figures/whiteboard/concept_time_resolved.png)
+![](figures/whiteboard/concept_open_loop_contemporaneous.png)
+![](figures/whiteboard/concept_time_resolved.png)
 </details>
 
 
@@ -40,10 +40,10 @@
 
 ## Network simulations - outline
 > <a name='figure-gaussian'></a>
-> ![](/figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
+> ![](figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
 > <details><summary>see also</summary>
 > 
-> ![](/figures/whiteboard/signal_aggregation.jpeg)
+> ![](figures/whiteboard/signal_aggregation.jpeg)
 > </details>
 > ### Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2
 > 🥡 **takeaway:** ??? 🚧
@@ -109,13 +109,13 @@
 >     </details>
 >     
 >     
-> ![](/figures/misc_figure_sketches/intervention_timeseries_flat.png)
+> ![](figures/misc_figure_sketches/intervention_timeseries_flat.png)
 > 
 
 ---
 ## Extracting circuit estimates 
 <a name='figure-pipeline'></a>
-![](/figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
+![](figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
 
 ### Outputs of network 
 - spikes from populations of neurons 
@@ -123,10 +123,10 @@
 ### What is cross-correlation
 <details><summary> see also </summary>
 
-![](/figures/whiteboard/methods_xcorr_features.jpeg)
-![](/figures/whiteboard/methods_circuit_xcorr_sketch.png)
-![](/_archive/figure4a_sketch.png)
-![](/figures/misc_figure_sketches/data_xcorr_gaussian.png)
+![](figures/whiteboard/methods_xcorr_features.jpeg)
+![](figures/whiteboard/methods_circuit_xcorr_sketch.png)
+![](_archive/figure4a_sketch.png)
+![](figures/misc_figure_sketches/data_xcorr_gaussian.png)
 </details>
 ### Figure PIPELINE: Process of detecting connections in a network model
 🥡 **takeaway:** ??? 🚧

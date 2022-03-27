@@ -51,8 +51,8 @@ The following work is presented with the linear-Gaussian and contemporaneous dom
 
 <details><summary>↪concept figures</summary>
 
-![](/figures/whiteboard/concept_time_resolved.png)
-![](/figures/whiteboard/concept_open_loop_contemporaneous.png)
+![](figures/whiteboard/concept_time_resolved.png)
+![](figures/whiteboard/concept_open_loop_contemporaneous.png)
 
 </details>
 

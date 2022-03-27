@@ -79,10 +79,10 @@ $$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) = \mathbb{V}_{i}(C) + \sigma^2_S$$
 Applying closed-loop to a linear gaussian circuit:
 
 \[
-\begin{aligned}
-\mathbb{V}_{i}(C|S=\text{closed},\sigma^2_S) &= \sigma^2_S  \\
+\begin{align}
+\mathbb{V}_{i}(C|S=\text{closed},\sigma^2_S) &= \sigma^2_S \\
 \mathbb{V}_{i}(C|S=\text{closed},\sigma^2_S) &\perp \mathbb{V}_{i}(C)
-\end{aligned}
+\end{align}
 \]
 
 <details><summary> ↪ Firing rates couple mean and variance </summary> 
@@ -91,12 +91,11 @@ In neural circuits, we're often interested in firing rates, which are non-negati
 
 
 \[
-\begin{aligned}
+\begin{align}
 \mu^{out}_i &= f(\mu^{in}_i, \mathbb{V}^{in}_i)\\
 \mathbb{V}^{out}_{i}(C) &= f(\mu^{out}_i, \mathbb{V}^{in}_i)
-\end{aligned}
+\end{align}
 \]
-
 </details>
 
 <details><summary> ↪ Notes on imperfect control </summary> 

@@ -4,17 +4,18 @@ panflute-path: 'publish/panflute_filters'
 title: Closed-Loop Identifiability in Neural Circuits
 author:
   - name: Adam Willats, Matthew O'Shaughnessy
+bibliography: [bib/moshaughnessy.bib, bib/misc.bib, bib/mega_causal_bib.bib]
 output:
   pdf_document:
      path: /publish/manuscript_pandoc.pdf
-
-bibliography: [bib/moshaughnessy.bib, bib/misc.bib, bib/mega_causal_bib.bib]
+classoption: twocolumn
+geometry: margin=1.5cm
 numberedsections: true
 ---
 
 <!-- id: "hide-todo" -->
-<!-- uncomment `id: hide-todo` to hide to-do list items and collapsible section -->'
-@import "publish/publish_style.less"
+<!-- uncomment `id: hide-todo` to hide to-do list items and collapsible section -->
+<!-- @ import "publish/publish_style.less" -->
 
 <!-- see also _meta folder, consider formatting as "YAML front matter" for pandoc -->
 
@@ -69,7 +70,7 @@ numberedsections: true
 
 !!!! todo - Rewrite X=XW+E as vector version - Describe what 'reachability' is *(see writing_tasks)*
 
-@import "/section_content/background_representation_reach.md"
+@ import "/section_content/background_representation_reach.md"
 
 !!!! - 70% done
 
@@ -80,10 +81,10 @@ numberedsections: true
 
 # Theory / Prediction
 <!-- <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/> -->
-![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
+![](figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
 > **Figure OVERVIEW:** ...
 
-<!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
+<!-- ![](figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
 ## Predicting correlation structure (theory)
 
 @import "/section_content/methods1_predicting_correlation.md"
@@ -106,27 +107,9 @@ numberedsections: true
 !!!! - overall, 60% done
 
 ## Impact of intervention on estimation performance
-<!-- PANDOC YAML MAPPING ERROR -->
-!!!! todo - comaprison signs in rows of DISAMBIG figure
-!!!! todo - merge from "box style" where entrire story is in caption, to having something in body of results text 
-!!!! todo - write "explain why CL is better" section, ? exile it to discussion section?
-!!!! todo - connect DISAMBIG caption to quantitative variance explanation section
-!!!! todo - collapse figvar - do we need to make shared input point here? or is discussion fine?
-!!!! todo - dR/dS needs to mention R as r^2 corr
+
 @import "/section_content/results1_impact_of_intervention.md"
- 
-<details><summary>↪Notes from matt</summary>
-
-- [super minor] First part of fig DISAMBIG: subsections (A) through (C) work really well
-- [super minor] in caption for (D-F): "modifications to the passive correlation pattern" is a bit confusing in the context of open-loop intervention
-- [super minor] also in caption for (D-F): really like "intervention-specific fingerprint" terminology. The last sentence of the (D-F) caption really hits the message home, possible to emphasize that this is the take-home message earlier?
-- [narrative/organization] fig DISAMBIG feels really example-y, more like a proof of concept than 'results.' The writing in Sec 5.1.1 also has this flavor, like it could be in a methods section. (The plot in the top right feels much more results-ey.) Not necessarily a bad thing, maybe just a consideration for thinking about article vs perspective flavor.
-- [missing] Section 5.1.2.1: what are the definitions of S_k, CoReach(i,j|S_k), and R_{ij}?
-- [narrative] Section 5.1.2.1: the narrative here really works for me, but it's a little unclear whether this is more of a 'result' or a 'recipe' -- the figures here also feel more example/proof-of-concept-ey, and the math here helps ground things in
-- [missing] discussion of partial closed-loop control?
-</details>
-
- 
+  
 <!-- ## Interaction of intervention & circuit structure
 !!!! - needs significant technical work and theory!
 @ import "/section_content/near_future_work/results2_circuit_x_intervention.md" -->

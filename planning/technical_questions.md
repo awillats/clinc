@@ -15,11 +15,11 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
 - [ ] add this to python implementation
 
 ## Open methodological questions
-![](/../figures/whiteboard/time_unrolled_representation.png)
+![](../figures/whiteboard/time_unrolled_representation.png)
 <details><summary>see also</summary>
 
-![](/../figures/whiteboard/concept_open_loop_contemporaneous.png)
-![](/../figures/whiteboard/concept_time_resolved.png)
+![](../figures/whiteboard/concept_open_loop_contemporaneous.png)
+![](../figures/whiteboard/concept_time_resolved.png)
 </details>
 - **time-resolved versus contemporaneous** inference domains
   - Contemp.: $\Delta_{sample} \approx \delta_{syn}$
