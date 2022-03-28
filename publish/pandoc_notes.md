@@ -1,63 +1,21 @@
-```bash
-pandoc -f markdown+tex_math_single_backslash --pdf-engine=xelatex --numbered-sections -o test.pdf manuscript_v0.md
-pandoc -f markdown+tex_math_single_backslash --pdf-engine=xelatex --numbered-sections -o test.pdf test.md
-pandoc -f markdown+tex_math_single_backslash --pdf-engine=xelatex -o test.pdf test.md ; open test.pdf
-pandoc -f markdown+tex_math_single_backslash -o /Users/adam/Documents/Research/Manuscripts/clinc/publish/test.pdf --pdf-engine=pdflatex
+# scripts 
+## Python 
+- `compile_markdown_imports.py`
+- `transplant_yaml.py`
 
-pandoc -f markdown+tex_math_single_backslash -o /Users/adam/Documents/Research/Manuscripts/clinc/publish/manuscript_pandoc.pdf --pdf-engine=xelatex --citeproc 
+## Bash 
+- `clean_markdown_compile.sh`
+- `markdown_to_mp3.sh`
 
-Error producing PDF. ! Package longtable Error: longtable not in 1-column m
+# To-do 
+- transplant_yaml
+  - overwrite yaml if its there, dont just append 
+- cleanup_filter.py 
+  - check audio export 
+  - have audio export be commandline option
 
-```
-
-compile markdown with panflute filters:
-```bash
-pandoc -f markdown+tex_math_single_backslash+yaml_metadata_block -o panman.md -F panflute manuscript_v0.md             
-
-pandoc -f markdown+tex_math_single_backslash+yaml_metadata_block -o publish/panman.md -F panflute manuscript_v0_.md
-source markdown_to_mp3.sh                                                  
-```
-
-right now, the necessary flow seems to be:
-- `right-click>save as markdown` (manu_v0_.md)
-- pandoc -o panfilt.md -F panflute manu_v0_.md 
-
-## Goal: gathered markdown, with latex in-tact, for panflute to operate on
-`RIGHT-CLICK`→`open-in-browser`
-  - does use panflute
-  
-`RIGHT-CLICK`→`HTHML`
-  - does use panflute
-`RIGHT-CLICK`→`save-as-markdown`
-  - renders LaTeX with codecogs :(
-  - *doesn't* use panflute
-  - (but does compile md imports)
-`RIGHT-CLICK`→`PANDOC`
-  - preserves LaTeX (renders nicely!)
-  - but *doesn't* use panflute 
-`Preview:Pandoc Parser`
-  - does use panflute
-  - LaTeX is plaintext!
-    - even without panflute
-
+# Pipelines 
 ### 3-stage to focus pdf: md-(compiled)-md-(filtered)-md-(formatted)-pdf 
-+yaml_metadata_block?
-
-python publish/compile_markdown_imports.py
- - yaml preserved! 
- 
-pandoc -f markdown+tex_math_single_backslash -o mc_pf_audio.md -F panflute manuscript_v0_out.md
-  - yaml lost :(
-  
-pandoc -f markdown+tex_math_single_backslash -o pf_audio.pdf --pdf-engine=xelatex --defaults=publish/pd_defaults.yaml mc_pf_audio.md
-
-pandoc -f markdown+tex_math_single_backslash+yaml_metadata_block -o pf_audio.pdf --pdf-engine=xelatex -F panflute --defaults=_meta/meta_default.yaml manuscript_v0_out.md
-- can't quite go from 
-  
-  
-pandoc -f markdown+tex_math_single_backslash -o pf_audio.pdf --pdf-engine=xelatex -F panflute --defaults=_meta/meta_default.yaml manuscript_v0_out.md
-
-maybe want to ignore latex altogether? or substitute before pandoc!!!!
 
 `COMPILE: `
   python publish/compile_markdown_imports.py
@@ -90,7 +48,7 @@ pandoc -f markdown+tex_math_single_backslash -o html_pf.pdf --pdf-engine=xelatex
 - to filter: html→md in commandline
 
 
-## Troubleshooting 
+# Troubleshooting 
 
 ### when using panflute filters, check section headings to make sure all the important pieces are still there 
 sometimes checking for delimiters deletes more than you expected. 
@@ -174,3 +132,25 @@ Return the raw text version of an element (and its children elements).
 
 
 
+## markdown preview enhanced export options
+right now, the necessary flow seems to be:
+- `right-click>save as markdown` (manu_v0_.md)
+- pandoc -o panfilt.md -F panflute manu_v0_.md 
+
+## Goal: gathered markdown, with latex in-tact, for panflute to operate on
+`RIGHT-CLICK`→`open-in-browser`
+  - does use panflute
+  
+`RIGHT-CLICK`→`HTHML`
+  - does use panflute
+`RIGHT-CLICK`→`save-as-markdown`
+  - renders LaTeX with codecogs :(
+  - *doesn't* use panflute
+  - (but does compile md imports)
+`RIGHT-CLICK`→`PANDOC`
+  - preserves LaTeX (renders nicely!)
+  - but *doesn't* use panflute 
+`Preview:Pandoc Parser`
+  - does use panflute
+  - LaTeX is plaintext!
+    - even without panflute

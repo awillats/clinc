@@ -1,7 +1,7 @@
 # Top 3 highest priority writing tasks:
 
 - [ ] re-arrange sections 
-  - [ ] scan as-is 
+  - [.] scan as-is 
     - minimally filtered two-column pdf
   - [ ] make prior arrangement changes 
     - see writing tasks 
