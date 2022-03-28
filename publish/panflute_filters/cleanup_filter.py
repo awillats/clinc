@@ -21,93 +21,8 @@ remove YAML with MetaBlocks ?
 TODO: figure out raw find and replace within a paragraph 
     - just run a python script on the text file?
     
-TODO: add spoken version of LaTeX math 
-    - would need to do this *before* mume renders latex to imgs
-    
-    https://((.*)[).]): link $1
-    \((.*).md\)  : link.
-    
-    - sqrt{}: square root 
-    
-    - x^b: x to the b 
-        ([a-zA-Z0-9}])\^
-        $1 to the
-        to the \{?2\}? : squared
-        \}\^\{ : to the 
-        
-        ([A-Z])-([A-Z])
-        $1 minus $2
-        
-    - x_i: x sub i OR x i 
-        _\{(\w*)\} : _sub_$1
-        (\w)_(\w)(?!\w) : $1 sub $2
-    
-    - x→y: x to y 
-    - \dot{x}: x dot 
-    - f(x | t): f of x given t 
-        f\(: _of_
-        \}\(: _of_
-        
-    
-    - \sum^{\inf}_{k=0}{W_k}: sum of W sub k from k=0 to inf
-    
-        \\sum_\{((\w|[=+-\\*])*)\}\^\{((\w|[=+-\\*])*)\}
-        the sum from $1 to $3 of 
-        
-        \\sum_\{((\w|[=+-\\*])*)\}\^(\w*)\s
-        the sum from $1 to $3 of 
-    
-    - \frac{WWs^2}{Ws*Ws}: W W over Ws times Ws 
-    
-        simple fracs can be done with this:
-        regex: `\\frac\{(\w*)\}\{(\w*)\}`
-        to: $1 over $2
-        
-        \\frac\{((\w|\s|\^|\||[{(=+-\\])*)\}\{((\w|\s|\^|\||[{(=+-\\])*)\}
-        $1 over $3
-        
-        nested fracs require something else:
-        https://stackoverflow.com/questions/546433/regular-expression-to-match-balanced-parentheses
-        nonested fracs
-        
-        \\widetilde\{(\w*)\}
-        $1 tilde
-        
-        f\(: a function of 
-        \\sim \\approx : is approximately
-        
-        
-        &= : = 
-        \\\\: \n
-        \^\{-1\} : _inverse_
-        \sqrt{ : square root of 
-        \gg : is much greater than 
-        \ll : is much less than
-        \gt : is greater than 
-        \lt : is less than 
-        \geq: is greater than or equal to
-        \leq: is less than or equal to
-        → : _to_
-        \neq : is not equal to 
-        
-        DELETE:
-        \\math(\w*)
-        \\left[([{] 
-        \\right[([{] 
-        \text : _
-        \\begin\{(\w*)\}
-        \\end\{(\w*)\}
-        
+'''   
 
-TODO: split file at section headings to make several audio files
-
-
-cut footnotes
-\[\^(.*)(\])(?![\s.])
-
-\[\^.*\}
-\[\^.*\](?!:)
-'''
 # h = pf.Header(pf.Str('hi'))
 # # print(h.content)
 # h.content = [pf.Str('ho'),pf.Str('ho'),pf.Str('ho')]
@@ -349,8 +264,7 @@ def main(doc=None):
     # focus_funs = []
     # audio_funs = []
     focus_funs = [no_todo, no_comment]+gather_delim_fns(focus_delims)
-    audio_funs = [speak_header, no_cite_fns]+gather_delim_fns(audio_delims)
-    
+    audio_funs = [speak_header]+no_cite_fns+gather_delim_fns(audio_delims)
     funs = []
     
     if do_standardize_eq:

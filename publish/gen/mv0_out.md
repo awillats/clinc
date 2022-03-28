@@ -11,6 +11,7 @@ output:
 classoption: twocolumn
 geometry: margin=1.5cm
 numbersections: true
+
 ---
 ---
 panflute-filters: [cleanup_filter]
@@ -25,8 +26,8 @@ output:
 classoption: twocolumn
 geometry: margin=1.5cm
 numbersections: true
----
 
+---
 <!-- id: "hide-todo" -->
 <!-- uncomment `id: hide-todo` to hide to-do list items and collapsible section -->
 <!-- @ import "publish/publish_style.less" -->
@@ -320,7 +321,9 @@ The first approach is accomplished with a network of nodes with gaussian noise s
 
 Additionally we study two domains of interactions between populations; contemporaneous and delay-resolvable connections. These domains represent the relative timescales of measurement versus timescale of synaptic delay.
 [^cases]
+
 [^cases]: cases doesnt work with pandoc yet, also want to talk about positive and negative lags here
+
 <!-- \[
 ==DANGER cases doesnt work with pandoc==
 \text{domain} = 

@@ -11,11 +11,11 @@ output:
 classoption: twocolumn
 geometry: margin=1.5cm
 numbersections: true
-id: "hide-todo"
----
 
+---
+<!-- id: "hide-todo" -->
 <!-- uncomment `id: hide-todo` to hide to-do list items and collapsible section -->
-@import "publish/publish_style.less"
+<!-- @ import "publish/publish_style.less" -->
 
 <!-- see also _meta folder, consider formatting as "YAML front matter" for pandoc -->
 

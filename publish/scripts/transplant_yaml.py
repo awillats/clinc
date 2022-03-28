@@ -7,15 +7,6 @@ put the yaml block from the top of one file at the top of the other
 
 #%%
 
-#replace with getopt
-# print(sys.argv)
-src = 'testin.md'
-targ = 'testout.md'
-
-if len(sys.argv)>1: src = sys.argv[1]
-if len(sys.argv)>2: targ = sys.argv[2]
-
-
 def transplant_yaml(src,targ):
     with open(src,'r') as fsrc:
         
@@ -33,5 +24,12 @@ def transplant_yaml(src,targ):
                 ftarg.seek(0)
                 ftarg.write(yaml_block+targcontent)
 
-if len(sys.argv)>0:
+if __name__ == "__main__":
+    #replace with getopt
+    # print(sys.argv)
+    src = 'testin.md'
+    targ = 'testout.md'
+    if len(sys.argv)>0:
+        if len(sys.argv)>1: src = sys.argv[1]
+        if len(sys.argv)>2: targ = sys.argv[2]
     transplant_yaml(src,targ)

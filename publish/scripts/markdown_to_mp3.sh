@@ -5,8 +5,10 @@
 
 # # would use modified version of cleanup_filter.py here ..
 # pandoc -f markdown+tex_math_single_backslash+yaml_metadata_block -o publish/panman.md -F panflute publish/manuscript_v0_.md
-say -f publish/gen/mv0_audio.md -o publish/gen/sound.aiff -v Allison
+
+python publish/scripts/latex_to_speech.py
+say -f publish/gen/mv0_auto_audio.md -o publish/gen/sound.aiff -v Allison
 echo '... converting to mp3 ...'
-lame -m m publish/gen/sound.aiff publish/outputs/mv0.mp3
+lame -m m publish/gen/sound.aiff publish/outputs/mv0_auto.mp3
 rm publish/gen/sound.aiff
 say 'done creating audio transcript' 

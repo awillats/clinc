@@ -13,6 +13,7 @@
 - cleanup_filter.py 
   - check audio export 
   - have audio export be commandline option
+- filter out css (`publish_style.less`)
 
 # Pipelines 
 ### 3-stage to focus pdf: md-(compiled)-md-(filtered)-md-(formatted)-pdf 
@@ -46,6 +47,12 @@ pandoc -f markdown+tex_math_single_backslash -o html_pf.pdf --pdf-engine=xelatex
 ### For audio (preserve latex)
 - to compile: any parser - RC:HTML
 - to filter: html→md in commandline
+
+
+# Misc regex tips 
+
+sometimes pandoc will wrap text at 80 characters, which behaves weirdly with markdown previews. This can easily be undone with a regex:
+`(?<!\n)\n\w` matches newlines which don't separate paragraphs (i.e. newlines likely introduced by panddoc wrapping). You can find and replace that pattern with ` ` to un-wrap text
 
 
 # Troubleshooting 

@@ -10,6 +10,7 @@ def f2str(fn):
 TURN INTO COMMANDLINE SCRIPT
 wrap in function
 fix relative paths
+only accept certain file extensions?
 '''
 def find_in_subdir(name, path):
     # print(os.getcwd())
