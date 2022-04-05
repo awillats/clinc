@@ -15,6 +15,11 @@
   - have audio export be commandline option
 - filter out css (`publish_style.less`)
 
+- write up guide for when use absolute versus relative paths 
+  - for the sake of recursive imports when compiling 
+  - and for images 
+  `![](/figures/...)` versus `![](figures/...)`
+
 # Pipelines 
 ### 3-stage to focus pdf: md-(compiled)-md-(filtered)-md-(formatted)-pdf 
 
