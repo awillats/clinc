@@ -15,6 +15,7 @@ numbersections: true
 ---
 # Abstract
 
+$x = 3$
 
 The necessity of intervention in inferring cause has long been understood in neuroscience. Recent work has highlighted the limitations of passive observation and single-site lesion studies in accurately recovering causal circuit structure. The advent of optogenetics has facilitated increasingly precise forms of intervention including closed-loop control which may help eliminate confounding influences. However, it is not yet clear how best to apply closed-loop control to leverage this increased inferential power. In this paper, we use tools from causal inference, control theory, and neuroscience to show when and how closed-loop interventions can more effectively reveal causal relationships.
 `We also examine the performance of standard network inference procedures in simulated spiking networks under passive, open-loop and closed-loop conditions.` We demonstrate a unique capacity of feedback control to distinguish competing circuit hypotheses by disrupting connections which would otherwise result in equivalent patterns of correlation[^1]. Our results build toward a practical framework to improve design of neuroscience experiments to answer causal questions about neural circuits.
@@ -197,7 +198,7 @@ Next, we apply (steps 1-3 of) this circuit search procedure to a collection of c
 "intervention-specific fingerprint", that is a distribution of frequencies for observing patterns of modified correlations *(across a single row within D-F)*. If this fingerprint contains many examples of the same pattern of correlation (such as **B**), many hypotheses correspond to the same observation, and that experiment contributes low information to distinguish between structures. A maximally informative intervention would produce a unique pattern of correlation for each member of the hypothesis set. :construction:`caption too long`
 
 **Why does closed-loop control provide a categorical advantage?** Because it severs indirect links `is this redundant with intro?`
-`needs to be backed here up by aggregate results?` - this is especially relevant in recurrently connected networks where the reachability matrix becomes more dense. - more stuff is connected to other stuff, so there are more indirect connections, and the resulting correlations look more similar (more circuits in the equivalence class) - patterns of correlation become more specific with increasing intervention strength - more severed links → more unique adjacency-specific patterns of correlation
+`needs to be backed here up by aggregate results?` - this is especially relevant in recurrently connected networks where the reachability matrix becomes more dense. - more stuff is connected to other stuff, so there are more indirect connections, and the resulting correlations look more similar (more circuits in the equivalence class) - patterns of correlation become more specific with increasing intervention strength - more severed links $→$ more unique adjacency-specific patterns of correlation
 
 > **Where you intervene**[^20] strongly determines the inference power
 > of your experiment. **secondary point:** having (binary) prediction
@@ -229,11 +230,11 @@ Our hypothesis is that this shaping of pairwise correlations will result in redu
 
 The impact of intervention on correlations can be summarized through the co-reachability $\text{CoReach}(i,j|S_k)$. A useful distillation of this mapping is to understand the sign of $\frac{dR_{ij}}{dS_k}$, that is whether increasing the variance of an intervention at node $k$ increases or decreases the correlation between nodes $i$ and $j$
 
-In a simulated network A→B [(fig. variance)](#fig-var) we demonstrate predicted and emprirical correlations between a pair of nodes as a function of intervention type, location, and variance. A few features are present which provide a general intuition for the impact of intervention location in larger circuits: First, interventions
+In a simulated network $A→B$ [(fig. variance)](#fig-var) we demonstrate predicted and emprirical correlations between a pair of nodes as a function of intervention type, location, and variance. A few features are present which provide a general intuition for the impact of intervention location in larger circuits: First, interventions
 "upstream" of a true connection [(lower left, fig. variance)](#fig-var) tend to increase the connection-related variance, and therefore strengthen the observed correlations.
 $$\text{Reach}(S_k→i) \neq 0 \\ \text{Reach}(i→j) \neq 0 \\ \frac{dR}{dS_k} > 0$$
 
-Second, interventions affecting only the downstream node [(lower right, fig. variance)](#fig-var) of a true connection introduce variance which is independent of the connection A→B, decreasing the observed correlation.
+Second, interventions affecting only the downstream node [(lower right, fig. variance)](#fig-var) of a true connection introduce variance which is independent of the connection $A→B$, decreasing the observed correlation.
 $$\text{Reach}(S_k → j) = 0 \\ \text{Reach}(S_k → j) \neq 0 \\ \frac{dR}{dS_k} < 0$$
 
 Third, interventions which reach both nodes will tend to increase the observed correlations [(upper left, fig. variance)](#fig-var), moreover this can be achieved even if no direct connection $i→j$ exists.
@@ -241,7 +242,7 @@ $$\text{Reach}(S_k → i) \neq 0 \\ \text{Reach}(S_k → j) \neq 0 \\ \text{Reac
 
 Notably, the impact of an intervention which is a "common cause" for both nodes depends on the relative weighted reachability between the source and each of the nodes. Correlations induced by a common cause are maximized when the input to each node is equal, that is
 $\widetilde{W}_{S_k→i} \approx \widetilde{W}_{S_k→j}$ (upper right \* in
-[fig. variance](#fig-var)). If i→j are connected
+[fig. variance](#fig-var)). If $i→j$ are connected
 $\widetilde{W}_{S_k→i} \gg \widetilde{W}_{S_k→j}$ results in an variance-correlation relationship similar to the "upstream source" case
 (increasing source variance increases correlation
 $\frac{dR}{dS_k} > 0$), while
@@ -255,7 +256,7 @@ $\widetilde{W}_{S_k→i} \ll \widetilde{W}_{S_k→j}$ results in a relationship 
 > 🚧(Final figure will be a mix of these two panels, caption will need
 > updating) **Figure VAR: Location, variance, and type of intervention
 > shape pairwise correlations** **(CENTER)** A two-node linear gaussian
-> network is simulated with a connection from A→B. Open-loop
+> network is simulated with a connection from $A→B$. Open-loop
 > interventions *(blue)* consist of independent gaussian inputs with a
 > range of variances $\sigma^2_S$. Closed-loop interventions *(orange)*
 > consist of feedback control with an independent gaussian target with a
@@ -264,18 +265,18 @@ $\widetilde{W}_{S_k→i} \ll \widetilde{W}_{S_k→j}$ results in a relationship 
 > activity*. Connections from sources to nodes are colored by their
 > impact on correlations between A and B; green denotes $dR/dS > 0$, red
 > denotes $dR/dS<0$. **(lower left)** Intervention "upstream" of the
-> connection A→B increases the correlation $r^2(A,B)$. **(lower right)**
-> Intervention at the terminal of the connection A→B decreases the
+> connection $A→B$ increases the correlation $r^2(A,B)$. **(lower right)**
+> Intervention at the terminal of the connection $A→B$ decreases the
 > correlation $r^2(A,B)$ by adding connection-independent noise.
 > **(upper left)** Intervention with shared inputs to both nodes
-> generally increases $r^2(A,B)$, *(even without A→B, see supplement)*.
+> generally increases $r^2(A,B)$, *(even without $A→B$, see supplement)*.
 > **(upper right)** The impact of shared interventions depends on
 > relative weighted reachability
 > $\text{Reach}(S_k→A) / \text{Reach}(S_k→B)$, with highest correlations
 > when these terms are matched (see *) Closed-loop interventions
 > *(orange)\* generally result in larger changes in correlation across
 > $\sigma^2_S$ than the equivalent open-loop intervention. Closed-loop
-> control at B effectively lesions the connection A→B, resulting in
+> control at B effectively lesions the connection $A→B$, resulting in
 > near-zero correlation. [^25]
 
 🚧 The change in correlation as a function of changing intervention variance ($\frac{dr^2_{ij}}{dS}$) can therefore be used as an additional indicator of presence/absence and directionality of the connection between A,B *(see [fig. disambig. D.)](fig-disambig))* 🚧
@@ -293,7 +294,7 @@ The examples explored in this work simplify several key features that may have r
 
 `full observability`
 
-### results summary → summary of value closed-loop generally
+### results summary to summary of value closed-loop generally
 
 Closed-loop control has the disadvantages of being more complex to implement and requires specialized real-time hardware and software, however it has been shown to have multifaceted usefulness in clinical and basic science applications. Here we focused on two advantages in particular; First, the capacity for functional lesioning which
 (reversibly) severs inputs to nodes and second, closed-loop control's capacity to precisely shape variance across nodes. Both of these advantages facilitate opportunities for closed-loop intervention to reveal more circuit structure than passive observation or even open-loop experiments.
@@ -304,7 +305,7 @@ In studying the utility of various intervention for circuit inference we arrived
 
 `hidden confounds`
 
-### "funnel out", future work → broad impact
+### "funnel out", future work to broad impact
 
 `sequential experimental design`
 
