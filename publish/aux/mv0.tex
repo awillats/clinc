@@ -160,7 +160,7 @@ from neuroscience literature, a rich theoretical literature has
 described the central role of interventions in inferring causal
 structure from data .
 
-FIG: %\includegraphics{figures/core_figure_sketches/figure1_sketch.png}
+\includegraphics[width=1.0\textwidth]{_annex/clinc/__jpeg_figures/core_figure_sketches/figure1_sketch.jpeg}
 \textgreater{} \textbf{Figure INTRO:} Examples of the roles
 interventions have played in neuroscience. (A) \emph{Passive
 observation} does not involve stimulating the brain. In this example,
@@ -217,7 +217,7 @@ reachability}\label{representations-reachability}}
 
 import ``/section\_content/background\_representation\_reach.md''
 
-FIG: %\includegraphics{figures/core_figure_sketches/circuit_walkthrough_3circuits_key_sketch.png}
+\includegraphics[width=1.0\textwidth]{_annex/clinc/__jpeg_figures/core_figure_sketches/circuit_walkthrough_3circuits_key_sketch.jpeg}
 \textgreater{} \textbf{Figure DEMO \emph{(box format)}: Applying CLINC
 to distinguish a pair of circuits} \textgreater{} \textgreater{}
 Consider the three-node identification problem shown in the figure
@@ -269,7 +269,7 @@ task not possible with passive observation or open-loop control.
 \hypertarget{theory-prediction}{%
 \section{Theory / Prediction}\label{theory-prediction}}
 
-FIG: %\includegraphics{figures/core_figure_sketches/methods_overview_pipeline_sketch.png}
+\includegraphics[width=1.0\textwidth]{_annex/clinc/__jpeg_figures/core_figure_sketches/methods_overview_pipeline_sketch.jpeg}
 \textgreater{} \textbf{Figure OVERVIEW:} \ldots{}
 
 \hypertarget{predicting-correlation-structure-theory}{%
@@ -413,7 +413,7 @@ parameters}
 \subsection{Implementing
 interventions}\label{implementing-interventions}}
 
-FIG: %\includegraphics{figures/core_figure_sketches/figure1_sketch.png}
+\includegraphics[width=1.0\textwidth]{_annex/clinc/__jpeg_figures/core_figure_sketches/figure1_sketch.jpeg}
 
 To study the effect of various interventions we simulated inputs to
 nodes in a network. In the \textbf{passive setting}, nodes receive
@@ -540,10 +540,10 @@ collection of closely related hypotheses for 3 interacting
 nodes\footnote{nodes in such a graphical model may represent populations
   of neurons, distinct cell-types, different regions within the brain,
   or components of a latent variable represented in the brain.} to
-illustrate the impact of intervention. ???
-\texttt{most\ of\ the\ story\ in\ the\ figure\ caption\ for\ now} ???
+illustrate the impact of intervention. 
+\texttt{most\ of\ the\ story\ in\ the\ figure\ caption\ for\ now} 
 
-FIG: %\includegraphics{figures/core_figure_sketches/circuit_entropy_sketch.png}
+\includegraphics[width=1.0\textwidth]{_annex/clinc/__jpeg_figures/core_figure_sketches/circuit_entropy_sketch.jpeg}
 \textgreater{} \textbf{Figure DISAMBIG: Interventions narrow the set of
 hypotheses consistent with observed correlations} \emph{source:
 \href{https://docs.google.com/drawings/d/1CBp1MhOW7OGNuBvo7OkIuzqnq8kmN8EEX_AkFuKpVtM/edit}{google
@@ -591,7 +591,7 @@ reachability matrix becomes more dense. - more stuff is connected to
 other stuff, so there are more indirect connections, and the resulting
 correlations look more similar (more circuits in the equivalence class)
 - patterns of correlation become more specific with increasing
-intervention strength - more severed links \(\rightarrow \) more unique
+intervention strength - more severed links → more unique
 adjacency-specific patterns of correlation
 
 \begin{quote}
@@ -670,21 +670,20 @@ this mapping is to understand the sign of \(\frac{dR_{ij}}{dS_k}\), that
 is whether increasing the variance of an intervention at node \(k\)
 increases or decreases the correlation between nodes \(i\) and \(j\)
 
-In a simulated network \(A\rightarrow B\)
-\protect\hyperlink{fig-var}{(fig.~variance)} we demonstrate predicted
-and emprirical correlations between a pair of nodes as a function of
-intervention type, location, and variance. A few features are present
-which provide a general intuition for the impact of intervention
-location in larger circuits: First, interventions ``upstream'' of a true
-connection \protect\hyperlink{fig-var}{(lower left, fig.~variance)} tend
-to increase the connection-related variance, and therefore strengthen
-the observed correlations.
+In a simulated network A→B \protect\hyperlink{fig-var}{(fig.~variance)}
+we demonstrate predicted and emprirical correlations between a pair of
+nodes as a function of intervention type, location, and variance. A few
+features are present which provide a general intuition for the impact of
+intervention location in larger circuits: First, interventions
+``upstream'' of a true connection \protect\hyperlink{fig-var}{(lower
+left, fig.~variance)} tend to increase the connection-related variance,
+and therefore strengthen the observed correlations.
 \[\text{Reach}(S_k\rightarrow i) \neq 0 \\ \text{Reach}(i\rightarrow j) \neq 0 \\ \frac{dR}{dS_k} > 0\]
 
 Second, interventions affecting only the downstream node
 \protect\hyperlink{fig-var}{(lower right, fig.~variance)} of a true
 connection introduce variance which is independent of the connection
-\(A\rightarrow B\), decreasing the observed correlation.
+A→B, decreasing the observed correlation.
 \[\text{Reach}(S_k \rightarrow  j) = 0 \\ \text{Reach}(S_k \rightarrow  j) \neq 0 \\ \frac{dR}{dS_k} < 0\]
 
 Third, interventions which reach both nodes will tend to increase the
@@ -713,14 +712,14 @@ relationship similar to the ``downstream source'' case
   \(\frac{d|R|}{dS} < 0\) increasing \(S\) might move \(r\) from
   \(-0.8\) to \(-0.2\), i.e.~decrease its magnitude not its value.}
 
-FIG: %\includegraphics{figures/misc_figure_sketches/quant_r2_prediction_common.png}
-FIG: %\includegraphics{figures/from_code/bidirectional_correlation.png}
+\includegraphics[width=1.0\textwidth]{_annex/clinc/__jpeg_figures/misc_figure_sketches/quant_r2_prediction_common.jpeg}
+\includegraphics[width=1.0\textwidth]{_annex/clinc/__jpeg_figures/from_code/bidirectional_correlation.jpeg}
 
 \begin{quote}
-???(Final figure will be a mix of these two panels, caption will need
+(Final figure will be a mix of these two panels, caption will need
 updating) \textbf{Figure VAR: Location, variance, and type of
 intervention shape pairwise correlations} \textbf{(CENTER)} A two-node
-linear gaussian network is simulated with a connection from \(A\rightarrow B\).
+linear gaussian network is simulated with a connection from A→B.
 Open-loop interventions \emph{(blue)} consist of independent gaussian
 inputs with a range of variances \(\sigma^2_S\). Closed-loop
 interventions \emph{(orange)} consist of feedback control with an
@@ -729,7 +728,7 @@ closed-loop interventions result in node outputs which are a mix of the
 control target and network-driven activity}. Connections from sources to
 nodes are colored by their impact on correlations between A and B; green
 denotes \(dR/dS > 0\), red denotes \(dR/dS<0\). \textbf{(lower left)}
-Intervention ``upstream'' of the connection \(A\rightarrow B\) increases the
+Intervention ``upstream'' of the connection A→B increases the
 correlation \(r^2(A,B)\). \textbf{(lower right)} Intervention at the
 terminal of the connection \(A\rightarrow B\) decreases the correlation
 \(r^2(A,B)\) by adding connection-independent noise. \textbf{(upper
@@ -741,7 +740,7 @@ relative weighted reachability
 when these terms are matched (see \emph{) Closed-loop interventions
 }(orange)* generally result in larger changes in correlation across
 \(\sigma^2_S\) than the equivalent open-loop intervention. Closed-loop
-control at B effectively lesions the connection \(A\rightarrow B\), resulting in
+control at B effectively lesions the connection A→B, resulting in
 near-zero correlation. \footnote{compare especially to
   \href{https://www.frontiersin.org/articles/10.3389/fncom.2020.00045/full}{``Transfer
   Entropy as a Measure of Brain Connectivity''},
@@ -750,11 +749,11 @@ near-zero correlation. \footnote{compare especially to
   Cross-Correlation between Spike Trains''} Figure 3.}
 \end{quote}
 
-??? The change in correlation as a function of changing intervention
+ The change in correlation as a function of changing intervention
 variance (\(\frac{dr^2_{ij}}{dS}\)) can therefore be used as an
 additional indicator of presence/absence and directionality of the
 connection between A,B \emph{(see \href{fig-disambig}{fig.~disambig.
-D.)})} ???
+D.)})} 
 
 \protect\hyperlink{fig-var}{Fig. variance} also demonstrates the
 relative dynamic range of correlations achievable under passive, open-

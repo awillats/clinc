@@ -5,18 +5,23 @@
 #DEBUG:
 # python -m compile_markdown manuscript_v0 -vepf
 
-pandoc --biblatex -o publish/aux/mv0.tex publish/aux/mv0_filt.md
-# python -c "import markdown_manuscript_filters as mmf ; mmf.unicode_to_latex_file('publish/aux/mv0.tex',is_verbose=True)"
+this_annex_folder="_annex/clinc/"
+md_in="publish/aux/mv0_filt.md"
+tex_in="publish/aux/mv0.tex"
+img_width=1.0
 
-# python -c "import markdown_manuscript_filters as mmf; import re; mmf.apply_pyrex(re.escape('\includeg'),'%'+re.escape('\includeg'),'test.md','test_out.md',do_ignore_yaml=False)"
-# python -c "import markdown_manuscript_filters as mmf ; mmf.unicode_to_latex_file('test_out.md',is_verbose=True)"
-# python -c "import markdown_manuscript_filters as mmf; mmf.apply_pyrex(r'[^\x00-\x7F]+','X' ,'test_out.md','test_out.md',do_ignore_yaml=False)"
+# CONVERT markdown to LaTeX (with \autocite{})
+pandoc --biblatex -o $tex_in $md_in
 
+# REMOVE EMOJI
+python -c "import markdown_manuscript_filters as mmf; mmf.remove_emoji('${tex_in}',do_transcribe_emoji=False)"
 
+# CONVERT figs to .jpeg
+# REPLACE include statements with jpeg, set new width
+python -c "import markdown_manuscript_filters as mmf;\
+  mmf.modify_graphics_path_png_jpeg_width('${tex_in}',\
+  new_path='$this_annex_folder',textwidth=$img_width, do_convert_imgs=True)"
+  
+#REPLACE MATH unicode symbols with latex counterparts
+python -c "import markdown_manuscript_filters as mmf ; mmf.math_unicode_to_latex_file('${tex_in}')"
 
-#REMOVE INCLUDE 
-python -c "import markdown_manuscript_filters as mmf; import re; mmf.apply_pyrex(re.escape('\includeg'),'FIG: %'+re.escape('\includeg'),'publish/aux/mv0.tex','publish/aux/mv0.tex',do_ignore_yaml=False)"
-#REPLACE MATH
-python -c "import markdown_manuscript_filters as mmf ; mmf.unicode_to_latex_file('publish/aux/mv0.tex',is_verbose=True)"
-#REMOVE UNICODE
-python -c "import markdown_manuscript_filters as mmf; mmf.apply_pyrex(r'[^\x00-\x7F]+','???' ,'publish/aux/mv0.tex','publish/aux/mv0.tex',do_ignore_yaml=False)"
