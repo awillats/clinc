@@ -3,6 +3,10 @@
 
 __*
 
+# ignore sound files 
+*.aiff
+*.mp3
+
 # ignore aux files for overleaf 
 *.aux
 *.log
