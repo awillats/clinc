@@ -11,12 +11,12 @@ To study the effect of various interventions we simulated inputs to nodes in a n
 \frac{dV}{dt} = \frac{V_0 + I - V}{\tau_m} + \sigma_m \sqrt{\tau_m} \xi(t)
 \]
 
-To emulate **open-loop intervention** we simulated current injection from an external source. This is intended to represent experiments involving stimulation from microelectrodes or optogenetics *(albeit simplifying away any impact of actuator dynamics)*. By default, open-loop intervention is specified as white noise sampled at each timestep from Gaussian distribution with mean and variance $\mu_{intv.}$ and $\sigma^2_{intv.}$[^res_cont_dyn]
+To emulate **open-loop intervention** we simulated current injection from an external source. This is intended to represent experiments involving stimulation from microelectrodes or optogenetics *(albeit simplifying away any impact of actuator dynamics)*. By default, open-loop intervention is specified as white noise sampled at each timestep from a Gaussian distribution with mean and variance $\mu_{intv.}$ and $\sigma^2_{intv.}$[^res_cont_dyn]
 
 \[
 I_{open-loop} \sim \mathcal{N}(\mu_{intv.},\,\sigma^{2}_{intv.})\\
 \]
-Ignoring the effect of signal means in the linear-Gaussian setting:
+Ignoring the effect of signal means in the linear Gaussian setting:
 \[
 X_k = f(\sigma^2_m, \sigma^{2}_{intv.})
 \]

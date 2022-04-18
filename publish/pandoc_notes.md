@@ -14,6 +14,11 @@
 - [ ] clip audio by section into separate but sequential tracks 
 - [ ] check for removal of $ in final file
   - check for `\frac`
+  - check for `to the 2` 
+  - perp  
+  - hyphens should be removed from audio transcript 
+    - but watch out for minus signs !
+    
 
 - transplant_yaml
   - overwrite yaml if its there, dont just append 

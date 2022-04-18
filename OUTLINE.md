@@ -219,7 +219,7 @@ y=Cx+\eta
     - [...equations here...]
 - **graded(weighted) reachability** can help predict the influence of parameter values (e.g. edge weights, time-constants) on identifiability
   - quantifies impact of inputs, noise on outputs
-  - easiest to describe/understand in linear-Gaussian setting
+  - easiest to describe/understand in linear Gaussian setting
   - [...equations here...]
 
 <a name='figure-reachability'></a>
@@ -267,7 +267,7 @@ y=Cx+\eta
 🥡 **takeaway:** ??? 🚧
 
 - all networks built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
-- (delayed) linear-Gaussian network 
+- (delayed) linear Gaussian network 
   - required custom functionality to implement 
     - [[brian_delayed_gaussian] repository ](https://github.com/awillats/brian_delayed_gaussian)
     - allows us to understand impact of variability in simplest setting

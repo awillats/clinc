@@ -253,7 +253,7 @@ probably want
 ## Predicting correlation structure (theory)
 
 <!--imported from "/section_content/methods1_predicting_correlation.md"-->
-A linear-Gaussian circuit can be described by 1) the variance of the Gaussian private (independent) noise at each node, and 2) the weight of the linear relationships between each pair of connected nodes. Let $s \in \mathbb{R}^p$ denote the variance of each of the $p$ nodes in the circuit, and $W \in \mathbb{R}^{p \times p}$ denote the matrix of connection strengths such that $$W_{ij} = \text{strength of $i \to j$ connection}.$$
+A linear Gaussian circuit can be described by 1) the variance of the Gaussian private (independent) noise at each node, and 2) the weight of the linear relationships between each pair of connected nodes. Let $s \in \mathbb{R}^p$ denote the variance of each of the $p$ nodes in the circuit, and $W \in \mathbb{R}^{p \times p}$ denote the matrix of connection strengths such that $$W_{ij} = \text{strength of $i \to j$ connection}.$$
 
 Note that $\left[(W^T) s\right]_j$ gives the variance at node $j$ due to length-1 (direct) connections, and more generally, $\left[ (W^T)^k s \right]_j$ gives the variance at node $j$ due to length-$k$ (indirect) connections. The *total* variance at node $j$ is thus $\left[ \sum_{k=0}^{\infty} (W^T)^k s \right]_j$.
 
@@ -334,7 +334,7 @@ Additionally we study two domains of interactions between populations; contempor
 \] -->
 In the delay-resolvable domain, directionality of connections may be inferred even under passive observations by looking at temporal precedence - whether the past of one signal is more strongly correlated with future lags of another signal *(i.e. cross-correlation)*. In the contemporaneous domain, network influences act within the time of a single sample[^contemp_sample] so this temporal precedence clue is lost (although directionality can still be inferred in the presence of intervention).
 
-The following work is presented with the linear-Gaussian and contemporaneous domains as the default for simplicity and conciseness. 
+The following work is presented with the linear Gaussian and contemporaneous domains as the default for simplicity and conciseness. 
 
 !!!! - talk about the extension to time-resolvable, spiking if it ends up being included
 
@@ -349,7 +349,7 @@ The following work is presented with the linear-Gaussian and contemporaneous dom
 
 ### Code implementation
 Software for data generation, analysis, and plotting is available at https://github.com/awillats/clinc.
-Both linear-Gaussian and spiking networks are simulated with code built from the [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator. This allows for highly modular code with easily interchanged neuron models and standardized output preprocessing and plotting. It was necessary to write an additional custom extension to Brian2 in order to capture delayed linear-Gaussian interactions, available at [brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian). With this added functionality, it is possible to compare the equivalent network parameters only changing linear-Gaussian versus spiking dynamics and inspect differences solely due to spiking.
+Both linear Gaussian and spiking networks are simulated with code built from the [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator. This allows for highly modular code with easily interchanged neuron models and standardized output preprocessing and plotting. It was necessary to write an additional custom extension to Brian2 in order to capture delayed linear Gaussian interactions, available at [brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian). With this added functionality, it is possible to compare the equivalent network parameters only changing linear Gaussian versus spiking dynamics and inspect differences solely due to spiking.
 <!-- - introduces additional difficulties associated with estimation based on spiking observations, nonlinearities -->
 
 !!!! - talk about parameter choices and ranges?
@@ -378,7 +378,7 @@ To emulate **open-loop intervention** we simulated current injection from an ext
 \[
 I_{open-loop} \sim \mathcal{N}(\mu_{intv.},\,\sigma^{2}_{intv.})\\
 \]
-Ignoring the effect of signal means in the linear-Gaussian setting:
+Ignoring the effect of signal means in the linear Gaussian setting:
 \[
 X_k = f(\sigma^2_m, \sigma^{2}_{intv.})
 \]
@@ -426,10 +426,10 @@ Because the instantiation of noise in the network will be different from trial t
 > *refer to methods overview figure*
 
 [^inf_techniques]: *inference techniques mentioned in the intro...*
-[^corr_prototype]: what does "prototype" mean here? something like MI and corr are equivalent in the linear-Gaussian case, ...
+[^corr_prototype]: what does "prototype" mean here? something like MI and corr are equivalent in the linear Gaussian case, ...
 [^corr_hyperparameter]: not sure how important this is. would prefer to set this threshold at some ad-hoc value since we're sweeping other properties. But a more in-depth analysis could look at a receiver-operator curve with respect to this threshold
 
-While a broad range of techniques[^inf_techniques] exist for inferring functional relationships from observational data, `(for the majority of this work)` we choose to focus on simple bivariate correlation as a measure of dependence in the linear-Gaussian network. The impact of intervention on this metric is analytically tractable *(see [methods1_predicting_correlation.md](methods1_predicting_correlation.md))*, and can be thought of as a prototype[^corr_prototype] for more sophisticated measures of dependence such as time-lagged cross-correlations, bivariate and multivariate transfer entropy.
+While a broad range of techniques[^inf_techniques] exist for inferring functional relationships from observational data, `(for the majority of this work)` we choose to focus on simple bivariate correlation as a measure of dependence in the linear Gaussian network. The impact of intervention on this metric is analytically tractable *(see [methods1_predicting_correlation.md](methods1_predicting_correlation.md))*, and can be thought of as a prototype[^corr_prototype] for more sophisticated measures of dependence such as time-lagged cross-correlations, bivariate and multivariate transfer entropy.
 
 
 We implement a naive comparison strategy to estimate the circuit adjacency from emprical correlations; Thresholded empirical correlation matrices are compared to correlation matrices predicted from each circuit in a hypothesis set. Any hypothesized cirucits which are predicted to have a similar correlation structure as is observed (i.e. corr. mats equal after thresholding) are marked as "plausible circuits."[^circuit_search] If only one circuit amongst the hypothesis set is a plausible match, this is considered to be the estimated circuit. The threshold for "binarizing" the empirical correlation matrix is treated as a hyperparameter to be swept at the time of analysis.[^corr_hyperparameter]

@@ -33,7 +33,7 @@ Our goal is to develop clean answers, phrased in neuro terms, to the following q
       
 
 
-[^assess]: "The measures implemented are: mutual information, conditional mutual information, Granger causality, and conditional Granger causality (each for univariate and multivariate linear-Gaussian processes). For completeness we have also included Pearson correlation and partial correlation for univariate processes (with a potentially multivariate conditional process)."
+[^assess]: "The measures implemented are: mutual information, conditional mutual information, Granger causality, and conditional Granger causality (each for univariate and multivariate linear Gaussian processes). For completeness we have also included Pearson correlation and partial correlation for univariate processes (with a potentially multivariate conditional process)."
 
 - map of techniques available for inference
   - see ["Assessing the Significance of Directed and Multivariate Measures of Linear Dependence Between Time Series"](https://arxiv.org/pdf/2003.03887.pdf), [code](https://github.com/olivercliff/assessing-linear-dependence)[^assess] and [Unifying Pairwise Interactions in Complex Dynamics](https://arxiv.org/abs/2201.11941)

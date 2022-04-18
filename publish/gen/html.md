@@ -265,7 +265,7 @@ SECTION: Theory / Prediction
 
 SUB SECTION: Predicting correlation structure (theory)
 
-A linear-Gaussian circuit can be described by 1) the variance of the
+A linear Gaussian circuit can be described by 1) the variance of the
 gaussian private (independent) noise at each node, and 2) the weight of
 the linear relationships between each pair of connected nodes. Let [\\(s
 \\in \\mathbb{R}\^p\\)]{.math .inline} denote the variance of each of
@@ -334,23 +334,23 @@ single sample[^6^](#fn6){#fnref6 .footnote-ref} so this temporal
 precedence clue is lost (although directionality can still be inferred
 in the presence of intervention).
 
-The following work is presented with the linear-Gaussian and
+The following work is presented with the linear Gaussian and
 contemporaneous domains as the default for simplicity and conciseness.
 
 SUB SECTION: Code implementation
 
 Software for data generation, analysis, and plotting is available at
-https://github.com/awillats/clinc. Both linear-Gaussian and spiking
+https://github.com/awillats/clinc. Both linear Gaussian and spiking
 networks are simulated with code built from the
 [Brian2](https://elifesciences.org/articles/47314) spiking neural
 network simulator. This allows for highly modular code with easily
 interchanged neuron models and standardized output preprocessing and
 plotting. It was necessary to write an additional custom extension to
-Brian2 in order to capture delayed linear-Gaussian interactions,
+Brian2 in order to capture delayed linear Gaussian interactions,
 available at
 [brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian).
 With this added functionality, it is possible to compare the equivalent
-network parameters only changing linear-Gaussian versus spiking dynamics
+network parameters only changing linear Gaussian versus spiking dynamics
 and inspect differences solely due to spiking.
 
 *see [\_network_parameters_table.md](_network_parameters_table.md) for
@@ -382,7 +382,7 @@ timestep from Gaussian distribution with mean and variance
 
 [\\\[ I\_{open-loop} \\sim
 \\mathcal{N}(\\mu\_{intv.},\\,\\sigma\^{2}\_{intv.})\\\\ \\\]]{.math
-.display} Ignoring the effect of signal means in the linear-Gaussian
+.display} Ignoring the effect of signal means in the linear Gaussian
 setting: [\\\[ X_k = f(\\sigma\^2_m, \\sigma\^{2}\_{intv.}) \\\]]{.math
 .display} `per-node indexing needs resolving here also`
 
@@ -439,7 +439,7 @@ SUB SECTION: Extracting circuit estimates
 While a broad range of techniques[^10^](#fn10){#fnref10 .footnote-ref}
 exist for inferring functional relationships from observational data,
 `(for the majority of this work)` we choose to focus on simple bivariate
-correlation as a measure of dependence in the linear-Gaussian network.
+correlation as a measure of dependence in the linear Gaussian network.
 The impact of intervention on this metric is analytically tractable
 *(see
 [methods1_predicting_correlation.md](methods1_predicting_correlation.md))*,
@@ -806,7 +806,7 @@ SECTION: Supplement
 
 11. ::: {#fn11}
     what does "prototype" mean here? something like MI and corr are
-    equivalent in the linear-Gaussian case,
+    equivalent in the linear Gaussian case,
     ...[↩︎](#fnref11){.footnote-back}
     :::
 

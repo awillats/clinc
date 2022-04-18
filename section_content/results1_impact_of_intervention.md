@@ -74,7 +74,9 @@ While a primary advantage of closed-loop interventions for circuit inference is 
 
 !!!! todo - this is very closely related to 4.2 implementing interventions, description of impact of intervention on variance should perhaps be moved there... or the supplement?
 
-$$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) \geq \mathbb{V}_{i}(C)$$
+[^V-notation]: need to be clear V means variance
+
+[^V-notation]$$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) \geq \mathbb{V}_{i}(C)$$
 More specifically, if the open-loop stimulus is statistically independent from the intrinsic variability[^open_loop_independent]
 $$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) = \mathbb{V}_{i}(C) + \sigma^2_S$$
 Applying closed-loop to a linear Gaussian circuit:

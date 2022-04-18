@@ -30,7 +30,7 @@
 </details>
 
 
-- linear-Gaussian v.s. spiking/rate 💫
+- linear Gaussian v.s. spiking/rate 💫
 
 - matrix series / matrix exponential
 
@@ -49,7 +49,7 @@
 > 🥡 **takeaway:** ??? 🚧
 > 
 > - all networks built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
-> - (delayed) linear-Gaussian network 
+> - (delayed) linear Gaussian network 
 >   - required custom functionality to implement 
 >     - [[brian_delayed_gaussian] repository ](https://github.com/awillats/brian_delayed_gaussian)
 >     - allows us to understand impact of variability in simplest setting
@@ -148,7 +148,7 @@
     > - mutual information
     > - transfer entropy
 >     
-> [^assess]: "The measures implemented are: mutual information, conditional mutual information, Granger causality, and conditional Granger causality (each for univariate and multivariate linear-Gaussian processes). For completeness we have also included Pearson correlation and partial correlation for univariate processes (with a potentially multivariate conditional process)."
+> [^assess]: "The measures implemented are: mutual information, conditional mutual information, Granger causality, and conditional Granger causality (each for univariate and multivariate linear Gaussian processes). For completeness we have also included Pearson correlation and partial correlation for univariate processes (with a potentially multivariate conditional process)."
 > 
 > ### lagged cross-correlation 
 > - connection to / equivalence with Granger Causality (GC)

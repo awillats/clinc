@@ -279,7 +279,7 @@ probably want
   
   
   
-A linear-Gaussian circuit can be described by 1) the variance of the Gaussian private (independent) noise at each node, and 2) the weight of the linear relationships between each pair of connected nodes. Let <img src="https://latex.codecogs.com/gif.latex?s%20&#x5C;in%20&#x5C;mathbb{R}^p"/> denote the variance of each of the <img src="https://latex.codecogs.com/gif.latex?p"/> nodes in the circuit, and <img src="https://latex.codecogs.com/gif.latex?W%20&#x5C;in%20&#x5C;mathbb{R}^{p%20&#x5C;times%20p}"/> denote the matrix of connection strengths such that <p align="center"><img src="https://latex.codecogs.com/gif.latex?W_{ij}%20=%20&#x5C;text{strength%20of%20<img src="https://latex.codecogs.com/gif.latex?i%20&amp;#x5C;to%20j"/>%20connection}."/></p>  
+A linear Gaussian circuit can be described by 1) the variance of the Gaussian private (independent) noise at each node, and 2) the weight of the linear relationships between each pair of connected nodes. Let <img src="https://latex.codecogs.com/gif.latex?s%20&#x5C;in%20&#x5C;mathbb{R}^p"/> denote the variance of each of the <img src="https://latex.codecogs.com/gif.latex?p"/> nodes in the circuit, and <img src="https://latex.codecogs.com/gif.latex?W%20&#x5C;in%20&#x5C;mathbb{R}^{p%20&#x5C;times%20p}"/> denote the matrix of connection strengths such that <p align="center"><img src="https://latex.codecogs.com/gif.latex?W_{ij}%20=%20&#x5C;text{strength%20of%20<img src="https://latex.codecogs.com/gif.latex?i%20&amp;#x5C;to%20j"/>%20connection}."/></p>  
   
   
 Note that <img src="https://latex.codecogs.com/gif.latex?&#x5C;left[(W^T)%20s&#x5C;right]_j"/> gives the variance at node <img src="https://latex.codecogs.com/gif.latex?j"/> due to length-1 (direct) connections, and more generally, <img src="https://latex.codecogs.com/gif.latex?&#x5C;left[%20(W^T)^k%20s%20&#x5C;right]_j"/> gives the variance at node <img src="https://latex.codecogs.com/gif.latex?j"/> due to length-<img src="https://latex.codecogs.com/gif.latex?k"/> (indirect) connections. The *total* variance at node <img src="https://latex.codecogs.com/gif.latex?j"/> is thus <img src="https://latex.codecogs.com/gif.latex?&#x5C;left[%20&#x5C;sum_{k=0}^{&#x5C;infty}%20(W^T)^k%20s%20&#x5C;right]_j"/>.
@@ -328,7 +328,7 @@ This framework also allows us to predict the impact of open- and closed-loop con
 - [~] read e.g.
 - [ ] discuss networks - adj ✅
 - discuss 2 key dimensions of complexity
-  - linear-Gaussian v.s. spiking (LIF - Poisson?) 💫
+  - linear Gaussian v.s. spiking (LIF - Poisson?) 💫
   - contemporaneous v.s. delayed connections 💫
 - [ ] discuss brian implementation (supplement) 💫
   
@@ -361,7 +361,7 @@ Additionally we study two domains of interactions between populations; contempor
   
 In the delay-resolvable domain, directionality of connections may be inferred even under passive observations by looking at temporal precedence - whether the past of one signal is more strongly correlated with future lags of another signal *(i.e. cross-correlation)*. In the contemporaneous domain, network influences act within the time of a single sample[^contemp_sample] so this temporal precedence clue is lost (although directionality can still be inferred in the presence of intervention).
   
-The following work is presented with the linear-Gaussian and contemporaneous domains as the default for simplicity and conciseness. 
+The following work is presented with the linear Gaussian and contemporaneous domains as the default for simplicity and conciseness. 
   
 !!!! - talk about the extension to time-resolvable, spiking if it ends up being included
   
@@ -377,7 +377,7 @@ The following work is presented with the linear-Gaussian and contemporaneous dom
 ###  Code implementation
   
 Software for data generation, analysis, and plotting is available at https://github.com/awillats/clinc.
-Both linear-Gaussian and spiking networks are simulated with code built from the [Brian2](https://elifesciences.org/articles/47314 ) spiking neural network simulator. This allows for highly modular code with easily interchanged neuron models and standardized output preprocessing and plotting. It was necessary to write an additional custom extension to Brian2 in order to capture delayed linear-Gaussian interactions, available at [brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian ). With this added functionality, it is possible to compare the equivalent network parameters only changing linear-Gaussian versus spiking dynamics and inspect differences solely due to spiking.
+Both linear Gaussian and spiking networks are simulated with code built from the [Brian2](https://elifesciences.org/articles/47314 ) spiking neural network simulator. This allows for highly modular code with easily interchanged neuron models and standardized output preprocessing and plotting. It was necessary to write an additional custom extension to Brian2 in order to capture delayed linear Gaussian interactions, available at [brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian ). With this added functionality, it is possible to compare the equivalent network parameters only changing linear Gaussian versus spiking dynamics and inspect differences solely due to spiking.
   
   
   
@@ -406,7 +406,7 @@ To emulate **open-loop intervention** we simulated current injection from an ext
   
 <p align="center"><img src="https://latex.codecogs.com/gif.latex?I_{open-loop}%20&#x5C;sim%20&#x5C;mathcal{N}(&#x5C;mu_{intv.},&#x5C;,&#x5C;sigma^{2}_{intv.})&#x5C;&#x5C;"/></p>  
   
-Ignoring the effect of signal means in the linear-Gaussian setting:
+Ignoring the effect of signal means in the linear Gaussian setting:
 <p align="center"><img src="https://latex.codecogs.com/gif.latex?X_k%20=%20f(&#x5C;sigma^2_m,%20&#x5C;sigma^{2}_{intv.})"/></p>  
   
 `per-node indexing needs resolving here also`
@@ -449,10 +449,10 @@ Because the instantiation of noise in the network will be different from trial t
 > *refer to methods overview figure*
   
 [^inf_techniques]: *inference techniques mentioned in the intro...*
-[^corr_prototype]: what does "prototype" mean here? something like MI and corr are equivalent in the linear-Gaussian case, ...
+[^corr_prototype]: what does "prototype" mean here? something like MI and corr are equivalent in the linear Gaussian case, ...
 [^corr_hyperparameter]: not sure how important this is. would prefer to set this threshold at some ad-hoc value since we're sweeping other properties. But a more in-depth analysis could look at a receiver-operator curve with respect to this threshold
   
-While a broad range of techniques[^inf_techniques] exist for inferring functional relationships from observational data, `(for the majority of this work)` we choose to focus on simple bivariate correlation as a measure of dependence in the linear-Gaussian network. The impact of intervention on this metric is analytically tractable *(see [methods1_predicting_correlation.md](methods1_predicting_correlation.md ))*, and can be thought of as a prototype[^corr_prototype] for more sophisticated measures of dependence such as time-lagged cross-correlations, bivariate and multivariate transfer entropy.
+While a broad range of techniques[^inf_techniques] exist for inferring functional relationships from observational data, `(for the majority of this work)` we choose to focus on simple bivariate correlation as a measure of dependence in the linear Gaussian network. The impact of intervention on this metric is analytically tractable *(see [methods1_predicting_correlation.md](methods1_predicting_correlation.md ))*, and can be thought of as a prototype[^corr_prototype] for more sophisticated measures of dependence such as time-lagged cross-correlations, bivariate and multivariate transfer entropy.
   
   
 We implement a naive comparison strategy to estimate the circuit adjacency from emprical correlations; Thresholded empirical correlation matrices are compared to correlation matrices predicted from each circuit in a hypothesis set. Any hypothesized cirucits which are predicted to have a similar correlation structure as is observed (i.e. corr. mats equal after thresholding) are marked as "plausible circuits."[^circuit_search] If only one circuit amongst the hypothesis set is a plausible match, this is considered to be the estimated circuit. The threshold for "binarizing" the empirical correlation matrix is treated as a hyperparameter to be swept at the time of analysis.[^corr_hyperparameter]

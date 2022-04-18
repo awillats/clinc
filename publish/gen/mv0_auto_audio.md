@@ -58,7 +58,7 @@ w 21 \neq 0. Note that hypotheses A and C have direct connections between nodes 
 
 ## Predicting correlation structure (theory)
 
-A linear-Gaussian circuit can be described by 1) the variance of the Gaussian private (independent) noise at each node, and 2) the weight of the linear relationships between each pair of connected nodes. Let
+A linear Gaussian circuit can be described by 1) the variance of the Gaussian private (independent) noise at each node, and 2) the weight of the linear relationships between each pair of connected nodes. Let
 s \in {R} to the p denote the variance of each of the p nodes in the circuit, and W \in {R} to the {p \times p} denote the matrix of connection strengths such that
 W ij  =  {strength of i \to j connection}.
 
@@ -110,13 +110,13 @@ Additionally we study two domains of interactions between populations; contempor
 
 In the delay-resolvable domain, directionality of connections may be inferred even under passive observations by looking at temporal precedence - whether the past of one signal is more strongly correlated with future lags of another signal *(i.e. cross-correlation)*. In the contemporaneous domain, network influences act within the time of a single sample so this temporal precedence clue is lost (although directionality can still be inferred in the presence of intervention).
 
-The following work is presented with the linear-Gaussian and contemporaneous domains as the default for simplicity and conciseness.
+The following work is presented with the linear Gaussian and contemporaneous domains as the default for simplicity and conciseness.
 
 ### Code implementation
 
-Software for data generation, analysis, and plotting is available at link github.com/awillats/clinc. Both linear-Gaussian and spiking networks are simulated with code built from the
-[Brian2](link elifesciences.org/articles/47314) spiking neural network simulator. This allows for highly modular code with easily interchanged neuron models and standardized output preprocessing and plotting. It was necessary to write an additional custom extension to Brian2 in order to capture delayed linear-Gaussian interactions, available at
-[brian_delayed_gaussian](link github.com/awillats/brian_delayed_gaussian). With this added functionality, it is possible to compare the equivalent network parameters only changing linear-Gaussian versus spiking dynamics and inspect differences solely due to spiking.
+Software for data generation, analysis, and plotting is available at link github.com/awillats/clinc. Both linear Gaussian and spiking networks are simulated with code built from the
+[Brian2](link elifesciences.org/articles/47314) spiking neural network simulator. This allows for highly modular code with easily interchanged neuron models and standardized output preprocessing and plotting. It was necessary to write an additional custom extension to Brian2 in order to capture delayed linear Gaussian interactions, available at
+[brian_delayed_gaussian](link github.com/awillats/brian_delayed_gaussian). With this added functionality, it is possible to compare the equivalent network parameters only changing linear Gaussian versus spiking dynamics and inspect differences solely due to spiking.
 
 *see [\_network_parameters_table.md] link. for list of relevant parameters*
 
@@ -134,7 +134,7 @@ To emulate **open loop intervention** we simulated current injection from an ext
 
  I open loop  is approximately  {N of \mu intv.,\,\sigma to the {2} intv.)... 
  ...
- Ignoring the effect of signal means in the linear-Gaussian setting:
+ Ignoring the effect of signal means in the linear Gaussian setting:
  X k  =  a function of \sigma squared m, \sigma to the {2} intv.)
  `per-node indexing needs resolving here also`
 
@@ -161,7 +161,7 @@ Because the instantiation of noise in the network will be different from trial t
 
 ## Extracting circuit estimates
 
-While a broad range of techniques exist for inferring functional relationships from observational data, `(for the majority of this work)` we choose to focus on simple bivariate correlation as a measure of dependence in the linear-Gaussian network. The impact of intervention on this metric is analytically tractable *(see
+While a broad range of techniques exist for inferring functional relationships from observational data, `(for the majority of this work)` we choose to focus on simple bivariate correlation as a measure of dependence in the linear Gaussian network. The impact of intervention on this metric is analytically tractable *(see
 [methods1_predicting_correlation.md] link.)*, and can be thought of as a prototype for more sophisticated measures of dependence such as time-lagged cross-correlations, bivariate and multivariate transfer entropy.
 
 We implement a naive comparison strategy to estimate the circuit adjacency from emprical correlations; Thresholded empirical correlation matrices are compared to correlation matrices predicted from each circuit in a hypothesis set. Any hypothesized cirucits which are predicted to have a similar correlation structure as is observed
@@ -365,7 +365,7 @@ In studying the utility of various intervention for circuit inference we arrived
 [^13]: *inference techniques mentioned in the intro...*
 
 [^14]: what does "prototype" mean here? something like MI and corr are
-    equivalent in the linear-Gaussian case, ...
+    equivalent in the linear Gaussian case, ...
 
 [^15]: TODO? formalize notation for this
 
