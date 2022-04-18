@@ -8,6 +8,13 @@
 - `markdown_to_mp3.sh`
 
 # To-do 
+- [ ] figure out how to make `_out.md` files not edittable (i.e. read only) from atom, but edittable from python, terminal etc.
+  - make atom a usergroup?
+
+- [ ] clip audio by section into separate but sequential tracks 
+- [ ] check for removal of $ in final file
+  - check for `\frac`
+
 - transplant_yaml
   - overwrite yaml if its there, dont just append 
 - cleanup_filter.py 

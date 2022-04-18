@@ -15,7 +15,7 @@ by Adam Willats and Matthew O'Shaugnessy
 Associated code is managed in the following repositories:
 - see [awillats/clinc/code](https://github.com/awillats/clinc/code/CODE_OVERVIEW.md) *(this repo)* for simplified network simulations & correlation, reachability theory 
 - see [awillats/clinc-gen](https://github.com/awillats/clinc-gen) for more detailed network & control simulations  
-- see [awillats/brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian) for simulating networks of gaussian nodes with delayed connections 
+- see [awillats/brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian) for simulating networks of Gaussian nodes with delayed connections 
 - see [awillats/clinc-analysis](https://github.com/awillats/clinc-analysis) for network estimation using IDTxl
 
 # Main plots

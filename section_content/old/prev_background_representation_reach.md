@@ -33,7 +33,7 @@ y=Cx+\eta
     - [...equations here...]
 - **graded reachability** can help predict the influence of parameter values (e.g. edge weights, time-constants) on identifiability
   - quantifies impact of inputs, noise on outputs
-  - easiest to describe/understand in linear-gaussian setting
+  - easiest to describe/understand in linear-Gaussian setting
   - [...equations here...]
 
 ## Understanding identification through derived properties of circuits (reachability rules)

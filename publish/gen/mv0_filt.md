@@ -74,7 +74,7 @@ $w_{21} \neq 0$. Note that hypotheses A and C have direct connections between no
 
 ## Predicting correlation structure (theory)
 
-A linear-Gaussian circuit can be described by 1) the variance of the gaussian private (independent) noise at each node, and 2) the weight of the linear relationships between each pair of connected nodes. Let
+A linear-Gaussian circuit can be described by 1) the variance of the Gaussian private (independent) noise at each node, and 2) the weight of the linear relationships between each pair of connected nodes. Let
 $s \in \mathbb{R}^p$ denote the variance of each of the $p$ nodes in the circuit, and $W \in \mathbb{R}^{p \times p}$ denote the matrix of connection strengths such that
 $$W_{ij} = \text{strength of $i \to j$ connection}.$$
 
@@ -111,7 +111,7 @@ We sought to understand both general principles (abstracted across particulars o
 
 ### Stochastic network dynamics
 
-The first approach is accomplished with a network of nodes with gaussian noise sources, linear interactions, and linear dynamics. The second approach is achieved with a network of nodes consisting of populations of leaky integrate-and-fire (LIF) neurons. These differ from the simpler case in their nonlinear-outputs, arising from inclusion of a spiking threshold. Interactions between neurons happen through spiking synapses, meaning information is passed between neurons sparsely in time[^7].
+The first approach is accomplished with a network of nodes with Gaussian noise sources, linear interactions, and linear dynamics. The second approach is achieved with a network of nodes consisting of populations of leaky integrate-and-fire (LIF) neurons. These differ from the simpler case in their nonlinear-outputs, arising from inclusion of a spiking threshold. Interactions between neurons happen through spiking synapses, meaning information is passed between neurons sparsely in time[^7].
 
 *Neuron dynamics:* $$
 \frac{dV}{dt} = \frac{V_0 + I - V}{\tau_m} + \sigma_m \sqrt{\tau_m} \xi(t)
@@ -127,9 +127,9 @@ The following work is presented with the linear-Gaussian and contemporaneous dom
 
 ### Code implementation
 
-Software for data generation, analysis, and plotting is available at https://github.com/awillats/clinc. Both linear-gaussian and spiking networks are simulated with code built from the
-[Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator. This allows for highly modular code with easily interchanged neuron models and standardized output preprocessing and plotting. It was necessary to write an additional custom extension to Brian2 in order to capture delayed linear-gaussian interactions, available at
-[brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian). With this added functionality, it is possible to compare the equivalent network parameters only changing linear-gaussian versus spiking dynamics and inspect differences solely due to spiking.
+Software for data generation, analysis, and plotting is available at https://github.com/awillats/clinc. Both linear-Gaussian and spiking networks are simulated with code built from the
+[Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator. This allows for highly modular code with easily interchanged neuron models and standardized output preprocessing and plotting. It was necessary to write an additional custom extension to Brian2 in order to capture delayed linear-Gaussian interactions, available at
+[brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian). With this added functionality, it is possible to compare the equivalent network parameters only changing linear-Gaussian versus spiking dynamics and inspect differences solely due to spiking.
 
 *see [\_network_parameters_table.md](_network_parameters_table.md) for list of relevant parameters*
 
@@ -205,10 +205,10 @@ Next, we apply (steps 1-3 of) this circuit search procedure to a collection of c
 
 ### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias
 
-While a primary advantage of closed-loop interventions for circuit inference is its ability to functionally lesion indirect connections, another, more nuanced `(quantitative)` advantage of closed-loop control lies in its capacity to bidirectionally control output variance. While the variance of an open-loop stimulus can be titrated to adjust the output variance at a node, in general, an open-loop stimulus cannot reduce this variance below its instrinsic[^21] variability. That is, if the system is linear with gaussian noise,
+While a primary advantage of closed-loop interventions for circuit inference is its ability to functionally lesion indirect connections, another, more nuanced `(quantitative)` advantage of closed-loop control lies in its capacity to bidirectionally control output variance. While the variance of an open-loop stimulus can be titrated to adjust the output variance at a node, in general, an open-loop stimulus cannot reduce this variance below its instrinsic[^21] variability. That is, if the system is linear with Gaussian noise,
 
 $$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) \geq \mathbb{V}_{i}(C)$$ More specifically, if the open-loop stimulus is statistically independent from the intrinsic variability[^22]
-$$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) = \mathbb{V}_{i}(C) + \sigma^2_S$$ Applying closed-loop to a linear gaussian circuit:
+$$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) = \mathbb{V}_{i}(C) + \sigma^2_S$$ Applying closed-loop to a linear Gaussian circuit:
 
 $$
 \begin{aligned}
@@ -254,11 +254,11 @@ $\widetilde{W}_{S_k→i} \ll \widetilde{W}_{S_k→j}$ results in a relationship 
 
 > 🚧(Final figure will be a mix of these two panels, caption will need
 > updating) **Figure VAR: Location, variance, and type of intervention
-> shape pairwise correlations** **(CENTER)** A two-node linear gaussian
+> shape pairwise correlations** **(CENTER)** A two-node linear Gaussian
 > network is simulated with a connection from A→B. Open-loop
-> interventions *(blue)* consist of independent gaussian inputs with a
+> interventions *(blue)* consist of independent Gaussian inputs with a
 > range of variances $\sigma^2_S$. Closed-loop interventions *(orange)*
-> consist of feedback control with an independent gaussian target with a
+> consist of feedback control with an independent Gaussian target with a
 > range of variances. *Incomplete closed-loop interventions result in
 > node outputs which are a mix of the control target and network-driven
 > activity*. Connections from sources to nodes are colored by their

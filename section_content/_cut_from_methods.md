@@ -14,7 +14,7 @@
 </details>
 
 
-- linear-gaussian v.s. spiking/rate 💫
+- linear-Gaussian v.s. spiking/rate 💫
 
 - matrix series / matrix exponential
 
@@ -35,7 +35,7 @@
 🥡 **takeaway:** ??? 🚧
 
 - all networks built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
-- (delayed) linear-gaussian network 
+- (delayed) linear-Gaussian network 
   - required custom functionality to implement 
     - [[brian_delayed_gaussian] repository ](https://github.com/awillats/brian_delayed_gaussian)
     - allows us to understand impact of variability in simplest setting

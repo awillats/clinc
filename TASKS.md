@@ -23,7 +23,7 @@
 # Technical loose-ends 
 - [ ] summarizing relationship between intervention utility (across-hypoth entropy) and circuit properties
 - [ ] ⚠️ predicting time-lagged correlation 
-- [ ] quantitative match between gaussian sims & theory [~]
+- [ ] quantitative match between Gaussian sims & theory [~]
 
 # minor tasks 
 - [~] pandoc filter to remove to-do list items?

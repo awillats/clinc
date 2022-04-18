@@ -4,7 +4,7 @@ panflute-path: 'publish/panflute_filters'
 title: Closed-Loop Identifiability in Neural Circuits
 author:
   - name: Adam Willats, Matthew O'Shaughnessy
-bibliography: [bib/moshaughnessy.bib, bib/misc.bib, bib/mega_causal_bib.bib]
+bibliography: [bib/moshaughnessy.bib, bib/misc.bib, bib/mega_causal_bib.bib, bib/clinc_sync.bib]
 output:
   pdf_document:
      path: /publish/other_formats/manuscript_v0_pandoc.pdf

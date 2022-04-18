@@ -3,7 +3,7 @@
 
 Let $s \in \mathbb{R}^p$ denote exogenous inputs to each of the $p$ nodes, and $W \in \mathbb{R}^{p \times p}$ denote the matrix of connection strengths such that $$W_{ij} = \text{strength of $j \rightarrow i$ connection}.$$
 
-We'll assume for now that all functional relationships between nodes are linear, and all exogenous noise is iid gaussian.[^lingauss]
+We'll assume for now that all functional relationships between nodes are linear, and all exogenous noise is iid Gaussian.[^lingauss]
 
 For intuition, note that:
  - $(s)_j$ denotes variance in node $j$ due to length-0 connections,

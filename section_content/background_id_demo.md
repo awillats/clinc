@@ -10,7 +10,7 @@
 > *Closed-loop* control (columns 5 and 6) can provide the experimenter with even more inferential power. Column 5 shows the resulting adjacency matrix when this closed-loop control is applied to node 1. In each hypothesis, the impact of this closed-loop control is to remove the impact of other nodes on node 1, because when perfect closed-loop is applied the activity of node 1 is completely independent of other nodes. (These severed connections are depicted in column 5 by dashed lines.) In hypothesis B, this also results in the elimation of the indirect connection from node 2 to node 1. The application of closed-loop control at node 1 thus results in a different observed correlation structure in each of the three circuit hypotheses (column 6). This means that the experimenter can therefore distinguish between these circuit hypotheses by applying closed-loop control -- a task not possible with passive observation or open-loop control.
 
 <details><summary>↪ figure to do items for @Adam</summary>
-
+- [ ] TODO: overall this needs to be cut from the caption and filtered into the text body
 - [ ] @Adam - change labels at top from "B" to "1"
 - [ ] @Adam - add (A) (B) (C) labels to each row
 - [ ] @Adam - in legend, change in/direct "edge" to in/direct "connection"

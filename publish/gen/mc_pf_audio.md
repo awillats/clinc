@@ -679,7 +679,7 @@ network structure and dynamics !!!! - 70% done
 -   \[\~\] read e.g.
 -   [ ] discuss networks - adj ✅
 -   discuss 2 key dimensions of complexity
-    -   linear-gaussian v.s. spiking (LIF - Poisson?) 💫
+    -   linear-Gaussian v.s. spiking (LIF - Poisson?) 💫
     -   contemporaneous v.s. delayed connections 💫
 -   [ ] discuss brian implementation (supplement) 💫
 
@@ -692,7 +692,7 @@ considerations introduced by dealing with spikes and synapses.
 
 ### Stochastic network dynamics
 
-The first approach is accomplished with a network of nodes with gaussian
+The first approach is accomplished with a network of nodes with Gaussian
 noise sources, linear interactions, and linear dynamics. The second
 approach is achieved with a network of nodes consisting of populations
 of leaky integrate-and-fire (LIF) neurons. These differ from the simpler
@@ -754,17 +754,17 @@ up being included
 ### Code implementation
 
 Software for data generation, analysis, and plotting is available at
-https://github.com/awillats/clinc. Both linear-gaussian and spiking
+https://github.com/awillats/clinc. Both linear-Gaussian and spiking
 networks are simulated with code built from the
 [Brian2](https://elifesciences.org/articles/47314) spiking neural
 network simulator. This allows for highly modular code with easily
 interchanged neuron models and standardized output preprocessing and
 plotting. It was necessary to write an additional custom extension to
-Brian2 in order to capture delayed linear-gaussian interactions,
+Brian2 in order to capture delayed linear-Gaussian interactions,
 available at
 [brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian).
 With this added functionality, it is possible to compare the equivalent
-network parameters only changing linear-gaussian versus spiking dynamics
+network parameters only changing linear-Gaussian versus spiking dynamics
 and inspect differences solely due to spiking.
 `<!-- - introduces additional difficulties associated with estimation based on spiking observations, nonlinearities -->`{=html}
 
@@ -1046,7 +1046,7 @@ lies in its capacity to bidirectionally control output variance. While
 the variance of an open-loop stimulus can be titrated to adjust the
 output variance at a node, in general, an open-loop stimulus cannot
 reduce this variance below its instrinsic[^20] variability. That is, if
-the system is linear with gaussian noise,
+the system is linear with Gaussian noise,
 
 !!!! todo - this is very closely related to 4.2 implementing
 interventions, description of impact of intervention on variance should
@@ -1056,7 +1056,7 @@ $$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) \geq \mathbb{V}_{i}(C)$$
 More specifically, if the open-loop stimulus is statistically
 independent from the intrinsic variability[^21]
 $$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) = \mathbb{V}_{i}(C) + \sigma^2_S$$
-Applying closed-loop to a linear gaussian circuit:
+Applying closed-loop to a linear Gaussian circuit:
 
 \[
 ```{=tex}
@@ -1212,11 +1212,11 @@ relationship similar to the "downstream source" case
 
 > 🚧(Final figure will be a mix of these two panels, caption will need
 > updating) **Figure VAR: Location, variance, and type of intervention
-> shape pairwise correlations** **(CENTER)** A two-node linear gaussian
+> shape pairwise correlations** **(CENTER)** A two-node linear Gaussian
 > network is simulated with a connection from A→B. Open-loop
-> interventions *(blue)* consist of independent gaussian inputs with a
+> interventions *(blue)* consist of independent Gaussian inputs with a
 > range of variances $\sigma^2_S$. Closed-loop interventions *(orange)*
-> consist of feedback control with an independent gaussian target with a
+> consist of feedback control with an independent Gaussian target with a
 > range of variances. *Incomplete closed-loop interventions result in
 > node outputs which are a mix of the control target and network-driven
 > activity*. Connections from sources to nodes are colored by their
