@@ -7,14 +7,16 @@ author:
 bibliography: [bib/moshaughnessy.bib, bib/misc.bib, bib/mega_causal_bib.bib]
 output:
   pdf_document:
-     path: /publish/manuscript_pandoc.pdf
+     path: /publish/other_formats/manuscript_v0_pandoc.pdf
 classoption: twocolumn
 geometry: margin=1.5cm
 numbersections: true
-
 ---
-<!-- id: "hide-todo" -->
-<!-- uncomment `id: hide-todo` to hide to-do list items and collapsible section -->
+<!-- 
+id: "hide-todo" 
+NOTE: uncomment `id: hide-todo` to hide to-do list items and collapsible section
+NOTE: requires MPE Use Pandoc Parser to be off 
+ -->
 <!-- @ import "publish/publish_style.less" -->
 
 <!-- see also _meta folder, consider formatting as "YAML front matter" for pandoc -->
