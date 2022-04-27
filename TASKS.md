@@ -1,13 +1,16 @@
 # Top 3 highest priority writing tasks:
 
 - [ ] re-arrange sections 
-  - [.] scan as-is 
+  - [x] scan as-is 
     - minimally filtered two-column pdf
+    
   - [ ] make prior arrangement changes 
     - see writing tasks 
     - discussion to set order of certain subsections
     - new outline?
+  
   - [ ] compartmentalize sections so they can be moved flexibly
+  
   - [ ] verify flow against examples
   
 - [ ] fill in content gaps 
