@@ -1,5 +1,34 @@
 Word count:
 
+**April 6th outline / section numbers:**  
+see `publish/outputs/manuscript_v0_mpe.html`
+
+# Abstract - 1.
+# Introduction - 2.
+## Estimating causal interactions in the brain - 2.1
+## Interventions in neuroscience & causal inference - 2.2 
+## Representations & reachability - 2.3
+# Theory / Prediction - 3. 
+## Predicting correlation structure (theory) - 3.1
+# Simulation Methods - 4. 
+## Modeling network structure and dynamics - 4.1 
+### Stochastic network dynamics - 4.1.1
+### Time-resolvable interactions - 4.1.2
+### Code implementation - 4.1.3 
+## Implementing interventions - 4.2
+## Extracting circuit estimates - 4.3
+## Information-theoretic measures of hypothesis ambiguity - 4.4 
+# Results - 5.
+## Impact of intervention on estimation performance - 5.1 
+### Intervening provides (categorical) improvements in inference power beyond passive observation - 5.1.1
+### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias - 5.1.2
+#### Impact of intervention location and variance on pairwise correlations - 5.1.2.1
+# Discussion - 6. 
+## limitations
+## results summary → summary of value closed-loop generally
+## summary of guidelines for experimenters
+## "funnel out", future work → broad impact
+
 # Organization / structure / flow
 - [ ] split sim methods elsewhere
     - [ ] pull all into theory / methods overview section
@@ -9,6 +38,12 @@ Word count:
 
 - [ ] Tentatively, bump 2.3 into theory section
 
+<details><summary>↪see also</summary>
+
+![](__local/clinc_org_whiteboard_20220316.jpg)
+
+</details>
+
 - [ ] proposed methods order - could be overwritten by order suggested by "steps of intervention"
   - *simple linear Gaussian case*
   - Interventions - 2.2 → to end of introduction 
@@ -17,6 +52,11 @@ Word count:
   - inferring cause from time series  - 2.1B→ new 3.3 
     - minimize granger, IDTxl
     
+- [ ] from methods1_prediction_correlation: Some redundancy with simulation methods; 
+  - cut and paste anything useful in 4.2 and put into 3.1 / 3.2
+
+
+
 - [ ] where does methods pipeline figure go?
 
 - [ ] integrate steps_of_inference.md as overview at the end of intro

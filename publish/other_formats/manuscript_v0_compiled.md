@@ -598,7 +598,7 @@ In neural circuits, we're often interested in firing rates, which are non-negati
 !!!! - reference [figvar](#fig-var ) to empricially show this bidirectional control of output variance?
   
   
-####  Impact of intervention location and variance on pariwise correlations
+####  Impact of intervention location and variance on pairwise correlations
   
   
   

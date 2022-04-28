@@ -122,7 +122,7 @@ In neural circuits, we're often interested in firing rates, which are non-negati
 !!!! - reference [figvar](#fig-var) to empricially show this bidirectional control of output variance?
 
 
-#### Impact of intervention location and variance on pariwise correlations
+#### Impact of intervention location and variance on pairwise correlations
 <!-- > - Implications for ID: more precise shaping of codependence across network
 > - wider dynamic range of observable correlations
 >   - important because we sometimes want to minimize correlations for indirect links

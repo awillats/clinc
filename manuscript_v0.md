@@ -61,7 +61,7 @@ NOTE: requires MPE Use Pandoc Parser to be off
 
 !!!! - 70% done
 
-!!!! Todo - Get language more precise and effective *(see writing_tasks)*
+<!-- !!!! Todo - Get language more precise and effective *(see writing_tasks)* -->
 
 @import "/section_content/background_intervention_causal_inf.md"
 
@@ -69,13 +69,14 @@ NOTE: requires MPE Use Pandoc Parser to be off
 
 !!!! - 60% done
 
-!!!! todo - Rewrite X=XW+E as vector version - Describe what 'reachability' is *(see writing_tasks)*
+<!-- !!!! todo - Rewrite X=XW+E as vector version - Describe what 'reachability' is *(see writing_tasks)* -->
 
 @ import "/section_content/background_representation_reach.md"
 
 !!!! - 70% done
 
-!!!! todo - Talk about what 'reachability' means (total direct+indirect impact) - [Matt:] Rewrite first paragraph to not use notation (place this box before any theory/notation sections) - [Matt:] Set expectation here that we're talking about linear Gaussian circuits
+!!!! todo - Talk about what 'reachability' means (total direct+indirect impact) - [Matt:] Rewrite first paragraph to not use notation (place this box before any theory/notation sections) 
+- [Matt:] Set expectation here that we're talking about linear Gaussian circuits
 
 @import "/section_content/background_id_demo.md"
 
@@ -93,6 +94,7 @@ NOTE: requires MPE Use Pandoc Parser to be off
 !!!! todo - Some redundancy with simulation methods; cut and paste anything useful in 4.2 and put into 3.1 / 3.2
 
 # Simulation Methods
+
 
 !!!! todo - reorganize / split sections 
 

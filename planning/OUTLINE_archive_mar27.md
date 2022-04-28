@@ -478,7 +478,7 @@ y=Cx+\eta
 - 
 - firing rates couple mean and variance
 - imperfect control - interpolates between open and closed-loop impact
-#### Impact of intervention location and variance on pariwise correlations
+#### Impact of intervention location and variance on pairwise correlations
 - Closed-loop intervention enables wider range of shaping covariance across a network
 - Implications for ID: more precise shaping of codependence across network`
 - `variance of node may increase or decrease correlation of pair of nodes`

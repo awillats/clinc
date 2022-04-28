@@ -1128,7 +1128,7 @@ $0\leq\gamma\leq1$ \[
 !!!! - reference [figvar](#fig-var) to empricially show this
 bidirectional control of output variance?
 
-#### Impact of intervention location and variance on pariwise correlations
+#### Impact of intervention location and variance on pairwise correlations
 
 ```{=html}
 <!-- > - Implications for ID: more precise shaping of codependence across network
@@ -1360,7 +1360,7 @@ advantages facilitate opportunities for closed-loop intervention to
 reveal more circuit structure than passive observation or even open-loop
 experiments.
 
-### summary of guidelines for experimentors
+### summary of guidelines for experimenters
 
 In studying the utility of various intervention for circuit inference we
 arrived at a few general guidelines which may assist experimental

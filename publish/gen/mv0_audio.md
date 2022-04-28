@@ -551,7 +551,7 @@ Applying closed-loop to a linear Gaussian circuit:
 
 
 
-SUB SECTION Impact of intervention location and variance on pariwise correlations
+SUB SECTION Impact of intervention location and variance on pairwise correlations
 
 [related methods] link. 
 
@@ -700,7 +700,7 @@ advantages facilitate opportunities for closed-loop intervention to
 reveal more circuit structure than passive observation or even open-loop
 experiments.
 
-SUB SECTION summary of guidelines for experimentors
+SUB SECTION summary of guidelines for experimenters
 
 In studying the utility of various intervention for circuit inference we
 arrived at a few general guidelines which may assist experimental
