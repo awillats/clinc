@@ -41,6 +41,7 @@ NOTE: requires MPE Use Pandoc Parser to be off
 - [References](#references) -->
 <!-- /code_chunk_output -->
 
+
 # Abstract
 
 @import "/section_content/abstract.md"
@@ -48,61 +49,107 @@ NOTE: requires MPE Use Pandoc Parser to be off
 # Introduction
 
 ## Estimating causal interactions in the brain
-<!-- !!!! - 70% done -->
-
 @import "/section_content/background_causal_network_id.md"
 
 ## Interventions in neuroscience & causal inference
-<!-- !!!! - 70% done -->
-
 @import "/section_content/background_intervention_causal_inf.md"
 
-## Representations & reachability
-<!-- !!!! - 60% done -->
+## Representations & reachability (minimal, dupe)
+```
+consider:
+@ import "/section_content/representation_reach.md"
+@ import "/section_content/background_id_demo.md"
+```
 
-@import "/section_content/representation_reach.md"
-
-@import "/section_content/background_id_demo.md"
-
-# Theory / Prediction
-<!-- <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/> -->
-![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
-> **Figure OVERVIEW:** ...
-
-<!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
-## Predicting correlation structure (theory)
-@import "/section_content/methods_predicting_correlation.md"
-
-# Simulation Methods
-
-<!-- were compiled in 
- @ import "/section_content/methods0_simulations_interventions_estimates.md" 
- -->
-@import "/section_content/methods_simulations.md" 
-<!-- works! -->
-@import "/section_content/methods_interventions.md"
-<!-- works! -->
-@import "/section_content/methods_circuit_estimates.md"
-
-## Information-theoretic measures of hypothesis ambiguity
-*see [_steps_of_inference.md](_steps_of_inference.md) for entropy writeup*
 
 # Results
 <!-- !!!! - overall, 60% done -->
+## Overview - Challenges (+)
+## Overview - Network (4.1?)
+- `reference extended methods`
+```
+only need some from:
+@ import "/section_content/methods_simulations.md" 
+```
 
-## Impact of intervention on estimation performance
+## Steps of inference - *overview of CLINC approach* (+)
+![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
+> **Figure OVERVIEW:** ...
+
+<!-- <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/> -->
+<!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
+@import "/section_content/misc/_steps_of_inference.md"
+
+
+### Representations & reachability
+`minimum results version from:`
+`@ import "/section_content/representation_reach.md"`
+
+@import "/section_content/background_id_demo.md"
+
+### Predicting correlation structure (theory)
+`@ import "/section_content/methods_predicting_correlation.md"`
+
+### Extracting circuit estimates (4.3)
+`@ import "/section_content/methods_circuit_estimates.md"`
+
+### (predicting) impact of intervention on pairwise dependence (3.1?, 5.1?)
+
+`@ import "/section_content/methods_interventions.md"`
+```
+might be useful stuff in:
+@ import "/section_content/results_impact_of_intervention.md"
+```
+## Impact of intervention on estimation performance 
+<!-- NOTE: ^ this H2 will likely be removed from, be implicit in final draft -->
 ### Intervening provides (categorical) improvements in inference power beyond passive observation
 @import "/section_content/results_impact_of_intervention.md"
-  
+
+### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias - *bidirectional var control* (5.1.2)
+#### Impact of intervention location and variance on pairwise correlations (5.1.2.1)
 <!-- @ import "results_data_efficiency_and_bias.md" -->
-    
+
 <!-- 
 ## Interaction of intervention & circuit structure
 @ import "/section_content/near_future_work/results2_circuit_x_intervention.md" -->
 
+
 # Discussion
 <!-- !!!! - overall, 30% done -->
 @import "/section_content/discussion.md"
+
+# Methods
+
+## Predicting correlation structure (3.1) --- Theory / Prediction
+### Representations & reachability (2.3?)
+@import "/section_content/representation_reach.md"
+```
+consider:
+@ import "/section_content/background_id_demo.md"
+```
+### Predicting correlation structure (3.1)
+@import "/section_content/methods_predicting_correlation.md"
+### Impact of interventions - theory, pred (3.1?, 5.1?)
+@import "/section_content/methods_predicting_correlation.md"
+`@ import "/section_content/results_impact_of_intervention.md"`
+
+## Modeling network structure and dynamics (4.1) --- Simulation Methods
+@import "/section_content/methods_simulations.md" 
+### Stochastic network dynamics (4.1.1)
+### Delayed interactions (4.1.2)
+### Code implementation (4.1.3)
+## Implementing interventions (4.2)
+@import "/section_content/methods_interventions.md" 
+
+## Extracting circuit estimates (4.3)
+@import "/section_content/methods_circuit_estimates.md"
+### Time-resolvable interactions *XCORR* (4.1.2)
+`@ import "/section_content/methods_simulations.md" time-resolvable domain`
+
+### Information-theoretic measures of hypothesis ambiguity (4.4)
+*see [_steps_of_inference.md](_steps_of_inference.md) for entropy writeup*
+
+
 
 # References
 *see [pandoc pandoc-citations](https://github.com/shd101wyy/markdown-preview-enhanced/blob/master/docs/pandoc-bibliographies-and-citations.md)*

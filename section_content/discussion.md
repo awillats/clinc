@@ -23,4 +23,11 @@ Second, we find that dense networks with strong reciprocal connections tend to r
 [^corrob_fiete]: this corroborates Ila Fiete's paper on bias as a function of recurrent network strength
 
 
+<!-- 
+NOTE: additional sections worth considering adding here 
+/sketches_and_notation/discussion/limitations_future_work.md
+/sketches_and_notation/discussion/value_of_cl_case_studies.md
+/sketches_and_notation/discussion/value_of_closed_loop_notes.md
+/sketches_and_notation/identifiability/variance_notes.md (firing rate section)
+-->
 

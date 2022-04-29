@@ -46,8 +46,8 @@ see `/publish/outputs/manuscript_v0_mpe.html`
 
 ## Steps of inference - *overview of CLINC approach* (+)
 <!-- Inference pipeline  -->
-<!-- ## Representations & reachability - 2.3 -->
-### Predicting corr (3.1)
+## Predicting corr (3.1)
+### Representations & reachability - 2.3
 <!-- Predicting correlation structure -->
 ### Extracting circuit estimates (4.3)
 ### Impact of intervention on pairwise dependence (3.1?, 5.1?)
