@@ -84,7 +84,7 @@ import plotting_functions as myplot
   - sweep_gaussian_SNR.py
     <details><summary>demo</summary>  
     
-    ![](figures/from_code/bidirectional_correlation.png) </details>
+    ![](/figures/from_code/bidirectional_correlation.png) </details>
   - plot_hypotheses_x_interventions.py
   
 - `plotting_functions/`

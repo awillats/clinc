@@ -84,5 +84,5 @@ or the posterior belief can be used as a prior for the next iteration.
 
 [^bad_convergence]: what about the scenario where the ground truth circuit is not in the hypotheses set?
 [^markov_equiv]: connect this section to the idea of the markdov equivalence class, and its size
-<!-- ![](figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png) -->
+<!-- ![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png) -->
 <!-- **Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses** -->

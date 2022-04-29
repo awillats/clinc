@@ -1,9 +1,9 @@
 
 ## Implementing interventions
-!!!! - 70% done
-!!!! - assumed: effect of interventions on theory already address
+<!-- !!!! - 70% done -->
+<!-- NOTE: assumed: effect of interventions on theory already addresses .... -->
 
-![](figures/core_figure_sketches/figure1_sketch.png)
+![](/figures/core_figure_sketches/figure1_sketch.png)
 
 To study the effect of various interventions we simulated inputs to nodes in a network. In the **passive setting**, nodes receive additive drive from *private* Gaussian noise sources common to all neurons within a node, but independent across nodes. The variance of this noise is specified by $\sigma_m \sqrt{\tau_m}$.[^eq_index]
 

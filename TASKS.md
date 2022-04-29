@@ -11,8 +11,9 @@
     - discussion to set order of certain subsections
     - [x] new outline?  
     
-  - [x] make intro-results changes (to outline)
-  - [ ] compartmentalize sections so they can be moved flexibly 🎯
+  - [x] make intro-results changes (to outline) 🎯
+  - [~] compartmentalize sections so they can be moved flexibly 🎯
+    - [ ] impact of intervention section needs splitting in two
   - [ ] move sections to new outline 
     - outline to imports script?
   

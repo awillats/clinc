@@ -17,7 +17,8 @@ x_{t+1} = W x_t + e_t,
 \]
 where $x_t \in \mathbb{R}^p$ denotes the state of each of the $p$ nodes at time $t$, and $e_t \in \mathbb{R}^p$ denotes the instantiation of each node's (independent and identically-distributed) private noise variance at time $t$.
 
-!!!! - TODO Adam, write out the dynamical system version of this
+<!-- TODO: Adam, write out the dynamical system version of this -->
+
 <!-- <details><summary>various implementations</summary>
 
 Topologically sorted implementation:

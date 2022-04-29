@@ -6,8 +6,8 @@
 
 <!-- - [ ] why link severing - difficult, might leave to later -->
 
-### Intervening provides (categorical) improvements in inference power beyond passive observation
-!!!! - Application to demo set, entropy over hypotheses - 50% done
+<!-- ### Intervening provides (categorical) improvements in inference power beyond passive observation -->
+<!-- NOTE: Application to demo set, entropy over hypotheses - 50% done -->
 
 <details><summary>↪notes, see also </summary>
 
@@ -24,8 +24,8 @@ going to assume these have already been discussed:
 Next, we apply (steps 1-3 of) this circuit search procedure to a collection of closely related hypotheses for 3 interacting nodes[^node_repr] to illustrate the impact of intervention. 🚧 `most of the story in the figure caption for now` 🚧
 
 <a id="fig-disambig"></a>
-![](figures/core_figure_sketches/circuit_entropy_sketch.png)
-<!-- ![](figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png) -->
+![](/figures/core_figure_sketches/circuit_entropy_sketch.png)
+<!-- ![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png) -->
 > **Figure DISAMBIG: Interventions narrow the set of hypotheses consistent with observed correlations** 
 *source: [google drawing](https://docs.google.com/drawings/d/1CBp1MhOW7OGNuBvo7OkIuzqnq8kmN8EEX_AkFuKpVtM/edit)*
 >**(A)** Directed adjacency matrices represent the true and hypothesized causal circuit structure
@@ -60,11 +60,11 @@ Next, we apply (steps 1-3 of) this circuit search procedure to a collection of c
 [^where_place]: Figure VAR shows this pretty well, perhaps sink this section until after discussing categorical and quantitative?
 
 
-!!!! - Quantitative impact of closed-loop - 70% done
+<!-- NOTE: - Quantitative impact of closed-loop - 70% done -->
 
 ### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias
 
-!!!! - Explain why closed-loop helps - bidirectional variance control - 60% done
+<!-- NOTE: - Explain why closed-loop helps - bidirectional variance control - 60% done -->
 
 [^dof]: need a more specific way of stating this. I mean degrees of freedom in the sense that mean and variance can be controlled independent of each other. And also, that the range of achievable correlation coefficients is wider for closed-loop than open-loop (where instrinsic variability constrains the minimum output variance)
   
@@ -72,7 +72,7 @@ Next, we apply (steps 1-3 of) this circuit search procedure to a collection of c
   
 While a primary advantage of closed-loop interventions for circuit inference is its ability to functionally lesion indirect connections, another, more nuanced `(quantitative)` advantage of closed-loop control lies in its capacity to bidirectionally control output variance. While the variance of an open-loop stimulus can be titrated to adjust the output variance at a node, in general, an open-loop stimulus cannot reduce this variance below its instrinsic[^intrinsic_var] variability. That is, if the system is linear with Gaussian noise,
 
-!!!! todo - this is very closely related to 4.2 implementing interventions, description of impact of intervention on variance should perhaps be moved there... or the supplement?
+<!-- TODO: [ORG] this is very closely related to 4.2 implementing interventions, description of impact of intervention on variance should perhaps be moved there... or the supplement? -->
 
 [^V-notation]: need to be clear V means variance
 
@@ -119,7 +119,7 @@ In neural circuits, we're often interested in firing rates, which are non-negati
 [^cl_indp_practical]: practically, this requires very fast feedback to achieve fully independent control over mean and variance. In the case of firing rates, I suspect $\mu \leq \alpha\mathbb{V}$, so variances can be reduced, but for very low firing rates, there's still an upper limit on what the variance can be.
 
 
-!!!! - reference [figvar](#fig-var) to empricially show this bidirectional control of output variance?
+<!-- TODO: reference [figvar](#fig-var) to empricially show this bidirectional control of output variance? -->
 
 
 #### Impact of intervention location and variance on pairwise correlations
@@ -130,7 +130,7 @@ In neural circuits, we're often interested in firing rates, which are non-negati
 
 [related methods](methods1_predicting_correlation.md)
 
-!!!! TODO - again, feels very backgroundy / discussiony ... where to put this?
+<!-- TODO: - again, feels very backgroundy / discussiony ... where to put this? -->
 
 We have shown that closed-loop interventions provide more flexible control over output variance of nodes in a network, and that shared and independent sources of variance determine pairwise correlations between node outputs. Together, this suggests closed-loop interventions may allow us to shape the pattern of correlations with more degrees of freedom[^dof] `[why do we want to?...]`
 
@@ -157,8 +157,8 @@ Notably, the impact of an intervention which is a "common cause" for both nodes 
 <a id="fig-predict"></a>
 <!-- <X id="fig-var"></X> -->
 <!-- <img src"/figures/misc_figure_sketches/quant_r2_prediction_common.png" width=300> -->
-![](figures/misc_figure_sketches/quant_r2_prediction_common.png)
-![](figures/from_code/bidirectional_correlation.png "generated by sweep_gaussian_SNR.py")
+![](/figures/misc_figure_sketches/quant_r2_prediction_common.png)
+![](/figures/from_code/bidirectional_correlation.png "generated by sweep_gaussian_SNR.py")
 
 > 🚧(Final figure will be a mix of these two panels, caption will need updating) **Figure VAR: Location, variance, and type of intervention shape pairwise correlations**
 > **(CENTER)** A two-node linear Gaussian network is simulated with a connection from A→B. Open-loop interventions *(blue)* consist of independent Gaussian inputs with a range of variances $\sigma^2_S$. Closed-loop interventions *(orange)* consist of feedback control with an independent Gaussian target with a range of variances. *Incomplete closed-loop interventions result in node outputs which are a mix of the control target and network-driven activity*. Connections from sources to nodes are colored by their impact on correlations between A and B; green denotes $dR/dS > 0$, red denotes $dR/dS<0$.
@@ -189,17 +189,21 @@ The change in correlation as a function of changing intervention variance ($\fra
 [Fig. variance](#fig-var) also demonstrates the relative dynamic range of correlations achievable under passive, open- and closed-loop intervention. In the passive case, correlations are determined by instrinsic properties of the network $\sigma^2_{base}$. These properties have influence over the observed correlations in a way that can be difficult to separate from differences due to the ground-truth circuit. With open-loop intervention we can observe the impact of increasing variance at a particular node, but the dynamic range of achievable correlations is bounded by not being able to reduce variance below its baseline level. With closed-loop control, the bidirectional control of the output variance for a node means a much wider range of correlations can be achieved [(blue v.s. orange in fig. variance)](#fig-var), resulting in a more sensitive signal reflecting the ground-truth connectivity.
 
 
-<!-- @ import "results1B_data_efficiency_and_bias.md" -->
 
 *see also [results1B_data_efficiency_and_bias.md](results1B_data_efficiency_and_bias.md)*
 
-!!!! todo - comaprison signs in rows of DISAMBIG figure
-!!!! todo - merge from "box style" where entrire story is in caption, to having something in body of results text 
-!!!! todo - write "explain why CL is better" section, ? exile it to discussion section?
-!!!! todo - connect DISAMBIG caption to quantitative variance explanation section
-!!!! todo - collapse figvar - do we need to make shared input point here? or is discussion fine?
-!!!! todo - dR/dS needs to mention R as r^2 corr
+<details><summary>↪todo items:</summary>
+
+<!-- TODO: -->
+- [ ] comparison signs in rows of DISAMBIG figure
+- [ ] merge from "box style" where entire story is in caption, to having something in body of results text 
+- [ ] write "explain why CL is better" section, ? exile it to discussion section?
+- [ ] connect DISAMBIG caption to quantitative variance explanation section
+- [ ] collapse figvar - do we need to make shared input point here? or is discussion fine?
+- [ ] dR/dS needs to mention R as r^2 corr
  
+</details>
+
 <details><summary>↪Notes from matt</summary>
 
 - [super minor] First part of fig DISAMBIG: subsections (A) through (C) work really well

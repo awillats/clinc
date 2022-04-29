@@ -1,35 +1,16 @@
-> scope markers:
-> - ✅ - currently in scope 
-> - 💫 - want to be in scope, have a head-start
-> - 🚀  - want to be in scope, would require substantial work
-> - 🙈 - not intended to be in scope, future work
 
----
-## Methods overview
->- METHODS SUMMARY (high-level): FIRST, what question are we trying to answer
->   - then OVERVIEW of methods (pipeline summary)
->   - basic components
->   - answer we're looking for
->   - overall approach
->   - key innovative methods
->   - assume readers aren't going to pore over the details
-
-
----
-<details><summary>↪overview sections:</summary>
-
-## Network simulations
+----
 
 <details><summary>↪outline</summary>
 
 ![](code/network_analysis/_demo_imgs/gaussian_snr_prediction_demo.png)
 
 - contemporaneous vs lagged 💫
-![](figures/whiteboard/time_unrolled_representation.png)
+![](/figures/whiteboard/time_unrolled_representation.png)
 <details><summary>see also</summary>
 
-![](figures/whiteboard/concept_open_loop_contemporaneous.png)
-![](figures/whiteboard/concept_time_resolved.png)
+![](/figures/whiteboard/concept_open_loop_contemporaneous.png)
+![](/figures/whiteboard/concept_time_resolved.png)
 </details>
 
 
@@ -44,33 +25,64 @@
 
 <details><summary>↪longer outline</summary>
 
-> <a name='figure-gaussian'></a>
-> ![](figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
-> <details><summary>see also</summary>
-> 
-> ![](figures/whiteboard/signal_aggregation.jpeg)
-> </details>
-> ### Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2
-> 🥡 **takeaway:** ??? 🚧
-> 
-> - all networks built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
-> - (delayed) linear Gaussian network 
->   - required custom functionality to implement 
->     - [[brian_delayed_gaussian] repository ](https://github.com/awillats/brian_delayed_gaussian)
->     - allows us to understand impact of variability in simplest setting
-> - spiking network 
->   - introduces additional difficulties associated with estimation based on spiking observations, nonlinearities
-> 
-> [^intv_type2]: see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)
+<a name='figure-gaussian'></a>
+![](/figures/misc_figure_sketches/gaussian_vs_spiking_network_eg.png)
+<details><summary>see also</summary>
+
+![](/figures/whiteboard/signal_aggregation.jpeg)
+</details>
+### Figure GAUSSIAN: Gaussian and spiking networks simulated in Brian2
+🥡 **takeaway:** ??? 🚧
+
+- all networks built on [Brian2](https://elifesciences.org/articles/47314) spiking neural network simulator 
+- (delayed) linear Gaussian network 
+  - required custom functionality to implement 
+    - [[brian_delayed_gaussian] repository ](https://github.com/awillats/brian_delayed_gaussian)
+    - allows us to understand impact of variability in simplest setting
+- spiking network 
+  - introduces additional difficulties associated with estimation based on spiking observations, nonlinearities
+
+[^intv_type2]: see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)
 
 
 </details>
 
 
---- 
 
-## Implementing interventions
+<details><summary>see also</summary>
+
+> - graph → connections: 0. adjacency represents between-population synapses
+
+### key parameters
+- parameter specification 💫 (supplement?)
+  - :rocket: heterogeneity
+    
+![](/figures/whiteboard/time_unrolled_representation.png)
+![](/figures/whiteboard/concept_time_resolved.png)
+![](/figures/whiteboard/concept_open_loop_contemporaneous.png)
+</details>
+
+
+## Interventions
+
+---
+### open-loop 
+- variance modulated ✅ 
+- replay 💫
+
+### closed-loop
+- perfect
+- emulated partial
+- practical PID
+
+
+### specification 
+- location (single-site)
+- intensity (variance)
+
 <details><summary>↪ short outline</summary>
+
+> be sure to reference / not reinvent [background_intervention_causal_inf.md](background_intervention_causal_inf.md)
 
 ### passive
 - baseline drive comes from independent, "private", noise sources
@@ -122,16 +134,22 @@
 >     </details>
 >     
 >     
-> ![](figures/misc_figure_sketches/intervention_timeseries_flat.png)
+> ![](/figures/misc_figure_sketches/intervention_timeseries_flat.png)
 
 </details>
 
----
-## Extracting circuit estimates 
-<a name='figure-pipeline'></a>
-![](figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
 
+
+[^intv_type2]: see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)
+
+# extracting circuit estimates
 <details><summary>↪outline</summary>
+
+<a name='figure-pipeline'></a>
+![](/figures/misc_figure_sketches/network_estimation_pipeline_sketch.png)
+
+> be sure to reference / not reinvent
+section: **Inferring causal interactions from time series.**  in [background_causal_network_id.md](background_causal_network_id.md)
 
 ### Outputs of network 
 <!-- - spikes from populations of neurons  -->
@@ -139,10 +157,10 @@
 ### What is cross-correlation
 <details><summary> see also </summary>
 
-![](figures/whiteboard/methods_xcorr_features.jpeg)
-![](figures/whiteboard/methods_circuit_xcorr_sketch.png)
+![](/figures/whiteboard/methods_xcorr_features.jpeg)
+![](/figures/whiteboard/methods_circuit_xcorr_sketch.png)
 ![](_archive/figure4a_sketch.png)
-![](figures/misc_figure_sketches/data_xcorr_gaussian.png)
+![](/figures/misc_figure_sketches/data_xcorr_gaussian.png)
 </details>
 
 ### Figure PIPELINE: Process of detecting connections in a network model
@@ -207,7 +225,5 @@
 > 
 > [^FC_methods]: "METHODS FOR STUDYING FUNCTIONAL INTERACTIONS AMONG NEURONAL POPULATIONS" - comes with MATLAB code, discusses time and trial shuffling, decomposing information (synergistic, redundant, independent)
 > 
-
-</details>
 
 </details>

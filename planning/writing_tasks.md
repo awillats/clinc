@@ -45,11 +45,26 @@ Word count:
 
 - ( ) consider variance control *before* categorical impact? - `[ORG]`
 
+- Simulation methods section sketch 
+  - Network simulations (simulation)
+  - Implementing interventions (simulation)
+  - Extracting circuit estimates (empirical)
+
+**Impact of intervention location and variance on pairwise correlations**
+  - again, feels very backgroundy / discussiony ... where to put this?
+
 
 <hr>
 
 
 # Writing 
+from abstract: 
+- [ ] 3/16 - Mention basic science applications of CL control - Maybe more forecasting idea of shaping correlations? (don't want reader to be surprised by structure of paper's argument)
+
+
+`from: "/section_content/background_causal_network_id.md"`
+- [ ] 3/16: - "We first propose..." paragraph (could build out or move or change focus away from the 'framework') - think about condensing and/or moving "Inferring causal interactions from time series" subsection - Maybe add half a paragraph or so in the discussion about how causal inference tools can help above correlation analysis (e.g., PC algorithm)
+
 - [ ] sketch discussion
 - [ ] (in background-interventions) get language more precise and effective about value of intervention
   - ([Adam:] revisit related work, try to distill down our core argument about why intervention > passive observation)

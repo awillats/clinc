@@ -9,9 +9,9 @@
 
 <details><summary> figure sketches </summary>
 
-![](figures/from_code/direct_indirect_circuit_snr.png)
-![](figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png) 
-![](figures/literature_figs/spike_field_shanechi_crop.png)
+![](/figures/from_code/direct_indirect_circuit_snr.png)
+![](/figures/misc_figure_sketches/idtxl_eg_datareq_passive_open_loop.png) 
+![](/figures/literature_figs/spike_field_shanechi_crop.png)
 
 </details>
 

@@ -3,7 +3,7 @@
 
 ##Entropy
 **big picture goal:** working towards automating
-![](figures/core_figure_sketches/circuit_entropy_sketch.png)
+![](/figures/core_figure_sketches/circuit_entropy_sketch.png)
 
 <details><summary>↪pipeline</summary>
 

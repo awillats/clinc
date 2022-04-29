@@ -1,7 +1,7 @@
 
 ## Extracting circuit estimates 
 !!!! - 10% done
-<!-- ![](figures/core_figure_sketches/methods_overview_pipeline_sketch.png) -->
+<!-- ![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png) -->
 > *refer to methods overview figure*
 
 [^inf_techniques]: *inference techniques mentioned in the intro...*

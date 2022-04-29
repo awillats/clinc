@@ -24,7 +24,7 @@ This framework also allows us to predict the impact of open- and closed-loop con
 
 [^arb-variance]: TODO: to any target value?
 
-!!!! todo [Matt:] add table from `sketches_and_notation/intro-background/causal_vs_expt.md` and modify text above to match
+<!-- TODO: [Matt:] add table from `sketches_and_notation/intro-background/causal_vs_expt.md` and modify text above to match -->
 
 [^covariance-derivation]: To see this, denote by $E \in \mathbb{R}^{p \times n}$ the matrix of $n$ private noise observations for each node. Note that $X = W^T X + E$, so $X = E(I-W^T)^{-1}$. The covariance matrix $\Sigma = \mathrm{cov}(X) = \mathbb{E}\left[X X^T\right]$ can then be written as $\Sigma = \mathbb{E}\left[ (I-W^T)^{-1} E E^T (I-W^T)^{-1} \right] = (I-W^T)^{-1} \mathrm{cov}(E) (I-W^T)^{-T} = (I-W^T)^{-1} \mathrm{diag}(s) (I-W^T)^{-T}$.
 
