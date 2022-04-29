@@ -1,5 +1,9 @@
 
 # Technical tasks
+
+- [ ] ⚠️ predicting time-lagged correlation 
+- [ ] quantitative match between Gaussian sims & theory [~]
+
 ## quantitative impact - ID-$r^2$
 - [~] **extend to impact of closed-loop** - @matt
   - see [IDSNR_notation_matt](sketches_and_notation/identifiability/IDSNR_notation_matt.md) for initial notes

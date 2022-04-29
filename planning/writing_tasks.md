@@ -1,33 +1,8 @@
 Word count:
 
-**April 6th outline / section numbers:**  
-see `publish/outputs/manuscript_v0_mpe.html`
+@import "OUTLINE_high_level_april6.md"
 
-# Abstract - 1.
-# Introduction - 2.
-## Estimating causal interactions in the brain - 2.1
-## Interventions in neuroscience & causal inference - 2.2 
-## Representations & reachability - 2.3
-# Theory / Prediction - 3. 
-## Predicting correlation structure (theory) - 3.1
-# Simulation Methods - 4. 
-## Modeling network structure and dynamics - 4.1 
-### Stochastic network dynamics - 4.1.1
-### Time-resolvable interactions - 4.1.2
-### Code implementation - 4.1.3 
-## Implementing interventions - 4.2
-## Extracting circuit estimates - 4.3
-## Information-theoretic measures of hypothesis ambiguity - 4.4 
-# Results - 5.
-## Impact of intervention on estimation performance - 5.1 
-### Intervening provides (categorical) improvements in inference power beyond passive observation - 5.1.1
-### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias - 5.1.2
-#### Impact of intervention location and variance on pairwise correlations - 5.1.2.1
-# Discussion - 6. 
-## limitations
-## results summary → summary of value closed-loop generally
-## summary of guidelines for experimenters
-## "funnel out", future work → broad impact
+<hr>
 
 # Organization / structure / flow
 - [ ] split sim methods elsewhere
@@ -40,7 +15,7 @@ see `publish/outputs/manuscript_v0_mpe.html`
 
 <details><summary>↪see also</summary>
 
-![](__local/clinc_org_whiteboard_20220316.jpg)
+![](/planning/__local/clinc_org_whiteboard_20220316.jpg)
 
 </details>
 
@@ -67,6 +42,12 @@ see `publish/outputs/manuscript_v0_mpe.html`
 
 - [ ] Either need to write a "results summary" section or smooth transition from quantitative results to discussion
 - [ ] add steps of inference to end of introduction
+
+- ( ) consider variance control *before* categorical impact? - `[ORG]`
+
+
+<hr>
+
 
 # Writing 
 - [ ] sketch discussion
@@ -104,6 +85,11 @@ see `publish/outputs/manuscript_v0_mpe.html`
 
 
 ## Mostly complete
+- [~] pandoc filter to remove to-do list items?
+
+- [~] update causal notation for open-loop inputs? 
+  - how would you write x = x + u_OL ? - see [causal_vs_expt.md](sketches_and_notation/intro-background/causal_vs_expt.md)
+
 - [x] reading through [10 simple rules for structuring papers](https://www.biorxiv.org/content/10.1101/088278v5.full.pdf+html)<details><summary>↪
 <details><summary>↪ details
 </summary>  
