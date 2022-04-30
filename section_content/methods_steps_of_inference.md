@@ -4,7 +4,7 @@
 [^refine]: see [Advancing functional connectivity](https://www.nature.com/articles/s41593-019-0510-4), fig. 2
 [^more_expt]: more than just an experiment, this is a "hypothesis search." Is this procedure what we're going to brand as the "CLINC" process?
 
-!!!! - Structure of an experiment / CLINC framework - 85% done - (move to methods/discussion?)
+<!-- NOTE: - Structure of an experiment / CLINC framework - 85% done - (move to methods/discussion?) -->
 **We envision the structure of an experiment[^more_expt]** to include the following broad stages:
 
 1. First, explicitly **enumerate the set of hypothesized circuits.** Hypotheses about the structure of the circuit would be based on multiple sources of information including prior recordings, anatomical constraints revealed by `experiments where you look at the fiber bundles connecting regions`, or commonly observed connectivity patterns in other systems `[🚧 add other sources of priors for circuit hypotheses]`[^bonus_causal][^more_assumptions] These hypotheses should be expressed as a set of circuits (adjacency matrices) each with a probability representing the prior belief about the relative likelihood of these options. This hypothesis set can be thought of as a space of possible explanations for the observed data so far, which will be narrowed down through further intervention, observation, and inference. [(Fig.DISAMBIG top row)](#fig-disambig)
@@ -23,26 +23,7 @@ A useful experiment (intervention) is one which produces highly distinct outcome
 
 🚧
 `Entropy as a measure of information about circuit hypotheses`
-Shannon entropy provides a scalar summarizing the diversity of a set of outcomes..
-...how uniform a discrete probability function is...
-...how surprising...(in expectation)
-
-$$H(X) = E[I(X)] = E[\log\frac{1}{p(X)}] = \sum_{i=1}^{N} p(x_i) \log\frac{1}{p(x_i)} $$
-
-`interpretting high and low entropy`
->a highly predictable experimental outcome means an experiment where not much was learned 
-
-[^alt_equiv]: i.e. if you took a PMF and counted the number of categories with probability greater than $p_th$. A distribution with 16 possible outcomes, but only 2bits of uncertainty is *as* uncertain as a uniform distribution with $2^2$ equally likely outcomes
-
-An intervention associated with a higher entropy across circuits will, on average, provide more information to narrow the set of hypotheses. In fact, one interpretation of entropy is that it describes the (uncertainty associated with the equivalent) number of *equally-likely* outcomes[^alt_equiv] of a probability mass function. In this setting $N_{equal}$ can be thought of as the number of hypotheses that can be distinguished under a given experiment[^markov_equiv].
-$$ H(C) = \log_2 N_{equal} \\
-N_{equal} = 2^{H(C)}$$
-For instance, open-loop intervention at node $x_0$ in [(Fig.DISAMBIG right column)](#fig-disambig) results in an entropy across the hypotheses of $H(C|S_0) \approx 1.5$bits or $N_{equal} \approx 2.8$. Looking at the patterns of correlation, there are $N=3$ distinct patterns, with the +++ pattern somewhat more likely than the others (+--, 0--).[^entropy_num] This intuition also helps understand the maximum entropy achievable for a given set of hypotheses:
-$$H^{max}(C) = log_2 N$$
-for this example set:
-$$H^{max}(C) = log_2 6 \approx 2.6$$ 
-
-[^entropy_num]: since $H(C)\leq H^{max}(C)$, $N_{equal} \leq N$
+**`@ import "/section_content/methods_entropy.md"`**
 
 `select intervention - (is this its own step, or the last part of step 3)`
 Here, we describe a "greedy" approach for choosing an effective single-node intervention, but extending the approach above to predict joint entropy would allow a joint or sequential experimental design which would be optimal over multiple interventions.
@@ -67,22 +48,8 @@ Using entropy as a metric to select a useful intervention, the next step is to c
 
 5. **Given the observed dependency pattern, form a posterior belief over hypotheses**
 `[🚧 transition text]`  
-> Evolution of entropy, as the space of hypotheses is narrowed from experiments and inference.
 
-\[
-\begin{align}
-H^{pre}(C):& \text{ uncertainty before intervention (starts at\,} H^{max}(C))\\
-H(C|S_i):& \text{ expected information gain from a given intervention}\\
-H^{post}(C|S_i) =\\ H^{pre} - H(C|S_i):& \text{expected remaining uncertainty after intervention}
-\end{align}
-\]
-If $H(X|S_i)\approx0 \,\forall i$, none of the candidate interventions provide additional information, and the identification process has converged.
-If $H^{post} = 0$ the initial hypothesis set has been reduced down to a single circuit hypothesis consistent with the observed data[^bad_convergence].
-If $H^{post} > 0$, some uncertainty remains in the posterior belief over the hypotheses. In this case a Maximum A Posteriori (MAP) estimate could be chosen as:
-$$ \hat{c}_{\text{MAP}} = \underset{c}\argmax \,L(\text{Corr} | c)\,\pi(c) $$
-or the posterior belief can be used as a prior for the next iteration.
+**`@ import "/section_content/methods_entropy_selection.md"`**
 
-[^bad_convergence]: what about the scenario where the ground truth circuit is not in the hypotheses set?
-[^markov_equiv]: connect this section to the idea of the markdov equivalence class, and its size
 <!-- ![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png) -->
 <!-- **Figure DISAMBIG: Stronger intervention facilitates disambiguating equivalent hypotheses** -->

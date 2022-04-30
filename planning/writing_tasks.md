@@ -1,11 +1,45 @@
 Word count:
 
-@import "OUTLINE_high_level_april6.md"
+<!-- @import "OUTLINE_high_level_april6.md" -->
 
 <hr>
+# Writing 
+## Soft results (background, methods)
+- [ ] sketch, pull in raw material 
+  - from outline 
+- [ ] compare to examples 
+- [ ] just write 
+
+## Hard results (results)
+- [ ] just write 
+- [ ] edit
+
+## Figures
+- [ ] every caption needs filling out 
+  - [ ] then pull some caption into body 
+
+## Intro / abstract
+- [ ] pull from `th`
+- [ ] 3/16 - Mention basic science applications of CL control - Maybe more forecasting idea of shaping correlations? (don't want reader to be surprised by structure of paper's argument)
+
+`from: "/section_content/background_causal_network_id.md"`
+- [ ] 3/16: - "We first propose..." paragraph (could build out or move or change focus away from the 'framework') - think about condensing and/or moving "Inferring causal interactions from time series" subsection - Maybe add half a paragraph or so in the discussion about how causal inference tools can help above correlation analysis (e.g., PC algorithm)
+
+- [ ] (in background-interventions) get language more precise and effective about value of intervention
+  - ([Adam:] revisit related work, try to distill down our core argument about why intervention > passive observation)
+  - **(Matt-done)** Reframe $x \to y$ vs $x \leftarrow y$ argument to focus on distinguishing between members of a hypotheses set (hypothesis first, data second)
+  - Add example demonstrating why location of stimulation matters to "The inferential power of interventions..." paragraphs
+  - **(Matt-done)** editing pass on last paragraph, qualify last paragraph (lean toward 'we are starting simple, blazing a trail for future research')
+
+- [ ] Describe what 'reachability' is (we're interested in net directional impact of one node on another, which includes both effects from direct and indirect connections)
+
+## Discussion 
+- [ ] pull from `th`
+
 
 # Organization / structure / flow
-- [ ] split sim methods elsewhere
+
+- [~] split sim methods elsewhere
     - [ ] pull all into theory / methods overview section
     - [ ] 4.1.2 - time-resolvable goes in discussion?
     - [ ] 4.3 - merge "estimating circuits" into inference pipeline steps
@@ -19,7 +53,7 @@ Word count:
 
 </details>
 
-- [ ] proposed methods order - could be overwritten by order suggested by "steps of intervention"
+- [.] ? proposed methods order - could be overwritten by order suggested by "steps of intervention"
   - *simple linear Gaussian case*
   - Interventions - 2.2 → to end of introduction 
   - reachability - 2.3→ new 3.1 
@@ -27,10 +61,8 @@ Word count:
   - inferring cause from time series  - 2.1B→ new 3.3 
     - minimize granger, IDTxl
     
-- [ ] from methods1_prediction_correlation: Some redundancy with simulation methods; 
+- [.] ? from methods1_prediction_correlation: Some redundancy with simulation methods; 
   - cut and paste anything useful in 4.2 and put into 3.1 / 3.2
-
-
 
 - [ ] where does methods pipeline figure go?
 
@@ -57,22 +89,7 @@ Word count:
 <hr>
 
 
-# Writing 
-from abstract: 
-- [ ] 3/16 - Mention basic science applications of CL control - Maybe more forecasting idea of shaping correlations? (don't want reader to be surprised by structure of paper's argument)
 
-
-`from: "/section_content/background_causal_network_id.md"`
-- [ ] 3/16: - "We first propose..." paragraph (could build out or move or change focus away from the 'framework') - think about condensing and/or moving "Inferring causal interactions from time series" subsection - Maybe add half a paragraph or so in the discussion about how causal inference tools can help above correlation analysis (e.g., PC algorithm)
-
-- [ ] sketch discussion
-- [ ] (in background-interventions) get language more precise and effective about value of intervention
-  - ([Adam:] revisit related work, try to distill down our core argument about why intervention > passive observation)
-  - **(Matt-done)** Reframe $x \to y$ vs $x \leftarrow y$ argument to focus on distinguishing between members of a hypotheses set (hypothesis first, data second)
-  - Add example demonstrating why location of stimulation matters to "The inferential power of interventions..." paragraphs
-  - **(Matt-done)** editing pass on last paragraph, qualify last paragraph (lean toward 'we are starting simple, blazing a trail for future research')
-
-- [ ] Describe what 'reachability' is (we're interested in net directional impact of one node on another, which includes both effects from direct and indirect connections)
 
 
 # Mechanical
@@ -90,7 +107,7 @@ from abstract:
 - [ ] [Matt:] Set expectation here that we're talking about linear Gaussian circuits
 
 # Technical 
-- [ ] Need to push for a last results section
+- [ ] ? push for a last results section
 
 ----
 # Archive
@@ -100,6 +117,26 @@ from abstract:
 
 
 ## Mostly complete
+
+- [~] re-arrange sections 
+  - [x] scan as-is 
+    - minimally filtered two-column pdf
+  - [x] verify flow against examples
+    - see /planning/__local/exemplar_section_structures.md
+    
+  - [~] make prior arrangement changes (to outline)
+    - see writing tasks 
+    - discussion to set order of certain subsections
+    - [x] new outline?  
+    
+  - [x] make intro-results changes (to outline)
+  - [~] compartmentalize sections so they can be moved flexibly 
+    - [ ] impact of intervention section needs splitting in two
+    
+  - [~] move sections to new outline
+    - `outline to imports script?`
+    - [~] new sections as needed from outline
+
 - [~] pandoc filter to remove to-do list items?
 
 - [~] update causal notation for open-loop inputs? 
@@ -160,13 +197,14 @@ from abstract:
 
 - [ ] write methods overview 1k words
   - find a good example of this
+  
 - [ ] write methods sections
+
 ---
 - [.] quarantine speculative methods
   - "currently in scope"
   - "would like this to be in scope but isn't currently"
   - "definitely future work"
-
 
 - [ ] poll CotN about circuit ambiguity, entropy
 - [ ] pandoc [crossref](https://github.com/lierdakil/pandoc-crossref) for equations, figures

@@ -66,9 +66,10 @@ consider:
 <!-- !!!! - overall, 60% done -->
 ## Overview - Challenges (+)
 ## Overview - Network (4.1?)
+@import "/section_content/results_overview.md"
 - `reference extended methods`
 ```
-only need some from:
+extract minimum from:
 @ import "/section_content/methods_simulations.md" 
 ```
 
@@ -78,28 +79,31 @@ only need some from:
 
 <!-- <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/> -->
 <!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
-@import "/section_content/misc/_steps_of_inference.md"
-
+@import "/section_content/methods_steps_of_inference.md"
 
 ### Representations & reachability
-`minimum results version from:`
+`extract minimum from:`
 `@ import "/section_content/representation_reach.md"`
 
 @import "/section_content/background_id_demo.md"
 
 ### Predicting correlation structure (theory)
-`@ import "/section_content/methods_predicting_correlation.md"`
+```
+extract minimum from: 
+@ import "/section_content/methods_predicting_correlation.md"
+```
 
 ### Extracting circuit estimates (4.3)
 `@ import "/section_content/methods_circuit_estimates.md"`
 
 ### (predicting) impact of intervention on pairwise dependence (3.1?, 5.1?)
-
-`@ import "/section_content/methods_interventions.md"`
 ```
-might be useful stuff in:
+extract minimum from: 
+@ import "/section_content/methods_interventions.md"
 @ import "/section_content/results_impact_of_intervention.md"
 ```
+
+
 ## Impact of intervention on estimation performance 
 <!-- NOTE: ^ this H2 will likely be removed from, be implicit in final draft -->
 ### Intervening provides (categorical) improvements in inference power beyond passive observation
@@ -120,18 +124,6 @@ might be useful stuff in:
 
 # Methods
 
-## Predicting correlation structure (3.1) --- Theory / Prediction
-### Representations & reachability (2.3?)
-@import "/section_content/representation_reach.md"
-```
-consider:
-@ import "/section_content/background_id_demo.md"
-```
-### Predicting correlation structure (3.1)
-@import "/section_content/methods_predicting_correlation.md"
-### Impact of interventions - theory, pred (3.1?, 5.1?)
-@import "/section_content/methods_predicting_correlation.md"
-`@ import "/section_content/results_impact_of_intervention.md"`
 
 ## Modeling network structure and dynamics (4.1) --- Simulation Methods
 @import "/section_content/methods_simulations.md" 
@@ -141,13 +133,39 @@ consider:
 ## Implementing interventions (4.2)
 @import "/section_content/methods_interventions.md" 
 
+
+## Predicting correlation structure (3.1) --- Theory / Prediction
+### Representations & reachability (2.3?)
+@import "/section_content/representation_reach.md"
+```
+see also:
+@ import "/section_content/background_id_demo.md"
+```
+### Predicting correlation structure (3.1)
+@import "/section_content/methods_predicting_correlation.md"
+<hr>
+@import "/section_content/methods_coreach_sign.md"
+
+### Impact of interventions - theory, pred (3.1?, 5.1?)
+
+<hr>
+@import "/section_content/methods_intervention_variance.md"
+```
+see also:
+@ import "/section_content/methods_predicting_correlation.md"
+@ import "/section_content/results_impact_of_intervention.md"`
+```
+
 ## Extracting circuit estimates (4.3)
 @import "/section_content/methods_circuit_estimates.md"
 ### Time-resolvable interactions *XCORR* (4.1.2)
 `@ import "/section_content/methods_simulations.md" time-resolvable domain`
 
 ### Information-theoretic measures of hypothesis ambiguity (4.4)
-*see [_steps_of_inference.md](_steps_of_inference.md) for entropy writeup*
+<!-- *see [_steps_of_inference.md](_steps_of_inference.md) for entropy writeup* -->
+@import "/section_content/entropy.md"
+### Selecting interventions (...)
+@import "/section_content/entropy_selection.md"
 
 
 

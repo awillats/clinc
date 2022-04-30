@@ -20,7 +20,7 @@ $$
 \end{aligned}
 $$
 
-This framework also allows us to predict the impact of open- and closed-loop control on the pairwise correlations we expect to observe. To model the application of open-loop control on node $c$, we add an arbitrary amount of private variance to $s_c$: $s_c \leftarrow s_c + s_c^{(OL)}$. To model the application of closed-loop control on node $c$, we first sever inputs to node $c$ by setting $W_{k,c} = 0$ for $k = 1, \dots p$, and then set the private variance of node $c$ by setting $s_c$ to any arbitrary value[^arb-variance]. Because $c$'s inputs have been severed, this private noise will become exactly node $c$'s output variance.
+This framework also allows us to predict the impact of open- and closed-loop control on the pairwise correlations we expect to observe. To model the application of open-loop control on node $c$, we add an arbitrary amount of private variance to $s_c$: $s_c \leftarrow s_c + s_c^{(OL)}$. To model the application of closed-loop control on node $c$, we first sever inputs to node $c$ by setting $W_{k,c} = 0$ for $k = 1, \dots p$, and then set the private variance of node $c$ by setting $s_c$ to any arbitrary value.[^arb-variance] Because $c$'s inputs have been severed, this private noise will become exactly node $c$'s output variance.
 
 [^arb-variance]: TODO: to any target value?
 

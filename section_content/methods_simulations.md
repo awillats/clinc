@@ -24,7 +24,7 @@ Additionally we study two domains of interactions between populations; contempor
 [^cases]: cases doesnt work with pandoc yet, also want to talk about positive and negative lags here
 
 <!-- \[
-==DANGER cases doesnt work with pandoc==
+NOTE: DANGER cases doesnt work with pandoc
 \text{domain} = 
 \begin{cases}
 \text{contemporaneous}, &\delta_{syn} \lt \Delta_{sample}\\
