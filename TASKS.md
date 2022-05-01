@@ -1,12 +1,29 @@
 # Top 3 highest priority writing tasks:
 
 - [ ] fill in content gaps 
-  - [ ] fill in results-methods 🧿
-    - high level versions of results 
-  
-  - ( ) reassess 🎯
-  - [ ] fill in results 
+
+## [ ] fill in results-methods 🧿
+*high level versions of results*
+
+- ( ) assess 🧿
+
+### Overview  
+- [ ] Challenges 
+- [ ] Network
+
+### Steps of inference - overview approach
+???
+- [ ] Representations and Reachability
+
+- [ ] Predicting Corr 
+- [ ] Circuit Estimates
+<!-- - [ ] Impact of Intervention  -->
+
+- ( ) reassess 🎯
+
+## [ ] fill in results 
     - writeups for hard results
+  
   - ( ) reassess 🎯
   - ( ) rough page count 🎯
     
@@ -15,10 +32,6 @@
   - [ ] reevaluate progress.md
     
 # minor tasks 
-- [~] cut entropy to it's own chapter, then sink to methods 
-- [~] split results_impact_of_intervention.md
-  - [~] pull variance notes out of Stronger Intervention shapes
-  
 # Organization considerations 
 - [ ] should representations and reachability live under predicting correlation structure?
   - R&R shows up multiple places, hard to know where to hit the concept hard, and whether to do that all in one place

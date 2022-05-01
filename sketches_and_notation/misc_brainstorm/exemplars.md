@@ -1,5 +1,5 @@
 see also https://beta.workflowy.com/#/f32ad4b2290a
-
+*see also /planning/__local/exemplar_section_structures.md <*
 # Table of Conents {ignore=true}
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=2 orderedList=false} -->
 <!-- code_chunk_output -->

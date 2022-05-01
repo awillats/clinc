@@ -64,9 +64,10 @@ consider:
 
 # Results
 <!-- !!!! - overall, 60% done -->
-## Overview - Challenges (+)
-## Overview - Network (4.1?)
+<!-- ## Overview - Challenges (+) -->
+<!-- ## Overview - Network (4.1?) -->
 @import "/section_content/results_overview.md"
+
 - `reference extended methods`
 ```
 extract minimum from:
@@ -79,7 +80,7 @@ extract minimum from:
 
 <!-- <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/> -->
 <!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
-@import "/section_content/methods_steps_of_inference.md"
+@import "/section_content/overview_steps_of_inference.md"
 
 ### Representations & reachability
 `extract minimum from:`
@@ -96,16 +97,18 @@ extract minimum from:
 ### Extracting circuit estimates (4.3)
 `@ import "/section_content/methods_circuit_estimates.md"`
 
+<!-- NOTE: background_id_demo here instead? before or after methods are introduced -->
+
+
+## Impact of intervention on estimation performance 
 ### (predicting) impact of intervention on pairwise dependence (3.1?, 5.1?)
+<!-- NOTE: ^ this H2 will likely be removed from, be implicit in final draft -->
 ```
+
 extract minimum from: 
 @ import "/section_content/methods_interventions.md"
 @ import "/section_content/results_impact_of_intervention.md"
 ```
-
-
-## Impact of intervention on estimation performance 
-<!-- NOTE: ^ this H2 will likely be removed from, be implicit in final draft -->
 ### Intervening provides (categorical) improvements in inference power beyond passive observation
 @import "/section_content/results_impact_of_intervention.md"
 

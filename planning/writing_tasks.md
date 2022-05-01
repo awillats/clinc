@@ -3,6 +3,13 @@ Word count:
 <!-- @import "OUTLINE_high_level_april6.md" -->
 
 <hr>
+# Hopper 
+- [ ] background - representations & reachability, but light on methods?
+  - into /section_content/background_representation_reachability.md
+  - from @ import "/section_content/representation_reach.md"
+  - from @ import "/section_content/background_id_demo.md"
+
+
 # Writing 
 ## Soft results (background, methods)
 - [ ] sketch, pull in raw material 
@@ -117,6 +124,10 @@ Word count:
 
 
 ## Mostly complete
+- [~] cut entropy to it's own chapter, then sink to methods 
+- [~] split results_impact_of_intervention.md
+  - [~] pull variance notes out of Stronger Intervention shapes
+  
 
 - [~] re-arrange sections 
   - [x] scan as-is 

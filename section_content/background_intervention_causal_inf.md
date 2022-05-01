@@ -1,3 +1,5 @@
+<!-- NOTE: see also __background_from_th.md -->
+
 Data collected from experimental settings can provide more inferential power than observational data alone. For example, consider an experimentalist who is considering multiple causal hypotheses for two nodes under study, $x$ and $y$: the hypothesis that $x$ is driving $y$, the hypothesis that $y$ is driving $x$, or the hypothesis that the two variables are being independently driven by a hidden confounder. Observational data revealing that $x$ and $y$ produce correlated time-series data is equally consistent with each of these three causal hypotheses, providing the experimentalist with no inferential power. Experimentally manipulating $x$ and observing the output of $y$, however, allows the scientist to begin to establish which causal interaction pattern is at work. Consistent with intuition from neuroscience literature, a rich theoretical literature has described the central role of interventions in inferring causal structure from data [@pearl2009causality; @eberhardt2007interventions].
 
 ![](/figures/core_figure_sketches/figure1_sketch.png "role of interventions")

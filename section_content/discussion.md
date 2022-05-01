@@ -1,3 +1,5 @@
+<!-- NOTE: see also __conclusions_from_th.md -->
+
 ### limitations
 The examples explored in this work simplify several key features that may have relevant contributions to circuit identification in practical experiments. [...]
 
