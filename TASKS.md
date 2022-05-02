@@ -5,11 +5,16 @@
 ## [ ] fill in results-methods 🧿
 *high level versions of results*
 
-- ( ) assess 🧿
+- (x) assess
 
 ### Overview  
-- [ ] Challenges 
-- [ ] Network
+- [.] Challenges  🧿
+
+    
+- [ ] Network  🧿
+  - ( ) section name 
+    - use overview figure as guide?
+    - something about the circuit? 
 
 ### Steps of inference - overview approach
 ???

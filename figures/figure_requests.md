@@ -7,6 +7,10 @@ key:
 - ✂️ potential merge / cut, or not sure whether it will be in scope
 
 --- 
+# resources 
+- [march 22 aim3-paper figure-edits](https://beta.workflowy.com/#/2b6e1f2371cf)
+
+# TODO
 ## Most important, least complete figures
 
 
@@ -166,6 +170,10 @@ see [section_content/_steps_of_inference.md](/section_content/_steps_of_inferenc
 ![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png)
 </details>
 
+- [ ] circuit node names need to be more legible?
+  - alt. can make it clear in the bracket which node is which
+- [ ] needs quant embedding in top right 
+- [ ] add row label indicators
 
 ### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias
 `Explain why closed-loop helps - bidirectional variance control`

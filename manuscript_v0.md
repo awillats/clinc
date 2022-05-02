@@ -3,7 +3,7 @@ panflute-filters: [cleanup_filter]
 panflute-path: 'publish/panflute_filters'
 title: Closed-Loop Identifiability in Neural Circuits
 author:
-  - name: Adam Willats, Matthew O'Shaughnessy
+  - name: Adam Willats, Matthew O'Shaughnessy, Christopher Rozell
 bibliography: [bib/moshaughnessy.bib, bib/misc.bib, bib/mega_causal_bib.bib, bib/clinc_sync.bib]
 output:
   pdf_document:
@@ -61,8 +61,9 @@ consider:
 @ import "/section_content/background_id_demo.md"
 ```
 
-
 # Results
+@import "/section_content/background_id_demo.md"
+
 <!-- !!!! - overall, 60% done -->
 <!-- ## Overview - Challenges (+) -->
 <!-- ## Overview - Network (4.1?) -->
@@ -76,35 +77,35 @@ extract minimum from:
 
 ## Steps of inference - *overview of CLINC approach* (+)
 ![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
+
 > **Figure OVERVIEW:** ...
 
 <!-- <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/> -->
 <!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
 @import "/section_content/overview_steps_of_inference.md"
 
-### Representations & reachability
+
+<!-- ### Extracting circuit estimates (4.3)
+`@ import "/section_content/methods_circuit_estimates.md"` -->
+<!-- NOTE: background_id_demo here instead? before or after methods are introduced -->
+
+## Impact of intervention on estimation performance 
+### (predicting) impact of intervention on pairwise dependence (3.1?, 5.1?)
+<!-- NOTE: ^ this H2 will likely be removed from, be implicit in final draft -->
+
+#### Representations & reachability
 `extract minimum from:`
 `@ import "/section_content/representation_reach.md"`
 
-@import "/section_content/background_id_demo.md"
+<!-- @ import "/section_content/background_id_demo.md" -->
 
-### Predicting correlation structure (theory)
+#### Predicting correlation structure (theory)
 ```
 extract minimum from: 
 @ import "/section_content/methods_predicting_correlation.md"
 ```
 
-### Extracting circuit estimates (4.3)
-`@ import "/section_content/methods_circuit_estimates.md"`
-
-<!-- NOTE: background_id_demo here instead? before or after methods are introduced -->
-
-
-## Impact of intervention on estimation performance 
-### (predicting) impact of intervention on pairwise dependence (3.1?, 5.1?)
-<!-- NOTE: ^ this H2 will likely be removed from, be implicit in final draft -->
 ```
-
 extract minimum from: 
 @ import "/section_content/methods_interventions.md"
 @ import "/section_content/results_impact_of_intervention.md"
@@ -144,7 +145,7 @@ extract minimum from:
 see also:
 @ import "/section_content/background_id_demo.md"
 ```
-### Predicting correlation structure (3.1)
+### Predicting correlation structure (3.1) {#methods-predict-corr}
 @import "/section_content/methods_predicting_correlation.md"
 <hr>
 @import "/section_content/methods_coreach_sign.md"
@@ -164,11 +165,11 @@ see also:
 ### Time-resolvable interactions *XCORR* (4.1.2)
 `@ import "/section_content/methods_simulations.md" time-resolvable domain`
 
-### Information-theoretic measures of hypothesis ambiguity (4.4)
+### Information-theoretic measures of hypothesis ambiguity (4.4) {#sec:entropy}
 <!-- *see [_steps_of_inference.md](_steps_of_inference.md) for entropy writeup* -->
-@import "/section_content/entropy.md"
-### Selecting interventions (...)
-@import "/section_content/entropy_selection.md"
+@import "/section_content/methods_entropy.md"
+### Selecting interventions (...) {#sec:entropy-selection}
+@import "/section_content/methods_entropy_selection.md"
 
 
 

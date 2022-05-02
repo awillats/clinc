@@ -4,19 +4,63 @@ Word count:
 
 <hr>
 # Hopper 
+- [ ] make it clear what nodes represent
+  - in introduction ( and again in methods ) 
+  > [^node_repr]: nodes in such a graphical model may represent populations of neurons, distinct cell-types, different regions within the brain, or components of a latent variable represented in the brain.
+  
+  - referenced in results_impact_of_intervention
+
+- [ ] in steps of inference emphasize this idea (which shows up later in results)
+  >  If this fingerprint contains many examples of the same pattern of correlation (such as **B**), many hypotheses correspond to the same observation, and that experiment contributes low information to distinguish between structures. A maximally informative intervention would produce a unique pattern of correlation for each member of the hypothesis set.
+  
 - [ ] background - representations & reachability, but light on methods?
   - into /section_content/background_representation_reachability.md
   - from @ import "/section_content/representation_reach.md"
   - from @ import "/section_content/background_id_demo.md"
 
+- [ ] detailed steps of inference to methods 
+  - overview version in early-results
+  
+  
+- ( ) NOTE: don't have to get all the way through all the methods before hitting rest of results 
+  - under this results-first model, can 
 
 # Writing 
+## Easy tasks 
+- [ ] fill out any caption
+- [ ] 
 ## Soft results (background, methods)
+- [ ] decide where first few figures go 
+  - start with DEMO and generalize through OVERVIEW 
+  - or start with OVERVIEW then apply it in a demo 
+  
+  - DEMO figure similar to `systematic errors`
+  - pipeline figure similar to `could a neuro`,`advancing FC`
+  
 - [ ] sketch, pull in raw material 
-  - from outline 
-- [ ] compare to examples 
+  - ( ) from outline 
+  - ( ) from figure DEMO ?
+    - does figure DEMO require steps of inference first? 
+    - should steps of inference be very early in results?
+    - *is* a good result! 
+    
+- ( ) section name 
+    - use overview figure as guide?
+    - something about the circuit? 
+    - could go without a name for the first chunk 
+    - exemplar style might be to name the section as tackling a simple circuit 
+    - could be named after themes
+      - i.e. Narrowind the space of hypotheses 
+    
+- [~] compare to examples 
+
 - [ ] just write 
 
+  - [ ] overview - challenges 
+    - only a paragraph or so 
+  - [ ] network section - should should be abbreviated intro to methods 
+  - [ ] steps of inference 
+  
 ## Hard results (results)
 - [ ] just write 
 - [ ] edit

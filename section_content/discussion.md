@@ -1,5 +1,11 @@
 <!-- NOTE: see also __conclusions_from_th.md -->
 
+```
+Restate themes!
+- narrowing search space 
+- where you intervene matters
+```
+
 ### limitations
 The examples explored in this work simplify several key features that may have relevant contributions to circuit identification in practical experiments. [...]
 

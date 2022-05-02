@@ -3,8 +3,11 @@ author:
 -name: Adam Willats
   affiliation: Georgia Institute of Technology and Emory University
   email: awillats3@gatech.edu
--name: Matthew O'Shaugnessy
+-name: Matthew O'Shaughnessy
   affiliation: Georgia Institute of Technology
   email: matthewoshaughnessy@gatech.edu 
+-name: Christopher Rozell
+  affiliation: Georgia Institute of Technology
+  email: crozell@gatech.edu 
 ---
-by A Willats, M O'Shaugnessy
+Adam Willats, Matthew O'Shaughnessy, Christopher Rozell

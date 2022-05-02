@@ -1,5 +1,5 @@
 Manuscript for "Closed-Loop Identifiability in Neural Circuits", 
-by Adam Willats and Matthew O'Shaugnessy
+by Adam Willats and Matthew O'Shaughnessy
 (work in progress)
 
 # Repo organization

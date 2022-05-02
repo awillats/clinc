@@ -1,26 +1,8 @@
-<!--
-NOTE:
-going to assume these have already been discussed:
-- predicting correlation
-- measuring dependence
-- markov equivalence
-[Methods: Procedure for choosing & applying intervention](overview_steps_of_inference.md)
--->
-
-<!--
-TODO:
-    
-- [ ] write lead-in for this section
-- [ ] write "why link severing"
-- [ ] fill in numerical details on figure 
--->
-
-
-<!-- ## Interaction of intervention on circuit estimation -->
 ### Intervening provides categorical improvements in inference power beyond passive observation
-`... transition:`
-Next, we apply the first three steps of this circuit search procedure to a collection of closely related circuit hypotheses to illustrate the impact of intervention.
-<!-- hypotheses for circuits with three interacting nodes[^node_repr] -->
+
+
+
+
 
 
 **Outline**   
@@ -48,9 +30,8 @@ Next, we apply the first three steps of this circuit search procedure to a colle
 
 <a id="fig-disambig"></a>
 ![](/figures/core_figure_sketches/circuit_entropy_sketch.png)
-<!-- ![](/figures/misc_figure_sketches/circuit_intervention_entropy_mockup.png) -->
- **Figure DISAMBIG: Interventions narrow the set of hypotheses consistent with observed correlations** 
-*source: [google drawing](https://docs.google.com/drawings/d/1CBp1MhOW7OGNuBvo7OkIuzqnq8kmN8EEX_AkFuKpVtM/edit)*
+**Figure DISAMBIG: Interventions narrow the set of hypotheses consistent with observed correlations** 
+<!-- NOTE: source [google drawing](https://docs.google.com/drawings/d/1CBp1MhOW7OGNuBvo7OkIuzqnq8kmN8EEX_AkFuKpVtM/edit)* -->
 **(A)** Directed adjacency matrices represent the true and hypothesized causal circuit structure
 **(B)** Directed reachability matrices represent the direct *(black)* and indirect *(grey)* influences in a network. Notably, different adjacency matrices can have equivalent reachability matrices making distinguishing between similar causal structures difficult, even with open-loop control.
 **(C)** Correlations between pairs of nodes. Under passive observation, the direction of influence is difficult to ascertain. 
@@ -59,19 +40,23 @@ Next, we apply the first three steps of this circuit search procedure to a colle
 <!-- A given hypotheses set (A) will result in an "intervention-specific fingerprint", that is a distribution of frequencies for observing patterns of modified correlations *(across a single row within D-F)*. If this fingerprint contains many examples of the same pattern of correlation (such as **B**), many hypotheses correspond to the same observation, and that experiment contributes low information to distinguish between structures. A maximally informative intervention would produce a unique pattern of correlation for each member of the hypothesis set. -->
 
 
+
 <!-- 
 - purpose of the figure 
   - conclusion: stronger intervention facilitates disambiguating equivalent hypotheses
     - more distinct patterns in a row 
     - few hypotheses have equivalent patterns
 - explain distribution across hypothesis for a given intervention
-  - build intuition for "more different circuits = better inference" -->
+  - build intuition for "more different circuits = better inference" 
+  -->
 
 
+
+<!--
 **Why does closed-loop control provide a categorical advantage?** 
 *Because it severs indirect links*
-
 !!!! - Explain why closed-loop helps - link severing
+-->
 
 <!--
 NOTE:
@@ -79,19 +64,14 @@ is this redundant with intro?`
 `needs to be backed here up by aggregate results?`
 -->
 
-<!-- TODO: 
+<!-- TODO:  **SUMMARY**
 - reachability can anticipate what open-loop buys 
 - modified reachability anticaptes what closed-loop buys 
 - benefit should be inference-algorithm agnostic
 
 - Where you intervene matters!
 
-
 - closed-loop doesnt always help 
--->
-
-
-<details><summary>↪ <b>OUTLINE</b> </summary>
 
 - this is especially relevant in recurrently connected networks where the reachability matrix becomes more dense. 
 
@@ -103,7 +83,7 @@ is this redundant with intro?`
 > **Where you intervene**[^where_place] strongly determines the inference power of your experiment.
 > **secondary point:** having (binary) prediction helps capture this relationship
 
-</details>
+-->
 
 <!-- [^node_repr]: nodes in such a graphical model may represent populations of neurons, distinct cell-types, different regions within the brain, or components of a latent variable represented in the brain. -->
 

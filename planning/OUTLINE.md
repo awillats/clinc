@@ -1,6 +1,10 @@
 *see also /planning/__local/exemplar_section_structures.md <*
+<!-- NOTE: see also [planning notes from feb 3](https://beta.workflowy.com/#/4ca3b6e5c802) -->
+
+
 # Introduction (2.)
 ## Estimating causal interactions in the brain (2.1)
+
 ## Interventions in neuroscience & causal inference (2.2)
 ## Representations & reachability (2.3, partial)
 
@@ -9,13 +13,22 @@
 ## Overview - Network (4.1?)
 <!-- where does methods pipeline figure go? -->
 
+
+- Reachability 
+- Overview 
+- Demo
+
 ## Steps of inference - *overview of CLINC approach* (+)
 <!-- Inference pipeline  -->
+
 ## Predicting corr (3.1)
 ### Representations & reachability - 2.3
 <!-- Predicting correlation structure -->
 ### Extracting circuit estimates (4.3)
+
 ### Impact of intervention on pairwise dependence (3.1?, 5.1?)
+
+
 
 ## Impact of intervention on estimation performance - 5.1 
 ### Intervening provides *(categorical)* improvements in inference power beyond passive observation (5.1.1)
