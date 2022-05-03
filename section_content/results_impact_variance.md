@@ -1,83 +1,112 @@
-<!-- NOTE: - Quantitative impact of closed-loop - 70% done -->
-
 ### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias
-
+<!-- TODO: this section title needs reworking. 
+- we don't deliver on promise of reduced bias yet 
+ -->
 <!-- NOTE: - Explain why closed-loop helps - bidirectional variance control - 60% done -->
 
-[^dof]: need a more specific way of stating this. I mean degrees of freedom in the sense that mean and variance can be controlled independent of each other. And also, that the range of achievable correlation coefficients is wider for closed-loop than open-loop (where instrinsic variability constrains the minimum output variance)
-  
-[^intrinsic_var]: below the level set by added, independent/"private" sources
-  
-While a primary advantage of closed-loop interventions for circuit inference is its ability to functionally lesion indirect connections, another, more nuanced `(quantitative)` advantage of closed-loop control lies in its capacity to bidirectionally control output variance. While the variance of an open-loop stimulus can be titrated to adjust the output variance at a node, in general, an open-loop stimulus cannot reduce this variance below its instrinsic[^intrinsic_var] variability. That is, if the system is linear with Gaussian noise,`...`
 
-**`@ import "/section_content/methods_intervention_variance"`**
+<!-- ... more nuanced, quantitative advantage .. -->
+While a primary advantage of closed-loop intervention for circuit inference is its ability to functionally lesion indirect connections, another, more nuanced advantage of closed-loop control lies in its capacity to bidirectionally manipulate output variance. While the variance of an open-loop stimulus can be titrated to adjust the output variance at a node, in general, an open-loop stimulus cannot reduce this variance below its intrinsic[^intrinsic_var] variability. That is, if the system is linear with Gaussian noise, each node's intrinsic variability sets a lower bound on the total output variance of that node in the presence of additive open-loop stimulation.
 
-<!-- TODO: reference [figvar](#fig-var) to empricially show this bidirectional control of output variance? -->
+**`@ import "/section_content/methods_intervention_variance.md"`**
+
+<!-- TODO: reference [figvar](#fig-var) to empirically show this bidirectional control of output variance? -->
 
 
 #### Impact of intervention location and variance on pairwise correlations
-<!-- > - Implications for ID: more precise shaping of codependence across network
-> - wider dynamic range of observable correlations
->   - important because we sometimes want to minimize correlations for indirect links
->   - allows for more distinct outcomes w.r.t. circuit -->
+<!-- NOTE: OUTLINE
+- Implications for ID: more precise shaping of codependence across network
+- wider dynamic range of observable correlations
+  - important because we sometimes want to minimize correlations for indirect links
+  - allows for more distinct outcomes w.r.t. circuit 
+  -->
 
 [related methods](methods1_predicting_correlation.md)
 
 <!-- TODO: - again, feels very backgroundy / discussiony ... where to put this? -->
+<!-- NOTE: I think the core idea here is transitioning from single node outputs to pairwise ...  -->
+<!-- TODO: cite methods that reinforce first line of this paragraph -->
+We have shown that closed-loop interventions provide more flexible control over output variance of nodes in a network, and that shared and independent sources of variance determine pairwise correlations between node outputs. Together, this suggests closed-loop interventions may allow us to shape pairwise correlations across a circuit with more degrees of freedom[^dof], which may result in more effective circuit inference.
 
-We have shown that closed-loop interventions provide more flexible control over output variance of nodes in a network, and that shared and independent sources of variance determine pairwise correlations between node outputs. Together, this suggests closed-loop interventions may allow us to shape the pattern of correlations with more degrees of freedom[^dof] `[why do we want to?...]`
+<!-- NOTE: this is where "confirmation bias" and requiring knowledge of the ground truth circuit structure creeps in. But at least it's addressed towards the end of the next paragraph -->
+One application of this increased flexibility is to increase correlations associated with pairs of directly correlated nodes, while decreasing spurious correlations associated with pairs of nodes without a direct connection (but perhaps are influenced by a common input, or are connected only indirectly). Such an approach would effectively increase the "signal-to-noise ratio" of causal, connection-related signal in the observed correlations. While "correlation does not imply causation," intervention may decrease the gap between the two. 
 
-One application of this increased flexibility is to increase correlations associated with pairs of directly correlated nodes, while decreasing spurious correlations associated with pairs of nodes without a direct connection (but perhaps are influenced by a common input, or are connected only indirectly). While "correlation does not imply causation," intervention may decrease the gap between the two. 
+Our hypothesis is that this shaping of pairwise correlations will result in reduced false positive edges in inferred circuits, "un-blurring" the indirect associations that would otherwise confound circuit inference. However care must be taken, as this strategy relies on a hypothesis for the ground truth adjacency and may also result in a "confirmation bias" as new spurious correlations can be introduced through closed-loop intervention.
 
-Our hypothesis is that this shaping of pairwise correlations will result in reduced false positive edges in inferred circuits, "unblurring" the indirect associations that would otherwise confound circuit inference. However care must be taken, as this strategy relies on a hypothesis for the ground truth adjacency and may also result in a "confirmation bias" as new spurious correlations can be introduced through closed-loop intervention.
-
-**`@ import "/section_content/methods_coreach_sign.md"`**
 
 <a id="fig-predict"></a>
-<!-- <X id="fig-var"></X> -->
-<!-- <img src"/figures/misc_figure_sketches/quant_r2_prediction_common.png" width=300> -->
-![](/figures/misc_figure_sketches/quant_r2_prediction_common.png)
+<!-- ![](/figures/misc_figure_sketches/quant_r2_prediction_common.png) -->
 ![](/figures/from_code/bidirectional_correlation.png "generated by sweep_gaussian_SNR.py")
 
-> 🚧(Final figure will be a mix of these two panels, caption will need updating) **Figure VAR: Location, variance, and type of intervention shape pairwise correlations**
-> **(CENTER)** A two-node linear Gaussian network is simulated with a connection from A→B. Open-loop interventions *(blue)* consist of independent Gaussian inputs with a range of variances $\sigma^2_S$. Closed-loop interventions *(orange)* consist of feedback control with an independent Gaussian target with a range of variances. *Incomplete closed-loop interventions result in node outputs which are a mix of the control target and network-driven activity*. Connections from sources to nodes are colored by their impact on correlations between A and B; green denotes $dR/dS > 0$, red denotes $dR/dS<0$.
-> **(lower left)** Intervention "upstream" of the connection A→B increases the correlation $r^2(A,B)$.
-> **(lower right)** Intervention at the terminal of the connection A→B decreases the correlation $r^2(A,B)$ by adding connection-independent noise.
-> **(upper left)** Intervention with shared inputs to both nodes generally increases $r^2(A,B)$, *(even without A→B, see supplement)*.
-> **(upper right)** The impact of shared interventions depends on relative weighted reachability $\text{Reach}(S_k→A) / \text{Reach}(S_k→B)$, with highest correlations when these terms are matched (see *)
-> Closed-loop interventions *(orange)* generally result in larger changes in correlation across $\sigma^2_S$ than the equivalent open-loop intervention. Closed-loop control at B effectively lesions the connection A→B, resulting in near-zero correlation.
-> [^var_compare]
+🚧 **Figure VAR: Location, variance, and type of intervention shape pairwise correlations**
+**(CENTER)** A two-node linear Gaussian network is simulated with a connection from A to B. Open-loop interventions *(blue)* consist of independent Gaussian inputs with a range of variances $\sigma^2_S$. Closed-loop interventions *(orange)* consist of feedback control with time-varying target drawn from an an independent Gaussian with a range of variances. Incomplete closed-loop interventions result in node outputs which are a mix of the control target and network-driven activity. 
+<!-- Connections from sources to nodes are colored by their impact on correlations between A and B; green denotes inputs which lead to increased pairwise correlation, red denotes inputs which decrease pairwise correlations. -->
+<!-- NOTE: as written, really only talking about open-loop influence...need to add that perfect closed-loop intervention, in fact, sets correlation to zero -->
+**(left)** Intervention "upstream" of the connection A→B increases the correlation $r^2(A,B)$.
+**(right)** Intervention at the terminal of the connection A→B decreases the correlation $r^2(A,B)$ by adding connection-independent noise.
+**(somewhere)** Intervention with shared inputs to both nodes generally increases $r^2(A,B)$, *(even without a connection from A to B, see Methods [#](REF-SECTION_HERE))*.
+<!-- **(upper right)** The impact of shared interventions depends on relative weighted reachability $\text{Reach}(S_k→A) / \text{Reach}(S_k→B)$, with highest correlations when these terms are matched (see Methods [#](REF-SECTION_HERE)) -->
 
 
-[^var_compare]: compare especially to ["Transfer Entropy as a Measure of Brain Connectivity"](https://www.frontiersin.org/articles/10.3389/fncom.2020.00045/full), ["How Connectivity, Background Activity, and Synaptic Properties Shape the Cross-Correlation between Spike Trains"](https://www.jneurosci.org/content/29/33/10234) Figure 3.
+`LEAD in, discussing figure`
 
-
-
-<details><summary>↪ additional notes:</summary>
-
-- contextualize increasing correlation is sometimes good, sometimes bad!
-- having (quantitative) prediction helps capture this relationship
-- **(incidental) subfigure PREDICT: Comparing predicted and empirical correlation, identification performance**
-</details>
+`dicsussing coreach sign`
 
 🚧
 The change in correlation as a function of changing intervention variance ($\frac{dr^2_{ij}}{dS}$) can therefore be used as an additional indicator of presence/absence and directionality of the connection between A,B *(see [fig. disambig. D.)](fig-disambig))*
 🚧
 
+[^var_compare]: compare especially to ["Transfer Entropy as a Measure of Brain Connectivity"](https://www.frontiersin.org/articles/10.3389/fncom.2020.00045/full), ["How Connectivity, Background Activity, and Synaptic Properties Shape the Cross-Correlation between Spike Trains"](https://www.jneurosci.org/content/29/33/10234) Figure 3.
 
-[Fig. variance](#fig-var) also demonstrates the relative dynamic range of correlations achievable under passive, open- and closed-loop intervention. In the passive case, correlations are determined by instrinsic properties of the network $\sigma^2_{base}$. These properties have influence over the observed correlations in a way that can be difficult to separate from differences due to the ground-truth circuit. With open-loop intervention we can observe the impact of increasing variance at a particular node, but the dynamic range of achievable correlations is bounded by not being able to reduce variance below its baseline level. With closed-loop control, the bidirectional control of the output variance for a node means a much wider range of correlations can be achieved [(blue v.s. orange in fig. variance)](#fig-var), resulting in a more sensitive signal reflecting the ground-truth connectivity.
+**`@ import "/section_content/methods_coreach_sign.md"`**
+
+
+<!-- TODO:
+- contextualize increasing correlation is sometimes good, sometimes bad!
+- having (quantitative) prediction helps capture this relationship
+- **(incidental) subfigure PREDICT: Comparing predicted and empirical correlation, identification performance**
+-->
+
+<!-- NOTE: this point seems important to make. not sure what the lead-in to it is yet. Think that should be flipping perspective on change in sign of correlation reflects position of an intervention relative to the direction of influence of a particular connection. Also notable that bidirectional connections can be identified with multiple interventions this way -->
+
+
+[Fig. variance](#fig-var) also demonstrates the relative dynamic range of correlations achievable under passive observation, open-, and closed-loop intervention. In the passive case, correlations are determined by intrinsic properties of the network such as network weights and intrinsic node variances. <!--"These properties have influence over the observed correlations in a way that can be difficult to separate from differences due to the ground-truth circuit." -- not sure what this part means--> With open-loop intervention, the impact of increasing variance at a particular node can be observed, but the dynamic range of achievable correlations is bounded by being unable to reduce variance below its baseline level. With closed-loop control, the bidirectional manipulation of the output variance for a node means a much wider range of correlations can be achieved [(blue v.s. orange in fig. variance)](#fig-var), resulting in a more sensitive signal reflecting the ground-truth connectivity.
+<!-- TODO: need to merge this with subsequent section -->
+
+<!-- NOTE: this may have be cut / relocated from figure caption -->
+Closed-loop interventions *(orange)* generally result in larger changes in correlation across $\sigma^2_S$ than the equivalent open-loop intervention. Closed-loop control at B effectively lesions the connection A→B, resulting in near-zero correlation.[^var_compare]
+
+```
+DISCUSS PARTIAL CONTROL
+- /section_content/methods_interventions.md
+- unclear at the outset, will partial closed-loop control have any properties of ideal closed-loop control? or will partial rejection of disturbances break the impact? 
+- result: generally falls between open and closed-loop
+  - "mostly" effective closed-loop control is still worth pursuing
+```
+
+```
+FUNNEL OUT
+- summarize implications 
+- either hint towards or away from followup analysis to identifiability
+```
+
+
+<!-- NOTE: end of content -->
 
 
 
-*see also [results1B_data_efficiency_and_bias.md](results1B_data_efficiency_and_bias.md)*
+<!-- NOTE: *see also [results_data_efficiency_and_bias.md](results_data_efficiency_and_bias.md)* -->
 
-<details><summary>↪todo items:</summary>
 
-<!-- TODO: -->
+[^dof]: need a more specific way of stating this. I mean degrees of freedom in the sense that mean and variance can be controlled independent of each other. And also, that the range of achievable correlation coefficients is wider for closed-loop than open-loop (where intrinsic variability constrains the minimum output variance)
+  
+[^intrinsic_var]: below the level set by added, independent/"private" sources
+
+
+<!-- TODO: 
 - [ ] collapse figvar - do we need to make shared input point here? or is discussion fine?
 - [ ] dR/dS needs to mention R as r^2 corr
- 
-</details>
+-->
 
 <details><summary>↪Notes from matt</summary>
 
@@ -89,4 +118,5 @@ The change in correlation as a function of changing intervention variance ($\fra
 - [missing] Section 5.1.2.1: what are the definitions of S_k, CoReach(i,j|S_k), and R_{ij}?
 - [narrative] Section 5.1.2.1: the narrative here really works for me, but it's a little unclear whether this is more of a 'result' or a 'recipe' -- the figures here also feel more example/proof-of-concept-ey, and the math here helps ground things in
 - [missing] discussion of partial closed-loop control?
+
 </details>

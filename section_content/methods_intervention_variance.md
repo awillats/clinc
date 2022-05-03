@@ -1,4 +1,4 @@
-<!-- TODO: [ORG] this is very closely related to 4.2 implementing interventions, description of impact of intervention on variance should perhaps be moved there... or the supplement? -->
+<!-- TODO: [ORG] this is very closely related to 4.2 implementing interventions, description of impact of intervention on variance should these be merged? -->
 
 [^V-notation]: need to be clear V means variance
 

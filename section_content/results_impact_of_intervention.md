@@ -44,7 +44,9 @@ log2(6)             = 2.58496
 > **(C)** Across-circuit entropy for each intervention type and location. Grey lines correspond to a single intervention location. Circle markers represent the mean entropy for a given intervention type across all intervention locations. Green dotted lines represents the maximum achievable entropy for this hypothesis set.
 **(D)** Distributions of patterns of pairwise correlation across hypotheses, for each intervention location and type. Distributions with more observed patterns, and more uniform probabilities correspond to experiments which reveal more information to narrow the set of candidate hypotheses.
 
-
+```
+text for choosing an intervention ... 
+```
 
 <!-- 
 - purpose of the figure 
