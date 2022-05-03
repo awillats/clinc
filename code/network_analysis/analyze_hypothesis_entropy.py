@@ -93,6 +93,14 @@ N_circ = len(As)
 #     else:
 #         ad[a] = 1
 # print(list(ad.values()))
+#%%
+'''
+For Fig. DISAMBIG, circuit_entropy_sketch.png
+'''
+N_nodes = 3
+N_circ = 6
+As = egcirc.get_hypothesis_fig_set()
+
 
 #%%
 N_circ = len(As)
