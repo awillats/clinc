@@ -85,19 +85,21 @@ extract minimum from:
 @import "/section_content/overview_steps_of_inference.md"
 
 
+<!-- NOTE: Cutting lots of sections here. Anything that needs to be re-included from this section should go into steps of inference 
+
 <!-- ### Extracting circuit estimates (4.3)
-`@ import "/section_content/methods_circuit_estimates.md"` -->
-<!-- NOTE: background_id_demo here instead? before or after methods are introduced -->
+`@ import "/section_content/methods_circuit_estimates.md"` 
+<!-- NOTE: background_id_demo here instead? before or after methods are introduced 
 
 ## Impact of intervention on estimation performance 
 ### (predicting) impact of intervention on pairwise dependence (3.1?, 5.1?)
-<!-- NOTE: ^ this H2 will likely be removed from, be implicit in final draft -->
+<!-- NOTE: ^ this H2 will likely be removed from, be implicit in final draft
 
 #### Representations & reachability
 `extract minimum from:`
 `@ import "/section_content/representation_reach.md"`
 
-<!-- @ import "/section_content/background_id_demo.md" -->
+<!-- @ import "/section_content/background_id_demo.md" 
 
 #### Predicting correlation structure (theory)
 ```
@@ -110,11 +112,16 @@ extract minimum from:
 @ import "/section_content/methods_interventions.md"
 @ import "/section_content/results_impact_of_intervention.md"
 ```
-### Intervening provides (categorical) improvements in inference power beyond passive observation
+-->
+
+
+<!-- ### Intervening provides categorical improvements in inference power beyond passive observation -->
 @import "/section_content/results_impact_of_intervention.md"
 
-### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias - *bidirectional var control* (5.1.2)
-#### Impact of intervention location and variance on pairwise correlations (5.1.2.1)
+<!-- ### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias - *bidirectional var control* (5.1.2) -->
+<!-- #### Impact of intervention location and variance on pairwise correlations (5.1.2.1) -->
+@import "/section_content/results_impact_variance.md"
+
 <!-- @ import "results_data_efficiency_and_bias.md" -->
 
 <!-- 

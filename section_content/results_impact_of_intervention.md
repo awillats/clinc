@@ -4,6 +4,9 @@ In the previous sections, we established how open-loop interventions modify obse
 
 While the ground truth connectivity is rarely available during experiments, it is valuable to explicitly lay out our prior hypothesis in the form of a directed graph or adjacency matrix. Panel A of `Fig. DISAMBIG` shows the adjacency and reachability of 6 candidate circuit hypotheses. `Row Ba` illustrates the presence of pairwise correlation for each hypotheses under passive observation. While the magnitudes of correlation will depend on particular values of system parameters, here we focus on only the presence or absence of a significant correlation between two nodes, as well as whether correlations increase or decrease from their baseline. In this way, we build towards an understanding of the categorical impact of intervention on observed pairwise dependence, which should be general across particular parameter values or algorithms for circuit inference. *(More concrete, quantitative effects will be explored in the next section).*
 
+<!-- NOTE: potentially useful raw text from "steps of inference"
+A useful experiment (intervention) is one which produces highly distinct outcomes when applied to each of the hypothesized circuits, while an experiment which produces the same outcome across all hypothesized circuits would be redundant.     Before collecting experimental data we do not know the ground-truth circuit with certainty, therefore it is useful to understand the range of possible observed patterns of dependence. To distill this range of possibilities to a make a decision about which intervention to apply, it is also useful to summarize the expected information we would gain about circuit identity across the range of hypotheses. (across columns of Fig.DISAMBIG) >-Here we generalize across specific values of synaptic weights and divide observed patterns into categories: increased correlation, decreased correlation, no correlation. -->
+
 The set of patterns of pairwise dependences across the hypothesis set  form an "intervention-specific fingerprint" (i.e. a single row of `Fig. DISAMBIG`). This fingerprint summarizes the outcomes of a particular experiment with intervention, and therefore shows which hypotheses are observationally equivalent under this observation. If this fingerprint contains many examples of the same pattern (such as the all-to-all correlation pattern seen under passive observation, `row Ba`), many different circuits correspond to the same observation, and that experiment contributes low information to distinguish between hypotheses. On the other hand, a maximally informative experiment would result in unique observations corresponding to each hypothesis. Observations from such an experiment would be sufficient to narrow the inferred circuit down to a single hypotheses.
 
 To quantify this hypothesis ambiguity based on the diversity of a set of possible outcomes, we compute the Shannon entropy over the distribution of patterns (See Methods [entropy](#methods-entropy)). Because our hypotheses set contains circuits with relatively dense connectivity, 5 of the 6 hypotheses result in all-to-all correlations, with the final hypothesis displaying a unique V-shaped pattern of correlation (A~B, and A~C, `row Ba`). The entropy of this distribution is 0.65 bits. To interpret this entropy value, it is useful to understand the maximum achievable entropy, which is simply the logarithm of the number of hypotheses. In this case, $H_{max} = \log_2(6)\approx 2.58 \text{bits}$, which indicates the information gained from passive observation is 25% efficient ($H_{passive} / H_{max} \approx 0.25 $). 
@@ -47,6 +50,12 @@ log2(6)             = 2.58496
 ```
 text for choosing an intervention ... 
 ```
+
+<!-- NOTE: text from steps of inference (may consider re-grabbing)
+Here, we describe a “greedy” approach for choosing an effective single-node intervention, but extending the approach above to predict joint entropy would allow a joint or sequential experimental design which would be optimal over multiple interventions. >- possible interventions consist of open-loop and closed-loop stim at each of N nodes > - but more constraints on the set of interventions can easily be incorporated at this stage
+
+For selecting the first intervention type and location, we propose choosing the intervention which results in the maximum expected circuit information, that is:
+ -->
 
 <!-- 
 - purpose of the figure 
