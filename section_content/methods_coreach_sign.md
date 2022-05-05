@@ -22,7 +22,10 @@ The impact of intervention on correlations can be understood from the interventi
 
 In a simulated network A→B [(fig. variance)](#fig-var) we demonstrate predicted and emprirical correlations between a pair of nodes as a function of intervention type, location, and variance. A few features are present which provide a general intuition for the impact of intervention location in larger circuits: First, interventions "upstream" of a true connection [(lower left, fig. variance)](#fig-var) tend to increase the connection-related variance, and therefore strengthen the observed correlations.
 
-![](/figures/misc_figure_sketches/quant_r2_prediction_common.png)
+<details><summary>↪old figure sketch:</summary>
+
+<img src="/figures/misc_figure_sketches/quant_r2_prediction_common.png" width=400></img>
+</details>
 
 
 `if:`
