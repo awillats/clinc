@@ -275,6 +275,11 @@
   keywords = {Computer Science - Information Theory,Computer Science - Neural and Evolutionary Computing,Quantitative Biology - Neurons and Cognition}
 }
 
+@misc{causal,
+  title = {Causal {{Discovery Toolbox Documentation}} \textemdash{} {{Causal Discovery Toolbox}} 0.5.23 Documentation},
+  howpublished = {https://fentechsolutions.github.io/CausalDiscoveryToolbox/html/index.html}
+}
+
 @article{chicharro2012when,
   title = {When {{Two Become One}}: {{The Limits}} of {{Causality Analysis}} of {{Brain Dynamics}}},
   shorttitle = {When {{Two Become One}}},
@@ -445,7 +450,7 @@
   doi = {10.1038/s41593-020-0699-2},
   abstract = {Understanding the mechanisms of neural computation and learning will require knowledge of the underlying circuitry. Because it is difficult to directly measure the wiring diagrams of neural circuits, there has long been an interest in estimating them algorithmically from multicell activity recordings. We show that even sophisticated methods, applied to unlimited data from every cell in the circuit, are biased toward inferring connections between unconnected but highly correlated neurons. This failure to `explain away' connections occurs when there is a mismatch between the true network dynamics and the model used for inference, which is inevitable when modeling the real world. Thus, causal inference suffers when variables are highly correlated, and activity-based estimates of connectivity should be treated with special caution in strongly connected networks. Finally, performing inference on the activity of circuits pushed far out of equilibrium by a simple low-dimensional suppressive drive might ameliorate inference bias.},
   copyright = {2020 The Author(s), under exclusive licence to Springer Nature America, Inc.},
-  keywords = {++,Computational neuroscience,Network models,Neural circuits,parameter sweep},
+  keywords = {++,Computational neuroscience,cross-correlation,Network models,Neural circuits,parameter sweep,xcorr},
   annotation = {Bandiera\_abtest: a Cg\_type: Nature Research Journals Primary\_atype: Research Subject\_term: Computational neuroscience;Network models;Neural circuits Subject\_term\_id: computational-neuroscience;network-models;neural-circuit}
 }
 
@@ -602,14 +607,14 @@
   abstract = {Elucidating causal relations between the brain and its produced behaviour is a fundamental neuroscientific goal. Traditional approaches for revealing such relations have relied on univariate single-site lesion experiments in which an individual brain region is perturbed and consequent behavioural effects are quantified. More recent studies, however, have pointed towards the inefficiency of single-site perturbations to reveal reliable neural contributions, arguing for more extensive perturbational regimes and analyses, e.g., multi-site perturbation approaches. This study aims to compare uni- and multi-site perturbation approaches using an Artificial Neural Network model to elucidate their inferential capabilities.}
 }
 
-@techreport{fakhar2021systematic,
+@misc{fakhar2021systematic,
   type = {Preprint},
   title = {Systematic {{Perturbation}} of an {{Artificial Neural Network}}: {{A Step Towards Quantifying Causal Contributions}} in {{The Brain}}},
   shorttitle = {Systematic {{Perturbation}} of an {{Artificial Neural Network}}},
   author = {Fakhar, Kayson and Hilgetag, Claus Christian},
   year = {2021},
   month = nov,
-  institution = {{Neuroscience}},
+  publisher = {{Neuroscience}},
   doi = {10.1101/2021.11.04.467251},
   abstract = {Lesion inference analysis is a fundamental approach for characterizing the causal contributions of neural elements to brain function. Historically, it has helped to localize specialized functions in the brain after brain damage, and it has gained new prominence through the arrival of modern optogenetic perturbation techniques that allow probing the functional contributions of neural circuit elements at unprecedented levels of detail.}
 }
@@ -1136,13 +1141,12 @@
   annotation = {Bandiera\_abtest: a Cc\_license\_type: cc\_by Cg\_type: Nature Research Journals Primary\_atype: Research Subject\_term: Complex networks;Nonlinear phenomena Subject\_term\_id: complex-networks;nonlinear-phenomena}
 }
 
-@misc{lepperod2018inferring,
+@article{lepperod2018inferring,
   title = {Inferring Causal Connectivity from Pairwise Recordings and Optogenetics},
   author = {Lepper{\o}d, Mikkel Elle and St{\"o}ber, Tristan and Hafting, Torkel and Fyhn, Marianne and Kording, Konrad Paul},
   year = {2018},
   month = nov,
-  pages = {463760},
-  institution = {{bioRxiv}},
+  publisher = {{bioRxiv}},
   doi = {10.1101/463760},
   abstract = {To study how the brain works, it is crucial to identify causal interactions between neurons, which is thought to require perturbations. However, when using optogenetics we typically perturb multiple neurons, producing a confound - any of the stimulated neurons can have affected the postsynaptic neuron. Here we show how this produces large biases, and how they can be reduced using the instrumental variable (IV) technique from econometrics. The interaction between stimulation and the absolute refractory period produces a weak, approximately random signal which can be exploited to estimate causal connectivity. When simulating integrate-and-fire neurons, we find that estimates from IV are better than na\"ive techniques (R2 = 0.77 vs R2 = 0.01). The difference is important as the estimates disagree when applied to experimental data from stimulated neurons with recorded spiking activity. Presented is a robust analysis framework for mapping out network connectivity based on causal neuron interactions.},
   chapter = {New Results},

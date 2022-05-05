@@ -1,6 +1,6 @@
 Word count:
 
-<!-- @import "OUTLINE_high_level_april6.md" -->
+<!-- @ import "OUTLINE_high_level_april6.md" -->
 
 <hr>
 # Hopper 
@@ -10,7 +10,8 @@ Word count:
   
   - referenced in results_impact_of_intervention
 
-- [ ] in steps of inference emphasize this idea (which shows up later in results)
+- [ ] in steps of inference emphasize this idea (which shows up later in results)  
+
   >  If this fingerprint contains many examples of the same pattern of correlation (such as **B**), many hypotheses correspond to the same observation, and that experiment contributes low information to distinguish between structures. A maximally informative intervention would produce a unique pattern of correlation for each member of the hypothesis set.
   
 - [ ] background - representations & reachability, but light on methods?
@@ -23,7 +24,7 @@ Word count:
   
   
 - ( ) NOTE: don't have to get all the way through all the methods before hitting rest of results 
-  - under this results-first model, can 
+  - under this results-first model, can postpone details  til later
 
 # Writing 
 ## Easy tasks 
@@ -62,7 +63,7 @@ Word count:
   - [ ] steps of inference 
   
 ## Hard results (results)
-- [ ] just write 
+- [x] just write 
 - [ ] edit
 
 ## Figures
@@ -73,7 +74,7 @@ Word count:
 - [ ] pull from `th`
 - [ ] 3/16 - Mention basic science applications of CL control - Maybe more forecasting idea of shaping correlations? (don't want reader to be surprised by structure of paper's argument)
 
-`from: "/section_content/background_causal_network_id.md"`
+`from: "/section_content/background_causal_network_id.md"`  
 - [ ] 3/16: - "We first propose..." paragraph (could build out or move or change focus away from the 'framework') - think about condensing and/or moving "Inferring causal interactions from time series" subsection - Maybe add half a paragraph or so in the discussion about how causal inference tools can help above correlation analysis (e.g., PC algorithm)
 
 - [ ] (in background-interventions) get language more precise and effective about value of intervention
@@ -124,9 +125,8 @@ Word count:
     - current figure really focuses on the fate of one circuit at a time
 
 - [ ] Either need to write a "results summary" section or smooth transition from quantitative results to discussion
-- [ ] add steps of inference to end of introduction
 
-- ( ) consider variance control *before* categorical impact? - `[ORG]`
+- [ ] consider variance control *before* categorical impact? - `[ORG]`
 
 - Simulation methods section sketch 
   - Network simulations (simulation)

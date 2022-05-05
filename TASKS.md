@@ -4,14 +4,9 @@
 
 ## [ ] fill in results-methods 🧿
 *high level versions of results*
-
-- (x) assess
-
-### Overview  
-- [.] Challenges  🧿
-
-    
-- [ ] Network  🧿
+### Overview  🧿
+- [.] Challenges  👁️‍🗨️
+- [ ] Network  👁️‍🗨️
   - ( ) section name 
     - use overview figure as guide?
     - something about the circuit? 
@@ -26,13 +21,8 @@
 
 - ( ) reassess 🎯
 
-## [ ] fill in results 
-    - writeups for hard results
-  
-  - ( ) reassess 🎯
+## [-] fill in results 
   - ( ) rough page count 🎯
-    
-    
 - [ ] identify additional gaps
   - [ ] reevaluate progress.md
     
