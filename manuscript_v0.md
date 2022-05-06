@@ -42,6 +42,9 @@ NOTE: requires MPE Use Pandoc Parser to be off
 <!-- /code_chunk_output -->
 
 
+[ `current focus` ](#results)
+
+
 # Abstract
 
 @import "/section_content/abstract.md"
@@ -54,7 +57,7 @@ NOTE: requires MPE Use Pandoc Parser to be off
 ## Interventions in neuroscience & causal inference
 @import "/section_content/background_intervention_causal_inf.md"
 
-## Representations & reachability (minimal, dupe)
+## ? Representations & reachability (minimal, dupe)
 ```
 consider:
 @ import "/section_content/representation_reach.md"
@@ -62,26 +65,20 @@ consider:
 ```
 
 # Results
-@import "/section_content/background_id_demo.md"
-
-<!-- !!!! - overall, 60% done -->
-<!-- ## Overview - Challenges (+) -->
-<!-- ## Overview - Network (4.1?) -->
 @import "/section_content/results_overview.md"
 
-- `reference extended methods`
-```
-extract minimum from:
-@ import "/section_content/methods_simulations.md" 
-```
+## ( Box 1: )
+@import "/section_content/background_id_demo.md"
 
 ## Steps of inference - *overview of CLINC approach* (+)
+```
+how do these steps help address established challenges 
+```
 ![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
 
 > **Figure OVERVIEW:** ...
 
-<!-- <img src="/figures/core_figure_sketches/figure2_sketch.png" width="500"/> -->
-<!-- ![](/figures/misc_figure_sketches/intervention_identifiability_concept.png) -->
+- `reference extended methods`
 @import "/section_content/overview_steps_of_inference.md"
 
 
@@ -119,18 +116,16 @@ extract minimum from:
 @import "/section_content/results_impact_of_intervention.md"
 
 <!-- ### Stronger intervention shapes correlation, resulting in more data-efficient inference with less bias - *bidirectional var control* (5.1.2) -->
-<!-- #### Impact of intervention location and variance on pairwise correlations (5.1.2.1) -->
+<!-- #### Impact of intervention location and variance on pairwise correlations-->
 @import "/section_content/results_impact_variance.md"
 
-<!-- @ import "results_data_efficiency_and_bias.md" -->
 
 <!-- 
+@ import "results_data_efficiency_and_bias.md"
 ## Interaction of intervention & circuit structure
 @ import "/section_content/near_future_work/results2_circuit_x_intervention.md" -->
 
-
 # Discussion
-<!-- !!!! - overall, 30% done -->
 @import "/section_content/discussion.md"
 
 # Methods

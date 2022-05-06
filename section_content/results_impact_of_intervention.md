@@ -1,4 +1,4 @@
-### Intervening provides categorical improvements in inference power beyond passive observation
+## Intervening provides categorical improvements in inference power beyond passive observation
 
 In the previous sections, we established how open-loop interventions modify observed pairwise correlations, and how closed-loop interventions modify a circuit's functional connectivity. Figure `ID-DEMO` demonstrated a simple example of how removing connections in a circuit can sometimes reveal more distinct patterns of dependence, and distinguish hypotheses which are indistinguishable through passive observation and open-loop control. Here, we systematize this approach to choose an appropriate intervention to narrow down a hypothesis set. The following sections will address how to evaluate the relative effectiveness of a particular intervention. <!-- NOTE: focusing on step 3 of steps of inference.--> Multiple intervention types and locations are compared for a larger set of circuit hypotheses to build towards general principles for where and how to intervene.
 

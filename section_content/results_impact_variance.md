@@ -6,7 +6,7 @@
 
 
 <!-- ... more nuanced, quantitative advantage .. -->
-### Impact of intervention location and variance on pairwise correlations
+## Impact of intervention location and variance on pairwise correlations
 
 While a primary advantage of closed-loop intervention for circuit inference is its ability to functionally lesion indirect connections, another, more nuanced advantage lies in its capacity to bidirectionally manipulate output variance. While the variance of an open-loop stimulus can be titrated to adjust the output variance at a node, in general, an open-loop stimulus cannot reduce this variance below variance arising from other sources. That is, if the system is linear with Gaussian noise, each node's intrinsic variability, the effect of other nodes, and unobserved disturbances together set a lower bound on the total output variance of that node in the presence of additive open-loop stimulation (See Methods [# variance & intervention](/section_content/methods_intervention_variance.md)).
 <!-- NOTE: long-winded, also need to double check this isn't established already earlier on -->

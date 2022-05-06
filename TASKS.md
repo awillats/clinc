@@ -14,7 +14,6 @@
 ### Steps of inference - overview approach
 ???
 - [ ] Representations and Reachability
-
 - [ ] Predicting Corr 
 - [ ] Circuit Estimates
 <!-- - [ ] Impact of Intervention  -->
