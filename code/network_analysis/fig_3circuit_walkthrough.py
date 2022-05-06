@@ -55,14 +55,10 @@ pos = netplot._gen_layout_from_adj(As[0])
 #%%
 
 #%%
-# fig,axs = myplot.subplots(1,6)
-fig = netplot.draw_adj_reach_corr_coreach(As[0],grey_correlations=False)
-# for ax in axs:
-    # myplot.expand_bounds(ax,1.2)
-    # pass
-# myplot.expand_bounds_each(axs)
-plt.savefig('test.svg',format='svg')
-plt.savefig('test.png',format='png')
+# df = 
+fig,axs = myplot.subplots(1,6)
+fig = netplot.draw_adj_reach_corr_coreach(As[0],axs=axs,grey_correlations=False)
+
 fig
 #%%
 'FOR DEBUG ONLY'
@@ -70,7 +66,7 @@ fig
 # df = coreach.compute_coreachability_from_src(
 df = coreach.compute_coreachability_tensor(net.reachability(As[0]))
 print(df[df['kS']==1])
-pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df, 1)
+pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df, 2)
 
 print(pos_edges)
 print(neut_edges)
@@ -87,7 +83,11 @@ cols = ['adj','reach','corr','open@1','adj ctrl@1','corr ctrl@1']
 plot_types_locs = [netplot.parse_plot_type(p) for p in cols]
 print(plot_types_locs)
 
+fig,axs = myplot.subplots(3,6)
+fig=netplot.plot_each_adj_by_plot_type(axs,As,plot_types_locs,ax_padding=1.0)
+myplot.savefig(f'results/circuit_walkthrough_{len(As)}circuits.png',
+    this_file='/code/network_analysis/fig_3circuit_walkthrough.py',
+    save_svg=True)        
+fig
 
-fig=netplot.plot_each_adj_by_plot_type(None,As,plot_types_locs)
-# # myplot.savefig(f'results/circuit_walkthrough_{len(As)}circuits.png',this_file='/code/fig_circuit_walkthrough.py')        
 # fig

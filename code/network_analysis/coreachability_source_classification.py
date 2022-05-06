@@ -118,7 +118,9 @@ def compute_coreachability_tensor(R, ignore_self_connections=True, to_multiindex
     '''
     n = R.shape[0] 
     df = pd.DataFrame()
-    for k in range(1,n):
+    
+    #formerly: range(1,n):
+    for k in range(0,n): 
         df = df.append(compute_coreachability_from_src(R,k, ignore_self_connections=ignore_self_connections, to_multiindex=to_multiindex))
         
     '''

@@ -59,8 +59,9 @@ DEFAULT_NET_PLOT_OPTIONS = {
         'width': 4,
         'arrowstyle': '-|>',
         'arrowsize':25,
-        'connectionstyle':"arc3,rad=-0.1",
+        'connectionstyle':"arc3,rad=0.1", 
     }
+#NOTE: consider using negative radius if connections are mostly clockwise
     
 # dusty_orange = '#b4a390'    
 DARK_CTRL_COLOR = 'darkorange'
@@ -687,6 +688,7 @@ class NetPlotType(Flag):
         if self & NetPlotType.CTRL:
             return 'orange'
         return 'black'
+        
     def lightcolor(self):
         if self & NetPlotType.PASV:
             return 'lightgrey'
@@ -746,6 +748,8 @@ def plot_adj_by_plot_type(ax, A, plot_type_loc, add_titles=True):
     grey=True
     plot_type = plot_type_loc['plot_type']
     intervention_location = plot_type_loc['intervention_location']
+    
+    # NOTE: this responsibility should belong to NetPlotType !
     plot_funs = {
         NetPlotType(0):         lambda adj,ax,intv_loc: adj*2,
         NetPlotType.ADJ:        lambda adj,ax,intv_loc: draw_np_adj(adj,ax=ax),
@@ -760,24 +764,36 @@ def plot_adj_by_plot_type(ax, A, plot_type_loc, add_titles=True):
     this_plot_fun = plot_funs.get(plot_type)
     
     this_plot_fun(A, ax, intervention_location)
+    
+    # # NOTE: this responsibility should belong to NetPlotType !
+    plot_title_fn_by_type = {
+        NetPlotType(0):         lambda plot_type_loc: '',
+        NetPlotType.ADJ:        lambda plot_type_loc: 'adjacency',
+        NetPlotType.REACH:      lambda plot_type_loc: 'reachability',
+        NetPlotType.CORR:       lambda plot_type_loc: 'correlations',
+        NetPlotType.ADJ_CTRL:   lambda plot_type_loc: 'modified\nadjacency',
+        NetPlotType.CORR_CTRL:  lambda plot_type_loc: 'correlations',
+        NetPlotType.OPEN:       lambda plot_type_loc: 'correlations',
+    }
+    
+    
     if add_titles:
-        ax.set_title(str(plot_type),color='lightgrey')
+        # ax.set_title(str(plot_type),color='lightgrey')
+        ax.set_title(plot_title_fn_by_type[plot_type](plot_type_loc),color=GREY)
     else:
         ax.set_title('')
 
-def plot_each_adj_by_plot_type(ax, As, plot_types,ax_padding=1.2):
+def plot_each_adj_by_plot_type(axs, As, plot_types,ax_padding=1.2):
     N_circ = len(As)
     N_plots = len(plot_types)
-    if ax is None:
-        h = 5 #panel height
-        fs = (h*N_plots, (h+.5)*N_circ)
-        fig,ax = plt.subplots(N_circ,N_plots, figsize=fs, sharex=True,sharey=True)
+    if axs is None:
+        fig,axs = myplt.subplots(N_circ,N_plots)
     else:
-        fig = ax.gcf()
+        fig = axs[0][0].get_figure()
     for j,A in enumerate(As):
         for i,plot_type in enumerate(plot_types):
-            plot_adj_by_plot_type(ax[j][i],A,plot_type, add_titles=(j==0))
-    myplot.expand_bounds(ax[0][0], ax_padding)
+            plot_adj_by_plot_type(axs[j][i],A,plot_type, add_titles=(j==0))
+    myplot.expand_bounds(axs[0][0],ax_padding)
     return fig
 #%%
 # 1-lag correlation-plot
