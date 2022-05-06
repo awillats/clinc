@@ -7,7 +7,12 @@ def subplots(nrows,ncols, figsize=None,w=3):
     
     if figsize is None:
         figsize = (w*ncols,w*nrows)
-    fig,ax = plt.subplots(nrows,ncols,figsize=figsize, sharex=True,sharey=True)
+    fig,ax = plt.subplots(nrows,ncols,figsize=figsize, 
+        sharey=True)
+    
+    for a in ax:
+        a.set_aspect('equal')
+
     return fig,ax
 def unbox(ax, clear_labels=False):
     '''

@@ -57,12 +57,12 @@ NOTE: requires MPE Use Pandoc Parser to be off
 ## Interventions in neuroscience & causal inference
 @import "/section_content/background_intervention_causal_inf.md"
 
-## ? Representations & reachability (minimal, dupe)
+<!-- ## ? Representations & reachability (minimal, dupe)
 ```
 consider:
 @ import "/section_content/representation_reach.md"
 @ import "/section_content/background_id_demo.md"
-```
+``` -->
 
 # Results
 @import "/section_content/results_overview.md"

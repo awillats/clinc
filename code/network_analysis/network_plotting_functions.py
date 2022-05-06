@@ -50,14 +50,55 @@ looking into alternate network visualization libraries:
 '''
 
 #%%
+'''
+Style settings 
+'''
 DEFAULT_NET_PLOT_OPTIONS = {
         'node_color': 'lightgrey',
-        'node_size': 1000, #1000
+        'node_size': 500, #1000
         'width': 4,
         'arrowstyle': '-|>',
         'arrowsize':25,
         'connectionstyle':"arc3,rad=-0.1",
     }
+    
+# dusty_orange = '#b4a390'    
+DARK_CTRL_COLOR = 'darkorange'
+CTRL_COLOR = 'orange'
+LIGHT_CTRL_COLOR = 'moccasin'
+
+OPEN_LOOP_COLOR = 'dodgerblue'
+# mpl::lightgrey == #D3D3D3
+LIGHTER_GREY = '#e6e6e6'
+GREY = '#D3D3D3'
+DARKER_GREY = '#adadad'
+
+def get_edge_style(type, do_grey_out=False,base_options={}):
+    if 'pos' in type or 'incr' in type:
+        edge_style = straight_edge_style(DARKER_GREY) #was 'peachpuff'
+        edge_style.update({'width':10})
+    if 'neg' in type or 'decr' in type:
+        edge_style = straight_edge_style(LIGHTER_GREY) # was 'lightblue'
+        edge_style.update({'width':2})
+    if 'neut' in type or 'same' in type:
+        edge_style = straight_edge_style(GREY) #lightgrey')
+        edge_style.update({'width':5})
+    
+    if 'good' in type:
+        edge_style = straight_edge_style('lightgreen')
+    if 'bad' in type:
+        edge_style = straight_edge_style('lightcoral')
+    
+    if type is None:
+        edge_style = straight_edge_style(GREY)
+        
+    if do_grey_out:
+        edge_style['edge_color'] = GREY
+    edge_style.update(base_options)
+    return edge_style
+    
+    
+#%%
 # _ABC_DICT = {number:chr(letter) for (number,letter) in zip(range(26),range(ord('A'),ord('Z')+1))}
 # Network plotting  
 def draw_weighted_corr(W, ax=None, min_w=0,max_w=10, more_options={},pos_override=None):
@@ -180,7 +221,7 @@ def straight_edge_style(color):
     # return {'edge_color':color,'connectionstyle':'arc3,rad=0','style':'--','arrowstyle':straight_arrow_style}
 
 
-def indicate_ctrl(ax, pos_i, markersize=20, color='darkorange'):
+def indicate_ctrl(ax, pos_i, markersize=20, color=DARK_CTRL_COLOR):
     # ms of 30 corresponds to a node size of 1000
     ax.plot(pos_i[0],pos_i[1],'o',color=color,markersize=markersize,markeredgewidth=4,fillstyle='none')
 
@@ -189,7 +230,7 @@ def indicate_intervention(ax, pos_i, type='open-loop'):
     see also indicate_ctrl
     '''
     arrow_mag = 0.4
-    arrow_c = 'dodgerblue' if type=='open-loop' else 'orange'
+    arrow_c = OPEN_LOOP_COLOR if type=='open-loop' else CTRL_COLOR
     # start from "outside" the node
     x0 = pos_i[0]*(1+arrow_mag)
     y0 = pos_i[1]*(1+arrow_mag)
@@ -235,16 +276,10 @@ def draw_correlations(A,Corr=None,ax=None,grey_correlations=False,base_options={
     #NOTE: does it make sense to have "yellow" correlations which are in the reachability but NOT the adj 
     # then "red" correlations which aren't in the reachability ?
     
-    good_corr_style = straight_edge_style('lightgreen') if not grey_correlations else straight_edge_style('lightgrey')
-    bad_corr_style = straight_edge_style('lightcoral') if not grey_correlations else straight_edge_style('lightgrey')
-    
-    # good_corr_style = base_options.copy()
-    # good_corr_style.update(_good_corr_style)
-    # bad_corr_style = base_options.copy()
-    # bad_corr_style.update(_bad_corr_style)
-    good_corr_style.update(base_options)
-    bad_corr_style.update(base_options)
-    
+    # bad_corr_style.update(base_options)
+    good_corr_style = get_edge_style('good', do_grey_out = grey_correlations, base_options = base_options)
+    bad_corr_style  = get_edge_style('bad', do_grey_out = grey_correlations, base_options = base_options)
+
     draw_np_adj(Corr, ax=ax, more_options=good_corr_style)
     pos = draw_np_adj(net.illusory_correlations(A,Corr), ax=ax, more_options=bad_corr_style)
     return pos
@@ -275,8 +310,8 @@ def draw_controlled_representations(ax, adj, adj_ctrls=None, reach_ctrls=None, c
         reach_ctrls = net.each_closed_loop_reachability(adj) #pass through is_binary?
         corr_ctrls = net.each_closed_loop_correlations(adj) #pass through is_binary?
     N = len(adj_ctrls)
-    ctrl_marker_color = 'darkorange' #unused?
-    severed_edge_style = {'edge_color':'moccasin','style':':'}
+    ctrl_marker_color = DARK_CTRL_COLOR
+    severed_edge_style = {'edge_color':LIGHT_CTRL_COLOR,'style':':'}
     
     pos = draw_adj_reach_corr(adj, ax[0,:],grey_correlations=True)
     # loop across control locations
@@ -300,11 +335,9 @@ def draw_controlled_correlations(ax, adj,  adj_ctrls=None,corr_ctrls=None, add_t
         adj_ctrls = net.each_closed_loop_adj(adj)
         corr_ctrls = net.each_closed_loop_correlations(adj) #pass through is_binary?
     N = len(adj_ctrls)
-    
-    dusty_orange = '#b4a390'
-    dark_orange = 'darkorange'
+
     if ctrl_color is None:
-        ctrl_color = dark_orange
+        ctrl_color = DARK_CTRL_COLOR #dark_orange
 
     for i in range(N):
         _ax = ax[i]
@@ -322,10 +355,12 @@ def __draw_ctrl_adj_at_source(ax,adj,intv_loc,adj_ctrl=None,
     if node_position is None:
         node_position = _gen_layout_from_adj(adj)
     
-    light_orange = '#936d4699'
-    dark_orange = '#ece3de99'
-    severed_direct_style = {'edge_color':'#53535366','style':'--'}
-    severed_indirect_style = {'edge_color':'#b5b5b566','style':'--'}
+    # light_orange = '#936d4699'
+    # dark_orange = '#ece3de99'
+    DARK_GREY_TRANS = '#53535366'
+    LIGHT_GREY_TRANS = '#b5b5b566'
+    severed_direct_style = {'edge_color':DARK_GREY_TRANS,'style':'--'}
+    severed_indirect_style = {'edge_color':LIGHT_GREY_TRANS,'style':'--'}
 
     
     myplot.unbox(ax)
@@ -364,8 +399,8 @@ def draw_controlled_adj_correlations(ax, adj, adj_ctrls=None, corr_ctrls=None):
         corr_ctrls = net.each_closed_loop_correlations(adj) #pass through is_binary?
     
     N = len(adj_ctrls)
-    ctrl_marker_color = 'darkorange' #unused?
-    severed_edge_style = {'edge_color':'moccasin','style':':'}
+    ctrl_marker_color = DARK_CTRL_COLOR # unused?
+    severed_edge_style = {'edge_color':LIGHT_CTRL_COLOR,'style':':'}
 
     #draw unmodified circuit in lower left 3 panels
     pos = draw_adj_reach_corr(adj, ax[1,:3], grey_correlations=True)
@@ -399,33 +434,39 @@ def draw_controlled_adj_correlations(ax, adj, adj_ctrls=None, corr_ctrls=None):
 # Plotting functions
 def __draw_coreachability_by_source(adj, axs, node_position=None, add_titles=True, grey_correlations=False):
     '''
-    refactoring with a more standard interface, work in progress
+    NOTE: work in progress
+    - refactoring with a more standard interface
     '''
     if node_position is None:
         node_position = _gen_layout_from_adj(adj)
     # if df is None:
     df = coreach.compute_coreachability_tensor(net.reachability(adj))
-    draw_coreachability_by_source(df=df, axs=axs, node_position=node_position, add_titles=add_titles, grey_correlations=grey_correlations)
+    draw_coreachability_by_source(df=df, axs=axs, node_position=node_position, 
+        add_titles=add_titles, grey_correlations=grey_correlations)
 
 def __draw_coreachability_at_source(adj, ax,intv_loc,df=None, node_position=None, add_titles=True, grey_correlations=False):
-    
+    '''
+    TODO: DOCS: how do these __draw version differ from others?
+        - they're intended as internal-only functions 
+        - they're being actively updated and aren't stable for public use
+    '''
     if df is None:
         df = coreach.compute_coreachability_tensor(net.reachability(adj))
         
     if node_position is None:
         node_position = _gen_layout_from_adj(adj)
-    pos_edge_style = straight_edge_style('peachpuff')
+    pos_edge_style = straight_edge_style('darkgrey')#'peachpuff'
     pos_edge_style.update({'width':10})
-    neg_edge_style = straight_edge_style('lightblue')
+    neg_edge_style = straight_edge_style('lightgrey') #'lightblue')
     neg_edge_style.update({'width':2})
-    neut_edge_style = straight_edge_style('lightgrey')
+    neut_edge_style = straight_edge_style('grey')
     neut_edge_style.update({'width':5})
     
     if grey_correlations:
         pos_edge_style['edge_color'] = 'lightgrey'
         neg_edge_style['edge_color'] = 'lightgrey'
         neut_edge_style['edge_color'] = 'lightgrey'
-    pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df,intv_loc)
+    pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df, intv_loc)
     
     draw_np_adj(neut_edges, ax, more_options=neut_edge_style)
     draw_np_adj(pos_edges, ax, more_options=pos_edge_style)
@@ -443,20 +484,9 @@ def draw_coreachability_by_source(df, axs, node_position, add_titles=True, grey_
     
     - [ ] TODO: move default styles elsewhere
     '''
-    pos_edge_style = straight_edge_style('peachpuff')
-    pos_edge_style.update({'width':10})
-    neg_edge_style = straight_edge_style('lightblue')
-    neg_edge_style.update({'width':2})
-    neut_edge_style = straight_edge_style('lightgrey')
-    neut_edge_style.update({'width':5})
-    
-    if grey_correlations:
-        pos_edge_style['edge_color'] = 'lightgrey'
-        neg_edge_style['edge_color'] = 'lightgrey'
-        neut_edge_style['edge_color'] = 'lightgrey'
-    #NOTE: temporarily overriding rendering style
-    # pos_edge_style['edge_color'] = 'lightgrey'
-    # neg_edge_style['edge_color'] = 'lightgrey'
+    increase_edge_style = get_edge_style('increase', do_grey_out=grey_correlations)
+    decrease_edge_style = get_edge_style('decrease', do_grey_out=grey_correlations)
+    neutral_edge_style = get_edge_style('neutral', do_grey_out=grey_correlations)
 
     #TODO: scale these by IDSNR weighted co-reachability
     n = len(coreach.get_node_names_from_coreach(df))
@@ -468,11 +498,11 @@ def draw_coreachability_by_source(df, axs, node_position, add_titles=True, grey_
         #     node_position=node_position,add_titles=add_titles, 
         #     grey_correlations=grey_correlations)
             
-        pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df,i)
+        incr_edges, neut_edges, decr_edges = coreach.get_coreachability_from_source(df,i)
         
-        draw_np_adj(neut_edges, axs[i], neut_edge_style)
-        draw_np_adj(pos_edges, axs[i], pos_edge_style)
-        draw_np_adj(neg_edges, axs[i], neg_edge_style)
+        draw_np_adj(neut_edges, axs[i], neutral_edge_style)
+        draw_np_adj(incr_edges, axs[i], increase_edge_style)
+        draw_np_adj(decr_edges, axs[i], decrease_edge_style)
         indicate_intervention(axs[i], node_position[node_names[i]])
         # print(node_position)
         if add_titles:
@@ -486,7 +516,8 @@ def draw_adj_reach_corr_coreach(A, df=None, axs=None, add_titles=True, grey_corr
         df = coreach.compute_coreachability_tensor(net.reachability(A))
 
     if axs is None:
-        fig, axs =  plt.subplots(1,n_plot, figsize=((n_plot)*5, 2*2.5),sharey=True)#, aspect='equal')
+        # fig, axs =  plt.subplots(1,n_plot, figsize=((n_plot)*5, 2*2.5),sharey=True)#, aspect='equal')
+        fig, axs = myplot.subplots(1,n_plot)
         print('INFO: creating axes')
     else:
         fig = axs[0].get_figure()

@@ -12,6 +12,10 @@ the if __name__ == '__main__' is far too complicated
 - and a comprehensive script elsewhere
 '''
 
+CORR_INCR = 'S^' #used to be S+
+CORR_DECR = 'Sv' #used to be S- 
+CORR_SAME = 'S=' #used to be S0
+CORR_ELIM = 'Sx'
 
 #%%
 def add_self_reach(R):
@@ -32,12 +36,12 @@ decr_ij_from_src = xor_coreach_from_src
 indp_ij_from_src = nor_coreach_from_src
 
 def label_coreach_from_src(R,i,j,s):
-    if and_coreach_from_src(R,i,j,s): return 'S^' 
+    if and_coreach_from_src(R,i,j,s): return CORR_INCR
     # not sure this is correct: should use correlations()
     # if R[i,j] == 0 and R[j,i] == 0: return 'Sx'
-    if net.binary_correlations(R)[i,j]==0: return 'Sx'
-    if xor_coreach_from_src(R,i,j,s): return 'Sv' 
-    if nor_coreach_from_src(R,i,j,s): return 'S='
+    if net.binary_correlations(R)[i,j]==0: return CORR_ELIM
+    if xor_coreach_from_src(R,i,j,s): return CORR_DECR
+    if nor_coreach_from_src(R,i,j,s): return CORR_SAME
     else:
         return None
 
@@ -75,28 +79,29 @@ def partition_sources_ab(R,i,j):
     # adds diagonal elements if they don't already exist
     # this represents the assumption that sources can access every node
     R = add_self_reach(R)
-    return {'S+':and_coreach(R,i,j),
-            'S-':xor_coreach(R,i,j),
-            'S0':nor_coreach(R,i,j)}
+    return {CORR_INCR:and_coreach(R,i,j),
+            CORR_DECR:xor_coreach(R,i,j),
+            CORR_SAME:nor_coreach(R,i,j)}
 
 def validate_sources(S):
     '''
     only and exactly 1 category should contain true at each index
     - [ ] could also check length off all categories are equal
     '''
-    Smat = np.array([S['S+'], S['S-'], S['S0']]) #3xN
+    # Smat = np.array([S['S+'], S['S-'], S['S0']]) #3xN
+    Smat = np.array([S[CORR_INCR], S[CORR_DECR], S[CORR_SAME]]) #3xN
     is_valid = np.all(np.sum(Smat, axis=0) == 1)
     return is_valid
     
 def condense_source_type_labels(S):
     S_labels = []
-    for i in range(len(S['S+'])):
-        if S['S+'][i]:
-            this_label = 'S+'
-        if S['S-'][i]:
-            this_label = 'S-'
-        if S['S0'][i]:
-            this_label = 'S0'
+    for i in range(len(S[CORR_INCR])):
+        if S[CORR_INCR][i]:
+            this_label = CORR_INCR 
+        if S[CORR_DECR][i]:
+            this_label = CORR_DECR  
+        if S[CORR_SAME][i]:
+            this_label = CORR_SAME
         S_labels.append(this_label)
     return S_labels
 
@@ -107,6 +112,10 @@ def add_multiindex_to_coreach(df):
     return df.set_index(['kS','iA','jB']).sort_values(['kS','iA','jB'])
     
 def compute_coreachability_tensor(R, ignore_self_connections=True, to_multiindex=False):
+    '''
+    computes coreachability matrix across all possible sources 
+    (thereby forming a coreachability tensor)
+    '''
     n = R.shape[0] 
     df = pd.DataFrame()
     for k in range(1,n):
@@ -139,9 +148,9 @@ def get_node_names_from_coreach(df):
 def get_coreachability_from_source(df, kS):
     df_rows = df[df['kS']==kS]
     # df_rows = df.xs(kS,level='kS')
-    df_pos  = df_rows[df_rows['type']=='S+']
-    df_neg  = df_rows[df_rows['type']=='S-']
-    df_neut = df_rows[df_rows['type']=='S0']
+    df_pos  = df_rows[df_rows['type']==CORR_INCR]
+    df_neg  = df_rows[df_rows['type']==CORR_DECR]
+    df_neut = df_rows[df_rows['type']==CORR_SAME]
     
     nodes = get_node_names_from_coreach(df_rows)
     
@@ -181,7 +190,7 @@ def reconstruct_reach_from_coreach_df(df):
         other_nodes.remove(node_self)
         node_other = other_nodes[0]
         
-        if row['type'] == 'S+':
+        if row['type'] == CORR_INCR:
             ReR.add_edge(node_self,node_other)
         # adding this back in seems to reconstruct fork-shaped reachability
         # elif row['type'] == 'S-':
@@ -226,7 +235,7 @@ if __name__ == '__main__':
         else:
             return 300
     # label_colors = {'S+':'lightgreen','S-':'lightcoral','S0':'lightgrey'}
-    label_colors = {'S+':'peachpuff','S-':'lightblue','S0':'lightgrey'}
+    label_colors = {CORR_INCR:'peachpuff',CORR_DECR:'lightblue',CORR_SAME:'lightgrey'}
 
 
     #%%

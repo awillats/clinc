@@ -86,6 +86,7 @@ import plotting_functions as myplot
     
     ![](/figures/from_code/bidirectional_correlation.png) </details>
   - plot_hypotheses_x_interventions.py
+  - **fig_circuit_walkthrough.py, fig_3circuit_walkthrough.py**
   
 - `plotting_functions/`
     - network_plotting_functions.py
@@ -108,3 +109,41 @@ Some early prototype code for computing reachability and correlation was written
 eventually plotting functions will get moved here ...
 
 ----
+# Computing coreachability 
+## Key functions 
+```python 
+df = coreach.compute_coreachability_tensor(net.reachability(adj))
+#which calls
+coreach.compute_coreachability_from_src(reach, idx)
+```
+# Plotting 
+## Key functions 
+
+- use `myplot.subplots()` as a wrapper to matplotlib's subplots, with better detault sizing for network plots s
+
+```python 
+netplot.draw_adj_reach_corr(A, ax)
+netplot.draw_controlled_adj_correlations(ax, A)
+# effect_of_control_horiz.png
+netplot.draw_controlled_representations(ax, A)
+# effect_of_control_grid
+
+```
+## Plotting interventions 
+
+
+```python
+plot_funs = {
+      NetPlotType(0):         lambda adj,ax,intv_loc: adj*2,
+      NetPlotType.ADJ:        lambda adj,ax,intv_loc: draw_np_adj(adj,ax=ax),
+      NetPlotType.REACH:      lambda adj,ax,intv_loc: draw_reachability(adj,ax=ax),
+      NetPlotType.CORR:       lambda adj,ax,intv_loc: draw_correlations(adj,ax=ax,grey_correlations=grey),
+      NetPlotType.ADJ_CTRL:   lambda adj,ax,intv_loc: __draw_ctrl_adj_at_source(adj=adj,ax=ax,intv_loc=intv_loc),
+      NetPlotType.CORR_CTRL:  lambda adj,ax,intv_loc: __draw_ctrl_correlations_at_source(adj=adj,ax=ax,intv_loc=intv_loc,grey_correlations=grey),
+      # NetPlotType.REACH_CTRL :  lambda adj,ax,intv_loc: netplot.__draw_coreachability_at_source(adj,ax=ax,intv_loc=intv_loc),
+      # NetPlotType.CTRL :  lambda adj,ax,intv_loc: netplot.__draw_coreachability_at_source(adj,ax=ax,intv_loc=intv_loc),
+      NetPlotType.OPEN:       lambda adj,ax,intv_loc: __draw_coreachability_at_source(adj=adj,ax=ax,intv_loc=intv_loc,grey_correlations=grey),
+  }
+  ```
+## Styling network plots 
+🚧 ... 

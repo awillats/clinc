@@ -33,10 +33,15 @@ def merge_lists_of_circuits(A, B=None, min_nodes=None):
 
     return [unhash_np(u) for u in unique_circs]
 #%%
+#NOTE: this now has a dedicated function in network_data_functions
 def _all_arrow_str_to_adj(all_arrow_strings, min_nodes=3):
+    '''TODO: move to network_data_functions'''
     return [netdata.arrow_str_to_np_adj(g,line_delim=';',min_nodes=min_nodes) for g in all_arrow_strings]
 
 def _are_all_adj_unique(As):
+    '''
+    TODO: move to network_data_functions
+    '''
     return len(As) == len(merge_lists_of_circuits(As))
     
 def get_all_3node_motifs():
@@ -70,12 +75,12 @@ def get_all_3node_motifs():
     gs_circs = [g0,g1,g2,g3, g4,g5,g6,g7, g8,g9,g10,g11, g12,g13,g14,g15]
     return _all_arrow_str_to_adj(gs_circs,min_nodes=3)
     
-def get_walktrhough_trio():
+def get_walkthrough_trio():
     g0 = 'A→B←C→A' #C-A-B triangle
     g1 = 'A↔B←C'
     g2 = 'A↔B←C→A'
     gs_circs = [g0,g1,g2]
-    return _all_arrow_str_to_adj(gs_circs)
+    return netdata.all_arrow_str_to_np_adj(gs_circs, min_nodes=3)
 
 def get_hypothesis_fig_set():
     '''

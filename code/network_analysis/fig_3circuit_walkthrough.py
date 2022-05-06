@@ -6,19 +6,14 @@ import networkx as nx
 
 
 import matplotlib.pyplot as plt
-import plotting_functions as myplot
 
+import example_circuits as egcirc
+
+import plotting_functions as myplot
+import network_data_functions as netdata
 import network_plotting_functions as netplot
 import network_analysis_functions as net
 import coreachability_source_classification as coreach
-#%%
-"""
-see also /code/network_analysis/fig_3circuit_walkthrough.py
-    - as of May 6 2022, that one is being used to produce the manuscript figure 
-
-NOTE: this version is intended more as a showcase of flexible plotting options provided by 
-plot_each_adj_by_plot_type
-"""
 #%%
 '''
 - [ ] I'm annoyed at how networkx (via matplotlib) handles arrow styles 
@@ -42,38 +37,57 @@ plot_each_adj_by_plot_type
 | a→b→c | a→b→c,a→c | a↔b↔c↔a | ++-      | ++0      |
 
 '''
-#%%
-A = np.array([[0, .1, 0],
-              [1, 0,  0],
-              [1, 4,  0]])
-              
-A0 = np.array([[0, 1, 0],
-              [1, 0,  0],
-              [0, 1,  0]])
-              
-A1 = np.array([[0, 1, 0],
-              [1, 0,  0],
-              [1, 1,  0]])                    
-                     
-A2 = np.array([[0, 1, 0],
-              [0, 0,  0],
-              [1, 1,  0]])
-As = [A0,A1]
+
+aa = 'C→A,B; A→B'
+ab = 'C→B↔A'
+ac = 'C→B↔A; C→A'
+
+'''
+uses 
+{from x to} syntax
+'''
+# As = egcirc.get_walkthrough_trio()
+As = netdata.all_arrow_str_to_np_adj([aa,ab,ac], min_nodes=3)
 
 #%%    
-pos = netplot._gen_layout_from_adj(A)
+pos = netplot._gen_layout_from_adj(As[0])
 
 #%%
-netplot.draw_adj_reach_corr_coreach(As[0])
+
+#%%
+# fig,axs = myplot.subplots(1,6)
+fig = netplot.draw_adj_reach_corr_coreach(As[0],grey_correlations=False)
+# for ax in axs:
+    # myplot.expand_bounds(ax,1.2)
+    # pass
+# myplot.expand_bounds_each(axs)
+plt.savefig('test.svg',format='svg')
+plt.savefig('test.png',format='png')
+fig
+#%%
+'FOR DEBUG ONLY'
+
+# df = coreach.compute_coreachability_from_src(
+df = coreach.compute_coreachability_tensor(net.reachability(As[0]))
+print(df[df['kS']==1])
+pos_edges, neut_edges, neg_edges = coreach.get_coreachability_from_source(df, 1)
+
+print(pos_edges)
+print(neut_edges)
+print(neg_edges)
+# fig,ax=plt.subplots()
+
+
 #%%
 '''
 can specify what you want in the columns 
 ( see network_plotting_functions/parse_plot_type() for )
 '''
-cols = ['adj','reach','corr','open@0','adj ctrl@1','corr ctrl@0']
+cols = ['adj','reach','corr','open@1','adj ctrl@1','corr ctrl@1']
 plot_types_locs = [netplot.parse_plot_type(p) for p in cols]
+print(plot_types_locs)
 
 
 fig=netplot.plot_each_adj_by_plot_type(None,As,plot_types_locs)
 # # myplot.savefig(f'results/circuit_walkthrough_{len(As)}circuits.png',this_file='/code/fig_circuit_walkthrough.py')        
-fig
+# fig

@@ -169,6 +169,13 @@ def arrow_str_to_np_adj(arrow_graph, line_delim=';',node_delim = ',',min_nodes=N
     G = arrow_str_to_networkx(arrow_graph, line_delim=line_delim, node_delim =node_delim)
     return nx_to_np_adj(G, min_nodes=min_nodes)
 
+def all_arrow_str_to_np_adj(all_arrow_strings, line_delim=';',node_delim = ',',min_nodes=None):
+    return [arrow_str_to_np_adj(g,
+        line_delim=line_delim,
+        node_delim=node_delim,
+        min_nodes=min_nodes) for g in all_arrow_strings]
+    
+    
 def np_adj_to_arrow_str(A, line_delim=';',node_delim=','):
     return graph_components_to_arrow_str(nx.DiGraph(A),line_delim=line_delim,node_delim=node_delim)
     # assert(np.array_equal(a, netdata.arrow_str_to_np_adj(netdata.np_adj_to_arrow_str(a))))
