@@ -25,5 +25,3 @@
 > - breakdown false positives, false negatives
 🚧
 
-[^bonus_causal]: **[future work]** use causality + graph theory to find "lurking look-alikes" i.e. Markov-equivalent circuits
-[^more_assumptions]: should also enumerate assumptions about the dynamics of the network, signs of network weights, approximate timescales of interaction.

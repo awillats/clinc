@@ -42,7 +42,7 @@ NOTE: requires MPE Use Pandoc Parser to be off
 <!-- /code_chunk_output -->
 
 
-[ `current focus` ](#results)
+[ `current focus` ](#steps-of-inference)
 
 
 # Abstract
@@ -67,16 +67,14 @@ consider:
 # Results
 @import "/section_content/results_overview.md"
 
-## ( Box 1: )
+## Demonstrating interventions and circuit inference
 @import "/section_content/background_id_demo.md"
 
-## Steps of inference - *overview of CLINC approach* (+)
+## Steps of inference 
+`*overview of CLINC approach* (+)`
 ```
 how do these steps help address established challenges 
 ```
-![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png)
-
-> **Figure OVERVIEW:** ...
 
 - `reference extended methods`
 @import "/section_content/overview_steps_of_inference.md"
@@ -168,7 +166,7 @@ see also:
 `@ import "/section_content/methods_simulations.md" time-resolvable domain`
 
 ### Information-theoretic measures of hypothesis ambiguity (4.4) {#sec:entropy}
-<!-- *see [_steps_of_inference.md](_steps_of_inference.md) for entropy writeup* -->
+<!-- *see [steps_of_inference.md](section_content/overview_steps_of_inference.md) for entropy writeup* -->
 @import "/section_content/methods_entropy.md"
 ### Selecting interventions (...) {#sec:entropy-selection}
 @import "/section_content/methods_entropy_selection.md"

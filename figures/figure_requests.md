@@ -164,15 +164,35 @@ probably want
 > - CL increases the precision of estimates
 > - CL removes/minimizes unrelated sources of variance
 
+<!-- <details><summary>↪to-do items</summary> -->
+
+- [ ] cut some text from sections 
+- [ ] decide on contemporaneous v.s. DT syntax for dynamics
+  - i.e. should $\widetilde{W}$ or $W$ drive dynamics ?
+- [ ] regenerate data 
+  - I like the sinusoidal drive for illustration, makes clear the increase in correlation between B and C ... but we don't use sinusoids elsewhere 
+  - also need to remove the ctrl @ 1 annotation, and ad x-axis label
+- [ ] consider calling stage 2 reachability rather than intervention 
+    - or Reachability & Intervention 
+  
 > 👨‍💻 needs commitment to concrete time-series data
 > 🗺️ needs layout / illustration cleaning up
 > but overall, conceptually, close enough to write a caption for
 
+</details>
 
 <details><summary>↪prior drafts 
 </summary>
 
-<img src="/figures/core_figure_sketches/figure2_sketch.png" width="400"/>
+- **Circuit:** 'Skeleton' of between-node influence represented as a directed graph or adjacency matrix
+- **Intervention:** Open and closed-loop interventions modify dynamics, variances, and the relationships between nodes   
+- **Dynamics:** Quantitative model of how activity evolves over time
+- **Data:** Observations from nodes and neurons over time 
+- **Estimate:** Measures of dependence useful for inferring connectivity 
+- **Prediction:** The reachability matrix can be transformed to predict observed correlations and the impact of candidate interventions
+- **Inference:** Estimate directed connectivity from dependence measured across experiments (thresholding, statistical testing, causal inference)
+
+<img src="/_archive/figure2_sketch.png" width="400"/>
 
 **Optimizing intervention:**
 
@@ -226,7 +246,8 @@ probably want
 
 ---
 ⚠️🚧 **figure request:** flowchart for steps of intervention experiment 🚧⚠️
-see [section_content/_steps_of_inference.md](/section_content/_steps_of_inference.md)
+see [section_content/overview_steps_of_inference.md](/section_content/overview_steps_of_inference.md)
+
 - merge or reference with pipeline overview?
 
 ---
