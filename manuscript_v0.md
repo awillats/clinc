@@ -126,6 +126,8 @@ extract minimum from:
 # Discussion
 @import "/section_content/discussion.md"
 
+<hr>
+
 # Methods
 
 
