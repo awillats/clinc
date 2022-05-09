@@ -53,22 +53,23 @@ Word count:
   - [ ] overview - challenges `followup`
     - only a paragraph or so 
   - [ ] network section - should should be abbreviated intro to methods 
-  - [ ] steps of inference 
+  - [~] steps of inference 
   
 ## Hard results (results)
 - [x] just write 
 - [~] edit
 
 ## Figures
-- [ ] every caption needs filling out 
-  - [ ] then pull some caption into body 
+- [~] every caption needs filling out 
+  - [~] then pull some caption into body 
 
 ## Intro / abstract
-- [ ] pull from `th`
-- [ ] 3/16 - Mention basic science applications of CL control - Maybe more forecasting idea of shaping correlations? (don't want reader to be surprised by structure of paper's argument)
+<!-- Intro TODO: https://beta.workflowy.com/#/c310f6ea7ec9 -->
+
+- [ ] Maybe more forecasting idea of shaping correlations? (don't want reader to be surprised by structure of paper's argument)
 
 `from: "/section_content/background_causal_network_id.md"`  
-- [ ] 3/16: - "We first propose..." paragraph (could build out or move or change focus away from the 'framework') - think about condensing and/or moving "Inferring causal interactions from time series" subsection - Maybe add half a paragraph or so in the discussion about how causal inference tools can help above correlation analysis (e.g., PC algorithm)
+- [ ] 3/16: - "We first propose..." paragraph (could build out or move or change focus away from the 'framework') 
 
 - [ ] (in background-interventions) get language more precise and effective about value of intervention
   - ([Adam:] revisit related work, try to distill down our core argument about why intervention > passive observation)
@@ -77,6 +78,13 @@ Word count:
   - **(Matt-done)** editing pass on last paragraph, qualify last paragraph (lean toward 'we are starting simple, blazing a trail for future research')
 
 - [ ] Describe what 'reachability' is (we're interested in net directional impact of one node on another, which includes both effects from direct and indirect connections)
+
+
+- [x] pull from `th`
+- [~] 3/16 - Mention basic science applications of CL control 
+
+`from: "/section_content/background_causal_network_id.md"`  
+- [~] think about condensing and/or moving "Inferring causal interactions from time series" subsection 
 
 ## Discussion 
 - [ ] pull from `th`

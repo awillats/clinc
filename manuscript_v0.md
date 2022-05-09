@@ -47,7 +47,7 @@ NOTE: requires MPE Use Pandoc Parser to be off
 @import "/section_content/abstract.md"
 
 # Introduction
-
+<!-- Intro TODO: https://beta.workflowy.com/#/c310f6ea7ec9 -->
 ## Estimating causal interactions in the brain
 @import "/section_content/background_causal_network_id.md"
 

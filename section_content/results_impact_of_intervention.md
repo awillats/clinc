@@ -22,8 +22,7 @@ log2(6)             = 2.58496
 <!-- NOTE: source [google drawing](https://docs.google.com/drawings/d/1CBp1MhOW7OGNuBvo7OkIuzqnq8kmN8EEX_AkFuKpVtM/edit)* -->
 ![](/figures/core_figure_sketches/circuit_entropy_sketch.png)
 
-> **Figure DISAMBIG: Interventions narrow the set of hypotheses consistent with observed correlations** 
-
+> **Figure DISAMBIG: Interventions narrow the set of hypotheses consistent with observed correlations.**  
 > **(A)** Directed adjacency matrices represent the true and hypothesized causal circuit structure. Directed reachability matrices represent the direct *(black)* and indirect *(grey)* influences in a network. Notably, different adjacency matrices can have equivalent reachability matrices making distinguishing between similar causal structures difficult, even with open-loop control.
 > **(B)** Correlations between pairs of nodes. **a)** Under passive observation, the direction of influence is difficult to ascertain. 
 > **(B b-g)** The impact of open-loop intervention at each of the nodes in the network is illustrated by modifications to the passive correlation pattern. Thick orange[^edge_color] edges denote correlations which increase above their baseline value with high variance open-loop input. Thin blue edges denote correlations which decrease, often as a result of increased connection-independent "noise" variance in one of the participating nodes. Grey edges are unaffected by intervention at that location.
