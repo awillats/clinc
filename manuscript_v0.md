@@ -42,9 +42,6 @@ NOTE: requires MPE Use Pandoc Parser to be off
 <!-- /code_chunk_output -->
 
 
-[ `current focus` ](#steps-of-inference)
-
-
 # Abstract
 
 @import "/section_content/abstract.md"
@@ -56,6 +53,15 @@ NOTE: requires MPE Use Pandoc Parser to be off
 
 ## Interventions in neuroscience & causal inference
 @import "/section_content/background_intervention_causal_inf.md"
+
+
+<!-- NOTE: GAP in field -->
+Despite the promise of these closed-loop strategies for identifying causal relations in neural circuits, however, it is not yet fully understood *when* more complex intervention strategies can provide additional inferential power, or *how* these experiments should be optimally designed. In this paper we demonstrate when and how closed-loop interventions can reveal the causal structure governing neural circuits. Drawing from ideas in causal inference
+[@pearl2009causality; @maathuis2016review; @chis2011structural], we describe the classes of models that can be distinguished by a given set of input-output experiments, and what experiments are necessary to uniquely determine specific causal relationships.
+
+<!-- NOTE: PAPER SUMMARY -->
+We first propose a mathematical framework that describes how open- and closed-loop interventions impact observable qualities of neural circuits. Using this framework, experimentalists propose a set of candidate hypotheses describing the potential causal structure of the circuit under study, and then select a series of interventions that best allows them to distinguish between these hypotheses. Using simplified *in silico* networks, we explore factors that govern the efficacy of these types of interventions. Guided by the results of this exploration, we present a set of recommendations that can guide the design of open- and closed-loop experiments to better uncover the causal structure underlying neural circuits.
+
 
 <!-- ## ? Representations & reachability (minimal, dupe)
 ```
@@ -71,44 +77,7 @@ consider:
 @import "/section_content/background_id_demo.md"
 
 ## Steps of inference 
-`*overview of CLINC approach* (+)`
-```
-how do these steps help address established challenges 
-```
-
-- `reference extended methods`
-@import "/section_content/overview_steps_of_inference.md"
-
-
-<!-- NOTE: Cutting lots of sections here. Anything that needs to be re-included from this section should go into steps of inference 
-
-<!-- ### Extracting circuit estimates (4.3)
-`@ import "/section_content/methods_circuit_estimates.md"` 
-<!-- NOTE: background_id_demo here instead? before or after methods are introduced 
-
-## Impact of intervention on estimation performance 
-### (predicting) impact of intervention on pairwise dependence (3.1?, 5.1?)
-<!-- NOTE: ^ this H2 will likely be removed from, be implicit in final draft
-
-#### Representations & reachability
-`extract minimum from:`
-`@ import "/section_content/methods_representation_reachability.md"`
-
-<!-- @ import "/section_content/background_id_demo.md" 
-
-#### Predicting correlation structure (theory)
-```
-extract minimum from: 
-@ import "/section_content/methods_predicting_correlation.md"
-```
-
-```
-extract minimum from: 
-@ import "/section_content/methods_interventions.md"
-@ import "/section_content/results_impact_of_intervention.md"
-```
--->
-
+@import " /section_content/overview_steps_of_inference.md "
 
 <!-- ### Intervening provides categorical improvements in inference power beyond passive observation -->
 @import "/section_content/results_impact_of_intervention.md"

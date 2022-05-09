@@ -9,19 +9,14 @@ Word count:
   > [^node_repr]: nodes in such a graphical model may represent populations of neurons, distinct cell-types, different regions within the brain, or components of a latent variable represented in the brain.
   
   - referenced in results_impact_of_intervention
-
-- [ ] in steps of inference emphasize this idea (which shows up later in results)  
-
-  >  If this fingerprint contains many examples of the same pattern of correlation (such as **B**), many hypotheses correspond to the same observation, and that experiment contributes low information to distinguish between structures. A maximally informative intervention would produce a unique pattern of correlation for each member of the hypothesis set.
   
 - [ ] background - representations & reachability, but light on methods?
   - into /section_content/background_representation_reachability.md
   - from @ import "/section_content/methods_representation_reachability.md"
   - from @ import "/section_content/background_id_demo.md"
 
-- [ ] detailed steps of inference to methods 
+- [~] detailed steps of inference to methods 
   - overview version in early-results
-  
   
 - ( ) NOTE: don't have to get all the way through all the methods before hitting rest of results 
   - under this results-first model, can postpone details  til later
@@ -29,42 +24,40 @@ Word count:
 # Writing 
 ## Easy tasks 
 - [ ] fill out any caption
-- [ ] 
 ## Soft results (background, methods)
-- [ ] decide where first few figures go 
+- [~] decide where first few figures go 
   - start with DEMO and generalize through OVERVIEW 
   - or start with OVERVIEW then apply it in a demo 
   
   - DEMO figure similar to `systematic errors`
   - pipeline figure similar to `could a neuro`,`advancing FC`
   
-- [ ] sketch, pull in raw material 
+- [~] sketch, pull in raw material 
   - ( ) from outline 
   - ( ) from figure DEMO ?
     - does figure DEMO require steps of inference first? 
     - should steps of inference be very early in results?
     - *is* a good result! 
     
-- ( ) section name 
+- (~) section name `followup`
     - use overview figure as guide?
     - something about the circuit? 
     - could go without a name for the first chunk 
     - exemplar style might be to name the section as tackling a simple circuit 
     - could be named after themes
-      - i.e. Narrowind the space of hypotheses 
+      - i.e. Narrowing the space of hypotheses 
     
 - [~] compare to examples 
 
 - [ ] just write 
-
-  - [ ] overview - challenges 
+  - [ ] overview - challenges `followup`
     - only a paragraph or so 
   - [ ] network section - should should be abbreviated intro to methods 
   - [ ] steps of inference 
   
 ## Hard results (results)
 - [x] just write 
-- [ ] edit
+- [~] edit
 
 ## Figures
 - [ ] every caption needs filling out 
@@ -87,6 +80,7 @@ Word count:
 
 ## Discussion 
 - [ ] pull from `th`
+- [ ] - Maybe add half a paragraph or so in the discussion about how causal inference tools can help above correlation analysis (e.g., PC algorithm)
 
 
 # Organization / structure / flow
@@ -154,8 +148,7 @@ Word count:
 - [ ] 🔧 Rewrite X=XW+E as vector version (and resolve contemporaneous setting in methods>simulation section)
 
 - [ ] (in background) Talk about what 'reachability' means (total direct+indirect impact)
-- [ ] [Matt:] (in background) Rewrite first paragraph to not use notation (place this box before any theory/notation sections)
-- [ ] [Matt:] Set expectation here that we're talking about linear Gaussian circuits
+
 
 # Technical 
 - [ ] ? push for a last results section

@@ -3,8 +3,18 @@
 !!!! - 10% done
 <!-- ![](/figures/core_figure_sketches/methods_overview_pipeline_sketch.png) -->
 > *refer to methods overview figure*
+<!-- NOTE: see also
+second half of /section_content/methods_entropy_selection.md which talks about 
+convergence criteria for choosing a circuit hypothesis
+-->
+<!-- NOTE: we're leaving a lot of information on the table with this simple approach
+- PC algorithm can help us infer direction, even with /just/ correlation
+- reachability X changes in correlation can help us infer direction!
 
-[^inf_techniques]: *inference techniques mentioned in the intro...*
+
+-->
+
+[^inf_techniques]: TODO: restate inference techniques mentioned in the intro...
 
 [^corr_prototype]: what does "prototype" mean here? something like MI and corr are equivalent in the linear Gaussian case, ...
 
@@ -15,4 +25,5 @@ While a broad range of techniques[^inf_techniques] exist for inferring functiona
 
 We implement a naive comparison strategy to estimate the circuit adjacency from empirical correlations; Thresholded empirical correlation matrices are compared to correlation matrices predicted from each circuit in a hypothesis set. Any hypothesized cirucits which are predicted to have a similar correlation structure as is observed `(i.e. corr. mats equal after thresholding)` are marked as "plausible circuits."[^circuit_search] If only one circuit amongst the hypothesis set is a plausible match, this is considered to be the estimated circuit. The threshold for "binarizing" the empirical correlation matrix is treated as a hyperparameter to be swept at the time of analysis.[^corr_hyperparameter]
 
-[^circuit_search]: TODO? formalize notation for this
+[^circuit_search]: TODO: formalize notation for this
+

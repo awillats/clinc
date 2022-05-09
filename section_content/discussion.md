@@ -1,5 +1,11 @@
 <!-- NOTE: see also __conclusions_from_th.md -->
 
+<!-- TODO:
+- [ ] add half a paragraph or so in the discussion about how causal inference tools can help above correlation analysis (e.g., PC algorithm) 
+  - see also /section_content/methods_circuit_estimates.md
+  
+-->
+
 ```
 Restate themes!
 - narrowing search space 
@@ -9,8 +15,9 @@ Restate themes!
 ### limitations
 The examples explored in this work simplify several key features that may have relevant contributions to circuit identification in practical experiments. [...]
 
-`full observability`
+`spiking networks`
 
+`full observability`
 
 ### results summary → summary of value closed-loop generally
 Closed-loop control has the disadvantages of being more complex to implement and requires specialized real-time hardware and software, however it has been shown to have multifaceted usefulness in clinical and basic science applications. Here we focused on two advantages in particular; First, the capacity for functional lesioning which (reversibly) severs inputs to nodes and second, closed-loop control's capacity to precisely shape variance across nodes. Both of these advantages facilitate opportunities for closed-loop intervention to reveal more circuit structure than passive observation or even open-loop experiments.
