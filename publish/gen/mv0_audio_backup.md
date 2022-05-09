@@ -686,7 +686,7 @@ SUB SECTION summary of guidelines for experimenters
 
 In studying the utility of various intervention for circuit inference we
 arrived at a few general guidelines which may assist experimental
-neuroscientists in designing the right intervention for the quesiton at
+neuroscientists in designing the right intervention for the question at
 hand. First, more ambiguous hypotheses sets require "stronger"
 interventions to distinguish. Open-loop intervention may be sufficient
 to determine directionality of functional relationships, but as larger

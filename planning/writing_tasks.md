@@ -68,6 +68,8 @@ Word count:
 
 - [ ] Maybe more forecasting idea of shaping correlations? (don't want reader to be surprised by structure of paper's argument)
 
+- [ ] Describe what 'reachability' is (we're interested in net directional impact of one node on another, which includes both effects from direct and indirect connections)
+
 `from: "/section_content/background_causal_network_id.md"`  
 - [ ] 3/16: - "We first propose..." paragraph (could build out or move or change focus away from the 'framework') 
 
@@ -77,7 +79,6 @@ Word count:
   - Add example demonstrating why location of stimulation matters to "The inferential power of interventions..." paragraphs
   - **(Matt-done)** editing pass on last paragraph, qualify last paragraph (lean toward 'we are starting simple, blazing a trail for future research')
 
-- [ ] Describe what 'reachability' is (we're interested in net directional impact of one node on another, which includes both effects from direct and indirect connections)
 
 
 - [x] pull from `th`

@@ -1,8 +1,8 @@
 <!-- TODO: [ORG] this is very closely related to 4.2 implementing interventions, description of impact of intervention on variance should these be merged? -->
 
-[^V-notation]: need to be clear V means variance
+<!-- TODO: define  - need to be clear V means variance -->
 
-[^V-notation]$$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) \geq \mathbb{V}_{i}(C)$$
+$$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) \geq \mathbb{V}_{i}(C)$$
 More specifically, if the open-loop stimulus is statistically independent from the intrinsic variability[^open_loop_independent]
 $$\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) = \mathbb{V}_{i}(C) + \sigma^2_S$$
 Applying closed-loop to a linear Gaussian circuit:
@@ -42,5 +42,6 @@ In neural circuits, we're often interested in firing rates, which are non-negati
 </details>
 
 [^open_loop_independent]: notably, this is part of the definition of open-loop intervention
+
 [^cl_indp_practical]: practically, this requires very fast feedback to achieve fully independent control over mean and variance. In the case of firing rates, I suspect $\mu \leq \alpha\mathbb{V}$, so variances can be reduced, but for very low firing rates, there's still an upper limit on what the variance can be.
 

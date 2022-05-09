@@ -1,48 +1,14 @@
-<!-- NOTE: see also __conclusions_from_th.md -->
+`WORK IN PROGRESS, likely to be significantly rewritten`
 
-<!-- TODO:
-- [ ] add half a paragraph or so in the discussion about how causal inference tools can help above correlation analysis (e.g., PC algorithm) 
-  - see also /section_content/methods_circuit_estimates.md
-  
--->
-
-```
-Restate themes!
-- narrowing search space 
-- where you intervene matters
-```
-
-## limitations
-The examples explored in this work simplify several key features that may have relevant contributions to circuit identification in practical experiments. [...]
-
-`spiking networks`
-
-`full observability`
-
-## results summary → summary of value closed-loop generally
 Closed-loop control has the disadvantages of being more complex to implement and requires specialized real-time hardware and software, however it has been shown to have multifaceted usefulness in clinical and basic science applications. Here we focused on two advantages in particular; First, the capacity for functional lesioning which (reversibly) severs inputs to nodes and second, closed-loop control's capacity to precisely shape variance across nodes. Both of these advantages facilitate opportunities for closed-loop intervention to reveal more circuit structure than passive observation or even open-loop experiments.
 
-## summary of guidelines for experimenters
-In studying the utility of various intervention for circuit inference we arrived at a few general guidelines which may assist experimental neuroscientists in designing the right intervention for the quesiton at hand.
-First, more ambiguous hypotheses sets require "stronger" interventions to distinguish. Open-loop intervention may be sufficient to determine directionality of functional relationships, but as larger numbers of similar hypotheses [...] closed-loop intervention reduces the hypothesis set more efficiently.
-Second, we find that dense networks with strong reciprocal connections tend to result in many equivalent circuit hypotheses, but that well-placed closed-loop control can disrupt loops and simplify correlation structure to be more identifiable.[^corrob_fiete] Recurrent loops are a common feature of neural circuit, and represent key opportunities for successful closed-loop intervention. The same is true for circuits with strong indirect correlations 
+Starting with linear Gaussian assumptions, this work laid a broad framework for anticipating the impact of various interventions on observed patterns of dependence. Finally, we evaluated predicted and empirical performance for refining a set of hypothesized circuits and discriminated observed patterns of covariance. In particular, this work reinforces the value of analyzing the consequences of unforeseen confounds and starts to integrate tools from causal inference and graph theory to do so. Our results suggest that closed-loop control is not a one-size-fits-all panacea, but rather it acts like a scalpel, providing a precise tool for disentangling cause in cases dominated by indirect and reciprocal influence.
 
-`hidden confounds`
-
-## "funnel out", future work → broad impact
-
-`sequential experimental design`
-
-*see [limitations_future_work.md](/sketches_and_notation/discussion/limitations_future_work.md)*
-
-[^corrob_fiete]: this corroborates Ila Fiete's paper on bias as a function of recurrent network strength
+In studying the utility of various intervention for circuit inference we arrived at a few general guidelines which may assist experimental neuroscientists in designing the right intervention for the question at hand. First, more ambiguous hypotheses sets require "stronger" interventions to distinguish. Open-loop intervention may be sufficient to determine directionality of functional relationships, but as for hypothesis sets containing similar circuits, closed-loop intervention reduces the hypothesis set more efficiently.
+Second, we find that dense networks with strong reciprocal connections tend to result in many equivalent circuit hypotheses, but that well-placed closed-loop control can disrupt loops and simplify correlation structure to be more identifiable. Recurrent loops are a common feature of neural circuit, and represent key opportunities for successful closed-loop intervention. The same is true for circuits with strong indirect correlations.
 
 
-<!-- 
-NOTE: additional sections worth considering adding here 
-/sketches_and_notation/discussion/limitations_future_work.md
-/sketches_and_notation/discussion/value_of_cl_case_studies.md
-/sketches_and_notation/discussion/value_of_closed_loop_notes.md
-/sketches_and_notation/identifiability/variance_notes.md (firing rate section)
--->
+The biggest limitation of this work is that it does not yet close the gap to experiments for identifying circuits from spiking data. Two pillars of this more detailed evaluation are closed-loop control in networks of spiking semi-biophysical neuron models, and inference methods suited for assessing causal strength from time-series with delay. Critically, in a spiking model, mean activity levels and output variance are no longer independent. For instance, in a spiking model, strong inhibition lowers the mean activity level which suppresses output variance. 
+
+While the work presented here highlights a step-by-step procedure for narrowing a set of hypothesized circuits, we have only begun to quantify the value of a single-site intervention for a single experiment. Many techniques exist for active learning and sequential experimental design, and could be readily applied to this problem of circuit influence. At a high level, this can be thought of as playing chess by thinking multiple moves into the future rather than choosing a move which optimizes only the board state for the next move. In addition, a prudent next step would be to assess the value of multiple interventions through quantifying their joint entropy. A few case studies in the `supplementary material` demonstrate situations where single-site closed-loop control alone is insufficient to distinguish a pair of circuits, but *is sufficient* as a preliminary step to simplify functional interactions when paired with additional open-loop stimulation.
 
