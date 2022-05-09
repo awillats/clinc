@@ -16,7 +16,7 @@ Word count:
   
 - [ ] background - representations & reachability, but light on methods?
   - into /section_content/background_representation_reachability.md
-  - from @ import "/section_content/representation_reach.md"
+  - from @ import "/section_content/methods_representation_reachability.md"
   - from @ import "/section_content/background_id_demo.md"
 
 - [ ] detailed steps of inference to methods 

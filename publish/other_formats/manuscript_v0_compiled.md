@@ -15,7 +15,7 @@ output:
 classoption: twocolumn
 geometry: margin=1.5cm
 numbersections: true
----  
+---
   
   
   
@@ -38,7 +38,11 @@ numbersections: true
   
   
   
-#  Abstract {#abstract }
+[ `current focus` ](#steps-of-inference )
+  
+  
+#  Abstract
+  
   
   
   
@@ -48,9 +52,11 @@ The necessity of intervention in inferring cause has long been understood in neu
 [^bidir]: may end up discussing quantitative advantages such as bidirectional variance (and correlation) control. If that's a strong focus in the results, should be talked about more in the abstract also
   
   
-#  Introduction {#introduction }
+#  Introduction
   
-##  Estimating causal interactions in the brain {#estimating-causal-interactions-in-the-brain }
+  
+##  Estimating causal interactions in the brain
+  
   
 Many hypotheses about neural circuits are phrased in terms of causal relationships: "will changes in activity to this region of the brain produce corresponding changes in another region?" Understanding these causal relationships is critical to both scientific understanding and to developing effective therapeutic interventions, which require knowledge of how potential therapies will impact brain activity and patient outcomes.
   
@@ -79,7 +85,8 @@ Other techniques detect directional interaction stemming from more general or co
 To quantify the strength of causal interactions, information-theoretic and transfer-entropy-based methods typically require knowledge of the ground truth causal relationships that exist [@janzing2013quantifying] or an ability to perturb the system [@ay2008information; @lizier2010differentiating]. In practice, these quantities are typically interpreted as "information transfer," and a variety of estimation strategies and methods to automatically select the conditioning set (i.e., the variables and time lags that should be conditioned on) are used (e.g., [@shorten2021estimating]). Multivariate conditional transfer entropy approaches using various variable selection schemes can differentiate between direct interactions, indirect interactions, and common causes, but their results depend on choices such as the binning strategies used to discretize continuous signals, the specific statistical tests used, and the estimator used to compute transfer entropy [@wibral2014directed]. `[If we end up making the jump to IDTxl in our results: In our empirical results using transfer-entropy-based notions of directional influence we use the IDTxl toolbox [@wollstadt2019idtxl].]` However, despite their mathematical differences, previous work has found that cross-correlation-based metrics and information-based metrics tend to produce qualitatively similar results, with similar patterns of true and false positives [@garofalo2009evaluation].
   
   
-##  Interventions in neuroscience & causal inference {#interventions-in-neuroscience-causal-inference }
+##  Interventions in neuroscience & causal inference
+  
   
   
   
@@ -105,212 +112,204 @@ Although algorithms designed to choose optimal interventions are often designed 
 [^possible-cite]: if citations needed here, could start by looking for a good high-level reference in either [@ghassami2018budgeted] or [@yang2018characterizing]. (Both of these papers are pretty technical, so likely wouln't be great citations on their own.)
   
   
-##  Representations & reachability (minimal, dupe) {#representations-reachability-minimal-dupe }
+  
+  
+  
+#  Results
+  
+  
+  
+  
+  
+To understand general principles of how intervention influences circuit inference, we simulated networks of nodes with linear interactions. Each node abstractly represents a population of neurons, and is driven by "private" independent Gaussian noise sources as well as weighted inputs from other connected nodes. Connections between nodes are represented, equivalently, as an adjacency matrix and a directed graph (see Methods [# representations & reachability](REF-SECTION-HERE )). Open-loop intervention is simulated to mimic current injection from an external source, and by default has amplitudes sampled at each timestep from a Gaussian distribution (see Methods [# implementing interventions](REF-SECTION-HERE )). We describe the impact of intervention in terms of its influence on the observed patterns of pairwise correlation, and for closed-loop control also in terms of its modifications to the effective connectivity of the network (see Methods [# predicting correlation](REF-SECTION-HERE )). While this linear Gaussian network simplifies away several features of biophysical networks of spiking neurons, we believe it provides a reasonable and tractable theoretic foundation for building towards understanding more complex systems (see [# spiking networks](REF-SECTION-HERE ) for a discussion of broader modeling assumptions such as spiking and time-lagged interactions).
+  
+These networks are simulated over time, and pairwise correlations are quantified as a basic measurement of statistical dependence. While more sophisticated inference procedures are commonly applied in neuroscience, studying key properties such as shaping across-node dependence should illustrate principles which generalize across inference methods.
+  
+In particular, we use these networks to illustrate the process of designing and conducting experiments with interventions to discover neural circuitry. We start by walking through an example of using correlations to distinguish between 3 circuit hypothesis. Then we distill this process into a general recipe for an identification experiment. This recipe is then applied to a more general problem of choosing where and how to intervene to decided between a set of candidate circuit hypotheses. We demonstrate cases where closed-loop control provides categorical and quantitative advantages for such experiments.
+  
+  
+##  Demonstrating interventions and circuit inference
+  
+  
+![](figures/core_figure_sketches/circuit_walkthrough_3circuits_annotated.png "generated by /code/network_analysis/fig_3circuit_walkthrough.py")
+  
+  
+  
+  
+> **Figure DEMO : Applying CLINC to distinguish a trio of circuits.**
+> ***(a)*** Connectivity for three different hypothesized circuits represented as a directed graph. This representation captures only the direct causal connections between nodes (also know as adjacency) and is what an experimenter may seek to infer from data.
+> ***(b)*** Network reachability illustrates direct connection in black (as in *a*), but also the directional influence of indirect connections in grey. This representation forms the basis of predicting observed correlations, and the impact of interventions *(see Methods [# representations & reachability](REF-SECTION-HERE ))*.
+> ***(c)*** Pairwise correlations under passive observation. For these circuit hypotheses each node is connected directly or indirectly to each other node, leading to an all-to-all pattern of correlation which makes circuit identity difficult to distinguish.
+> ***(d)*** Pairwise correlations under open-loop intervention at node B. Interventions can increase or decrease pairwise correlations (illustrated with thick and thin line weights) which provides some information about the directions of influence within a circuit.
+> ***(e)*** Effective connectivity under closed-loop intervention at node B. Closed-loop control effectively lesions the inputs to the controlled node by driving that node to a specified target. This modifies the causal influences in the circuit (dashed dark arrows), and also interrupts any paths of indirect influence traveling through this node (illustrated with a red X over a dashed grey connection).
+> ***(f)*** Pairwise correlations under closed-loop intervention at node B. As a result of the lesioned direct and indirect connections, resulting correlations are sparser and more distinct across hypotheses.
+  
+  
+  
+Consider the circuit identification problem shown in the `Figure DEMO`, in which an experimenter has identified three hypotheses for the causal structure of a three-node circuit. By quantifying pairwise measures of dependency, and comparing to the expected pattern produced under each hypothesis, this hypothesis set can be narrowed to only those consistent with the observed data. However, for some hypothesis sets and experimental conditions, several circuits may lead to equivalent pairwise correlations ( column (c), passive observation). Intervention may modify observed dependencies in a way which leads to more distinct outcomes, allowing the hypothesis set to be further reduced.
+  
+  
+  
+These circuit hypotheses, shown as directed graphs in  column (a), can each be represented by an adjacency matrix *(Methods [# reachability & representation](REF-SECTION-HERE ))*. For example, circuit <img src="https://latex.codecogs.com/gif.latex?C_1"/> is represented by an adjacency matrix in which entries <img src="https://latex.codecogs.com/gif.latex?w_{A→B}"/>, <img src="https://latex.codecogs.com/gif.latex?w_{C→A}"/>, and <img src="https://latex.codecogs.com/gif.latex?w_{C→B}%20&#x5C;neq%200"/>. Note that hypotheses <img src="https://latex.codecogs.com/gif.latex?C_1"/> and <img src="https://latex.codecogs.com/gif.latex?C_3"/> have direct connections between nodes A and C. While hypothesis <img src="https://latex.codecogs.com/gif.latex?C_2"/> does not have a direct connection between these nodes an *indirect* connection exists through the path C <img src="https://latex.codecogs.com/gif.latex?&#x5C;to"/> B <img src="https://latex.codecogs.com/gif.latex?&#x5C;to"/> A *(shown as a solid gray arrow in  column (b))*. This indirect influence can be quantified and predicted using the the weighted reachability matrix <img src="https://latex.codecogs.com/gif.latex?&#x5C;widetilde{W}"/> illustrated as a directed graph in  column (b).
+  
+Because there are direct or indirect connections between each pair of nodes, passive observation of each hypothesized circuit would reveal that all nodes are correlated with each other ( column (c)). These three hypotheses are therefore difficult to distinguish for an experimentalist who performs only passive observation. 
+  
+  
+  
+  
+  
+Open-loop stimulation is commonly applied to help understand the direction of causal influence in circuits. `Fig. DEMO,  column (d)` shows the impact on observed correlations of performing open-loop control on node B. In hypothesis <img src="https://latex.codecogs.com/gif.latex?C_1"/>, node B is not a driver of other nodes, so open-loop stimulation at this site will introduce connection-independent noise which reduces its correlation with nodes which influence it. However, the connection from node B to A in hypotheses <img src="https://latex.codecogs.com/gif.latex?C_2"/> and <img src="https://latex.codecogs.com/gif.latex?C_3"/>, leads to open-loop stimulation at node B to add shared variance between B and its downstream targets, and therefore *increases* the observed correlation between nodes B and A (see Methods [# intervention variance](REF-SECTION-HERE )). An experimenter can thus distinguish between hypothesis <img src="https://latex.codecogs.com/gif.latex?C_1"/> and the other two hypotheses by applying open-loop control and observing the resulting pattern of correlations (column (d)). However, this pattern of open-loop stimulation would not allow the experimenter to distinguish between hypotheses <img src="https://latex.codecogs.com/gif.latex?C_2"/> and <img src="https://latex.codecogs.com/gif.latex?C_3"/>.
+  
+Closed-loop control (columns (e) and (f)) can provide the experimenter with even more inferential power. Column (e) shows the resulting adjacency matrix when closed-loop control is applied to node B. In each hypothesis, the result of this closed-loop control is to remove the impact of other nodes on node B. These severed connections are depicted in column (e) by dashed lines.<!-- when perfect closed-loop is applied the activity of node B is completely independent of other nodes.  --> Under hypothesis <img src="https://latex.codecogs.com/gif.latex?C_2"/>, this also results in the elimination of the indirect connection from node C to node A. The application of closed-loop control at node B thus results in a different observed correlation structure in each of the three circuit hypotheses (column (f)). This means that the experimenter can therefore distinguish between these circuit hypotheses by applying closed-loop control, a result not possible with passive observation or open-loop control.
+  
+This example illustrates some key steps in circuit identification, and some of the differences in inferential power different interventional experiments provide. However, in the next section, we codify this process into a general set of steps or recipe for circuit inference. We then apply this approach more broadly to explore the impact of intervention in more detail.
+  
+  
+  
+  
+  
+  
+  
+  
+  
+##  Steps of inference 
+  
+`*overview of CLINC approach* (+)`
 ```
-consider:
-@ import "/section_content/representation_reach.md"
-@ import "/section_content/background_id_demo.md"
+how do these steps help address established challenges 
 ```
-  
-#  Results {#results }
-  
-![](/figures/core_figure_sketches/circuit_walkthrough_3circuits_annotated.png "generated by /code/network_analysis/fig_circuit_walkthrough.py")
-  
-  
-  
-> **Figure DEMO _(box format)_: Applying CLINC to distinguish a pair of circuits**
->
-> Consider the three-node identification problem shown in the figure above, in which the experimenter has identified three hypotheses for the causal structure of the circuit. These circuit hypotheses, shown as directed graphs in column 1, can each also be represented by an adjacency matrix of the form \ref{eq:adjacency-matrix}: for example, circuit A is represented by an adjacency matrix in which <img src="https://latex.codecogs.com/gif.latex?w_{01}"/>, <img src="https://latex.codecogs.com/gif.latex?w_{20}"/>, and <img src="https://latex.codecogs.com/gif.latex?w_{21}%20&#x5C;neq%200"/>. Note that hypotheses A and C have direct connections between nodes 0 and 2; while hypothesis B does not have a direct connection between these nodes, computing the weighted reachability matrix <img src="https://latex.codecogs.com/gif.latex?&#x5C;widetilde{W}"/> in circuit B an *indirect* connection exists through the path 2 <img src="https://latex.codecogs.com/gif.latex?&#x5C;to"/> 1 <img src="https://latex.codecogs.com/gif.latex?&#x5C;to"/> 0 (illustrated in gray in column 2).
->
-> Because there are direct or indirect connections between each pair of nodes, passive observation of each hypothesized circuit would reveal that each pair of nodes is correlated (column 3). These three hypotheses are therefore difficult to distinguish[^a] for an experimentalist who performs only passive observation, but can be distinguished through stimulation.
->
-> Column 4 shows the impact on observed correlations of performing *open-loop* control on node 1. In hypothesis A, node 1 is not a driver of other nodes, so open-loop stimulation at this site will not increase the correlation between the signal observed at node 1 and other nodes. The path from node 1 to 0 in hypotheses B and C, meanwhile, causes the open-loop stimulation at node 1 to *increase* the observed correlation between nodes 1 and 0. An experimenter can thus distinguish between hypothesis A and the other two hypotheses by appling open-loop control and observing the resulting pattern of correlations (column 4). However, this pattern of open-loop stimulation would not allow the experimenter to distinguish between hypotheses B and C.
->
-> *Closed-loop* control (columns 5 and 6) can provide the experimenter with even more inferential power. Column 5 shows the resulting adjacency matrix when this closed-loop control is applied to node 1. In each hypothesis, the impact of this closed-loop control is to remove the impact of other nodes on node 1, because when perfect closed-loop is applied the activity of node 1 is completely independent of other nodes. (These severed connections are depicted in column 5 by dashed lines.) In hypothesis B, this also results in the elimation of the indirect connection from node 2 to node 1. The application of closed-loop control at node 1 thus results in a different observed correlation structure in each of the three circuit hypotheses (column 6). This means that the experimenter can therefore distinguish between these circuit hypotheses by applying closed-loop control -- a task not possible with passive observation or open-loop control.
-  
-<details><summary>↪ figure to do items for @Adam</summary>
-- [ ] TODO: overall this needs to be cut from the caption and filtered into the text body
-- [ ] @Adam - change labels at top from "B" to "1"
-- [ ] @Adam - add (A) (B) (C) labels to each row
-- [ ] @Adam - in legend, change in/direct "edge" to in/direct "connection"
-- [ ] @Adam - in legend, orange dashed arrow to dark gray
-  
-</details>
-  
-[^a]: saying "difficult to distinguish" instead of "indistinguishable" here since the magnitudes of the correlations could also be informative with different assumptions
-  
-<details><summary>↪2,3 circuit versions, straight from code</summary>
-  
-![](code/network_analysis/results/circuit_walkthrough_2circuits.png "generated by /code/network_analysis/fig_circuit_walkthrough.py")
-![](code/network_analysis/results/circuit_walkthrough_3circuits.png "generated by /code/network_analysis/fig_circuit_walkthrough.py")
-> 3 circuit walkthrough, walkthrough will all intervention locations might be appropriate for the supplement
-  
-</details>
-  
-  
-<details><summary>↪to do items</summary>
-  
-- [ ] find and include frequent circuit (curto + motif)
-- [ ] wrap circuits we want in `example_circuits.py`
-- [ ] alt method of displaying indirect paths?
-  - https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.simple_paths.all_simple_paths.html#networkx.algorithms.simple_paths.all_simple_paths
-</details>
-  
-<details><summary> ↪see also</summary>
-  
-more inspiration:
-- Combining multiple functional connectivity methods to improve causal inferences
-- Advancing functional connectivity research from association to causation
-- Fig1. of "Systematic errors in connectivity"
-  
-![](code/network_analysis/results/effect_of_control_horiz.png )
-![](figures/misc_figure_sketches/two_circuit_case_study_mockup.png )
-  
-> this figure does a great job of:
-> - setting up a key
-> - incrementally adding confounds
-> - highlighting severed edges
-> this figure does NOT
-> - explicitly address mutliple hypotheses
-  
-![](figures/misc_figure_sketches/closed_loop_severs_inputs.png )
-**Figure 11: Closed-loop control compensates for inputs to a node in simple circuits:** The left column shows a simple circuit and recording and stimulation sites for an open-loop experiment. The right column shows the functional circuit which results from closed-loop control of the output of region A. Generally, assuming perfectly effective control, the impact of other inputs to a controlled node is nullified and therefore crossed off the functional circuit diagram.
-  
-> this figure does a great job of:
-> - using a minimal version of the key above
-> - showing two competing hypotheses
-> - (throughs latent / common modulation in for fun)
-  
-![](figures/misc_figure_sketches/closed_loop_distinguishes_corticalEI.png )
-**Figure 12: Closed-loop control allows for two circuit hypotheses to be distinguished.** Two hypothesized circuits for the relationships between pyramidal (Pyr, excitatory), parvalbumin-positive (PV, inhibitory), and somatostain-expressing (Som, inhibitory) cells are shown in the two rows. Dashed lines in the right column represent connections whose effects are compensated for through closed-loop control of the Pyr node. By measuring correlations between recorded regions during closed-loop control it is possible to distinguish which hypothesized circuit better matches the data. Notably in the open-loop intervention, activity in all regions is correlated for both hypothesized circuits leading to ambiguity.
-</details>
-  
-<details><summary>↪more notes</summary>
-  
-probably want
-- two circuits which look clearly different
-  - ! but which have equivalent reachability
-  - possibly with reciprocal connections
-  - possssibly with common modulation
-  
-- do we need to reflect back from set of possible observations to consistent hypotheses?
-  - mention markov equivalence classes explicitly?
-  
-- intuitive explanation using binary reachability rules
-  <!-- - consider postponing until we introduce intervention?
-  - i.e. have one figure that walks through both reachability and impact of intervention -->
-- *point to the rest of the paper as deepening and generalizing these ideas*
-- *(example papers - Advancing functional connectivity research from association to causation, Combining multiple functional connectivity methods to improve causal inferences)*
-  
-- connect **graded reachability** to ID-SNR
-  - <img src="https://latex.codecogs.com/gif.latex?&#x5C;mathrm{IDSNR}_{ij}"/> measures the strength of signal related to the connection <img src="https://latex.codecogs.com/gif.latex?i→j"/> relative to in the output of node <img src="https://latex.codecogs.com/gif.latex?j"/>
-  - for true, direct connections this quantity increasing means a (true positive) connection will be identified more easily (with high certainty, requiring less data)
-  - for false or indirect connections, this quantity increasing means a false positive connection is more likely to be identified
-  - as a result we want to maximize IDSNR for true links, and minimize it for false/indirect links
-  
-  
-( see also `sketches_and_notation/walkthrough_EI_dissection.md` )
-  
-  
-</details>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-`reference extended methods`
-```
-extract minimum from:
-@ import 
-"/section_content/methods_simulations.md" 
-  
-```
-  
-  
-  
-  
-  
-  
   
 - `reference extended methods`
-```
-extract minimum from:
-@ import "/section_content/methods_simulations.md" 
-```
   
-##  Steps of inference - *overview of CLINC approach* (+) {#steps-of-inference-overview-of-clinc-approach }
-![](figures/core_figure_sketches/methods_overview_pipeline_sketch.png )
-  
-> **Figure OVERVIEW:** ...
-  
-  
-  
-  
-  
-  
+<details><summary>↪notes</summary>
   
 > **Theme B.** Experiments for circuit inference can be thought of as **narrowing the set of plausible explanations**, refining a hypotheses space[^refine]
   
+<!-- 
+TODO: overall, this section needs the single-circuit and multi-circuit hypotheses integrating better.
+The figure currently describes the process for a single circuit, which is the simplest to describe. But the body of the text is mostly pointed towards the multi-hypothesis perspective that follows in Figure DISAMBIG
+  
+- [ ] combine any of the steps? 
+  - i.e. 3+4 ? 5+6?
+ -->
+  
+</details>
+  
+![](figures/core_figure_sketches/methods_overview_pipeline_sketch.png )
+  
+> **Figure OVERVIEW: Components of a circuit identification experiment.**
+> The ground-truth or hypothesized circuit can be represented either as a graph depicting connections between nodes or, equivalently, as an adjacency matrix. While the adjacency matrix describes the direct causal relationships, it's useful to understand the net direct and indirect effect of nodes on each other, called reachability. This reachability representation is key for predicting observed correlations, as well as the impact of intervention. The generative model for this network describes how connections and sources of variance contribute to network dynamics, and observed time-series data (either simulated or measured *in vivo*). From these time-series, pairwise dependence can be measured through quantities like correlation coefficients. Alternately, in the design phase, correlations can be predicted directly from the intervention-adjusted reachability matrices. Circuit inference typically consists of thresholding or statistical tests to determine significant connections to reconstruct an estimated circuit.
+  
+  
 [^refine]: see [Advancing functional connectivity](https://www.nature.com/articles/s41593-019-0510-4 ), fig. 2
   
-[^more_expt]: more than just an experiment, this is a "hypothesis search." Is this procedure what we're going to brand as the "CLINC" process?
+[^more_expt]: TODO: might reword. This is more than just an experiment, this is a "hypothesis search." Is this procedure what we're going to brand as the "CLINC" process?
+  
+We envision the structure of an experiment[^more_expt] to include the following broad stages:
+  
+#  First, explicitly **enumerate the set of hypothesized circuits.**
+  
+  
+Methods [# circuit representations](section_content/methods_representation_reachability.md )
+  
+  
+Hypotheses about the structure of the circuit are often based on multiple sources of information including prior recordings, anatomical constraints revealed by tract tracing experiments, or commonly observed connectivity patterns in other systems. These hypotheses should be expressed as a set of circuits (adjacency matrices, *`Fig. OVERVIEW circuit`*) each with a probability representing the prior belief about the relative likelihood of these options. This hypothesis set can be thought of as a space of possible explanations for the observed data so far, which will be narrowed down through further intervention, observation, and inference *(see also [Fig.DISAMBIG (A)](#fig-disambig )).*
   
   
   
-**We envision the structure of an experiment[^more_expt]** to include the following broad stages:
   
-1. First, explicitly **enumerate the set of hypothesized circuits.** Hypotheses about the structure of the circuit would be based on multiple sources of information including prior recordings, anatomical constraints revealed by `experiments where you look at the fiber bundles connecting regions`, or commonly observed connectivity patterns in other systems `[🚧 add other sources of priors for circuit hypotheses]`[^bonus_causal][^more_assumptions] These hypotheses should be expressed as a set of circuits (adjacency matrices) each with a probability representing the prior belief about the relative likelihood of these options. This hypothesis set can be thought of as a space of possible explanations for the observed data so far, which will be narrowed down through further intervention, observation, and inference. [(Fig.DISAMBIG top row)](#fig-disambig )
   
-[^most]: verify whether this is reasonable to say
+#  Second, **forecast patterns of correlation** which could result from applying candidate interventions.
   
-2. Second, *in silico*, **forecast patterns of correlation** which could result from applying candidate interventions.
-Most algorithms[^most] for circuit inference quantify and threshold measures of dependence between pairs of nodes. Correlations are often used to measure the linear component of dependence between outputs of two nodes, although the approach described here should generalize to other nonlinear measures of dependence such as mutual information. As such, the observed pattern of dependence (correlations) in a given experiment summarizes the input to an inference procedure to recover an estimated circuit.  
-    A detailed forecast of the observed outputs could be achieved by simulating biophysical networks across candidate interventions and hypothesized ground-truth circuits. However, for large networks or large hypothesis sets this may be expensive to compute. Instead, for the sake of rapid iteration in designing interventions, we propose using the reachability representation of a linear (linearized) network to succinctly and efficiently predict the observed correlations[^bivar_pred] across nodes[^node_repr]. The methods described in `[ref. prediction methods]` allow us to anticipate how open and closed-loop interventions across nodes in the network might increase, decrease, or sever dependencies between node outputs.
+  
+  
+  
+Methods 
+[# predicting correlation](section_content/methods_predicting_correlation.md )
+[# specifying interventions](section_content/methods_interventions.md )
+[# predicting impact of intervention](section_content/methods_intervention_variance.md )
+  
+  
+  
+ Most algorithms for circuit inference quantify and threshold measures of dependence between pairs of nodes. Correlations are often used to measure the linear component of dependence between outputs of two nodes, although the approach described here should generalize to other nonlinear measures of dependence such as mutual information. As such, the observed pattern of dependence (correlations) in a given experiment summarizes the input to an inference procedure to recover an estimated circuit.  
+    A detailed forecast of the observed outputs could be achieved by simulating biophysical networks across candidate interventions and hypothesized ground-truth circuits. However, for large networks or large hypothesis sets this may be expensive to compute. Instead, for the sake of rapid iteration in designing interventions, we propose using the reachability representation of a linear (or linearized) network to succinctly and efficiently predict the observed correlations[^bivar_pred] across nodes. The methods described in Methods [# predicting correlations](REF-SECTION-HERE ) allow us to anticipate how open and closed-loop interventions across nodes in the network might increase, decrease, or sever dependencies between node outputs (*see also `Fig. OVERVIEW intervention, prediction`*).
   
 [^bivar_pred]: using binary reachability, we can be more general above predicting the "sign/slope" (when will they increase/decrease) of other measures of bivariate dependence like transfer entropy
   
-3. `{Survey / analyze / compare / summarize}` `{diversity / equivalence /  distinguishability of}` patterns of correlation across each hypothesized circuit.
-A useful experiment (intervention) is one which produces highly distinct outcomes when applied to each of the hypothesized circuits, while an experiment which produces the same outcome across all hypothesized circuits would be redundant.
+  
+  
+#  `{Survey / analyze / compare / summarize}` `{diversity / equivalence /  distinguishability of}` patterns of correlation across each hypothesized circuit.
+  
+  
+Methods [# across-hypothesis entropy](section_content/methods_entropy.md )
+  
+A useful experiment (data collected in the presence of an intervention) is one which produces highly distinct outcomes when applied to each of the hypothesized circuits, while an experiment which produces the same outcome across all hypothesized circuits would be redundant.
     Before collecting experimental data we do not know the ground-truth circuit with certainty, therefore it is useful to understand the range of possible observed patterns of dependence. To distill this range of possibilities to a make a decision about which intervention to apply, it is also useful to summarize the expected information we would gain about circuit identity across the range of hypotheses. [(across columns of Fig.DISAMBIG)](#fig-disambig )
 >-*Here we generalize across specific values of synaptic weights and divide observed patterns into categories: increased correlation, decreased correlation, no correlation.*
+  
+  
+  
+  
+  
+  
+#  **Select intervention** 
+  
+  
+Methods 
+[# selecting intervention](section_content/methods_entropy_selection.md )
+*[# specifying interventions](section_content/methods_interventions.md )*
+  
+Here, we describe a "greedy" approach for choosing an effective single-node intervention, but extending the approach above to predict joint entropy would allow a joint or sequential experimental design which would be optimal over multiple interventions *(see Discussion)*.
+>- possible interventions consist of open-loop and closed-loop stim at each of N nodes 
+>   - but more constraints on the set of interventions can easily be incorporated at this stage
   
 🚧
 `Entropy as a measure of information about circuit hypotheses`
 **`@ import "/section_content/methods_entropy.md"`**
   
-`select intervention - (is this its own step, or the last part of step 3)`
-Here, we describe a "greedy" approach for choosing an effective single-node intervention, but extending the approach above to predict joint entropy would allow a joint or sequential experimental design which would be optimal over multiple interventions.
->- possible interventions consist of open-loop and closed-loop stim at each of N nodes 
->   - but more constraints on the set of interventions can easily be incorporated at this stage
+  
   
 For selecting the first intervention type and location, we propose choosing the intervention which results in the maximum expected circuit information, that is:
 <p align="center"><img src="https://latex.codecogs.com/gif.latex?S_i^*%20=%20&#x5C;underset{i}{&#x5C;arg&#x5C;max}&#x5C;,H(C|S_i)"/></p>  
 [^intv_notation]
   
   
-[^intv_notation]: will need to tighten up notation for intervention summarized as a variable, annotating its type (passive, open-, closed-loop) as well as its location. Also have to be careful about overloading <img src="https://latex.codecogs.com/gif.latex?S_i"/> as the impact of private variance and as a particular open-loop intervention
+[^intv_notation]: will need to tighten up notation for intervention summarized as a variable, annotating its type (passive, open-, closed-loop) as well as its location. Also have to be careful about overloading <img src="https://latex.codecogs.com/gif.latex?S_i"/> as the impact of private variance and as a particular open-loop intervention.
   
-🚧
-4. Apply intervention and collect data
-Using entropy as a metric to select a useful intervention, the next step is to conduct that interventional experiment, in-vivo or in a detailed simulation. Such an experiment may reveal outputs patterns not fully captured by the linearized reachability representation. 
   
-`[extract correlations ...]`
-[^practicalities]. 
+#   **Apply intervention, collect data, estimate dependence**
+  
+  
+  
+Methods 
+*[# specifying interventions](section_content/methods_interventions.md )*
+[# collecting data from simulations](section_content/methods_simulations.md )
+[# quantifying dependence](section_content/methods_circuit_estimates.md )
+  
+Using entropy as a metric to select a useful intervention, the next step is to conduct that interventional experiment, in-vivo or in a detailed simulation. Such an experiment may reveal outputs patterns not fully captured by the linearized reachability representation. [^practicalities]
+  
+  
+  
   
 [^practicalities]: Omitting several quantitative practicalities in this step. Notably choosing the amplitude / frequency content of an intervention w.r.t. estimated parameters of the circuit
   
   
-5. **Given the observed dependency pattern, form a posterior belief over hypotheses**
-`[🚧 transition text]`  
+#  **Given the observed dependency pattern, form a posterior belief over hypotheses**
+  
+Methods 
+*[# extracting circuit estimates ](section_content/methods_circuit_estimates.md )*
+[# determining directionality from changes in correlation](section_content/methods_coreach_sign.md )
+  
   
 **`@ import "/section_content/methods_entropy_selection.md"`**
   
   
   
+```
+- discuss reconstruction of single circuit from reachability 
+- note process is iterative!
+- funnel out / transition to fig disambig ?
+```
   
   
   
@@ -322,7 +321,8 @@ Using entropy as a metric to select a useful intervention, the next step is to c
   
   
   
-###  Intervening provides categorical improvements in inference power beyond passive observation {#intervening-provides-categorical-improvements-in-inference-power-beyond-passive-observation }
+##  Intervening provides categorical improvements in inference power beyond passive observation
+  
   
 In the previous sections, we established how open-loop interventions modify observed pairwise correlations, and how closed-loop interventions modify a circuit's functional connectivity. Figure `ID-DEMO` demonstrated a simple example of how removing connections in a circuit can sometimes reveal more distinct patterns of dependence, and distinguish hypotheses which are indistinguishable through passive observation and open-loop control. Here, we systematize this approach to choose an appropriate intervention to narrow down a hypothesis set. The following sections will address how to evaluate the relative effectiveness of a particular intervention. <!-- NOTE: focusing on step 3 of steps of inference.--> Multiple intervention types and locations are compared for a larger set of circuit hypotheses to build towards general principles for where and how to intervene.
   
@@ -346,7 +346,7 @@ While the ground truth connectivity is rarely available during experiments, it i
   
   
   
-The set of patterns of pairwise dependences across the hypothesis set  form an "intervention-specific fingerprint" (i.e. a single row of `Fig. DISAMBIG`). This fingerprint summarizes the outcomes of a particular experiment with intervention, and therefore shows which hypotheses are observationally equivalent under this observation. If this fingerprint contains many examples of the same pattern (such as the all-to-all correlation pattern seen under passive observation, `Fig. DISAMBIG Ba`), many different circuits correspond to the same observation, and that experiment contributes low information to distinguish between hypotheses. On the other hand, a maximally informative experiment would result in unique observations corresponding to each hypothesis. Observations from such an experiment would be sufficient to narrow the inferred circuit down to a single hypotheses.
+The set of patterns of pairwise dependences across the hypothesis set form an "intervention-specific fingerprint" (i.e. a single row of `Fig. DISAMBIG`). This fingerprint summarizes the outcomes of a particular experiment with intervention, and therefore shows which hypotheses are observationally equivalent under this observation. If this fingerprint contains many examples of the same pattern (such as the all-to-all correlation pattern seen under passive observation, `Fig. DISAMBIG Ba`), many different circuits correspond to the same observation, and that experiment contributes low information to distinguish between hypotheses. On the other hand, a maximally informative experiment would result in unique observations corresponding to each hypothesis. Observations from such an experiment would be sufficient to narrow the inferred circuit down to a single hypotheses.
   
 To quantify this hypothesis ambiguity based on the diversity of a set of possible outcomes, we compute the Shannon entropy over the distribution of patterns (See Methods [entropy](#methods-entropy )). Because our hypotheses set contains circuits with relatively dense connectivity, 5 of the 6 hypotheses result in all-to-all correlations, with the final hypothesis resulting in a unique V-shaped pattern of correlation (A~B, and A~C, `Fig. DISAMBIG row Ba`). The entropy of this distribution is 0.65 bits. To interpret this entropy value, it is useful to understand the maximum achievable entropy, which is simply the logarithm of the number of hypotheses. In this case, <img src="https://latex.codecogs.com/gif.latex?H_{max}%20=%20&#x5C;log_2(6)&#x5C;approx%202.58%20&#x5C;text{bits}"/>, which indicates the information gained from passive observation is 25% efficient (<img src="https://latex.codecogs.com/gif.latex?H_{passive}%20&#x2F;%20H_{max}%20&#x5C;approx%200.25"/>). 
   
@@ -406,7 +406,8 @@ To summarize, by understanding the relationship between circuit structure, the e
   
   
   
-###  Impact of intervention location and variance on pairwise correlations {#impact-of-intervention-location-and-variance-on-pairwise-correlations }
+##  Impact of intervention location and variance on pairwise correlations
+  
   
 While a primary advantage of closed-loop intervention for circuit inference is its ability to functionally lesion indirect connections, another, more nuanced advantage lies in its capacity to bidirectionally manipulate output variance. While the variance of an open-loop stimulus can be titrated to adjust the output variance at a node, in general, an open-loop stimulus cannot reduce this variance below variance arising from other sources. That is, if the system is linear with Gaussian noise, each node's intrinsic variability, the effect of other nodes, and unobserved disturbances together set a lower bound on the total output variance of that node in the presence of additive open-loop stimulation (See Methods [# variance & intervention](section_content/methods_intervention_variance.md )).
   
@@ -531,11 +532,7 @@ In this section, we demonstrated the interaction between intervention location, 
   
   
   
-  
-  
-  
-#  Discussion {#discussion }
-  
+#  Discussion
   
   
   
@@ -547,23 +544,27 @@ Restate themes!
 - where you intervene matters
 ```
   
-###  limitations {#limitations }
+###  limitations
+  
 The examples explored in this work simplify several key features that may have relevant contributions to circuit identification in practical experiments. [...]
   
 `full observability`
   
   
-###  results summary → summary of value closed-loop generally {#results-summary-summary-of-value-closed-loop-generally }
+###  results summary → summary of value closed-loop generally
+  
 Closed-loop control has the disadvantages of being more complex to implement and requires specialized real-time hardware and software, however it has been shown to have multifaceted usefulness in clinical and basic science applications. Here we focused on two advantages in particular; First, the capacity for functional lesioning which (reversibly) severs inputs to nodes and second, closed-loop control's capacity to precisely shape variance across nodes. Both of these advantages facilitate opportunities for closed-loop intervention to reveal more circuit structure than passive observation or even open-loop experiments.
   
-###  summary of guidelines for experimenters {#summary-of-guidelines-for-experimenters }
+###  summary of guidelines for experimenters
+  
 In studying the utility of various intervention for circuit inference we arrived at a few general guidelines which may assist experimental neuroscientists in designing the right intervention for the quesiton at hand.
 First, more ambiguous hypotheses sets require "stronger" interventions to distinguish. Open-loop intervention may be sufficient to determine directionality of functional relationships, but as larger numbers of similar hypotheses [...] closed-loop intervention reduces the hypothesis set more efficiently.
 Second, we find that dense networks with strong reciprocal connections tend to result in many equivalent circuit hypotheses, but that well-placed closed-loop control can disrupt loops and simplify correlation structure to be more identifiable.[^corrob_fiete] Recurrent loops are a common feature of neural circuit, and represent key opportunities for successful closed-loop intervention. The same is true for circuits with strong indirect correlations 
   
 `hidden confounds`
   
-###  "funnel out", future work → broad impact {#funnel-out-future-work-broad-impact }
+###  "funnel out", future work → broad impact
+  
   
 `sequential experimental design`
   
@@ -577,19 +578,23 @@ Second, we find that dense networks with strong reciprocal connections tend to r
   
   
   
-#  Methods {#methods }
+#  Methods
   
   
-##  Modeling network structure and dynamics (4.1) --- Simulation Methods {#modeling-network-structure-and-dynamics-41-simulation-methods }
   
-##  Modeling network structure and dynamics {#modeling-network-structure-and-dynamics }
+##  Modeling network structure and dynamics (4.1) --- Simulation Methods
+  
+  
+##  Modeling network structure and dynamics
+  
 We sought to understand both general principles (abstracted across particulars of network implementation) as well as some practical considerations introduced by dealing with spikes and synapses.
   
   
   
   
   
-###  Stochastic network dynamics {#stochastic-network-dynamics }
+###  Stochastic network dynamics
+  
   
 The first approach is accomplished with a network of nodes with Gaussian noise sources, linear interactions, and linear dynamics. The second approach is achieved with a network of nodes consisting of populations of leaky integrate-and-fire (LIF) neurons. These differ from the simpler case in their nonlinear-outputs, arising from inclusion of a spiking threshold. Interactions between neurons happen through spiking synapses, meaning information is passed between neurons sparsely in time[^fr]. 
   
@@ -600,7 +605,8 @@ The first approach is accomplished with a network of nodes with Gaussian noise s
   
 [^fr]: However, depending on overall firing rates and population sizes, this sparse spike-based transmission can be coarse-grained to a firing-rate-based model.
   
-###  Time-resolvable interactions {#time-resolvable-interactions }
+###  Time-resolvable interactions
+  
   
 Additionally we study two domains of interactions between populations; contemporaneous and delay-resolvable connections. These domains represent the relative timescales of measurement versus timescale of synaptic delay.
 [^cases]
@@ -625,7 +631,8 @@ The following work is presented with the linear Gaussian and contemporaneous dom
   
 </details>
   
-###  Code implementation {#code-implementation }
+###  Code implementation
+  
 Software for data generation, analysis, and plotting is available at https://github.com/awillats/clinc.
 Both linear Gaussian and spiking networks are simulated with code built from the [Brian2](https://elifesciences.org/articles/47314 ) spiking neural network simulator. This allows for highly modular code with easily interchanged neuron models and standardized output preprocessing and plotting. It was necessary to write an additional custom extension to Brian2 in order to capture delayed linear Gaussian interactions, available at [brian_delayed_gaussian](https://github.com/awillats/brian_delayed_gaussian ). With this added functionality, it is possible to compare the equivalent network parameters only changing linear Gaussian versus spiking dynamics and inspect differences solely due to spiking.
   
@@ -637,13 +644,18 @@ Both linear Gaussian and spiking networks are simulated with code built from the
 *see [_network_parameters_table.md](_network_parameters_table.md ) for list of relevant parameters*
   
   
-###  Stochastic network dynamics (4.1.1) {#stochastic-network-dynamics-411 }
-###  Delayed interactions (4.1.2) {#delayed-interactions-412 }
-###  Code implementation (4.1.3) {#code-implementation-413 }
-##  Implementing interventions (4.2) {#implementing-interventions-42 }
+###  Stochastic network dynamics (4.1.1)
+  
+###  Delayed interactions (4.1.2)
+  
+###  Code implementation (4.1.3)
+  
+##  Implementing interventions (4.2)
   
   
-##  Implementing interventions {#implementing-interventions }
+  
+##  Implementing interventions
+  
   
   
   
@@ -702,8 +714,10 @@ Because the instantiation of noise in the network will be different from trial t
   
   
   
-##  Predicting correlation structure (3.1) --- Theory / Prediction {#predicting-correlation-structure-31-theory-prediction }
-###  Representations & reachability (2.3?) {#representations-reachability-23 }
+##  Predicting correlation structure (3.1) --- Theory / Prediction
+  
+###  Representations & reachability (2.3?)
+  
   
 [^exog]: the most important property of <img src="https://latex.codecogs.com/gif.latex?e"/> for the math to work, i believe, is that they're random variables independent of each other. This is not true in general if E is capturing input from common sources, other nodes in the network. I think to solve this, we'll need to have an endogenous independent noise term and an externally applied (potentially common) stimulus term.
 [^sim_repr]: have to be careful with this. this almost looks like a dynamical system, but isn't. In simulation we're doing something like an SCM, where the circuit is sorted topologically then computed sequentially. have to resolve / compare these implementations
@@ -744,7 +758,8 @@ This notion of reachability, encoded by the pattern of nonzero entries in <img s
 see also:
 @ import "/section_content/background_id_demo.md"
 ```
-###  Predicting correlation structure (3.1) {#methods-predict-corr }
+###  Predicting correlation structure (3.1)
+  
   
 A linear Gaussian circuit can be described by 1) the variance of the Gaussian private (independent) noise at each node, and 2) the weight of the linear relationships between each pair of connected nodes. Let <img src="https://latex.codecogs.com/gif.latex?s%20&#x5C;in%20&#x5C;mathbb{R}^p"/> denote the variance of each of the <img src="https://latex.codecogs.com/gif.latex?p"/> nodes in the circuit, and <img src="https://latex.codecogs.com/gif.latex?W%20&#x5C;in%20&#x5C;mathbb{R}^{p%20&#x5C;times%20p}"/> denote the matrix of connection strengths such that <p align="center"><img src="https://latex.codecogs.com/gif.latex?W_{ij}%20=%20&#x5C;text{strength%20of%20<img src="https://latex.codecogs.com/gif.latex?i%20&amp;#x5C;to%20j"/>%20connection}."/></p>  
   
@@ -828,7 +843,8 @@ Notably, the impact of an intervention which is a "common cause" for both nodes 
 [^verify_drds]: TODO: verify not 100% sure this is true, the empirical results are really pointing to dr^2/dW<0 rather than dr^2/dS<0. Also this should really be something like <img src="https://latex.codecogs.com/gif.latex?&#x5C;frac{d|R|}{dS}"/> or <img src="https://latex.codecogs.com/gif.latex?&#x5C;frac{dr^2}{dS}"/> since these effects decrease the *magnitude* of correlations. I.e. if <img src="https://latex.codecogs.com/gif.latex?&#x5C;frac{d|R|}{dS}%20&lt;%200"/> increasing <img src="https://latex.codecogs.com/gif.latex?S"/> might move <img src="https://latex.codecogs.com/gif.latex?r"/> from <img src="https://latex.codecogs.com/gif.latex?-0.8"/> to <img src="https://latex.codecogs.com/gif.latex?-0.2"/>, i.e. decrease its magnitude not its value.
   
   
-###  Impact of interventions - theory, pred (3.1?, 5.1?) {#impact-of-interventions-theory-pred-31-51 }
+###  Impact of interventions - theory, pred (3.1?, 5.1?)
+  
   
 <hr>
   
@@ -877,10 +893,12 @@ see also:
 @ import "/section_content/results_impact_of_intervention.md"`
 ```
   
-##  Extracting circuit estimates (4.3) {#extracting-circuit-estimates-43 }
+##  Extracting circuit estimates (4.3)
   
   
-##  Extracting circuit estimates  {#extracting-circuit-estimates }
+  
+##  Extracting circuit estimates 
+  
 !!!! - 10% done
   
   
@@ -897,10 +915,12 @@ We implement a naive comparison strategy to estimate the circuit adjacency from 
   
 [^circuit_search]: TODO? formalize notation for this
   
-###  Time-resolvable interactions *XCORR* (4.1.2) {#time-resolvable-interactions-xcorr-412 }
+###  Time-resolvable interactions *XCORR* (4.1.2)
+  
 `@ import "/section_content/methods_simulations.md" time-resolvable domain`
   
-###  Information-theoretic measures of hypothesis ambiguity (4.4) {#sec:entropy }
+###  Information-theoretic measures of hypothesis ambiguity (4.4)
+  
   
   
   
@@ -931,7 +951,8 @@ for this example set:
   
 [^markov_equiv]: connect this section to the idea of the markdov equivalence class, and its size
   
-###  Selecting interventions (...) {#sec:entropy-selection }
+###  Selecting interventions (...)
+  
   
 > Evolution of entropy, as the space of hypotheses is narrowed from experiments and inference.
   
@@ -956,10 +977,12 @@ or the posterior belief can be used as a prior for the next iteration.
   
   
   
-#  References {#references }
+#  References
+  
 *see [pandoc pandoc-citations](https://github.com/shd101wyy/markdown-preview-enhanced/blob/master/docs/pandoc-bibliographies-and-citations.md )*
   
-#  Supplement {#supplement }
+#  Supplement
+  
   
   
   

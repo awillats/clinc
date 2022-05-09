@@ -60,7 +60,7 @@ NOTE: requires MPE Use Pandoc Parser to be off
 <!-- ## ? Representations & reachability (minimal, dupe)
 ```
 consider:
-@ import "/section_content/representation_reach.md"
+@ import "/section_content/methods_representation_reachability.md"
 @ import "/section_content/background_id_demo.md"
 ``` -->
 
@@ -92,7 +92,7 @@ how do these steps help address established challenges
 
 #### Representations & reachability
 `extract minimum from:`
-`@ import "/section_content/representation_reach.md"`
+`@ import "/section_content/methods_representation_reachability.md"`
 
 <!-- @ import "/section_content/background_id_demo.md" 
 
@@ -140,7 +140,7 @@ extract minimum from:
 
 ## Predicting correlation structure (3.1) --- Theory / Prediction
 ### Representations & reachability (2.3?)
-@import "/section_content/representation_reach.md"
+@import "/section_content/methods_representation_reachability.md"
 ```
 see also:
 @ import "/section_content/background_id_demo.md"
