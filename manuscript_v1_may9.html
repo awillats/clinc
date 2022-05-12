@@ -1,0 +1,1754 @@
+<!DOCTYPE html><html><head>
+      <title>Closed-Loop Identifiability in Neural Circuits</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"],"messageStyle":"none","tex2jax":{"processEnvironments":false,"processEscapes":true,"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"TeX":{"extensions":["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]},"HTML-CSS":{"availableFonts":["TeX"],"imageFont":null},"root":"file:///Users/adam/.dotfiles/atom/packages/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/mathjax"});
+        </script>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+.markdown-preview.markdown-preview {
+  /* Heading numbering, inspired by Typora 
+     https://support.typora.io/Auto-Numbering/
+    */
+}
+@page {
+  size: A4 portrait;
+  margin-left: 1.5in;
+  margin-right: 1in;
+  margin-bottom: 1.5in;
+}
+.do-number-sections {
+  counter-reset: h1;
+}
+.do-number-sections h1 {
+  counter-reset: h2;
+}
+.do-number-sections h2 {
+  counter-reset: h3;
+}
+.do-number-sections h3 {
+  counter-reset: h4;
+}
+.do-number-sections h4 {
+  counter-reset: h5;
+}
+.do-number-sections h5 {
+  counter-reset: h6;
+}
+.do-number-sections h1:before {
+  counter-increment: h1;
+  content: counter(h1) ". ";
+}
+.do-number-sections h2:before {
+  counter-increment: h2;
+  content: counter(h1) "." counter(h2) ". ";
+}
+.do-number-sections h3:before {
+  counter-increment: h3;
+  content: counter(h1) "." counter(h2) "." counter(h3) ". ";
+}
+.do-number-sections h4:before {
+  counter-increment: h4;
+  content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) ". ";
+}
+.do-number-sections h5:before {
+  counter-increment: h5;
+  content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". ";
+}
+.do-number-sections h6:before {
+  counter-increment: h6;
+  content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". ";
+}
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 id="abstract">Abstract</h1>
+<p>The necessity of intervention in inferring cause has long been
+understood in neuroscience. Recent work has highlighted the limitations
+of passive observation and single-site lesion studies in accurately
+recovering causal circuit structure. The advent of optogenetics has
+facilitated increasingly precise forms of intervention including
+closed-loop control which may help eliminate confounding influences.
+However, it is not yet clear how best to apply closed-loop control to
+leverage this increased inferential power. In this paper, we use tools
+from causal inference, control theory, and neuroscience to show when and
+how closed-loop interventions can more effectively reveal causal
+relationships. We also examine the performance of standard network
+inference procedures in simulated Gaussian networks under passive,
+open-loop and closed-loop conditions. We demonstrate a unique capacity
+of feedback control to distinguish competing circuit hypotheses by
+disrupting connections which would otherwise result in equivalent
+patterns of correlation. We also demonstrate the increased range of
+correlations achievable under closed-loop intervention, leading to
+increased signal-to-noise ratio for connection-related measures. Our
+results build toward a practical framework to improve design of
+neuroscience experiments to answer causal questions about neural
+circuits.</p>
+<h1 id="introduction">Introduction</h1>
+<h2 id="estimating-causal-interactions-in-the-brain">Estimating causal
+interactions in the brain</h2>
+<p>Many hypotheses about neural circuits are phrased in terms of causal
+relationships: &#x201C;will changes in activity to this region of the brain
+produce corresponding changes in another region?&#x201D; Understanding these
+causal relationships is critical to both scientific understanding and to
+developing effective therapeutic interventions, which require knowledge
+of how potential therapies will impact brain activity and patient
+outcomes.</p>
+<p><strong>Inferring causal interactions from time series.</strong> A
+number of strategies have been proposed to detect causal relationships
+between observed variables. Wiener-Granger (or predictive) causality
+states that a variable <span class="math inline">\(X\)</span>
+&#x201C;Granger-causes&#x201D; <span class="math inline">\(Y\)</span> if <span class="math inline">\(X\)</span> contains information relevant to <span class="math inline">\(Y\)</span> that is not contained in <span class="math inline">\(Y\)</span> itself or any other variable <span class="citation" data-cites="wiener1956theory">(Wiener 1956)</span>.
+This concept has traditionally been operationalized with vector
+autoregressive models <span class="citation" data-cites="granger1969investigating">(Granger 1969)</span>; the
+requirement that <em>all</em> potentially causative variables be
+considered makes these notions of dependence susceptible to unobserved
+confounders <span class="citation" data-cites="runge2018causal">(Runge
+2018)</span>.</p>
+<p>A key methodological differences between approaches for causal
+inference from time-series is the choice of linear-Gaussian versus
+nonlinear measures of dependence (e.g.&#xA0;Granger causality <span class="citation" data-cites="schreiber2000measuring">Schreiber
+(2000)</span>; <span class="citation" data-cites="barnett2009granger">Barnett, Barrett, and Seth (2009)</span>
+versus transfer entropy <span class="citation" data-cites="bossomaier2016transfer">Bossomaier et al. (2016)</span>).
+Another key difference lies in the choice of what signals to condition
+on. Bivariate cross-correlation methods look at the correlation of time
+series collected from pairs of nodes at various lags and detect peaks at
+negative time lags. Such peaks could indicate the presence of a direct
+causal relationship &#x2013; but they could also stem from indirect causal
+links or hidden confounders <span class="citation" data-cites="dean2016dangers">(Dean and Dunsmuir 2016)</span>. In these
+bivariate correlation methods, it is thus necessary to consider patterns
+of correlation between many pairs of nodes in order to differentiate
+between direct, indirect, and confounding relationships <span class="citation" data-cites="dean2016dangers">(Dean and Dunsmuir
+2016)</span>. This distinguishes these strategies from some multivariate
+methods that &#x201C;control&#x201D; for the effects of potential confounders. For
+example, multivariate conditional transfer entropy approaches use
+various variable selection schemes which can differentiate between
+direct interactions, indirect interactions, and common causes, but their
+results depend on choices such as the binning strategies used to
+discretize continuous signals, the specific statistical tests used, and
+the estimator used to compute transfer entropy <span class="citation" data-cites="wibral2014directed wollstadt2019idtxl">(Wibral, Vicente, and
+Lizier 2014; Wollstadt et al. 2019)</span>.</p>
+<p>However, despite their mathematical differences, previous work has
+found that cross-correlation-based metrics and information-based metrics
+tend to produce qualitatively similar results, with similar patterns of
+true and false positives <span class="citation" data-cites="garofalo2009evaluation">(Garofalo et al. 2009)</span>. In
+this work, we focus on the simplest approach for discovering
+interactions from time-series which is to threshold correlations between
+node outputs. See <a href="REF-SECTION-HERE"># Future Work</a> for
+discussion of extending this approach to more sophisticated inference
+approaches.</p>
+<h2 id="interventions-in-neuroscience-causal-inference">Interventions in
+neuroscience &amp; causal inference</h2>
+<p>A range of mathematical and practical challenges make it difficult to
+determine these causal relationships. In studies that rely only
+observational data, it is often impossible to determine whether observed
+patterns of activity are caused by known and controlled inputs, or
+whether they are instead spurious connections generated by recurrent
+activity, indirect relationships, or unobserved &#x201C;confounders.&#x201D; It is
+generally understood that moving from experiments involving passive
+observation to more complex levels of intervention allows experimenters
+to better tackle challenges to circuit identification. However, while
+chemical and surgical lesion experiments have historically been employed
+to remove the influence of possible confounds, they are likely to
+dramatically disrupt circuits from their typical functions, making
+conclusions about underlying causal structure drawn from these
+experiments unlikely to hold in naturalistic settings <span class="citation" data-cites="chicharro2012when">(Chicharro and Ledberg
+2012)</span>.</p>
+<p><img src="figures/core_figure_sketches/figure1_sketch.png" title="role of interventions"></p>
+<blockquote>
+<p><strong>Figure INTRO: Roles interventions have played in
+understanding structure and function in neuroscience.</strong> (A)
+<em>Passive observation</em> involves recording signals without
+stimulating the brain. In this example, observational data is used to
+identify patients suffering from absence seizures <span class="citation" data-cites="smith2005eeg">(Smith 2005)</span>. (B) <em>Open-loop
+stimulation</em> involves recording activity in the brain while
+perturbing a region with a known input signal. Using systematic
+<em>open-loop stimulation experiments</em>, Penfield uncovered the
+spatial organization of how senses and movement are mapped in the cortex
+<span class="citation" data-cites="penfield1937somatic penfield1950cerebral">(W. Penfield and
+Boldrey 1937; Wilder Penfield and Rasmussen 1950)</span>. (C)
+<em>Closed-loop control</em> uses feedback control to precisely specify
+activity in certain brain regions regardless of activity in other
+regions. Using closed-loop control (voltage clamp), Hodgkin, Huxley, and
+Katz were able to dissect the recurrent ion channel dynamics of the
+action potential by functionally lesioning the impact of individual ion
+channels <span class="citation" data-cites="cole1949dynamic hodgkin1949effect hodgkin1952measurement">(Cole
+1949; A. L. Hodgkin and Katz 1949; A. L. Hodgkin, Huxley, and Katz
+1952)</span>.</p>
+</blockquote>
+<p><strong>The role of intervention in neuroscience</strong> Despite
+these challenges, neuroscientists have made progress in understanding
+the brain through various approaches. One way in which these approaches
+differ is in terms of their use of recording and stimulation
+(<code>Fig. INTRO</code>). Recording from the brain <strong>(passive
+observation)</strong> and analyzing those data for patterns can tell us
+which regions may be involved in a particular behavior. For instance,
+electroencepahlograms (EEG) can help reveal the hidden storm of
+electrical activity that underlies epileptic seizures, providing clues
+as to its origin and classifying its type <span class="citation" data-cites="smith2005eeg">(Smith 2005)</span>. In addition, perturbing
+the brain through stimulation <strong>(open-loop intervention)</strong>
+can help understand whether activity in one region is sufficient to
+produce some downstream effect. For instance, Wilder Penfield stimulated
+different regions of the brain with electricity in order to assess safe
+sites for surgical treatment of epilepsy. Through these systematic
+stimulation experiments, he was able to uncover the spatial organization
+of how senses and movement are mapped in the cortex <span class="citation" data-cites="penfield1937somatic penfield1950cerebral">(W. Penfield and
+Boldrey 1937; Wilder Penfield and Rasmussen 1950)</span>. Similarly
+Hubel and Wiesel delivered precise patterns of sensory stimulation in
+the form of patterns of light in order to characterize the function of
+the visual system <span class="citation" data-cites="hubel1959receptive hubel1962receptive">(Hubel and Wiesel
+1959, 1962)</span>. These open-loop approaches are especially adept at
+demonstrating cause and effect in &#x201C;feedforward&#x201D; chains of information
+processing within the brain.</p>
+<p>However, in many circuits and at several scales, the brain is
+connected back on itself in reciprocal loops. In these systems, the
+effect of stimulation can reverberate through a circuit blurring the
+direction of cause and effect. In addition, unobserved sources of
+variability mean responses of the brain to the identical inputs can be
+context dependent and differ from trial to trial. For such systems,
+<strong>closed-loop interventions</strong> - that is, adapting inputs to
+a system based on measurements in order to drive the system&#x2019;s state
+toward a target - have proved invaluable in isolating function and
+removing outside disturbances. Hodgkin, Huxley, and Katz used a
+closed-loop technique, voltage clamp, to dissect the recurrent ion
+channel dynamics of the action potential by functionally lesioning the
+impact of individual ion channels (<code>Fig. INTRO</code>, <span class="citation" data-cites="cole1949dynamic">Cole (1949)</span>; <span class="citation" data-cites="hodgkin1949effect">A. L. Hodgkin and Katz
+(1949)</span>; <span class="citation" data-cites="hodgkin1952measurement">A. L. Hodgkin, Huxley, and Katz
+(1952)</span>). Subsequently, dynamic-clamp experiments have used
+precise intracellular measurements and mathematical models to predict
+currents which allow for causally manipulating ongoing dynamics <span class="citation" data-cites="sharp1993dynamic prinz2004dynamic">(Sharp
+et al. 1993; Prinz, Abbott, and Marder 2004)</span>.</p>
+<p>In both of these settings, a key advantage of closed-loop control is
+that a tightly coupled set of factors are simplified by holding some
+constant and thereby removing their effect on the variables being
+studied. An alternative approach, used successfully throughout
+neuroscience is to lesion (e.g.&#xA0;chemically or surgically) inputs from
+other regions. While chemical and surgical lesion experiments have
+historically been employed to remove the influence of possible
+confounds, they are likely to dramatically disrupt circuits from their
+typical functions, making conclusions about underlying causal structure
+drawn from these experiments unlikely to hold in naturalistic settings
+<span class="citation" data-cites="chicharro2012when wolff2018promise vaidya2019lesion valero-cabre2020perturbationdriven">(Chicharro
+and Ledberg 2012; Wolff and &#xD6;lveczky 2018; Vaidya et al. 2019;
+Valero-Cabr&#xE9; et al. 2020)</span>.</p>
+<p><strong>The role of intervention in causal inference</strong> Data
+collected from experimental settings can provide more inferential power
+than observational data alone. For example, consider an experimentalist
+who is considering multiple causal hypotheses for two nodes under study,
+<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>: the hypothesis that <span class="math inline">\(x\)</span> is driving <span class="math inline">\(y\)</span>, the hypothesis that <span class="math inline">\(y\)</span> is driving <span class="math inline">\(x\)</span>, or the hypothesis that the two
+variables are being independently driven by a hidden confounder.
+Observational data revealing that <span class="math inline">\(x\)</span>
+and <span class="math inline">\(y\)</span> produce correlated
+time-series data is equally consistent with each of these three causal
+hypotheses, providing the experimentalist with no inferential power.
+Experimentally manipulating <span class="math inline">\(x\)</span> and
+observing the output of <span class="math inline">\(y\)</span>, however,
+allows the scientist to begin to establish which causal interaction
+pattern is at work. Consistent with intuition from neuroscience
+literature, a rich theoretical literature has described the central role
+of interventions in inferring causal structure from data <span class="citation" data-cites="pearl2009causality eberhardt2007interventions">(Pearl 2009;
+Eberhardt and Scheines 2007)</span>.</p>
+<p>The inferential power of interventions is depends on <em>where</em>
+stimulation is applied: interventions on some portions of a system may
+provide more information about the system&#x2019;s causal structure than
+interventions in other areas. And interventions are also more valuable
+when they more effectively set the state of the system: &#x201C;perfect&#x201D;
+closed-loop control, which completely severs a node&#x2019;s activity from its
+inputs, are often more informative than &#x201C;soft&#x201D; interventions that only
+partially control a part of the system <span class="citation" data-cites="eberhardt2007interventions">(Eberhardt and Scheines
+2007)</span>.</p>
+<p><strong>The challenge of designing intervention experiments.</strong>
+In experimental neuroscience settings, experimenters are faced with
+deciding between interventions that differ in both location and
+effectiveness. For example, stimulation can often only be applied to
+certain regions of the brain. And while experimenters may be able to
+exactly manipulate activity in some parts of the brain using closed-loop
+control, in other locations it may only be possible to apply weaker
+forms of intervention that perturb a region but do not manipulate its
+activity exactly to a desired state. In Section <a href="REF-SECTION-HERE"># impact of intervention</a>, we compare the
+effectiveness of open-loop, closed-loop, and partially-effective
+closed-loop control.</p>
+<p>Although algorithms designed to choose optimal interventions are
+often designed for simple models with strong assumptions,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>
+they provide intuition that can aid practitioners seeking to design
+real-world experiments that provide as much scientific insight as
+possible. Importantly, the informativeness of interventions is often
+independent of the algorithm used to infer causal connections, meaning
+that certain interventions can reveal portions of a circuit&#x2019;s causal
+structure that would be impossible for <em>any</em> algorithm to infer
+from only observational data <span class="citation" data-cites="das2020systematic">(Das and Fiete 2020)</span>. We similarly
+expect the results we demonstrate in this paper to both inform
+experimentalists and open avenues for further research.</p>
+<p>Despite the promise of these closed-loop strategies for identifying
+causal relations in neural circuits, however, it is not yet fully
+understood <em>when</em> more complex intervention strategies can
+provide additional inferential power, or <em>how</em> these experiments
+should be optimally designed. In this paper we demonstrate when and how
+closed-loop interventions can reveal the causal structure governing
+neural circuits. Drawing from ideas in causal inference <span class="citation" data-cites="pearl2009causality maathuis2016review chis2011structural">(Pearl
+2009; Maathuis and Nandy 2016; Chis, Banga, and Balsa-Canto
+2011)</span>, we describe the classes of models that can be
+distinguished by a given set of input-output experiments, and what
+experiments are necessary to uniquely determine specific causal
+relationships.</p>
+<p>We first propose a mathematical framework that describes how open-
+and closed-loop interventions impact observable qualities of neural
+circuits. Using this framework, experimentalists propose a set of
+candidate hypotheses describing the potential causal structure of the
+circuit under study, and then select a series of interventions that best
+allows them to distinguish between these hypotheses. Using simplified
+<em>in silico</em> networks, we explore factors that govern the efficacy
+of these types of interventions. Guided by the results of this
+exploration, we present a set of recommendations that can guide the
+design of open- and closed-loop experiments to better uncover the causal
+structure underlying neural circuits.</p>
+<h1 id="results">Results</h1>
+<p>To understand general principles of how intervention influences
+circuit inference, we simulated networks of nodes with linear
+interactions. Each node abstractly represents a population of neurons,
+and is driven by &#x201C;private&#x201D; independent Gaussian noise sources as well as
+weighted inputs from other connected nodes. Connections between nodes
+are represented, equivalently, as an adjacency matrix and a directed
+graph (see <span class="citation" data-cites="fornito2016connectivity">Fornito, Zalesky, and Bullmore
+(2016)</span>, Methods <a href="REF-SECTION-HERE"># representations
+&amp; reachability</a>). Open-loop intervention is simulated to mimic
+current injection from an external source, and by default has amplitudes
+sampled at each timestep from a Gaussian distribution (see Methods <a href="REF-SECTION-HERE"># implementing interventions</a>). We describe
+the impact of intervention in terms of its influence on the observed
+patterns of pairwise correlation, and for closed-loop control also in
+terms of its modifications to the effective connectivity of the network
+(see Methods <a href="REF-SECTION-HERE"># predicting correlation</a>).
+While this linear Gaussian network simplifies away several features of
+biophysical networks of spiking neurons, we believe it provides a
+reasonable and tractable theoretic foundation for building towards
+understanding more complex systems (see Discussion <a href="REF-SECTION-HERE"># spiking networks</a> for a discussion of
+broader modeling assumptions such as spiking and time-lagged
+interactions).</p>
+<p>These networks are simulated over time, and pairwise correlations are
+quantified as a basic measurement of statistical dependence. While more
+sophisticated inference procedures are commonly applied in neuroscience,
+studying key properties such as shaping across-node dependence should
+illustrate principles which generalize across inference methods. In
+particular, we use these networks to illustrate the process of designing
+and conducting experiments with interventions to discover neural
+circuitry. We start by walking through an example of using correlations
+to distinguish between 3 circuit hypothesis. Then we distill this
+process into a general recipe for an identification experiment. This
+recipe is then applied to a more general problem of choosing where and
+how to intervene to decided between a set of candidate circuit
+hypotheses. We demonstrate cases where closed-loop control provides
+categorical and quantitative advantages for such experiments.</p>
+<h2 id="demonstrating-interventions-and-circuit-inference">Demonstrating
+interventions and circuit inference</h2>
+<p><img src="figures/core_figure_sketches/circuit_walkthrough_3circuits_annotated.png" title="generated by /code/network_analysis/fig_3circuit_walkthrough.py"></p>
+<blockquote>
+<p><strong>Figure DEMO : Applying CLINC to distinguish a trio of
+circuits.</strong> <strong><em>(a)</em></strong> Connectivity for three
+different hypothesized circuits represented as a directed graph. This
+representation captures only the direct causal connections between nodes
+(also know as adjacency) and is what an experimenter may seek to infer
+from data. <strong><em>(b)</em></strong> Network reachability
+illustrates direct connection in black (as in <em>a</em>), but also the
+directional influence of indirect connections in grey. This
+representation forms the basis of predicting observed correlations, and
+the impact of interventions <em>(see Methods <a href="REF-SECTION-HERE"># representations &amp; reachability</a>)</em>.
+<strong><em>(c)</em></strong> Pairwise correlations under passive
+observation. For these circuit hypotheses each node is connected
+directly or indirectly to each other node, leading to an all-to-all
+pattern of correlation which makes circuit identity difficult to
+distinguish. <strong><em>(d)</em></strong> Pairwise correlations under
+open-loop intervention at node B. Interventions can increase or decrease
+pairwise correlations (illustrated with thick and thin line weights)
+which provides some information about the directions of influence within
+a circuit. <strong><em>(e)</em></strong> Effective connectivity under
+closed-loop intervention at node B. Closed-loop control effectively
+lesions the inputs to the controlled node by driving that node to a
+specified target. This modifies the causal influences in the circuit
+(dashed dark arrows), and also interrupts any paths of indirect
+influence traveling through this node (illustrated with a red X over a
+dashed grey connection). <strong><em>(f)</em></strong> Pairwise
+correlations under closed-loop intervention at node B. As a result of
+the lesioned direct and indirect connections, resulting correlations are
+sparser and more distinct across hypotheses.</p>
+</blockquote>
+<p>Consider the circuit identification problem shown in the
+<code>Figure DEMO</code>, in which an experimenter has identified three
+hypotheses for the causal structure of a three-node circuit. By
+quantifying pairwise measures of dependency, and comparing to the
+expected pattern produced under each hypothesis, this hypothesis set can
+be narrowed to only those consistent with the observed data. However,
+for some hypothesis sets and experimental conditions, several circuits
+may lead to equivalent pairwise correlations ( column (c), passive
+observation). Intervention may modify observed dependencies in a way
+which leads to more distinct outcomes, allowing the hypothesis set to be
+further reduced.</p>
+<p>These circuit hypotheses, shown as directed graphs in column (a), can
+each be represented by an adjacency matrix <em>(Methods <a href="REF-SECTION-HERE"># reachability &amp; representation</a>)</em>.
+For example, circuit <span class="math inline">\(C_1\)</span> is
+represented by an adjacency matrix in which entries <span class="math inline">\(w_{A&#x2192;B}\)</span>, <span class="math inline">\(w_{C&#x2192;A}\)</span>, and <span class="math inline">\(w_{C&#x2192;B} \neq 0\)</span>. Note that hypotheses
+<span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_3\)</span> have direct connections between nodes
+A and C. While hypothesis <span class="math inline">\(C_2\)</span> does
+not have a direct connection between these nodes an <em>indirect</em>
+connection exists through the path C <span class="math inline">\(\to\)</span> B <span class="math inline">\(\to\)</span> A <em>(shown as a solid gray arrow in
+column (b))</em>. This indirect influence can be quantified and
+predicted using the the weighted reachability matrix <span class="math inline">\(\widetilde{W}\)</span> illustrated as a directed
+graph in column (b).</p>
+<p>Because there are direct or indirect connections between each pair of
+nodes, passive observation of each hypothesized circuit would reveal
+that all nodes are correlated with each other ( column (c)). These three
+hypotheses are therefore difficult to distinguish for an experimentalist
+who performs only passive observation.</p>
+<p>Open-loop stimulation is commonly applied to help understand the
+direction of causal influence in circuits.
+<code>Fig. DEMO,  column (d)</code> shows the impact on observed
+correlations of performing open-loop control on node B. In hypothesis
+<span class="math inline">\(C_1\)</span>, node B is not a driver of
+other nodes, so open-loop stimulation at this site will introduce
+connection-independent noise which reduces its correlation with nodes
+which influence it. However, the connection from node B to A in
+hypotheses <span class="math inline">\(C_2\)</span> and <span class="math inline">\(C_3\)</span>, leads to open-loop stimulation at
+node B to add shared variance between B and its downstream targets, and
+therefore <em>increases</em> the observed correlation between nodes B
+and A (see Methods <a href="REF-SECTION-HERE"># intervention
+variance</a>). An experimenter can thus distinguish between hypothesis
+<span class="math inline">\(C_1\)</span> and the other two hypotheses by
+applying open-loop control and observing the resulting pattern of
+correlations (column (d)). However, this pattern of open-loop
+stimulation would not allow the experimenter to distinguish between
+hypotheses <span class="math inline">\(C_2\)</span> and <span class="math inline">\(C_3\)</span>.</p>
+<p>Closed-loop control (columns (e) and (f)) can provide the
+experimenter with even more inferential power. Column (e) shows the
+resulting adjacency matrix when closed-loop control is applied to node
+B. In each hypothesis, the result of this closed-loop control is to
+remove the impact of other nodes on node B. These severed connections
+are depicted in column (e) by dashed lines. Under hypothesis <span class="math inline">\(C_2\)</span>, this also results in the elimination
+of the indirect connection from node C to node A. The application of
+closed-loop control at node B thus results in a different observed
+correlation structure in each of the three circuit hypotheses (column
+(f)). This means that the experimenter can therefore distinguish between
+these circuit hypotheses by applying closed-loop control, a result not
+possible with passive observation or open-loop control.</p>
+<p>This example illustrates some key steps in circuit identification,
+and some of the differences in inferential power different
+interventional experiments provide. However, in the next section, we
+codify this process into a general set of steps or recipe for circuit
+inference. We then apply this approach more broadly to explore the
+impact of intervention in more detail.</p>
+<h2 id="steps-of-inference">Steps of inference</h2>
+
+<p><img src="figures/core_figure_sketches/methods_overview_pipeline_sketch.png"></p>
+<blockquote>
+<p><strong>Figure OVERVIEW: Components of a circuit identification
+experiment.</strong> The ground-truth or hypothesized circuit can be
+represented either as a graph depicting connections between nodes or,
+equivalently, as an adjacency matrix <span class="citation" data-cites="fornito2016connectivity">(Fornito, Zalesky, and Bullmore
+2016)</span>. While the adjacency matrix describes the direct causal
+relationships, it&#x2019;s useful to understand the net direct and indirect
+effect of nodes on each other, called reachability. This reachability
+representation is key for predicting observed correlations, as well as
+the impact of intervention. The generative model for this network
+describes how connections and sources of variance contribute to network
+dynamics, and observed time-series data (either simulated or measured
+<em>in vivo</em>). From these time-series, pairwise dependence can be
+measured through quantities like correlation coefficients. Alternately,
+in the design phase, correlations can be predicted directly from the
+intervention-adjusted reachability matrices. Circuit inference typically
+consists of thresholding or statistical tests to determine significant
+connections to reconstruct an estimated circuit.</p>
+</blockquote>
+<p>We envision the structure of a set of experiments to identify a
+circuit through intervention to include the following broad stages:</p>
+<p>First, explicitly enumerate the set of hypothesized circuits.
+Hypotheses about the structure of the circuit are often based on
+multiple sources of information including prior recordings, anatomical
+constraints revealed by tract tracing experiments, or commonly observed
+connectivity patterns in other systems. These hypotheses should be
+expressed as a set of circuits (adjacency matrices,
+<em><code>Fig. OVERVIEW circuit</code></em>) each with a probability
+representing the prior belief about the relative likelihood of these
+options. This hypothesis set can be thought of as a space of possible
+explanations for the observed data so far, which will be narrowed down
+through further intervention, observation, and inference <em>(see also
+<a href="#fig-disambig">Fig. DISAMBIG (A)</a>).</em></p>
+<p>Second, forecast patterns of correlation which could result from
+applying candidate interventions. Most algorithms for circuit inference
+quantify and threshold measures of dependence between pairs of nodes.
+Correlations are often used to measure the linear component of
+dependence between outputs of two nodes, although the approach described
+here should generalize to other nonlinear measures of dependence such as
+mutual information. As such, the observed pattern of dependence
+(correlations) in a given experiment summarizes the input to an
+inference procedure to recover an estimated circuit.<br>
+&#xA0;&#xA0;&#xA0;&#xA0;A detailed forecast of the observed outputs could be achieved by
+simulating biophysical networks across candidate interventions and
+hypothesized ground-truth circuits. However, for large networks or large
+hypothesis sets this may be expensive to compute. Instead, for the sake
+of rapid iteration in designing interventions, we propose using the
+reachability representation of a linear (or linearized) network to
+succinctly and efficiently predict the observed correlationsacross
+nodes. The methods described in Methods <a href="REF-SECTION-HERE">#
+predicting correlations</a> allow us to anticipate how open and
+closed-loop interventions across nodes in the network might increase,
+decrease, or sever dependencies between node outputs (<em>see also
+<code>Fig. OVERVIEW intervention, prediction</code></em>).</p>
+<p>Third, assess distinguishability of patterns of correlation across
+hypothesized circuits and interventions. A useful experiment is one
+which produces highly distinct outcomes when applied to each of the
+hypothesized circuits, while an experiment which produces the same
+outcome across all hypothesized circuits would be redundant. Before
+collecting experimental data we do not know the ground-truth circuit
+with certainty, therefore it is useful to understand the range of
+possible observed patterns of dependence. To distill this range of
+possibilities to a make a decision about which intervention to apply, it
+is also useful to summarize the expected information we would gain about
+circuit identity across the range of hypotheses (e.g.&#xA0;across columns of
+<a href="#fig-disambig">Fig. DISAMBIG)</a>. &#xA0;&#xA0;&#xA0;&#xA0;While the magnitudes of
+correlation will depend on particular values of system parameters, here
+we focus on only the presence or absence of a significant correlation
+between two nodes, as well as whether correlations increase or decrease
+from their baseline. In this way, we build towards an understanding of
+the categorical impact of intervention on observed pairwise dependence,
+which should be general across particular parameter values or algorithms
+for circuit inference. The set of patterns of pairwise dependences
+across the hypothesis set form an &#x201C;intervention-specific fingerprint.&#x201D;
+This fingerprint summarizes the outcomes of a particular experiment with
+intervention, and therefore shows which hypotheses are observationally
+equivalent under this observation. To quantify this hypothesis
+distinguishability based on the diversity of a set of possible outcomes,
+we compute the Shannon entropy over the distribution of patterns of
+dependence (See Methods <a href="../section_content/methods_entropy.md">#
+across-hypothesis entropy</a>). The maximum achievable entropy is simply
+the logarithm of the number of hypotheses and would correspond to an
+experiment wherein the outcome is sufficient to uniquely determine the
+correct hypothesis from the set.</p>
+<p>Fourth, select intervention type and location.We describe briefly a
+greedy approach for choosing an effective single-site intervention, but
+extending the approach above to predict joint entropy would allow a
+joint or sequential experimental design which could be optimized over
+multiple interventions <em>(see Discussion)</em>. For selecting the
+first intervention type and location, we propose choosing the
+intervention which results in the maximum expected circuit information
+across the prior hypothesis set, that is, the intervention type and
+location with the highest entropy (see Methods <a href="../section_content/methods_entropy_selection.md"># selecting
+intervention</a>). On subsequent iterations, an updated prior over
+hypotheses should be used to select the next intervention.</p>
+<p>Fifth, apply intervention, collect data, and estimate between-node
+dependence. Using entropy as a metric to select a useful intervention,
+the next step is to conduct that interventional experiment, in-vivo or
+in a detailed simulation. Such an experiment may reveal outputs patterns
+not fully captured by the linearized reachability representation.
+Time-series observations from each node are used to compute between-node
+measures of dependence such as pairwise correlations.</p>
+<p>Finally, given the observed pairwise dependencies, the last step is
+to form a posterior belief over circuit hypotheses. With prior beliefs
+about the hypothesis set, and pairwise dependencies quantified under
+intervention, these can be combined in a Bayesian fashion to form a
+posterior distribution over circuit hypotheses. This step is likely to
+be highly application-specific and depend strongly on the goals for
+inference (<code>Fig. OVERVIEW, inference</code>). A simple strategy
+would be to compare thresholded empirical correlation matrix to the
+discretized predicted correlations under each hypothesis given the
+specified intervention. Any hypothesized circuits with correlations
+structure inconsistent with the observed correlations could be
+eliminated from the candidate hypothesis set (see Methods <a href="../section_content/methods_circuit_estimates.md"># circuit
+estimates</a>).<!-- NOTE: see also [# determining directionality from changes in correlation](/section_content/methods_coreach_sign.md) -->
+&#xA0;&#xA0;&#xA0;&#xA0;More generally, an iterative identification procedure may update the
+prior for the next round from the posterior distribution over
+hypotheses. At a predefined convergence criteria, a <em>maximum a
+posteriori</em> (MAP) estimate of the circuit identity can be estimated
+and iterations can be stopped (see Methods <a href="../section_content/methods_entropy_selection.md"># estimate
+convergence</a>). If this convergence criteria is not met, the steps of
+inference outlined in this section can be repeated with the updated
+prior.</p>
+<h2 id="intervening-provides-categorical-improvements-in-inference-power-beyond-passive-observation">Intervening
+provides categorical improvements in inference power beyond passive
+observation</h2>
+<p>In the previous sections, we established how open-loop interventions
+modify observed pairwise correlations, and how closed-loop interventions
+modify a circuit&#x2019;s functional connectivity. Figure <code>ID-DEMO</code>
+demonstrated a simple example of how removing connections in a circuit
+can sometimes reveal more distinct patterns of dependence, and
+distinguish hypotheses which are indistinguishable through passive
+observation and open-loop control. Here, we systematize this approach to
+choose an appropriate intervention to narrow down a hypothesis set. The
+following sections will address how to evaluate the relative
+effectiveness of a particular intervention.
+<!-- NOTE: focusing on step 3 of steps of inference.--> Multiple
+intervention types and locations are compared for a larger set of
+circuit hypotheses to build towards general principles for where and how
+to intervene.</p>
+<p>While the ground truth connectivity is rarely available during
+experiments, it is valuable to explicitly lay out our prior hypothesis
+in the form of a directed graph or adjacency matrix. Panel A of
+<code>Fig. DISAMBIG</code> shows the adjacency and reachability of 6
+candidate circuit hypotheses. <code>Row Ba</code> illustrates the
+presence of pairwise correlation for each hypotheses under passive
+observation. While the magnitudes of correlation will depend on
+particular values of system parameters, here we focus on only the
+presence or absence of a significant correlation between two nodes, as
+well as whether correlations increase or decrease from their baseline.
+In this way, we build towards an understanding of the categorical impact
+of intervention on observed pairwise dependence, which should be general
+across particular parameter values or algorithms for circuit inference.
+<em>(More concrete, quantitative effects will be explored in the next
+section).</em></p>
+<p><a id="fig-disambig" href></a></p>
+<p><img src="figures/core_figure_sketches/circuit_entropy_sketch.png"></p>
+<blockquote>
+<p><strong>Figure DISAMBIG: Interventions narrow the set of hypotheses
+consistent with observed correlations.</strong><br>
+<strong>(A)</strong> Directed adjacency matrices represent the true and
+hypothesized causal circuit structure. Directed reachability matrices
+represent the direct <em>(black)</em> and indirect <em>(grey)</em>
+influences in a network. Notably, different adjacency matrices can have
+equivalent reachability matrices making distinguishing between similar
+causal structures difficult, even with open-loop control.
+<strong>(B)</strong> Correlations between pairs of nodes.
+<strong>a)</strong> Under passive observation, the direction of
+influence is difficult to ascertain. <strong>(B b-g)</strong> The impact
+of open-loop intervention at each of the nodes in the network is
+illustrated by modifications to the passive correlation pattern. Thick
+orange<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> edges denote correlations which
+increase above their baseline value with high variance open-loop input.
+Thin blue edges denote correlations which decrease, often as a result of
+increased connection-independent &#x201C;noise&#x201D; variance in one of the
+participating nodes. Grey edges are unaffected by intervention at that
+location. <strong>(C)</strong> Across-circuit entropy for each
+intervention type and location. Grey lines correspond to a single
+intervention location. Circle markers represent the mean entropy for a
+given intervention type across all intervention locations. Green dotted
+lines represents the maximum achievable entropy for this hypothesis set.
+<strong>(D)</strong> Distributions of patterns of pairwise correlation
+across hypotheses, for each intervention location and type.
+Distributions with more observed patterns, and more uniform
+probabilities correspond to experiments which reveal more information to
+narrow the set of candidate hypotheses.</p>
+</blockquote>
+<p>The set of patterns of pairwise dependences across the hypothesis set
+form an &#x201C;intervention-specific fingerprint&#x201D; (i.e.&#xA0;a single row of
+<code>Fig. DISAMBIG</code>). This fingerprint summarizes the outcomes of
+a particular experiment with intervention, and therefore shows which
+hypotheses are observationally equivalent under this observation. If
+this fingerprint contains many examples of the same pattern (such as the
+all-to-all correlation pattern seen under passive observation,
+<code>Fig. DISAMBIG Ba</code>), many different circuits correspond to
+the same observation, and that experiment contributes low information to
+distinguish between hypotheses. On the other hand, a maximally
+informative experiment would result in unique observations corresponding
+to each hypothesis. Observations from such an experiment would be
+sufficient to narrow the inferred circuit down to a single
+hypotheses.</p>
+<p>To quantify this hypothesis ambiguity based on the diversity of a set
+of possible outcomes, we compute the Shannon entropy over the
+distribution of patterns (See Methods <a href="#methods-entropy">entropy</a>). Because our hypotheses set
+contains circuits with relatively dense connectivity, 5 of the 6
+hypotheses result in all-to-all correlations, with the final hypothesis
+resulting in a unique V-shaped pattern of correlation (A~B, and A~C,
+<code>Fig. DISAMBIG row Ba</code>). The entropy of this distribution is
+0.65 bits. To interpret this entropy value, it is useful to understand
+the maximum achievable entropy, which is simply the logarithm of the
+number of hypotheses. In this case, <span class="math inline">\(H_{max}
+= \log_2(6)\approx 2.58 \text{bits}\)</span>, which indicates the
+information gained from passive observation is 25% efficient (<span class="math inline">\(H_{passive} / H_{max} \approx 0.25\)</span>).</p>
+<p>As discussed in Methods <a href="../section_content/methods_coreach_sign.md"># reachability &amp;
+correlation direction</a>, high-variance open-loop intervention tends to
+increase correlations between pairs of nodes downstream of the
+intervention, and decreases correlations when only one node is
+downstream of the stimulus location. This can produce more distinct,
+hypothesis-specific patterns of pairwise dependence.
+<code>Fig. DISAMBIG, Bb</code> shows how open-loop intervention at node
+A distinguishes hypotheses <span class="math inline">\(\{C_1,C_2,C_3\}\)</span> (where node A has
+reachability to nodes B and C) from hypotheses <span class="math inline">\(\{C_4,C_5\}\)</span> (where node A can only reach
+node C). This increased distinguishability is reflected in the
+distribution of correlation patterns in the fingerprint, and the entropy
+of that distribution <span class="math inline">\((H_{OL&#x2192;A} \approx 1.46
+\text{bits}, H_{OL&#x2192;A}/H_{max} = 0.56)\)</span>. In expectation, this
+intervention provides more information about the hypothesis set than
+passive observation alone.</p>
+<p>For some sets of circuit hypotheses, the capability of closed-loop
+intervention to remove indirect connections uncovers distinct patterns
+of resulting correlations that would otherwise be equivalent under other
+interventions. Because <span class="math inline">\(C_4\)</span> and
+<span class="math inline">\(C_5\)</span> have equivalent reachability
+matrices, their pairwise correlations will be similar even under
+open-loop intervention. But in <code>Fig. DISAMBIG Bb</code>,
+closed-loop intervention at node A, severs the inputs to this node.
+Under hypothesis <span class="math inline">\(C_4\)</span>, nodes C and B
+remain correlated through their direct connection, however, under <span class="math inline">\(C_5\)</span>, severing inputs to A also severs the
+indirect influence of C on B, which is sufficient to remove the
+correlation between nodes C and B. The distribution of observed patterns
+<code>(Fig. DISAMBIG, Dc)</code>, contains more distinct entries, and
+leads to a higher across-hypothesis entropy of <span class="math inline">\(H_{CL&#x2192;A} \approx 1.79 \text{bits},
+H_{CL&#x2192;A}/H_{max} = 0.69\)</span>.</p>
+<p>This example highlighted a location for intervention where
+closed-loop control provides a categorical for distinguishing circuit
+hypotheses above open-loop control (and passive observation). This
+advantage is notable, in that it represents an improvement in circuit
+estimation bias which would be unlikely to be mitigated through
+collecting more data. However, <code>Fig. DISAMBIG</code> further
+highlights the importance of not only intervention <em>type</em>, but
+also intervention <em>location</em> in determining successful circuit
+inference. For a given intervention type, different locations for
+delivering stimuli result in categorically different
+hypothesis-narrowing information <em>(e.g.&#xA0;<span class="math inline">\(H(OL_B) &lt; H(OL_A) &lt; H(OL_C)\)</span>,
+<code>Fig. DISAMBIG Column D</code>)</em>. On the other hand, for
+interventions at nodes B and C, open-loop and closed-loop control result
+in identical correlation fingerprints for this hypothesis set &#x2014;
+closed-loop control at <em>these</em> locations does not provide a
+categorical benefit beyond the information learned through open-loop
+control. This equivalence between open-loop and closed-loop
+interventions arises in cases where severing inputs at the target node
+does not interrupt an indirect connection which otherwise makes circuits
+in the hypothesis set ambiguous.</p>
+<p>To summarize, by understanding the relationship between circuit
+structure, the effect of interventions, and changes to the observed
+patterns of correlation, we were able to demonstrate the relative
+utility of passive observation, open-loop control, and closed-loop
+control. Open-loop control improves the capacity to distinguish circuits
+by increasing the diversity of outcomes as changes in correlations
+reveal directionality of influence. In addition, closed-loop control is
+capable of providing a categorical improvement in the ability to
+distinguish between and narrow down a set of competing hypotheses. It
+results in distinct patterns of observed dependence in additional cases
+even with equivalent reachability by severing ambiguous indirect
+connections. These categorical differences in across-circuit entropy are
+likely to reflect fundamental differences in the best-case conditions
+for evaluating similar hypotheses, regardless of data volume or
+algorithms used for circuit inference. However, the utility of a given
+intervention does depend strongly on the location of control relative to
+paths in the hypothesized circuits. Hypothesis sets where closed-loop is
+likely to outperform open-loop control would consist of similar
+circuits, where direct and indirect connections are difficult to
+distinguish, such as those with recurrent loops. In highly sparse or
+largely-feedforward circuits, open-loop and closed-loop intervention are
+likely to result in similar circuit information.</p>
+<h2 id="impact-of-intervention-location-and-variance-on-pairwise-correlations">Impact
+of intervention location and variance on pairwise correlations</h2>
+<p>While a primary advantage of closed-loop intervention for circuit
+inference is its ability to functionally lesion indirect connections,
+another, more nuanced advantage lies in its capacity to bidirectionally
+manipulate output variance. While the variance of an open-loop stimulus
+can be titrated to adjust the output variance at a node, in general, an
+open-loop stimulus cannot reduce this variance below variance arising
+from other sources. That is, if the system is linear with Gaussian
+noise, each node&#x2019;s intrinsic variability, the effect of other nodes, and
+unobserved disturbances together set a lower bound on the total output
+variance of that node in the presence of additive open-loop stimulation
+(See Methods <a href="../section_content/methods_intervention_variance.md"># variance
+&amp; intervention</a>).</p>
+<p>We have shown that closed-loop interventions provide more flexible
+control over output variance of nodes in a network, and that shared and
+independent sources of variance determine pairwise correlations between
+node outputs (Methods <a href="../section_content/methods_predicting_correlation.md"># predicting
+correlation</a>). Together, this suggests closed-loop interventions may
+allow us to shape <em>pairwise correlations</em> across a circuit with
+more degrees of freedom, which may result in more effective circuit
+inference.</p>
+<p>One application of this increased flexibility is to increase
+correlations associated with pairs of directly connected nodes, while
+decreasing &#x201C;spurious&#x201D; correlations associated with pairs of nodes
+without a direct connection (but which are perhaps influenced by a
+common input, or are connected only indirectly). Such an approach would
+effectively increase the &#x201C;signal-to-noise ratio&#x201D; of causal,
+connection-related signal in the observed correlations. While
+&#x201C;correlation does not imply causation,&#x201D; intervention may decrease the
+gap between the two.</p>
+<p>Our hypothesis is that this shaping of pairwise correlations will
+result in reduced false positive edges in inferred circuits,
+&#x201C;un-blurring&#x201D; the indirect associations that would otherwise confound
+circuit inference. However care must be taken, as this strategy relies
+on a hypothesis for the ground truth adjacency and may also result in a
+&#x201C;confirmation bias&#x201D; as new spurious correlations can be introduced
+through closed-loop intervention.</p>
+<p><a id="fig-var" href></a></p>
+<p><img src="figures/core_figure_sketches/fig_var_SNR_sketch.png" width="500">
+<!-- "generated by sweep_gaussian_SNR.py") --></p>
+<blockquote>
+<p><strong>Figure VAR: Location, variance, and type of intervention
+shape pairwise correlations.</strong> A three-node linear Gaussian
+network is simulated with a connections from A to B and from B to C.
+Open-loop interventions <em>(blue)</em> consist of independent Gaussian
+inputs with a range of variances <span class="math inline">\(\sigma^2_S\)</span>. Closed-loop interventions
+<em>(orange)</em> consist of feedback control with a time-varying target
+drawn from an an independent Gaussian with a range of variances.
+Incomplete closed-loop interventions result in node outputs which are a
+mix of the control target and network-driven activity.
+<strong>(A)</strong> Pairwise correlations, visualized with varied line
+thickness, at a range of intervention variances for open-loop control
+(upper) and closed-loop control (lower) at node B. <strong>(B)</strong>
+Intervention &#x201C;upstream&#x201D; of the connection B&#x2192;C increases the correlation
+<span class="math inline">\(r^2(B,C)\)</span>. <strong>(C)</strong> The
+same intervention decreases or eliminates the correlation <span class="math inline">\(r^2(A,C)\)</span> which arises from an indirect
+connection.</p>
+</blockquote>
+<p>Figure VAR demonstrates the relative dynamic range of pairwise
+correlations achievable under passive observation, open-, and
+closed-loop intervention. A simple three-node linear Gaussian chain
+(A&#x2192;B&#x2192;C) is simulated with interventions at the middle node B. Open-loop
+intervention with Gaussian inputs, and closed-loop control using a
+Gaussian target are applied with their variance <span class="math inline">\(\sigma^2_{S_B}\)</span> swept across a range.</p>
+<p>Under passive observation, correlations are determined by intrinsic
+properties of the network such as network weights and intrinsic node
+variances. With open-loop intervention of sufficiently high variance,
+the impact of increasing variance at a particular node can be observed,
+but the dynamic range of achievable correlations is bounded by being
+unable to reduce a node&#x2019;s variance below its baseline level. With
+closed-loop control, the bidirectional manipulation of the output
+variance for a node means a much wider range of correlations can be
+achieved <a href="#fig-var">(Fig. VAR, B)</a>, which can be used to
+better separate direct from indirect influences.</p>
+<p>In this example, correlations between B and C are driven by a direct
+connection in the network which is &#x201C;downstream&#x201D; of the intervention at
+node B. <code>Fig. VAR B</code> demonstrates that high variance
+interventions will tend to increase the observed correlation <span class="math inline">\(r^2(B,C)\)</span> by elevating the
+connection-related signal present in the output of C. On the other hand,
+only an indirect connection exists from node A to node C (via node B).
+<code>Fig. VAR C</code> demonstrates an interaction between intervention
+location and indirect connectivity. Interventions affecting node B
+influence the output of node C, but not node A, acting as noise rather
+than signal from the perspective of <span class="math inline">\(r^2(A,C)\)</span> <em>(see Methods <a href="../section_content/methods_coreach_sign.md"># reachability &amp;
+correlation direction</a>)</em>. Together, both of these effects lead to
+an increase in the correlation associated with the direct connection
+<span class="math inline">\(r^2(B,C)\)</span> and a decrease in the
+correlation associated with the indirect connection <span class="math inline">\(r^2(A,C)\)</span> as a function of increasing
+intervention variance. An inference approach based on thresholding or
+statistical tests of strength of observed dependence would be able to
+separate direct from indirect effects more efficiently as these
+quantities diverge. Moreover, this contrast between direct and indirect
+correlations becomes more stark for closed-loop intervention which
+severs the influence of node A on node C, dropping the associated
+correlation to zero <code>(Fig. VAR C)</code>. Notably, if a direct
+connection from A to C existed in this circuit, the same closed-loop
+intervention at node B would reduce but not eliminate <span class="math inline">\(r^2(A,C)\)</span>, thus closed-loop control can be
+used to evaluate the necessity of an intermediate node in mediating the
+influence of a source node on a downstream target.</p>
+<p>So far, closed-loop control has been discussed and simulated in its
+ideal form, that is with the ability to perfectly set the activity of a
+node to a target value or trajectory. In practical settings, closed-loop
+control must react in real-time based on noisy feedback, and therefore
+will only ever be partially effective. It is important to understand how
+sensitive our previous results are to the effectiveness of control, and
+evaluate whether partially effective closed-loop intervention still
+provides benefits associated with ideal closed-loop. To do this, we
+modified our simulated intervention to interpolate between its output
+under ideal control, and its uncontrolled output (See Methods <a href="../section_content/methods_interventions.md"># simulating
+interventions</a>). We find that partially effective control results in
+a intervention-variance to correlation curve between ideal closed-loop
+and open-loop interventions, although shifted somewhat
+<em>(<code>Fig. VAR B</code>, 50% control effectiveness)</em>. As
+expected, highly effective closed-loop control
+<em>(<code>Fig. VAR C</code>, 80% control effectiveness)</em> performs
+similarly to ideal control, suggesting that earlier results for
+idealized control may provide reasonable predictions for practical
+experiments with imperfect, but effective controller performance.</p>
+<p>In this section, we demonstrated the interaction between intervention
+location, intervention variance, and pairwise correlations. This effect
+of intervention location on pairwise correlations can be predicted in
+order to optimize design of experiments <em>(see Methods <a href="../section_content/methods_coreach_sign.md"># reachability &amp;
+correlation direction</a>)</em>. We demonstrated a quantitative
+advantage of closed-loop intervention in bidirectional manipulation of
+node variance, and thereby flexibly shaping pairwise correlations. This
+increased flexibility allows for distinguishing direct and indirect
+causes with stronger signal-to-noise ratio which may facilitate more
+data-efficient circuit inference.</p>
+<h1 id="discussion">Discussion</h1>
+<p><code>WORK IN PROGRESS, likely to be significantly rewritten</code></p>
+<p>Closed-loop control has the disadvantages of being more complex to
+implement and requires specialized real-time hardware and software,
+however it has been shown to have multifaceted usefulness in clinical
+and basic science applications. Here we focused on two advantages in
+particular; First, the capacity for functional lesioning which
+(reversibly) severs inputs to nodes and second, closed-loop control&#x2019;s
+capacity to precisely shape variance across nodes. Both of these
+advantages facilitate opportunities for closed-loop intervention to
+reveal more circuit structure than passive observation or even open-loop
+experiments.</p>
+<p>Starting with linear Gaussian assumptions, this work laid a broad
+framework for anticipating the impact of various interventions on
+observed patterns of dependence. Finally, we evaluated predicted and
+empirical performance for refining a set of hypothesized circuits and
+discriminated observed patterns of covariance. In particular, this work
+reinforces the value of analyzing the consequences of unforeseen
+confounds and starts to integrate tools from causal inference and graph
+theory to do so. Our results suggest that closed-loop control is not a
+one-size-fits-all panacea, but rather it acts like a scalpel, providing
+a precise tool for disentangling cause in cases dominated by indirect
+and reciprocal influence.</p>
+<p>In studying the utility of various intervention for circuit inference
+we arrived at a few general guidelines which may assist experimental
+neuroscientists in designing the right intervention for the question at
+hand. First, more ambiguous hypotheses sets require &#x201C;stronger&#x201D;
+interventions to distinguish. Open-loop intervention may be sufficient
+to determine directionality of functional relationships, but as for
+hypothesis sets containing similar circuits, closed-loop intervention
+reduces the hypothesis set more efficiently. Second, we find that dense
+networks with strong reciprocal connections tend to result in many
+equivalent circuit hypotheses, but that well-placed closed-loop control
+can disrupt loops and simplify correlation structure to be more
+identifiable. Recurrent loops are a common feature of neural circuit,
+and represent key opportunities for successful closed-loop intervention.
+The same is true for circuits with strong indirect correlations.</p>
+<p>The biggest limitation of this work is that it does not yet close the
+gap to experiments for identifying circuits from spiking data. Two
+pillars of this more detailed evaluation are closed-loop control in
+networks of spiking semi-biophysical neuron models, and inference
+methods suited for assessing causal strength from time-series with
+delay. Critically, in a spiking model, mean activity levels and output
+variance are no longer independent. For instance, in a spiking model,
+strong inhibition lowers the mean activity level which suppresses output
+variance.</p>
+<p>While the work presented here highlights a step-by-step procedure for
+narrowing a set of hypothesized circuits, we have only begun to quantify
+the value of a single-site intervention for a single experiment. Many
+techniques exist for active learning and sequential experimental design,
+and could be readily applied to this problem of circuit influence. At a
+high level, this can be thought of as playing chess by thinking multiple
+moves into the future rather than choosing a move which optimizes only
+the board state for the next move. In addition, a prudent next step
+would be to assess the value of multiple interventions through
+quantifying their joint entropy. A few case studies in the
+<code>supplementary material</code> demonstrate situations where
+single-site closed-loop control alone is insufficient to distinguish a
+pair of circuits, but <em>is sufficient</em> as a preliminary step to
+simplify functional interactions when paired with additional open-loop
+stimulation.</p>
+<hr>
+<h1 id="methods">Methods</h1>
+<h2 id="sec:methods-sim">Modeling network structure and dynamics</h2>
+<p><code>WORK IN PROGRESS</code></p>
+<p>We sought to understand both general principles (abstracted across
+particulars of network implementation) as well as some practical
+considerations introduced by dealing with spikes and synapses. We
+simulate a network of nodes with Gaussian noise sources, linear
+interactions, and linear dynamics.</p>
+<p>&#x2026;</p>
+<h2 id="sec:methods-intervention">Implementing interventions</h2>
+<p>To study the effect of various interventions we simulated inputs to
+nodes in a network. In the <strong>passive setting</strong>, nodes
+receive additive drive from <em>private</em> Gaussian noise sources
+common to all neurons within a node, but independent across nodes. The
+variance of this noise is specified by <span class="math inline">\(\sigma_i\)</span>.</p>
+<p>To emulate <strong>open-loop intervention</strong> we simulated
+current injection from an external source. This is intended to represent
+experiments involving stimulation from microelectrodes or optogenetics
+<em>(albeit simplifying away any impact of actuator dynamics)</em>. By
+default, open-loop intervention is specified as white noise sampled at
+each timestep from a Gaussian distribution with mean and variance <span class="math inline">\(\mu_{intv.}\)</span> and <span class="math inline">\(\sigma^2_{intv.}\)</span></p>
+<p><span class="math display">\[
+I_{open-loop} \sim \mathcal{N}(\mu_{intv.},\,\sigma^{2}_{intv.})\\
+\]</span> Ignoring the effect of signal means in the linear Gaussian
+setting: <span class="math display">\[
+X_k = f(\sigma^2_m, \sigma^{2}_{intv.})
+\]</span> <code>per-node indexing needs resolving here also</code></p>
+<p>Ideal <strong>closed-loop control</strong> is able to overwrite the
+output of a node, setting it precisely to the specified target <span class="math inline">\(T\)</span>. <span class="math display">\[
+\begin{aligned}
+T &amp;\sim \mathcal{N}(\mu_{intv.},\,\sigma^{2}_{intv.}) \\
+I_{closed-loop} &amp;= f(X, T)  \\
+X_k | CL_{k} &amp;\approx T
+\end{aligned}
+\]</span> Note that in this setting, the <em>output</em> of a node <span class="math inline">\(X_k\)</span> under closed-loop control is
+identical to the target, therefore <span class="math display">\[
+X_k | CL_{k} = f(\sigma^{2}_{intv.}) \perp \sigma^2_m
+\]</span> In practice, near-ideal control is only possible with very
+fast measurement and computation relative to the network&#x2019;s intrinsic
+dynamics, such as in the case of dynamic clamp <span class="citation" data-cites="sharp1993dynamic prinz2004dynamic">(Sharp et al. 1993;
+Prinz, Abbott, and Marder 2004)</span>. To demonstrate a broader class
+of closed-loop interventions (such as those achievable with
+extracellular recording and stimulation), imperfect &#x201C;partial&#x201D; control is
+simulated by linearly interpolating the output of each node between the
+target <span class="math inline">\(T\)</span> and the uncontrolled
+output based on a control effectiveness parameter <span class="math inline">\(\gamma\)</span></p>
+<p><span class="math display">\[
+X | CL_{k, \gamma} = \gamma T + (1-\gamma) X
+\]</span></p>
+<h2 id="sec:methods-predict-overview">Predicting correlation
+structure</h2>
+<h3 id="sec:methods-reach">Representations &amp; reachability</h3>
+<p>Different mathematical representations of circuits can elucidate
+different connectivity properties. For example, consider the circuit
+<span class="math inline">\(A \rightarrow B \leftarrow C\)</span>. This
+circuit can be modeled by the dynamical system <span class="math display">\[
+\begin{cases}
+\dot{x}_A &amp;= f_A(e_A) \\
+\dot{x}_B &amp;= f_B(x_A, x_C, e_B) \\
+\dot{x}_C &amp;= f_C(e_C),
+\end{cases}
+\]</span> where <span class="math inline">\(e_A\)</span>, <span class="math inline">\(e_B\)</span>, and <span class="math inline">\(e_C\)</span> represent independent private noise
+sources for each node.</p>
+<p>When the system is linear we can use matrix notation to describe the
+impact of each node on the others <span class="citation" data-cites="fornito2016connectivity">(Fornito, Zalesky, and Bullmore
+2016)</span>: <span class="math display">\[
+\mathbf{x}_{t+1} = \mathbf{W x}_t + \mathbf{Se}_t,
+\]</span> where <span class="math inline">\(\mathbf{x_t} \in
+\mathbb{R}^p\)</span> denotes the state of each of the <span class="math inline">\(p\)</span> nodes at time <span class="math inline">\(t\)</span>, <span class="math inline">\(\mathbf{e_t} \in \mathbb{R}^p\)</span> denotes the
+instantiation of each node&#x2019;s (independent and identically-distributed)
+private noise variance at time <span class="math inline">\(t\)</span>,
+and <span class="math inline">\(\mathbf{S} \in \mathbb{R}^{p \times
+p}\)</span> represents a diagonal matrix where entries <span class="math inline">\(s_{i} = \mathbf{S}_{ii}\)</span> represent the
+noise variance at node <span class="math inline">\(i\)</span>.</p>
+<p><span class="math inline">\(\mathbf{W}\)</span> represents the
+<em>adjacency matrix</em>:</p>
+<p><span class="math display">\[
+\mathbf{W} = \begin{bmatrix}
+    w_{A&#x2192;A} &amp; w_{B&#x2192;A} &amp; w_{C&#x2192;A} \\
+    w_{A&#x2192;B} &amp; w_{B&#x2192;B} &amp; w_{C&#x2192;B} \\
+    w_{A&#x2192;C} &amp; w_{B&#x2192;C} &amp; w_{C&#x2192;C}
+\end{bmatrix}.
+\]</span> The adjacency matrix captures directional first-order
+connections in the circuit. The entries of <span class="math inline">\(\mathbf{W}_{ij} = w_{j&#x2192;i}\)</span> describe how
+activity in one node <span class="math inline">\(x_j\)</span> changes in
+response to activity in another <span class="math inline">\(x_i\)</span>. For example, the circuit <span class="math inline">\(A \rightarrow B \leftarrow C\)</span>, would be
+representted by <span class="math inline">\(w_{A&#x2192;B} \neq 0\)</span> and
+<span class="math inline">\(w_{C&#x2192;B} \neq 0\)</span>.</p>
+<p><strong>Reachability.</strong> Our goal is to reason about the
+relationship between underlying causal structure (which we want to
+understand) and the correlation or information shared by pairs of nodes
+in the circuit (which we can observe). Quantities based on the adjacency
+matrix and weighted reachability matrix bridge this gap, connecting the
+causal structure of a circuit to the correlation structure its nodes
+will produce.</p>
+<p>The directional <span class="math inline">\(k^{\mathrm{th}}\)</span>-order connections in the
+circuit are similarly described by the matrix <span class="math inline">\(\mathbf{W}^k\)</span>, so the <em>weighted
+reachability matrix</em> <span class="math display">\[
+    \mathbf{\widetilde{W}} = \sum_{k=0}^{\infty} \mathbf{W}^k
+\]</span> describes the total impact &#x2013; through both first-order (direct)
+connections and higher-order (indirect) connections &#x2013; of each node on
+the others <span class="citation" data-cites="skiena2011transitive">(Skiena 2011)</span>. Whether node
+<span class="math inline">\(j\)</span> is &#x201C;reachable&#x201D; from node <span class="math inline">\(i\)</span> by a direct or indirect connection is
+thus indicated by <span class="math inline">\(\mathbf{\widetilde{W}}_{j&#x2192;i} \neq 0\)</span>, with
+the magnitude of <span class="math inline">\(\mathbf{\widetilde{W}}_{j&#x2192;i}\)</span> indicating
+sensitive node <span class="math inline">\(j\)</span> is to a change in
+node <span class="math inline">\(i\)</span>.</p>
+<p>This notion of reachability, encoded by the pattern of nonzero
+entries in <span class="math inline">\(\mathbf{\widetilde{W}}\)</span>,
+allows us to determine when two nodes will be correlated (or more
+generally, contain information about each other). Moreover, as described
+in sections <a href="#sec:methods-predict-corr"># predicting
+correlation</a>, <a href="#sec:methods-intervention-var"># intervention
+and variance</a> quantities derived from these representations can also
+be used to describe the impact of open- and closed-loop interventions on
+circuit behavior, allowing us to quantitatively explore the impact of
+these interventions on the identifiability of circuits.</p>
+<h3 id="sec:methods-predict-corr">Predicting correlation structure</h3>
+<p>A linear Gaussian circuit can be described by 1) the variance of the
+Gaussian private (independent) noise at each node, and 2) the weight of
+the linear relationships between each pair of connected nodes. Let <span class="math inline">\(\mathbf{s} \in \mathbb{R}^p\)</span> denote the
+variance of each of the <span class="math inline">\(p\)</span> nodes in
+the circuit, and <span class="math inline">\(\mathbf{W} \in
+\mathbb{R}^{p \times p}\)</span> denote the matrix of connection
+strengths such that <span class="math display">\[\mathbf{W}_{j&#x2192;i} =
+\mathbf{W}_{ij}= \text{strength of $i \to j$ connection}.\]</span></p>
+<p>Note that <span class="math inline">\(\left[ \mathbf{Ws} \right]_
+{j}\)</span> gives the variance at node <span class="math inline">\(j\)</span> due to length-1 (direct) connections,
+and more generally, <span class="math inline">\(\left[ \mathbf{W}^k
+\mathbf{s} \right]_ j\)</span> gives the variance at node <span class="math inline">\(j\)</span> due to length-<span class="math inline">\(k\)</span> (indirect) connections. The
+<em>total</em> variance at node <span class="math inline">\(j\)</span>
+is thus <span class="math inline">\(\left[ \sum_{k=0}^{\infty}
+\mathbf{W}^k \mathbf{s} \right]_j\)</span>.</p>
+<p>Our goal is to connect private variances and connection strengths to
+observed pairwise correlations in the circuit. Defining <span class="math inline">\(\mathbf{X} \in \mathbb{R}^{p \times n}\)</span> as
+the matrix of <span class="math inline">\(n\)</span> observations of
+each node, we have<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span class="math display">\[
+\begin{aligned}
+    \Sigma = \mathrm{cov}(\mathbf{X}) &amp;= \mathbb{E}\left[\mathbf{X
+X}^T\right] \\
+    &amp;= (I-\mathbf{W})^{-1} \mathrm{diag}(\mathbf{S})
+(I-\mathbf{W})^{-T} \\
+    &amp;= \mathbf{\widetilde{W}} \mathrm{diag}(\mathbf{S})
+\widetilde{W}^T,
+\end{aligned}
+\]</span></p>
+<p>We can equivalently write <span class="math inline">\(\Sigma_{ij} =
+\sum_{k=1}^p \mathbf{\widetilde{W}}_ {ik} \mathbf{\widetilde{W}}_ {jk}
+s_k\)</span>.</p>
+<p>Under passive observation, the squared correlation coefficient can
+thus be written as <span class="math display">\[
+\begin{aligned}
+    r^2(i,j) &amp;= \frac{\Sigma_{ij}}{\Sigma_{ii} \Sigma_{jj}} \\
+    &amp;= \frac{\left( \sum_{k=1}^p \mathbf{\widetilde{W}}_ {ik}
+\mathbf{\widetilde{W}}_ {jk} \mathbf{s}_ k \right)^2}{\left(\sum_{k=1}^p
+\mathbf{\widetilde{W}}_ {ik}^2 \mathbf{s}_ k\right)\left(\sum_{k=1}^p
+\mathbf{\widetilde{W}}_ {jk}^2 \mathbf{s}_ k\right)}.
+\end{aligned}
+\]</span></p>
+<p>This framework also allows us to predict the impact of open- and
+closed-loop control on the pairwise correlations we expect to observe.
+To model the application of open-loop control on node <span class="math inline">\(c\)</span>, we add an arbitrary amount of private
+variance to <span class="math inline">\(s_c\)</span>: <span class="math inline">\(s_c \leftarrow s_c + s_c^{(OL)}\)</span>. To model
+the application of closed-loop control on node <span class="math inline">\(c\)</span>, we first sever inputs to node <span class="math inline">\(c\)</span> by setting <span class="math inline">\(\mathbf{W}_{k&#x2192;c} = 0\)</span> for <span class="math inline">\(k = 1, \dots p\)</span>, and then set the private
+variance of node <span class="math inline">\(c\)</span> by setting <span class="math inline">\(s_c\)</span> to the target variance. Because <span class="math inline">\(c\)</span>&#x2019;s inputs have been severed, this
+private noise will become exactly node <span class="math inline">\(c\)</span>&#x2019;s output variance.</p>
+<p><strong>Impact of intervention variance on pairwise correlations &#x2014;
+interaction with circuit structure</strong></p>
+<p>The impact of intervention on correlations can be understood from the
+intervention&#x2019;s location relative to causal circuit connections. One
+useful distillation of this concept is to understand the sign of <span class="math inline">\(\frac{dr^2_{ij}}{dS_k}\)</span>, that is whether
+increasing the variance of an intervention at node <span class="math inline">\(k\)</span> increases or decreases the correlation
+between nodes <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span></p>
+<p>In a simulated network A&#x2192;B <a href="#fig-var">(fig.&#xA0;variance)</a> we
+demonstrate predicted and empirical correlations between a pair of nodes
+as a function of intervention type, location, and variance. A few
+features are present which provide a general intuition for the impact of
+intervention location in larger circuits: First, interventions
+&#x201C;upstream&#x201D; of a true connection <a href="#fig-var">(lower left,
+fig.&#xA0;variance)</a> tend to increase the connection-related variance, and
+therefore strengthen the observed correlations.</p>
+<p><span class="math display">\[\mathbf{\widetilde{W}}_ {S_k&#x2192;i} \neq 0,
+\mathbf{\widetilde{W}}_ {i&#x2192;j} \neq 0 \implies \frac{dr^2}{dS_k} &gt;
+0\]</span></p>
+<p>Second, interventions affecting only the downstream node <a href="#fig-var">(lower right, fig.&#xA0;variance)</a> of a true connection
+introduce variance which is independent of the connection A&#x2192;B,
+decreasing the observed correlation.</p>
+<p><span class="math display">\[\mathbf{\widetilde{W}}_ {S_k &#x2192; j} = 0 ,
+\mathbf{\widetilde{W}}_ {S_k &#x2192; j} \neq 0 \implies \frac{dr^2}{dS_k} &lt;
+0\]</span></p>
+<p>Third, interventions which reach both nodes will tend to increase the
+observed correlations <a href="#fig-var">(upper left,
+fig.&#xA0;variance)</a>, moreover occurs even if no direct connection <span class="math inline">\(i&#x2192;j\)</span> exists.</p>
+<p><span class="math display">\[\mathbf{\widetilde{W}}_ {S_k &#x2192; i} \neq
+0, \mathbf{\widetilde{W}}_ {S_k &#x2192; j} \neq 0, \mathbf{\widetilde{W}}_ {i
+&#x2192; j} = 0 \implies \frac{dr^2}{dS_k} &gt; 0\]</span></p>
+<p>Notably, the impact of an intervention which is a &#x201C;common cause&#x201D; for
+both nodes depends on the relative weighted reachability between the
+source and each of the nodes. Correlations induced by a common cause are
+maximized when the input to each node is equal, that is <span class="math inline">\(\mathbf{\widetilde{W}}_{S_k&#x2192;i} \approx
+\mathbf{\widetilde{W}}_{S_k&#x2192;j}\)</span> (upper right * in <a href="#fig-var">fig.&#xA0;variance</a>). If i&#x2192;j are connected <span class="math inline">\(\mathbf{\widetilde{W}}_{S_k&#x2192;i} \gg
+\mathbf{\widetilde{W}}_{S_k&#x2192;j}\)</span> results in an
+variance-correlation relationship similar to the &#x201C;upstream source&#x201D; case
+(increasing source variance increases correlation <span class="math inline">\(\frac{dr^2}{dS_k} &gt; 0\)</span>), while <span class="math inline">\(\mathbf{\widetilde{W}}_{S_k&#x2192;i} \ll
+\mathbf{\widetilde{W}}_{S_k&#x2192;j}\)</span> results in a relationship
+similar to the &#x201C;downstream source&#x201D; case (<span class="math inline">\(\frac{dr^2}{dS_k} &lt; 0\)</span>)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<h3 id="sec:methods-intervention-var">Impact of interventions</h3>
+<p><span class="math display">\[\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) \geq
+\mathbb{V}_{i}(C)\]</span> More specifically, if the open-loop stimulus
+is statistically independent from the intrinsic variability<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> <span class="math display">\[\mathbb{V}_{i}(C|S=\text{open},\sigma^2_S) =
+\mathbb{V}_{i}(C) + \sigma^2_S\]</span> Applying closed-loop to a linear
+Gaussian circuit:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{V}_{i}(C|S=\text{closed},\sigma^2_S) &amp;= \sigma^2_S  \\
+\mathbb{V}_{i}(C|S=\text{closed},\sigma^2_S) &amp;\perp
+\mathbb{V}_{i}(C)
+\end{aligned}
+\]</span></p>
+<details>
+<summary>
+&#x21AA; Firing rates couple mean and variance
+</summary>
+<p>In neural circuits, we&#x2019;re often interested in firing rates, which are
+non-negative. This particular output nonlinearity means that the linear
+Gaussian assumptions do not hold, especially in the presence of strong
+inhibitory inputs. In this setting, firing rate variability is coupled
+to its mean rate; Under a homoeneous-rate Poisson assumption, mean
+firing rate and firing rate variability would be proportional. With
+inhibitory inputs, open-loop stimulus can drive firing rates low enough
+to reduce their variability. Here, feedback control still provides an
+advantage in being able to control the mean and variance of firing rates
+independently<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p><span class="math display">\[
+\begin{aligned}
+\mu^{out}_i &amp;= f(\mu^{in}_i, \mathbb{V}^{in}_i)\\
+\mathbb{V}^{out}_{i}(C) &amp;= f(\mu^{out}_i, \mathbb{V}^{in}_i)
+\end{aligned}
+\]</span></p>
+</details>
+<details>
+<summary>
+&#x21AA; Notes on imperfect control
+</summary>
+<code>Ideal control</code> <span class="math display">\[
+\mathbb{V}_{i}(C|S=\text{closed},\sigma^2_S) = \sigma^2_S
+\]</span> <code>Imperfect control</code> - intuitively feedback control
+is counteracting / subtracting disturbance due to unobserved sources,
+including intrinsic variability. We could summarize the effectiveness of
+closed-loop disturbance rejection with a scalar <span class="math inline">\(0\leq\gamma\leq1\)</span> <span class="math display">\[
+\mathbb{V}_{i}(C|S=\text{closed},\sigma^2_S) = \mathbb{V}_{i}(C) -
+\gamma\mathbb{V}_{i}(C) + \sigma^2_S \\
+\mathbb{V}_{i}(C|S=\text{closed},\sigma^2_S) = (1-\gamma)
+\mathbb{V}_{i}(C) + \sigma^2_S
+\]</span>
+</details>
+<h2 id="sec:methods-extract-circuit">Extracting circuit estimates</h2>
+<p>While a broad range of techniques[^inf_techniques] exist for
+inferring functional relationships from observational data, for this
+investigation we choose to focus on simple bivariate correlation as a
+measure of dependence in the linear Gaussian network. The impact of
+intervention on this metric is analytically tractable <em>(see Methods
+<a href="#sec:methods-predict-corr"># predicting correlation</a>)</em>,
+and can be thought of as a prototype for more sophisticated measures of
+dependence such as time-lagged cross-correlations, bivariate and
+multivariate transfer entropy.</p>
+<p>We implement a naive comparison strategy to estimate the circuit
+adjacency from empirical correlations; Thresholded empirical correlation
+matrices are compared to correlation matrices predicted from each
+circuit in a hypothesis set. Any hypothesized circuits which are
+predicted to have a similar correlation structure as is observed
+(i.e.&#xA0;correlation matrices equal after thresholding) are marked as
+&#x201C;plausible circuits.&#x201D; If only one circuit amongst the hypothesis set is
+a plausible match, this is considered to be the estimated circuit. The
+threshold for &#x201C;binarizing&#x201D; the empirical correlation matrix is treated
+as a hyperparameter to be swept at the time of analysis.</p>
+<h3 id="sec:methods-entropy">Information-theoretic measures of
+hypothesis ambiguity</h3>
+<p>Shannon entropy provides a scalar summarizing the diversity of a set
+of outcomes.</p>
+<p><span class="math display">\[H(X) = E[I(X)] = E[\log\frac{1}{p(X)}] =
+\sum_{i=1}^{N} p(x_i) \log\frac{1}{p(x_i)} \]</span></p>
+<p><strong>Interpreting high and low entropy.</strong></p>
+<p>An intervention associated with a higher entropy across circuits
+will, on average, provide more information to narrow the set of
+hypotheses. In fact, one interpretation of entropy is that it describes
+the (uncertainty associated with the equivalent) number of
+<em>equally-likely</em> outcomes<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> of a probability mass
+function. In this setting <span class="math inline">\(N_{equal}\)</span>
+can be thought of as the number of hypotheses that can be distinguished
+under a given experiment<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>. <span class="math display">\[ H(C)
+= \log_2 N_{equal} \\
+N_{equal} = 2^{H(C)}\]</span> For instance, open-loop intervention at
+node <span class="math inline">\(x_0\)</span> in <a href="#fig-disambig">(Fig.DISAMBIG right column)</a> results in an
+entropy across the hypotheses of <span class="math inline">\(H(C|S_0)
+\approx 1.5\)</span>bits or <span class="math inline">\(N_{equal}
+\approx 2.8\)</span>. Looking at the patterns of correlation, there are
+<span class="math inline">\(N=3\)</span> distinct patterns, with the +++
+pattern somewhat more likely than the others (+&#x2013;, 0&#x2013;).<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>
+This intuition also helps understand the maximum entropy achievable for
+a given set of hypotheses: <span class="math display">\[H^{max}(C) =
+log_2 N\]</span> for this example set: <span class="math display">\[H^{max}(C) = log_2 6 \approx 2.6\]</span></p>
+<h3 id="sec:methods-entropy-selection">Selecting interventions</h3>
+<p><strong>Selecting the optimal intervention.</strong></p>
+<p>Here, we describe a greedy approach for choosing an effective
+single-site intervention, but extending the approach above to predict
+joint entropy would allow a joint or sequential experimental design
+which could be optimized over multiple interventions <em>(see
+Discussion)</em>.</p>
+<p>For selecting the first intervention type and location, we propose
+choosing the intervention which results in the maximum expected circuit
+information, that is: <span class="math display">\[S_i^* =
+\underset{i}{\arg\max}\,H(\mathbf{C}|S_i)\]</span><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
+<p>Alongside intervention type and location, additional constraints
+could be incorporated at this stage, such as using estimated circuit
+weights to balance using high variance stimuli while avoiding excess
+stimulus amplitudes.</p>
+<p><strong>Evolution of entropy, as the space of hypotheses is narrowed
+from experiments and inference.</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+H^{pre}(C):&amp; \text{ uncertainty before intervention (starts at}\,
+H^{max}(C))\\
+H(C|S_i):&amp; \text{ expected information gain from a given
+intervention}\\
+H^{post}(C|S_i) = H^{pre} - H(C|S_i):&amp; \text{ expected remaining
+uncertainty after intervention}
+\end{aligned}
+\]</span></p>
+<p>If <span class="math inline">\(H(X|S_i)\approx0 \,\forall i\)</span>,
+none of the candidate interventions provide additional information, and
+the identification process has converged. If <span class="math inline">\(H^{post} = 0\)</span> the initial hypothesis set
+has been reduced down to a single circuit hypothesis consistent with the
+observed data. If <span class="math inline">\(H^{post} &gt; 0\)</span>,
+some uncertainty remains in the posterior belief over the hypotheses. In
+this case a Maximum A Posteriori (MAP) estimate could be chosen as:
+<span class="math display">\[ \hat{c}_{\text{MAP}} =
+\underset{c}{\text{argmax}} \,L(\text{Corr} | c)\,\pi(c) \]</span> or
+the posterior belief can be used as a prior for the next iteration.</p>
+<hr>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-barnett2009granger" class="csl-entry" role="doc-biblioentry">
+Barnett, Lionel, Adam B. Barrett, and Anil K. Seth. 2009. <span>&#x201C;Granger
+<span>Causality</span> and <span>Transfer Entropy Are Equivalent</span>
+for <span>Gaussian Variables</span>.&#x201D;</span> <em>Physical Review
+Letters</em> 103 (23): 238701. <a href="https://doi.org/10.1103/PhysRevLett.103.238701">https://doi.org/10.1103/PhysRevLett.103.238701</a>.
+</div>
+<div id="ref-bossomaier2016transfer" class="csl-entry" role="doc-biblioentry">
+Bossomaier, Terry, Lionel Barnett, Michael Harr&#xE9;, and Joseph T. Lizier.
+2016. <span>&#x201C;Transfer <span>Entropy</span>.&#x201D;</span> In <em>An
+<span>Introduction</span> to <span>Transfer Entropy</span></em>, 65&#x2013;95.
+<span>Cham</span>: <span>Springer International Publishing</span>. <a href="https://doi.org/10.1007/978-3-319-43222-9_4">https://doi.org/10.1007/978-3-319-43222-9_4</a>.
+</div>
+<div id="ref-chicharro2012when" class="csl-entry" role="doc-biblioentry">
+Chicharro, Daniel, and Anders Ledberg. 2012. <span>&#x201C;When <span>Two
+Become One</span>: <span>The Limits</span> of <span>Causality
+Analysis</span> of <span>Brain Dynamics</span>.&#x201D;</span> Edited by Thomas
+Wennekers. <em>PLoS ONE</em> 7 (3): e32466. <a href="https://doi.org/10.1371/journal.pone.0032466">https://doi.org/10.1371/journal.pone.0032466</a>.
+</div>
+<div id="ref-chis2011structural" class="csl-entry" role="doc-biblioentry">
+Chis, Oana-Teodora, Julio R. Banga, and Eva Balsa-Canto. 2011.
+<span>&#x201C;Structural <span>Identifiability</span> of <span>Systems Biology
+Models</span>: <span>A Critical Comparison</span> of
+<span>Methods</span>.&#x201D;</span> Edited by Johannes Jaeger. <em>PLoS
+ONE</em> 6 (11): e27755. <a href="https://doi.org/10.1371/journal.pone.0027755">https://doi.org/10.1371/journal.pone.0027755</a>.
+</div>
+<div id="ref-cole1949dynamic" class="csl-entry" role="doc-biblioentry">
+Cole, K. S. 1949. <span>&#x201C;Dynamic Electrical Characteristics of the Squid
+Axon Membrane.&#x201D;</span> <em>Annual Review of Physiology</em>, no. 3:
+253&#x2013;58.
+</div>
+<div id="ref-das2020systematic" class="csl-entry" role="doc-biblioentry">
+Das, Abhranil, and Ila R. Fiete. 2020. <span>&#x201C;Systematic Errors in
+Connectivity Inferred from Activity in Strongly Recurrent
+Networks.&#x201D;</span> <em>Nature Neuroscience</em> 23 (10): 1286&#x2013;96. <a href="https://doi.org/10.1038/s41593-020-0699-2">https://doi.org/10.1038/s41593-020-0699-2</a>.
+</div>
+<div id="ref-dean2016dangers" class="csl-entry" role="doc-biblioentry">
+Dean, Roger T., and William T. M. Dunsmuir. 2016. <span>&#x201C;Dangers and
+Uses of Cross-Correlation in Analyzing Time Series in Perception,
+Performance, Movement, and Neuroscience: <span>The</span> Importance of
+Constructing Transfer Function Autoregressive Models.&#x201D;</span>
+<em>Behavior Research Methods</em> 48 (2): 783&#x2013;802. <a href="https://doi.org/10.3758/s13428-015-0611-2">https://doi.org/10.3758/s13428-015-0611-2</a>.
+</div>
+<div id="ref-eberhardt2007interventions" class="csl-entry" role="doc-biblioentry">
+Eberhardt, Frederick, and Richard Scheines. 2007. <span>&#x201C;Interventions
+and <span>Causal Inference</span>.&#x201D;</span> <em>Philosophy of
+Science</em> 74 (5): 981&#x2013;95. <a href="https://doi.org/10.1086/525638">https://doi.org/10.1086/525638</a>.
+</div>
+<div id="ref-fornito2016connectivity" class="csl-entry" role="doc-biblioentry">
+Fornito, Alex, Andrew Zalesky, and Edward T. Bullmore, eds. 2016.
+<span>&#x201C;Connectivity <span>Matrices</span> and <span>Brain Graphs</span>
+- <span>Chapter</span> 3.&#x201D;</span> In <em>Fundamentals of <span>Brain
+Network Analysis</span></em>, 89&#x2013;113. <span>San Diego</span>:
+<span>Academic Press</span>. <a href="https://doi.org/10.1016/B978-0-12-407908-3.00003-0">https://doi.org/10.1016/B978-0-12-407908-3.00003-0</a>.
+</div>
+<div id="ref-garofalo2009evaluation" class="csl-entry" role="doc-biblioentry">
+Garofalo, Matteo, Thierry Nieus, Paolo Massobrio, and Sergio Martinoia.
+2009. <span>&#x201C;Evaluation of the <span>Performance</span> of
+<span>Information Theory-Based Methods</span> and
+<span>Cross-Correlation</span> to <span>Estimate</span> the
+<span>Functional Connectivity</span> in <span>Cortical
+Networks</span>.&#x201D;</span> <em>PLOS ONE</em> 4 (8): e6482. <a href="https://doi.org/10.1371/journal.pone.0006482">https://doi.org/10.1371/journal.pone.0006482</a>.
+</div>
+<div id="ref-granger1969investigating" class="csl-entry" role="doc-biblioentry">
+Granger, C. W. J. 1969. <span>&#x201C;Investigating <span>Causal
+Relations</span> by <span>Econometric Models</span> and <span class="nocase">Cross-spectral Methods</span>.&#x201D;</span>
+<em>Econometrica</em> 37 (3): 424. <a href="https://doi.org/10.2307/1912791">https://doi.org/10.2307/1912791</a>.
+</div>
+<div id="ref-hodgkin1952measurement" class="csl-entry" role="doc-biblioentry">
+Hodgkin, A L, A F Huxley, and B Katz. 1952. <span>&#x201C;Measurement of
+Current-Voltage Relationships in the Mebrane of the Giant Axon of
+Loligo.&#x201D;</span> <em>J. Physiol</em> 116 (4): 424&#x2013;48. <a href="https://doi.org/10.1113/jphysiol.1952.sp004716">https://doi.org/10.1113/jphysiol.1952.sp004716</a>.
+</div>
+<div id="ref-hodgkin1949effect" class="csl-entry" role="doc-biblioentry">
+Hodgkin, A. L., and B. Katz. 1949. <span>&#x201C;<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1392331">The Effect
+of Sodium Ions on the Electrical Activity of the Giant Axon of the
+Squid</a>.&#x201D;</span> <em>The Journal of Physiology</em> 108 (1): 37&#x2013;77.
+</div>
+<div id="ref-hubel1959receptive" class="csl-entry" role="doc-biblioentry">
+Hubel, D. H., and T. N. Wiesel. 1959. <span>&#x201C;<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1363130">Receptive
+Fields of Single Neurones in the Cat&#x2019;s Striate Cortex</a>.&#x201D;</span>
+<em>The Journal of Physiology</em> 148 (3): 574&#x2013;91.
+</div>
+<div id="ref-hubel1962receptive" class="csl-entry" role="doc-biblioentry">
+&#x2014;&#x2014;&#x2014;. 1962. <span>&#x201C;<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1359523">Receptive
+Fields, Binocular Interaction and Functional Architecture in the Cat&#x2019;s
+Visual Cortex</a>.&#x201D;</span> <em>The Journal of Physiology</em> 160 (1):
+106&#x2013;154.2.
+</div>
+<div id="ref-maathuis2016review" class="csl-entry" role="doc-biblioentry">
+Maathuis, Marloes H., and Preetam Nandy. 2016. <span>&#x201C;A Review of Some
+Recent Advances in Causal Inference.&#x201D;</span> In <em>Handbook of
+<span>Big Data</span></em>, 387&#x2013;408.
+</div>
+<div id="ref-pearl2009causality" class="csl-entry" role="doc-biblioentry">
+Pearl, Judea. 2009. <em>Causality: Models, Reasoning, and
+Inference</em>. Second. <span>Cambridge University Press</span>.
+</div>
+<div id="ref-penfield1937somatic" class="csl-entry" role="doc-biblioentry">
+Penfield, W., and E. Boldrey. 1937. <span>&#x201C;Somatic Motor and Sensory
+Representation in the Cerebral Cortex of Man as Studied by Electrical
+Stimulation.&#x201D;</span> <em>Brain: A Journal of Neurology</em> 60: 389&#x2013;443.
+<a href="https://doi.org/10.1093/brain/60.4.389">https://doi.org/10.1093/brain/60.4.389</a>.
+</div>
+<div id="ref-penfield1950cerebral" class="csl-entry" role="doc-biblioentry">
+Penfield, Wilder, and Theodore Rasmussen. 1950. <em>The Cerebral Cortex
+of Man; a Clinical Study of Localization of Function.</em> The Cerebral
+Cortex of Man; a Clinical Study of Localization of Function.
+<span>Oxford, England</span>: <span>Macmillan</span>.
+</div>
+<div id="ref-prinz2004dynamic" class="csl-entry" role="doc-biblioentry">
+Prinz, Astrid A., L. F. Abbott, and Eve Marder. 2004. <span>&#x201C;The Dynamic
+Clamp Comes of Age.&#x201D;</span> <em>Trends in Neurosciences</em> 27 (4):
+218&#x2013;24. <a href="https://doi.org/10.1016/j.tins.2004.02.004">https://doi.org/10.1016/j.tins.2004.02.004</a>.
+</div>
+<div id="ref-runge2018causal" class="csl-entry" role="doc-biblioentry">
+Runge, J. 2018. <span>&#x201C;Causal Network Reconstruction from Time Series:
+<span>From</span> Theoretical Assumptions to Practical
+Estimation.&#x201D;</span> <em>Chaos: An Interdisciplinary Journal of Nonlinear
+Science</em> 28 (7): 075310. <a href="https://doi.org/10.1063/1.5025050">https://doi.org/10.1063/1.5025050</a>.
+</div>
+<div id="ref-schreiber2000measuring" class="csl-entry" role="doc-biblioentry">
+Schreiber, Thomas. 2000. <span>&#x201C;Measuring <span>Information
+Transfer</span>.&#x201D;</span> <em>Physical Review Letters</em> 85 (2):
+461&#x2013;64. <a href="https://doi.org/10.1103/PhysRevLett.85.461">https://doi.org/10.1103/PhysRevLett.85.461</a>.
+</div>
+<div id="ref-sharp1993dynamic" class="csl-entry" role="doc-biblioentry">
+Sharp, Andrew A, Michael B O&#x2019;Neil, LF Abbott, and Eve Marder. 1993.
+<span>&#x201C;The Dynamic Clamp: Artificial Conductances in Biological
+Neurons.&#x201D;</span> <em>Trends in Neurosciences</em> 16 (10): 389&#x2013;94.
+</div>
+<div id="ref-skiena2011transitive" class="csl-entry" role="doc-biblioentry">
+Skiena, Steven S. 2011. <span>&#x201C;Transitive Closure and Reduction.&#x201D;</span>
+In <em>The Algorithm Design Manual</em>, Second, 495&#x2013;97.
+<span>Springer</span>.
+</div>
+<div id="ref-smith2005eeg" class="csl-entry" role="doc-biblioentry">
+Smith, S. 2005. <span>&#x201C;<span>EEG</span> in the Diagnosis,
+Classification, and Management of Patients with Epilepsy.&#x201D;</span>
+<em>Journal of Neurology, Neurosurgery, and Psychiatry</em> 76 (Suppl
+2): ii2&#x2013;7. <a href="https://doi.org/10.1136/jnnp.2005.069245">https://doi.org/10.1136/jnnp.2005.069245</a>.
+</div>
+<div id="ref-vaidya2019lesion" class="csl-entry" role="doc-biblioentry">
+Vaidya, Avinash R., Maia S. Pujara, Michael Petrides, Elisabeth A.
+Murray, and Lesley K. Fellows. 2019. <span>&#x201C;Lesion <span>Studies</span>
+in <span>Contemporary Neuroscience</span>.&#x201D;</span> <em>Trends in
+Cognitive Sciences</em> 23 (8): 653&#x2013;71. <a href="https://doi.org/10.1016/j.tics.2019.05.009">https://doi.org/10.1016/j.tics.2019.05.009</a>.
+</div>
+<div id="ref-valero-cabre2020perturbationdriven" class="csl-entry" role="doc-biblioentry">
+Valero-Cabr&#xE9;, Antoni, Monica N. Toba, Claus C. Hilgetag, and R. Jarrett
+Rushmore. 2020. <span>&#x201C;Perturbation-Driven Paradoxical Facilitation of
+Visuo-Spatial Function: <span>Revisiting</span> the
+<span>&#x2018;<span>Sprague</span> Effect&#x2019;</span>.&#x201D;</span> <em>Cortex</em>, In
+<span>Honour</span> of <span>Dr Robert Rafal</span>, 122 (January):
+10&#x2013;39. <a href="https://doi.org/10.1016/j.cortex.2019.01.031">https://doi.org/10.1016/j.cortex.2019.01.031</a>.
+</div>
+<div id="ref-wibral2014directed" class="csl-entry" role="doc-biblioentry">
+Wibral, Michael, Raul Vicente, and Joseph T. Lizier, eds. 2014.
+<em>Directed <span>Information Measures</span> in
+<span>Neuroscience</span></em>. Understanding <span>Complex
+Systems</span>. <span>Berlin, Heidelberg</span>: <span>Springer Berlin
+Heidelberg</span>. <a href="https://doi.org/10.1007/978-3-642-54474-3">https://doi.org/10.1007/978-3-642-54474-3</a>.
+</div>
+<div id="ref-wiener1956theory" class="csl-entry" role="doc-biblioentry">
+Wiener, N. 1956. <span>&#x201C;The Theory of Prediction.&#x201D;</span> In <em>Modern
+Mathematics for the Engineer</em>. <span>McGraw-Hill</span>.
+</div>
+<div id="ref-wolff2018promise" class="csl-entry" role="doc-biblioentry">
+Wolff, Steffen BE, and Bence P &#xD6;lveczky. 2018. <span>&#x201C;The Promise and
+Perils of Causal Circuit Manipulations.&#x201D;</span> <em>Current Opinion in
+Neurobiology</em>, Neurobiology of <span>Behavior</span>, 49 (April):
+84&#x2013;94. <a href="https://doi.org/10.1016/j.conb.2018.01.004">https://doi.org/10.1016/j.conb.2018.01.004</a>.
+</div>
+<div id="ref-wollstadt2019idtxl" class="csl-entry" role="doc-biblioentry">
+Wollstadt, Patricia, Joseph T. Lizier, Raul Vicente, Conor Finn, Mario
+Mart&#xED;nez-Zarzuela, Pedro Mediano, Leonardo Novelli, and Michael Wibral.
+2019. <span>&#x201C;<span>IDTxl</span>: <span>The Information Dynamics
+Toolkit</span> Xl: A <span>Python</span> Package for the Efficient
+Analysis of Multivariate Information Dynamics in Networks.&#x201D;</span>
+<em>Journal of Open Source Software</em> 4 (34): 1081. <a href="https://doi.org/10.21105/joss.01081">https://doi.org/10.21105/joss.01081</a>.
+</div>
+</div>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>These assumptions are typically on
+properties such as the types of functional relationships that exist in
+circuits, the visibility and structure of confounding relationships, and
+noise statistics.<a href="#fnref1" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
+<li id="fn2" role="doc-endnote"><p>will change the color scheme for
+final figure. Likely using orange and blue to denote closed and
+open-loop interventions. Will also add in indication of severed edges<a href="#fnref2" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
+<li id="fn3" role="doc-endnote"><p>To see this, denote by <span class="math inline">\(E \in \mathbb{R}^{p \times n}\)</span> the matrix
+of <span class="math inline">\(n\)</span> private noise observations for
+each node. Note that <span class="math inline">\(X = W^T X + E\)</span>,
+so <span class="math inline">\(X = E(I-W^T)^{-1}\)</span>. The
+covariance matrix <span class="math inline">\(\Sigma = \mathrm{cov}(X) =
+\mathbb{E}\left[X X^T\right]\)</span> can then be written as <span class="math inline">\(\Sigma = \mathbb{E}\left[ (I-W^T)^{-1} E E^T
+(I-W^T)^{-1} \right] = (I-W^T)^{-1} \mathrm{cov}(E) (I-W^T)^{-T} =
+(I-W^T)^{-1} \mathrm{diag}(s) (I-W^T)^{-T}\)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
+<li id="fn4" role="doc-endnote"><p>TODO: verify not 100% sure this is
+true, the empirical results are really pointing to dr^2/dW&lt;0 rather
+than dr^2/dS&lt;0. Also this should really be something like <span class="math inline">\(\frac{d|R|}{dS}\)</span> or <span class="math inline">\(\frac{dr^2}{dS}\)</span> since these effects
+decrease the <em>magnitude</em> of correlations. I.e. if <span class="math inline">\(\frac{d|R|}{dS} &lt; 0\)</span> increasing <span class="math inline">\(S\)</span> might move <span class="math inline">\(r\)</span> from <span class="math inline">\(-0.8\)</span> to <span class="math inline">\(-0.2\)</span>, i.e.&#xA0;decrease its magnitude not its
+value.<a href="#fnref4" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
+<li id="fn5" role="doc-endnote"><p>notably, this is part of the
+definition of open-loop intervention<a href="#fnref5" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
+<li id="fn6" role="doc-endnote"><p>practically, this requires very fast
+feedback to achieve fully independent control over mean and variance. In
+the case of firing rates, I suspect <span class="math inline">\(\mu \leq
+\alpha\mathbb{V}\)</span>, so variances can be reduced, but for very low
+firing rates, there&#x2019;s still an upper limit on what the variance can
+be.<a href="#fnref6" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
+<li id="fn7" role="doc-endnote"><p>i.e.&#xA0;if you took a PMF and counted
+the number of categories with probability greater than <span class="math inline">\(p_{th}\)</span>. A distribution with 16 possible
+outcomes, but only 2bits of uncertainty is <em>as</em> uncertain as a
+uniform distribution with <span class="math inline">\(2^2\)</span>
+equally likely outcomes<a href="#fnref7" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
+<li id="fn8" role="doc-endnote"><p>connect this section to the idea of
+the Markov equivalence class, and its size<a href="#fnref8" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
+<li id="fn9" role="doc-endnote"><p>since <span class="math inline">\(H(C)\leq H^{max}(C)\)</span>, <span class="math inline">\(N_{equal} \leq N\)</span><a href="#fnref9" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
+<li id="fn10" role="doc-endnote"><p>will need to tighten up notation for
+intervention summarized as a variable, annotating its type (passive,
+open-, closed-loop) as well as its location. Also have to be careful
+about overloading <span class="math inline">\(S_i\)</span> as the impact
+of private variance and as a particular open-loop intervention.<a href="#fnref10" class="footnote-back" role="doc-backlink">&#x21A9;&#xFE0E;</a></p></li>
+</ol>
+</section>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

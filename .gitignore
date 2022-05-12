@@ -7,6 +7,7 @@ __*
 *_files/
 .spellchecker.json
 _out.md
+*_out.md
 
 # ignore sound files 
 *.aiff

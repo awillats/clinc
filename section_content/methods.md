@@ -14,10 +14,10 @@
  -->
 
 ## Modeling network structure and dynamics {#sec:methods-sim}
-@import " /section_content/methods_simulations.md " 
+@import "/section_content/methods_simulations.md" 
 
 ## Implementing interventions {#sec:methods-intervention}
-@import " /section_content/methods_interventions.md " 
+@import "/section_content/methods_interventions.md" 
 
 
 ## Predicting correlation structure {#sec:methods-predict-overview}
