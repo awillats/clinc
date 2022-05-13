@@ -1,6 +1,11 @@
-Manuscript for "Closed-Loop Identifiability in Neural Circuits", 
-by Adam Willats and Matthew O'Shaughnessy
-(work in progress)
+# "Closed-Loop Identifiability in Neural Circuits"
+by Adam Willats, Matthew O'Shaughnessy, Christopher Rozell  
+*(work in progress)*
+
+
+**view current manuscript draft [as pdf](https://github.com/awillats/clinc/blob/main/publish/outputs/CLINC_may9_snapshot.pdf)** 📖   
+**view current manuscript draft [as web page](https://htmlpreview.github.io/?https://github.com/awillats/clinc/blob/main/manuscript_v1_may9.html)** 💻
+
 
 # Repo organization
 - [manuscript_v*.md](https://github.com/awillats/clinc/blob/main/manuscript_v0.md) - full document for compiling into pdf
